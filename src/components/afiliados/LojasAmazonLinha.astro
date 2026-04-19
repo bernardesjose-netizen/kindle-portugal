@@ -1,0 +1,49 @@
+---
+import { linksPorLojaDeAsin, MARKETPLACES, temTag } from '@lib/afiliados';
+
+interface Props {
+  /** ASIN do produto */
+  asin: string;
+  /** Texto introdutório (default: "Comprar em:") */
+  prefixo?: string;
+}
+
+const { asin, prefixo = 'Comprar em:' } = Astro.props;
+
+const lojas = linksPorLojaDeAsin(asin);
+const temAlgumaLoja = MARKETPLACES.some((m) => temTag(m.id));
+
+const etiquetaCurta: Record<string, string> = {
+  es: 'ES',
+  com: 'US',
+  uk: 'UK',
+  de: 'DE',
+  fr: 'FR',
+  it: 'IT',
+  br: 'BR',
+};
+---
+
+{temAlgumaLoja && lojas.length > 0 && (
+  <div class="my-5 flex flex-wrap items-center gap-2 rounded-xl border border-marinho-100 bg-creme-50 px-4 py-3">
+    <span class="text-xs font-semibold uppercase tracking-wide text-marinho-600">{prefixo}</span>
+    <ul class="flex flex-wrap gap-1.5">
+      {lojas.map((loja) => (
+        <li>
+          <a
+            href={loja.url}
+            rel="sponsored nofollow noopener"
+            target="_blank"
+            class="inline-flex items-center gap-1.5 rounded-full border border-marinho-200 bg-white px-3 py-1 text-xs font-semibold text-marinho-800 shadow-[0_1px_2px_rgba(15,26,36,0.04)] transition-all duration-150 hover:-translate-y-0.5 hover:border-marca-500 hover:text-marca-700 hover:shadow-[0_4px_10px_rgba(249,126,7,0.15)]"
+            data-afiliado="amazon"
+            data-mercado={loja.id}
+            aria-label={`Ver na ${loja.etiqueta}`}
+          >
+            <span aria-hidden="true">{loja.bandeira}</span>
+            <span>{etiquetaCurta[loja.id] ?? loja.id.toUpperCase()}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
