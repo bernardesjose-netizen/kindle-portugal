@@ -5,7 +5,7 @@ export const SITE = {
     'O que saber antes de comprar um Kindle em Portugal, como enviar ebooks, conversores, bibliotecas digitais e reviews honestas — em português europeu.',
   url: import.meta.env.PUBLIC_SITE_URL ?? 'https://kindleportugal.com',
   idioma: 'pt-PT',
-  email: import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'ola@kindleportugal.com',
+  email: import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'kindleportugal@gmail.com',
   amazonTag: import.meta.env.PUBLIC_AMAZON_TAG ?? '',
   autorOrganizacao: {
     nome: 'Kindle Portugal',
