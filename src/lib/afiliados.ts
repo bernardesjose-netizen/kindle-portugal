@@ -1,6 +1,6 @@
 const env = import.meta.env;
 
-export type Marketplace = 'es' | 'com' | 'uk' | 'de' | 'fr' | 'it' | 'br';
+export type Marketplace = 'es' | 'com' | 'uk' | 'de' | 'fr' | 'it';
 
 const FALLBACK = env.PUBLIC_AMAZON_TAG ?? '';
 
@@ -11,7 +11,6 @@ const TAGS: Record<Marketplace, string> = {
   de: env.PUBLIC_AMAZON_TAG_DE ?? FALLBACK,
   fr: env.PUBLIC_AMAZON_TAG_FR ?? FALLBACK,
   it: env.PUBLIC_AMAZON_TAG_IT ?? FALLBACK,
-  br: env.PUBLIC_AMAZON_TAG_BR ?? FALLBACK,
 };
 
 export const MARKETPLACES: {
@@ -27,7 +26,6 @@ export const MARKETPLACES: {
   { id: 'de', etiqueta: 'Amazon Alemanha', host: 'www.amazon.de', bandeira: '🇩🇪', moeda: 'EUR' },
   { id: 'fr', etiqueta: 'Amazon França', host: 'www.amazon.fr', bandeira: '🇫🇷', moeda: 'EUR' },
   { id: 'it', etiqueta: 'Amazon Itália', host: 'www.amazon.it', bandeira: '🇮🇹', moeda: 'EUR' },
-  { id: 'br', etiqueta: 'Amazon Brasil', host: 'www.amazon.com.br', bandeira: '🇧🇷', moeda: 'BRL' },
 ];
 
 const HOST_TO_MARKET: Record<string, Marketplace> = {
@@ -37,7 +35,6 @@ const HOST_TO_MARKET: Record<string, Marketplace> = {
   'amazon.de': 'de',
   'amazon.fr': 'fr',
   'amazon.it': 'it',
-  'amazon.com.br': 'br',
 };
 
 function detetarMarketplace(hostname: string): Marketplace | null {
