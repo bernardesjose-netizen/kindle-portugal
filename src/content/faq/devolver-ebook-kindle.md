@@ -1,0 +1,21 @@
+---
+pergunta: "Posso devolver um ebook Kindle se não gostar?"
+categoria: "ebooks"
+ordem: 34
+---
+
+Sim — tens **até 7 dias após a compra** para devolver um ebook Kindle na Amazon.es, desde que **não tenhas lido mais de ~10%**. É um direito específico para ebooks, separado do período de devolução de produtos físicos.
+
+**Como devolver:**
+
+1. Vai a **Amazon.es → A Minha Conta → Conteúdo Digital e Dispositivos → Livros**.
+2. Encontra o ebook e clica em **"Ações… → Devolver para reembolso"**.
+3. Escolhe a razão (por engano, não gostei, erro de formatação, etc.).
+4. Reembolso aparece no cartão em 3-5 dias úteis.
+
+**Na prática:**
+- Útil para **compras por engano** (clicar no botão "Buy now with 1-Click" é fácil demais).
+- Útil se a **formatação estiver errada** (palavras coladas, imagens partidas, problemas de OCR — acontece em alguns ebooks self-publishing).
+- **Não abuses:** se fizeres demasiadas devoluções seguidas, a Amazon bloqueia a funcionalidade da tua conta.
+
+**Limite:** passados 7 dias ou lendo mais de 10% do livro, a compra fica definitiva. Para livros muito curtos, os 10% chegam cedo — presta atenção.

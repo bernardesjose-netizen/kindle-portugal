@@ -1,0 +1,22 @@
+---
+pergunta: "O Kindle funciona sem Wi-Fi?"
+categoria: "utilizacao"
+ordem: 26
+---
+
+Sim — para **ler**, o Kindle funciona totalmente offline. Já os livros descarregados ficam em memória até os apagares.
+
+**O que não precisa de Wi-Fi:**
+- Leitura de livros já descarregados.
+- Consulta do dicionário, *highlights*, notas e marcadores.
+- Leitura de PDFs e ficheiros pessoais copiados por USB.
+- Bateria durar semanas sem ligar à rede (aliás, dura mais).
+
+**O que exige Wi-Fi (pelo menos pontualmente):**
+- **Descarregar livros** comprados ou enviados (acontece automaticamente quando ligas ao Wi-Fi).
+- **Sincronização** de posição de leitura entre dispositivos (telemóvel, tablet, outros Kindles).
+- **Atualizações de firmware** da Amazon.
+- **Enviar livros via "Send to Kindle"** — chegam ao aparelho na próxima sincronização.
+- **Kindle Unlimited** — requer verificação periódica da subscrição.
+
+**Em viagem:** antes de sair, liga-te a Wi-Fi, descarrega todos os livros que planeias ler e desliga sem preocupação. Nos Kindles básicos só há Wi-Fi — os modelos com **4G/celular** foram descontinuados em 2024, já não fazem falta para a maioria dos casos.

@@ -1,0 +1,15 @@
+---
+pergunta: "Qual é a diferença entre o Kindle básico e o Paperwhite?"
+categoria: "compra"
+ordem: 12
+---
+
+Há três diferenças práticas que importam.
+
+**Ecrã.** O Kindle básico tem 6″ (~158 g); o Paperwhite tem 7″ (~211 g). Uma polegada extra parece pouco, mas na prática o Paperwhite mostra mais texto por página e é notoriamente melhor para **PDFs, banda desenhada e livros técnicos**.
+
+**Resistência à água.** O Paperwhite é **IPX8** (até 60 min a 2 m). O básico **não é**. Se lês na praia, piscina ou banheira, é razão suficiente para ir ao Paperwhite.
+
+**Luz frontal com temperatura ajustável.** O Paperwhite Signature Edition permite alternar entre **luz branca fria** (de dia) e **luz quente âmbar** (à noite). O básico tem luz frontal mas sem ajuste de temperatura.
+
+**Resumo:** se o orçamento é apertado e só lês texto em casa, o básico (~109 €) chega. Se lês em mais contextos, ou queres uma experiência que dura mais anos sem te cansares, os ~60 € extra do Paperwhite compensam. Ver o [guia de comparação completo](/guias/qual-kindle-comprar-2026).

@@ -1,0 +1,19 @@
+---
+pergunta: "Posso comprar um Kindle numa loja física em Portugal?"
+categoria: "compra"
+ordem: 11
+---
+
+**Não oficialmente.** A Amazon não tem presença retalhista em Portugal e os Kindles não são distribuídos nas grandes cadeias (Worten, FNAC, Mediamarkt). Ocasionalmente aparecem unidades usadas no **OLX** ou **CustoJusto**, mas com risco (conta Amazon associada, garantia já ativada, etc.).
+
+**As duas opções realistas:**
+
+1. **Amazon.es online** — a mais usada. Envia para qualquer morada em Portugal continental e ilhas, em 2-4 dias, sem taxas alfandegárias (é intracomunitário). Paga em euros, suporte em espanhol/inglês.
+
+2. **Amazon.com (EUA)** — só faz sentido se estás a pensar em **inglês** e queres o modelo com Kindle Unlimited USA. Adiciona ~20-30 € de taxas aduaneiras + IVA. Em geral **não compensa** para quem está em Portugal.
+
+**Se quiseres ver o Kindle ao vivo antes de comprar:**
+- **FNAC Espanha** (Madrid, Barcelona) vende Kindles em loja física — se estás de viagem a Espanha, é uma opção para tocar no aparelho.
+- **Kindle App no telemóvel** — instala antes e lê alguns *samples* gratuitos. Experimentas a fonte, o layout, a app, antes de investir no aparelho físico.
+
+A inexistência de loja física é também a razão pela qual muita gente em PT adia a compra: não dá para experimentar. Os Kindles são **robustos e o retorno é barato** (Amazon.es devolve sem problemas em 30 dias) — se não gostares, devolves.

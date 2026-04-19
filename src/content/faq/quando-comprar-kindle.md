@@ -1,0 +1,23 @@
+---
+pergunta: "Quando é a melhor altura para comprar um Kindle?"
+categoria: "compra"
+ordem: 18
+---
+
+Há quatro momentos do ano em que a Amazon.es faz descontos significativos nos Kindles. Vale a pena esperar pelo próximo — descontos de 20-35 % são comuns.
+
+| Evento | Quando | Desconto típico |
+|---|---|---|
+| **Amazon Prime Day** | 2.ª/3.ª semana de julho | 25-35 % |
+| **Black Friday + Cyber Monday** | última semana de novembro | 20-30 % |
+| **Natal / pós-Natal** | meados de dezembro a 5 janeiro | 15-25 % |
+| **Dia do Pai / Mãe** | março-maio | 10-20 % |
+
+**Outras promoções menos óbvias:**
+- **Lançamento de novo modelo** — a Amazon baixa o preço da geração anterior. Ex.: ao sair um novo Paperwhite, o anterior cai 30-40 € por algumas semanas.
+- **Bundles com capa oficial ou Kindle Unlimited** — por vezes sai mais barato do que comprar separado.
+- **Amazon Warehouse** — secção da Amazon.es com Kindles "usados como novos" ou com embalagem danificada, 10-20 % mais baratos (garantia mantém-se).
+
+**Dica:** o **Prime Day é normalmente o melhor momento do ano** para Kindles (mais agressivo que a Black Friday). Subscreve **Amazon Prime** uns dias antes (são 4,99 €/mês e podes cancelar) para aceder às ofertas exclusivas. Usa sites de tracking de preços como **keepa.com** para ver se o desconto é real ou marketing.
+
+**Pior altura para comprar:** agosto e setembro, quase nunca há promoções nos Kindles.
