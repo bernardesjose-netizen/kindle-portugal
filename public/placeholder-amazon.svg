@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" width="220" height="220" fill="none">
+  <rect width="220" height="220" rx="12" fill="#f5f1e9"/>
+  <path d="M65 88h90v70a8 8 0 0 1-8 8H73a8 8 0 0 1-8-8V88Z" stroke="#0f1a24" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M88 88V78a22 22 0 0 1 44 0v10" stroke="#0f1a24" stroke-width="2.4" stroke-linecap="round"/>
+  <text x="110" y="180" text-anchor="middle" font-size="12" font-weight="600" fill="#0f1a24" font-family="system-ui, -apple-system, sans-serif">Ver na Amazon.es</text>
+  <text x="110" y="198" text-anchor="middle" font-size="10" fill="#f97e07" font-family="system-ui, -apple-system, sans-serif">clicar no botão abaixo</text>
+</svg>
