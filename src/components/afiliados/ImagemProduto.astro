@@ -66,11 +66,15 @@ const cfg = marketConfig[marketplace];
 const tag = tagPara(marketplace);
 const semTag = !tag;
 
-const srcWidget = `https://${cfg.widget}/widgets/q?_encoding=UTF8&MarketPlace=${cfg.place}&ASIN=${asin}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL${tamanhoEfetivo}_${tag ? `&tag=${tag}` : ''}`;
+// Proxy no nosso domínio — ver functions/api/img.ts. Evita que ad-blockers
+// filtrem o host amazon-adsystem.com; o pedido parte do browser para
+// kindleportugal.com, e o proxy na edge Cloudflare vai buscar a imagem
+// server-side à Amazon. Em dev (npm run dev) o endpoint não existe e cai
+// diretamente no fallback, mas em produção (Cloudflare Pages) funciona.
+const srcWidget = `/api/img?asin=${asin}&m=${marketplace}&size=${tamanhoEfetivo}`;
 
-// Placeholder estático para quando o widget Amazon é bloqueado
-// (ad-blockers filtram amazon-adsystem.com) ou o ASIN não tem imagem
-// no catálogo público (P/{ASIN} retorna GIF 1x1 em muitos produtos novos).
+// Fallback para quando o proxy não está disponível (dev local) ou o ASIN
+// não tem imagem no catálogo Amazon.
 const srcFallback = '/placeholder-amazon.svg';
 
 const hrefProduto = urlAfiliado(`https://${cfg.produtoHost}/dp/${asin}`);
