@@ -1,0 +1,90 @@
+---
+import { tagPara, urlAfiliado, type Marketplace } from '@lib/afiliados';
+import ImagemProduto from './ImagemProduto.astro';
+
+interface Props {
+  /** ASIN do produto na Amazon */
+  asin: string;
+  /** Marketplace principal (default: 'es') */
+  marketplace?: Marketplace;
+  /** Texto alternativo da imagem */
+  alt: string;
+  /** Lista de 2-4 características em destaque */
+  destaques?: string[];
+  /** Texto do CTA (default: 'Ver galeria completa na Amazon') */
+  cta?: string;
+}
+
+const {
+  asin,
+  marketplace = 'es',
+  alt,
+  destaques = [],
+  cta = 'Ver galeria e avaliações na Amazon',
+} = Astro.props;
+
+const produtoHost = {
+  es: 'www.amazon.es',
+  com: 'www.amazon.com',
+  uk: 'www.amazon.co.uk',
+  de: 'www.amazon.de',
+  fr: 'www.amazon.fr',
+  it: 'www.amazon.it',
+}[marketplace];
+
+const hrefProduto = urlAfiliado(`https://${produtoHost}/dp/${asin}`);
+const tag = tagPara(marketplace);
+---
+
+<div
+  class="my-8 grid gap-5 overflow-hidden rounded-2xl border border-marinho-100 bg-creme-50/60 p-5 sm:grid-cols-[1fr_1fr] sm:p-6"
+  style="box-shadow: var(--shadow-media);"
+>
+  <div class="flex items-center justify-center rounded-xl bg-white p-4">
+    <ImagemProduto
+      asin={asin}
+      alt={alt}
+      marketplace={marketplace}
+      tamanho={500}
+      formato="normal"
+    />
+  </div>
+
+  <div class="flex flex-col justify-between gap-4">
+    <div>
+      <span class="pill">Amazon · {marketplace.toUpperCase()}</span>
+      <p class="mt-3 text-sm text-marinho-700" style="line-height: 1.55;">
+        {alt}
+      </p>
+      {destaques.length > 0 && (
+        <ul class="mt-4 space-y-1.5 text-sm text-marinho-600">
+          {destaques.map((d) => (
+            <li class="flex items-start gap-2">
+              <span class="mt-0.5 text-marca-600" aria-hidden="true">▸</span>
+              <span>{d}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+
+    {tag && (
+      <a
+        href={hrefProduto}
+        rel="sponsored nofollow noopener"
+        target="_blank"
+        data-afiliado="amazon"
+        data-mercado={marketplace}
+        class="group inline-flex items-center justify-between gap-3 rounded-xl bg-marinho-900 px-4 py-3 text-sm font-semibold text-creme-50 shadow-[0_2px_6px_rgba(15,26,36,0.15)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-marca-600 hover:shadow-[0_6px_16px_rgba(249,126,7,0.25)]"
+      >
+        <span>{cta}</span>
+        <span
+          aria-hidden="true"
+          class="transition-transform duration-200 group-hover:translate-x-1"
+        >
+          ↗
+        </span>
+      </a>
+    )}
+  </div>
+</div>
