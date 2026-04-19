@@ -1,0 +1,198 @@
+---
+/**
+ * Ornamento decorativo de fundo (SVG inline, zero JS).
+ *
+ * Usado para adicionar motivos muito discretos (livros, e-reader, pena)
+ * posicionados atrás do conteúdo. Sempre `aria-hidden` e `pointer-events-none`.
+ *
+ * - `motivo`: o desenho a mostrar.
+ * - `posicao`: canto onde aparece. Desktop. Em mobile fica escondido.
+ * - `intensidade`: opacidade base ('subtil' ~0.04, 'medio' ~0.07).
+ */
+
+type Motivo = 'livro-aberto' | 'estante' | 'pena' | 'marcador' | 'e-reader' | 'pagina-marcada';
+type Posicao = 'topo-direita' | 'topo-esquerda' | 'fundo-direita' | 'fundo-esquerda';
+type Intensidade = 'subtil' | 'medio';
+
+interface Props {
+  motivo: Motivo;
+  posicao?: Posicao;
+  intensidade?: Intensidade;
+  /** Tom dominante — 'marinho' (frio) ou 'dourado' (quente). */
+  tom?: 'marinho' | 'dourado';
+}
+
+const {
+  motivo,
+  posicao = 'topo-direita',
+  intensidade = 'subtil',
+  tom = 'marinho',
+} = Astro.props;
+
+const posClasses: Record<Posicao, string> = {
+  'topo-direita': 'top-4 right-2 sm:top-10 sm:right-4 lg:right-8',
+  'topo-esquerda': 'top-4 left-2 sm:top-10 sm:left-4 lg:left-8',
+  'fundo-direita': 'bottom-10 right-2 sm:right-4 lg:right-8',
+  'fundo-esquerda': 'bottom-10 left-2 sm:left-4 lg:left-8',
+};
+
+const opClass = intensidade === 'subtil' ? 'opacity-[0.13]' : 'opacity-[0.20]';
+const corClass = tom === 'dourado' ? 'text-dourado-500' : 'text-marinho-700';
+---
+
+<div
+  aria-hidden="true"
+  class={`pointer-events-none absolute z-0 select-none ${posClasses[posicao]} ${opClass} ${corClass}`}
+>
+  {motivo === 'livro-aberto' && (
+    <svg
+      width="180"
+      height="180"
+      viewBox="0 0 180 180"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      {/* Livro aberto com páginas ligeiramente curvas */}
+      <path d="M90 52 C70 44, 42 42, 20 48 L20 144 C42 138, 70 140, 90 148" />
+      <path d="M90 52 C110 44, 138 42, 160 48 L160 144 C138 138, 110 140, 90 148" />
+      <path d="M90 52 L90 148" />
+      <path d="M32 66 L76 62" />
+      <path d="M32 82 L76 78" />
+      <path d="M32 98 L76 94" />
+      <path d="M32 114 L60 110" />
+      <path d="M104 62 L148 66" />
+      <path d="M104 78 L148 82" />
+      <path d="M104 94 L148 98" />
+      <path d="M104 110 L132 114" />
+    </svg>
+  )}
+
+  {motivo === 'estante' && (
+    <svg
+      width="200"
+      height="160"
+      viewBox="0 0 200 160"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      {/* Estante com lombadas de alturas diferentes */}
+      <rect x="10" y="30" width="22" height="110" rx="2" />
+      <rect x="36" y="44" width="20" height="96" rx="2" />
+      <rect x="60" y="22" width="24" height="118" rx="2" />
+      <rect x="88" y="52" width="20" height="88" rx="2" />
+      <rect x="112" y="36" width="26" height="104" rx="2" />
+      <rect x="142" y="48" width="20" height="92" rx="2" />
+      <rect x="166" y="30" width="22" height="110" rx="2" />
+      {/* Detalhes */}
+      <line x1="14" y1="60" x2="28" y2="60" />
+      <line x1="14" y1="110" x2="28" y2="110" />
+      <line x1="64" y1="52" x2="80" y2="52" />
+      <line x1="64" y1="110" x2="80" y2="110" />
+      <line x1="116" y1="66" x2="134" y2="66" />
+      <line x1="116" y1="120" x2="134" y2="120" />
+      <line x1="170" y1="60" x2="184" y2="60" />
+      {/* Chão da estante */}
+      <line x1="2" y1="146" x2="198" y2="146" stroke-width="1.5" />
+    </svg>
+  )}
+
+  {motivo === 'pena' && (
+    <svg
+      width="160"
+      height="200"
+      viewBox="0 0 160 200"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      {/* Pena de escrever estilizada */}
+      <path d="M132 20 C100 32, 64 68, 44 110 C36 126, 30 146, 28 168 L28 180 L40 180 C62 178, 82 172, 98 164 C140 144, 176 108, 188 76" transform="translate(-20 -10)" />
+      <path d="M108 30 C90 40, 60 70, 44 100" />
+      <path d="M100 44 C84 54, 60 76, 48 98" />
+      <path d="M92 58 C78 66, 58 82, 50 98" />
+      <path d="M84 72 C72 80, 58 90, 52 100" />
+      {/* Traço final da pena até à tinta */}
+      <path d="M28 170 L14 194" stroke-width="1.5" />
+      {/* Gota de tinta */}
+      <circle cx="10" cy="196" r="2.5" fill="currentColor" stroke="none" />
+    </svg>
+  )}
+
+  {motivo === 'marcador' && (
+    <svg
+      width="120"
+      height="200"
+      viewBox="0 0 120 200"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      {/* Fita de marcador de página */}
+      <path d="M30 10 L90 10 L90 170 L60 148 L30 170 Z" />
+      <line x1="46" y1="40" x2="74" y2="40" />
+      <line x1="46" y1="58" x2="74" y2="58" />
+      <line x1="46" y1="76" x2="74" y2="76" />
+    </svg>
+  )}
+
+  {motivo === 'e-reader' && (
+    <svg
+      width="180"
+      height="220"
+      viewBox="0 0 180 220"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      {/* Silhueta de e-reader com linhas de texto */}
+      <rect x="24" y="14" width="132" height="192" rx="10" />
+      <rect x="36" y="28" width="108" height="158" rx="4" />
+      {/* Linhas de texto no ecrã */}
+      <line x1="48" y1="48" x2="132" y2="48" />
+      <line x1="48" y1="62" x2="128" y2="62" />
+      <line x1="48" y1="76" x2="132" y2="76" />
+      <line x1="48" y1="90" x2="112" y2="90" />
+      <line x1="48" y1="112" x2="132" y2="112" />
+      <line x1="48" y1="126" x2="124" y2="126" />
+      <line x1="48" y1="140" x2="132" y2="140" />
+      <line x1="48" y1="154" x2="116" y2="154" />
+      {/* Botão inferior */}
+      <circle cx="90" cy="196" r="4" />
+    </svg>
+  )}
+
+  {motivo === 'pagina-marcada' && (
+    <svg
+      width="180"
+      height="200"
+      viewBox="0 0 180 200"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.75"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      {/* Folha dobrada com canto virado */}
+      <path d="M30 20 L124 20 L156 52 L156 180 L30 180 Z" />
+      <path d="M124 20 L124 52 L156 52" />
+      <line x1="46" y1="74" x2="140" y2="74" />
+      <line x1="46" y1="90" x2="140" y2="90" />
+      <line x1="46" y1="106" x2="132" y2="106" />
+      <line x1="46" y1="122" x2="140" y2="122" />
+      <line x1="46" y1="138" x2="116" y2="138" />
+      <line x1="46" y1="154" x2="126" y2="154" />
+    </svg>
+  )}
+</div>

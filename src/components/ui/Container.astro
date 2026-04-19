@@ -1,0 +1,17 @@
+---
+interface Props {
+  largura?: 'texto' | 'normal' | 'largo';
+  classe?: string;
+}
+const { largura = 'normal', classe = '' } = Astro.props;
+
+const largurasClasses: Record<string, string> = {
+  texto: 'max-w-[68ch]',
+  normal: 'max-w-5xl',
+  largo: 'max-w-7xl',
+};
+---
+
+<div class={`mx-auto w-full px-4 sm:px-6 ${largurasClasses[largura]} ${classe}`}>
+  <slot />
+</div>

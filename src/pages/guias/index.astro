@@ -1,0 +1,96 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Container from '@components/ui/Container.astro';
+import { getCollection } from 'astro:content';
+import { formatarData } from '@lib/formatters';
+
+const guias = (await getCollection('guias', ({ data }) => !data.rascunho)).sort(
+  (a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf(),
+);
+
+const categorias: Record<string, string> = {
+  comprar: 'Comprar',
+  utilizar: 'Utilizar',
+  'converter-e-enviar': 'Converter e enviar',
+  ebooks: 'Ebooks',
+  problemas: 'Resolver problemas',
+  comparacoes: 'Comparações',
+};
+
+const pillPorCategoria: Record<string, string> = {
+  comprar: '',
+  utilizar: 'pill-oceano',
+  'converter-e-enviar': 'pill-salvia',
+  ebooks: 'pill-dourado',
+  problemas: 'pill-ambar',
+  comparacoes: 'pill-marinho',
+};
+
+const caixaPorCategoria: Record<string, string> = {
+  comprar: 'caixa-marca',
+  utilizar: 'caixa-oceano',
+  'converter-e-enviar': 'caixa-salvia',
+  ebooks: 'caixa-dourado',
+  problemas: 'caixa-ambar',
+  comparacoes: 'caixa-marinho',
+};
+---
+
+<BaseLayout
+  titulo="Guias sobre Kindle e ebooks em Portugal"
+  descricao="Guias práticos em português europeu: como comprar um Kindle, enviar livros, converter formatos, bibliotecas digitais em PT e resolver problemas comuns."
+>
+  <section class="relative overflow-hidden border-b-4 border-oceano-500 bg-gradient-to-br from-oceano-900 via-oceano-800 to-marinho-900 text-creme-50">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0"
+      style="background-image: radial-gradient(ellipse at top right, rgb(20 110 180 / 0.45) 0%, transparent 55%), radial-gradient(ellipse at bottom left, rgb(249 126 7 / 0.15) 0%, transparent 50%);"
+    />
+    <Container largura="normal" classe="relative z-10 py-14">
+      <span class="inline-flex items-center gap-1 rounded-full border border-oceano-300/40 bg-oceano-400/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-oceano-200">
+        Guias
+      </span>
+      <h1
+        class="mt-3 text-4xl font-bold text-creme-50 md:text-5xl"
+        style="font-family: var(--font-serif); letter-spacing: -0.03em;"
+      >
+        Guias práticos
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg text-oceano-100/90">
+        Passo-a-passo sem floreados. Começa pelo essencial ou salta direto ao problema que queres
+        resolver.
+      </p>
+    </Container>
+  </section>
+
+  <Container largura="normal" classe="py-14">
+    {guias.length === 0 ? (
+      <p class="text-marinho-600">Ainda não há guias publicados. Volta em breve.</p>
+    ) : (
+      <ul class="grid gap-6 md:grid-cols-2">
+        {guias.map((g) => (
+          <li class={`caixa ${caixaPorCategoria[g.data.categoria] ?? 'caixa-marca'} group`}>
+            <a href={`/guias/${g.id}`} class="block p-6">
+              <span class={`pill ${pillPorCategoria[g.data.categoria] ?? ''}`}>
+                {categorias[g.data.categoria] ?? g.data.categoria}
+              </span>
+              <h2
+                class="mt-3 text-2xl font-bold text-marinho-900 transition-colors group-hover:text-marca-700"
+                style="font-family: var(--font-serif); letter-spacing: -0.02em;"
+              >
+                {g.data.titulo}
+              </h2>
+              <p class="mt-3 text-marinho-600">{g.data.descricao}</p>
+              <p class="mt-4 border-t border-marinho-100 pt-3 text-xs text-marinho-400">
+                <time datetime={g.data.data_publicacao.toISOString()}>
+                  {formatarData(g.data.data_publicacao)}
+                </time>
+                {g.data.tempo_leitura_min && <span> · {g.data.tempo_leitura_min} min de leitura</span>}
+              </p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+  </Container>
+</BaseLayout>

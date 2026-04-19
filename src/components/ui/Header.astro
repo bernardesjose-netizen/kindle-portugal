@@ -1,0 +1,54 @@
+---
+import Container from './Container.astro';
+import { SITE, NAVEGACAO_PRINCIPAL } from '@lib/site';
+
+const caminhoAtual = Astro.url.pathname;
+function ativo(href: string) {
+  if (href === '/') return caminhoAtual === '/';
+  return caminhoAtual.startsWith(href);
+}
+---
+
+<header class="sticky top-0 z-40 border-b border-marinho-100/80 bg-creme-50/85 backdrop-blur-md">
+  <Container largura="largo" classe="flex items-center justify-between gap-6 py-4">
+    <a
+      href="/"
+      class="group flex items-center gap-2.5 text-marinho-900"
+      aria-label={SITE.nome}
+    >
+      <svg
+        class="h-8 w-8 shrink-0 transition-transform duration-300 group-hover:rotate-[-6deg]"
+        viewBox="0 0 32 32"
+        aria-hidden="true"
+      >
+        <rect width="32" height="32" rx="7" fill="currentColor" />
+        <rect x="7" y="5" width="18" height="22" rx="2" fill="#fefbf5" />
+        <rect x="10" y="9" width="12" height="1.4" fill="#4a5568" />
+        <rect x="10" y="12" width="12" height="1.4" fill="#4a5568" />
+        <rect x="10" y="15" width="9" height="1.4" fill="#4a5568" />
+        <circle cx="16" cy="23" r="1.6" fill="#f97e07" />
+      </svg>
+      <span class="hidden text-[1.05rem] font-bold tracking-tight sm:inline" style="font-family: var(--font-serif);">
+        Kindle <span class="text-marca-600">Portugal</span>
+      </span>
+    </a>
+
+    <nav aria-label="Navegação principal" class="nav-scroll -mx-2 overflow-x-auto">
+      <ul class="flex min-w-max items-center gap-1 px-2 text-sm">
+        {
+          NAVEGACAO_PRINCIPAL.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class={`nav-link ${ativo(item.href) ? 'ativo' : ''}`}
+                aria-current={ativo(item.href) ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </Container>
+</header>

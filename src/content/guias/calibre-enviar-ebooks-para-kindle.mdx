@@ -1,0 +1,279 @@
+---
+titulo: "Calibre em 2026: converter e enviar ebooks grátis para o Kindle (EPUB, PDF, MOBI)"
+descricao: "Guia do Calibre em PT-PT: onde descarregar, principais funções, converter entre formatos (EPUB/PDF/AZW3) e enviar ebooks para o Kindle. Fontes de livros grátis legais."
+categoria: "converter-e-enviar"
+tags:
+  - "Calibre"
+  - "converter ebooks"
+  - "EPUB para Kindle"
+  - "PDF Kindle"
+  - "Projecto Gutenberg"
+  - "Standard Ebooks"
+  - "livros grátis"
+  - "Send to Kindle"
+autor:
+  nome: "Kindle Portugal"
+data_publicacao: 2026-04-19
+tempo_leitura_min: 14
+modelos_relacionados:
+  - "paperwhite"
+seo:
+  titulo_seo: "Calibre 2026 — Converter e enviar ebooks para Kindle em PT-PT"
+  descricao_seo: "Guia completo do Calibre: descarregar, converter EPUB/PDF/MOBI e enviar para Kindle. Fontes de livros grátis legais para Portugal."
+---
+
+import ImagemProduto from '@components/afiliados/ImagemProduto.astro';
+import LojasAmazon from '@components/afiliados/LojasAmazon.astro';
+
+<div class="my-6 grid grid-cols-3 gap-4">
+  <ImagemProduto asin="B0CNV9F72P" alt="Kindle básico 2024" marketplace="es" formato="pequeno" />
+  <ImagemProduto asin="B0CFPWLGF2" alt="Kindle Paperwhite" marketplace="es" formato="pequeno" />
+  <ImagemProduto asin="B0DVQQGMCZ" alt="Kindle Scribe 3.ª geração" marketplace="es" formato="pequeno" />
+</div>
+
+O **Calibre** é o canivete-suíço de quem lê fora do ecossistema Amazon. Gratuito, *open-source*, mantido desde 2006 pelo indiano-americano Kovid Goyal, corre em Windows, macOS e Linux. Permite **importar**, **organizar**, **converter** e **enviar** ebooks para qualquer leitor — incluindo Kindle. Este guia mostra como o usar para descarregar livros gratuitos de sites legais e ter tudo no Kindle em minutos.
+
+## Em resumo
+
+- **Onde descarregar:** [calibre-ebook.com](https://calibre-ebook.com) — site oficial, gratuito e sem publicidade.
+- **Para que serve:** gerir biblioteca, converter EPUB ↔ AZW3/MOBI/PDF, limpar metadados, enviar para Kindle via USB ou email.
+- **Alternativa nativa:** a Amazon aceita hoje **EPUB directamente** via *Send to Kindle* — Calibre continua útil para conversões, limpeza de metadados e fontes que não servem EPUB.
+- **Livros grátis legais:** Projecto Gutenberg, Standard Ebooks, Internet Archive, Luso Livros.
+
+## O que é o Calibre e porque continua a valer a pena em 2026
+
+O Calibre nasceu antes de a Amazon aceitar EPUB em *Send to Kindle* (funcionalidade que só chegou em **maio de 2022**). Durante mais de 10 anos, **foi a única forma prática** de passar ebooks não comprados na Amazon para o Kindle. Hoje continua relevante por cinco razões:
+
+1. **Gestão de biblioteca** — centraliza todos os ebooks num único sítio, independentemente da fonte.
+2. **Conversão entre 20+ formatos** — incluindo PDF → EPUB, HTML → EPUB, DOCX → EPUB.
+3. **Limpeza e enriquecimento de metadados** — título, autor, capa, ISBN, descrição; procura automática em Amazon, Google Books e Goodreads.
+4. **Descarregador de notícias** — agrega feeds RSS e cria um "jornal" em formato ebook pronto para Kindle.
+5. **Mais de 500 plugins comunitários** — para quase tudo o que imaginares.
+
+É *open-source* (licença GPL-3), não tem versão paga, não tem anúncios, não pede conta. Corre localmente — os teus ebooks nunca saem do teu computador.
+
+## Onde descarregar (só daqui)
+
+- **Site oficial:** [calibre-ebook.com/download](https://calibre-ebook.com/download)
+- Instaladores para **Windows** (64-bit), **macOS** (Intel e Apple Silicon), **Linux** (tarball, AppImage, pacotes distro)
+- Também há versão **portable** para Windows (não precisa de instalar)
+
+⚠️ **Não descarregues de sites intermédios** (Softonic, FileHippo, CNET, etc.). O Calibre é grátis no site oficial e qualquer versão "empacotada" de terceiros pode trazer *bundleware* indesejado.
+
+## Primeira utilização em 5 minutos
+
+### 1. Instalar e escolher o leitor preferido
+
+No primeiro arranque, o Calibre pergunta qual é o teu leitor. Escolhe **Amazon → Kindle**. Isto configura a conversão automática para **AZW3** (formato proprietário Kindle, melhor para tipografia) e os templates certos para *Send to Kindle*.
+
+### 2. Adicionar livros
+
+**Arrastar e largar** na janela principal. O Calibre lê o ficheiro, extrai metadados (título, autor) e coloca-o na tua biblioteca. Formatos suportados na importação:
+
+- **EPUB** (o padrão aberto)
+- **PDF** (com extração de texto)
+- **MOBI / AZW3 / AZW** (formatos Kindle)
+- **DOCX, RTF, ODT** (documentos Office)
+- **HTML, CHM, LIT, LRF, PDB, PRC** e mais 10 formatos
+
+### 3. Procurar metadados em falta
+
+Clique direito num livro → **Editar metadados → Descarregar metadados e capa**. O Calibre consulta **Amazon, Google Books, Goodreads** e oferece ficha completa. Útil para ebooks descarregados sem capa ou descrição.
+
+### 4. Converter para formato Kindle
+
+Clique direito no livro → **Converter → Converter individualmente**. Escolhe o formato de saída (**AZW3** para Kindles modernos; EPUB também funciona com *Send to Kindle*). Em menos de 10 segundos, tens o livro pronto.
+
+### 5. Enviar para o Kindle
+
+Duas formas:
+
+**a) Por USB (rápido, sem ligação à internet):**
+- Liga o Kindle ao computador por cabo USB-C.
+- O Calibre detecta-o automaticamente — aparece o ícone "Dispositivo" na barra superior.
+- Clique direito no livro → **Enviar para dispositivo → Memória principal**.
+- Desliga o cabo. O livro aparece na biblioteca do Kindle.
+
+**b) Por email *Send to Kindle* (mais cómodo, funciona à distância):**
+- Vai a [amazon.es/mycd](https://www.amazon.es/mycd) → **Preferências → Enviar para Kindle** e descobre o teu email pessoal (*algo*@kindle.com).
+- Autoriza o teu email normal a enviar para esse endereço.
+- No Calibre: **Preferências → Partilhar ebooks por email** e configura o SMTP do teu serviço de email.
+- Clique direito no livro → **Conectar/partilhar → Email para...**. Chega ao Kindle em 1-2 minutos.
+
+Os EPUB funcionam nativamente desde maio de 2022 — não tens de converter para AZW3 antes de enviar.
+
+## Principais funções em detalhe
+
+### Conversão entre formatos
+
+A funcionalidade estrela do Calibre. Menu **Converter livros** permite:
+
+| Do formato | Para | Qualidade | Notas |
+|-----------|------|-----------|-------|
+| EPUB | AZW3 | Excelente | O par padrão para Kindle. |
+| PDF | EPUB | Variável | Bom se o PDF for texto; mau se for varrimento de páginas. |
+| DOCX / ODT | EPUB | Excelente | Converter manuscritos próprios para ler como ebook. |
+| HTML | EPUB | Boa | Salvar artigos longos para ler no Kindle. |
+| MOBI antigo | AZW3 / EPUB | Excelente | Migração de bibliotecas antigas Kindle. |
+
+**Dica:** nas opções de conversão, separador **"Aparência"**, define a fonte base, o tamanho e as margens do Kindle. Evita quebras de linha esquisitas.
+
+### Edição de ebooks
+
+O Calibre inclui um **editor visual de EPUB/AZW3** com *preview* ao vivo. Útil para:
+- Corrigir erros de formatação (títulos sem estilo, parágrafos juntos).
+- Substituir a capa por uma melhor.
+- Adicionar índice (ToC) automático a partir dos H1/H2.
+- Tradução parcial (substituições em massa).
+
+Abrir com: clique direito → **Editar livro**.
+
+### Descarregador de notícias ("News Downloader")
+
+Agrega feeds RSS e páginas web em **jornais ebook** prontos para Kindle. A Calibre vem com **+1000 receitas pré-configuradas** — Público, Expresso, Observador, The Guardian, NYT, Le Monde, etc.
+
+- **Buscar notícias → Agendar** → escolhe publicações → programa **diariamente às 7h**.
+- O Calibre descarrega, converte para AZW3 e envia para o Kindle automaticamente.
+
+Resultado: ao acordar, tens o Público do dia no Kindle, com tipografia decente, sem publicidade, sem *paywalls* (quando o RSS é aberto).
+
+### Plugins comunitários
+
+**Preferências → Plugins → Obter novos plugins** abre o catálogo comunitário. Alguns úteis:
+
+- **Goodreads Sync** — sincroniza o estado de leitura com o teu perfil Goodreads.
+- **Count Pages** — estima páginas e tempo de leitura por livro.
+- **Open With** — abre ebooks em editores externos.
+- **Reading List** — gere uma "pilha por ler".
+
+> **Nota sobre DRM:** o Calibre **não remove** DRM por defeito. Ebooks comprados em **Kindle Store, Kobo, Apple Books, Wook e Bertrand** têm proteção DRM Adobe ou proprietária que o Calibre respeita — vais receber mensagem de erro se tentares converter. Remoção de DRM é zona cinzenta legal (permitida para cópia pessoal em alguns países, proibida para distribuição). Neste site não cobrimos esse tópico.
+
+## Fontes de ebooks gratuitos (todas legais)
+
+Estas fontes publicam obras em **domínio público** (autor falecido há 70+ anos em Portugal) ou em **Creative Commons**. São as mais usadas por quem lê muito sem gastar.
+
+### Projecto Gutenberg
+
+A avó de todos — lançada em 1971. Mais de **75.000 obras** em domínio público, incluindo clássicos portugueses.
+
+- **Site:** [gutenberg.org](https://www.gutenberg.org)
+- **Em português:** [gutenberg.org/browse/languages/pt](https://www.gutenberg.org/browse/languages/pt)
+- **Formatos:** EPUB, MOBI, HTML, TXT
+- **Exemplos PT:** *Os Maias* e *O Primo Basílio* (Eça), *Amor de Perdição* (Camilo), *As Pupilas do Senhor Reitor* (Júlio Dinis), *Viagens na Minha Terra* (Garrett).
+
+**Fluxo:** no site, escolhe o livro → clica em "EPUB (no images)" → abre no Calibre (arrasta o ficheiro) → envia para Kindle.
+
+### Standard Ebooks
+
+Voluntários que pegam em obras do Gutenberg e fazem edições **tipograficamente cuidadas** — capas novas, correção de erros, formatação moderna. Qualidade de edição premium, gratuito.
+
+- **Site:** [standardebooks.org](https://standardebooks.org)
+- **Formatos:** EPUB, AZW3 (Kindle directo), KEPUB (Kobo)
+- **Catálogo:** ~1.000 obras, mas todas *muito* bem feitas. Sobretudo literatura inglesa e clássicos traduzidos.
+
+Se leres clássicos, usa Standard Ebooks em vez de Gutenberg — a experiência de leitura é superior.
+
+### Internet Archive
+
+Não-lucro com **milhões de livros digitalizados** — muitos em domínio público, alguns com empréstimo temporário (modelo CDL, *Controlled Digital Lending*).
+
+- **Site:** [archive.org](https://archive.org)
+- **Ebooks:** [archive.org/details/texts](https://archive.org/details/texts)
+- **Formatos:** PDF, EPUB, Kindle
+- **Útil para:** manuais técnicos antigos, revistas históricas, arquivos jornalísticos.
+
+### Luso Livros
+
+Iniciativa portuguesa especializada em **clássicos em português europeu**.
+
+- **Site:** [lusolivros.org](http://www.lusolivros.org)
+- **Formatos:** EPUB, PDF
+- **Catálogo:** pequeno mas cuidado — Pessoa, Garrett, Camilo, Antero de Quental.
+
+### Arquivo Pessoa
+
+Obra de Fernando Pessoa em acesso livre.
+
+- **Site:** [arquivopessoa.net](http://arquivopessoa.net)
+- **Formato:** HTML (convertível para EPUB via Calibre)
+- Cobre a obra publicada **e parte dos inéditos**.
+
+### ManyBooks e Feedbooks (secção gratuita)
+
+Agregadores com selecções editoriais de clássicos e ficção independente. Interfaces mais limpas que o Gutenberg.
+
+- [manybooks.net](https://manybooks.net)
+- [feedbooks.com/publicdomain](https://www.feedbooks.com/publicdomain)
+
+## Fluxo completo: do site para o Kindle em 3 minutos
+
+**Exemplo prático — descarregar *Os Maias* do Projecto Gutenberg e enviar para Kindle:**
+
+1. Abrir [gutenberg.org/ebooks/14785](https://www.gutenberg.org/ebooks/14785) (*Os Maias*).
+2. Clicar em **EPUB (no images)** — descarrega `pg14785.epub`.
+3. Abrir o Calibre → arrastar o ficheiro para a janela.
+4. Clique direito → **Editar metadados → Descarregar metadados e capa** (para ganhar ficha completa).
+5. Ligar o Kindle por USB → clicar direito no livro → **Enviar para dispositivo → Memória principal**.
+6. Desligar o cabo. Começar a ler em *Os Maias*.
+
+**Tempo real:** menos de 3 minutos, incluindo instalação do Calibre se ainda não o tens.
+
+## Quando o Calibre não é necessário
+
+A Amazon adicionou duas alternativas nativas que cobrem 70% dos casos:
+
+### a) Send to Kindle (email)
+
+Já referido acima. EPUB desde maio 2022 — se só queres enviar um EPUB para o teu Kindle, não precisas do Calibre.
+
+### b) App "Send to Kindle" para Windows/Mac
+
+A Amazon lançou em 2023 uma **app nativa** que arrasta-e-larga ficheiros para o teu Kindle via cloud. Formatos aceites: EPUB, PDF, DOC/DOCX, TXT, MOBI, HTML, BMP, GIF, JPG, PNG.
+
+- Descarregar em [amazon.com/sendtokindle](https://www.amazon.com/gp/sendtokindle).
+
+**Quando continuas a precisar do Calibre:**
+- Para **gerir biblioteca** grande (Calibre é uma aplicação de gestão; *Send to Kindle* é só transferência).
+- Para **converter entre formatos** (PDF→EPUB, DOCX→EPUB, RTF→EPUB, HTML→EPUB).
+- Para **descarregador de notícias** (feeds RSS → ebook).
+- Para **editar metadados e capas** em massa.
+- Para **plugins** de utilidades avançadas.
+
+## Perguntas frequentes
+
+**O Calibre é mesmo gratuito?**
+Sim. Licença GPL-3. Sem conta, sem anúncios, sem compras internas. Os autores aceitam [doações voluntárias](https://calibre-ebook.com/donate), nada mais.
+
+**O Calibre funciona em Windows 11 / macOS Sonoma / Linux?**
+Sim, todos. A equipa mantém builds actualizadas mensalmente. Versão actual (abril 2026): 7.x.
+
+**Posso converter um livro comprado na Kindle Store para EPUB?**
+Não sem remover o DRM. Os ebooks comprados na Amazon têm proteção proprietária. O Calibre respeita o DRM por *default*. Para livros **em domínio público** ou **sem DRM** que compraste, sim — conversão livre.
+
+**O Calibre envia dados meus para algum sítio?**
+Não. Corre localmente. As únicas ligações de rede que faz são quando tu pedes (descarregar metadados, notícias, plugins, actualizações).
+
+**Qual é a diferença entre EPUB e AZW3 no Kindle?**
+Ambos funcionam. AZW3 é formato proprietário Amazon e tem tipografia ligeiramente melhor (*Bookerly* com hifenização). EPUB é padrão aberto. Para texto simples, não notas diferença.
+
+**Os livros enviados via email contam nos planos limitados de dados?**
+Não. O Kindle só descarrega via Wi-Fi (excepto os poucos modelos 3G/4G antigos). Envia quantos quiseres.
+
+**Posso usar o Calibre para gerir ebooks em formato Kobo ou outros?**
+Sim. O Calibre é agnóstico — usa-o com Kobo, PocketBook, Boox, Nook, ou para organizar uma biblioteca pessoal só em EPUB.
+
+## Em resumo
+
+- O **Calibre** é gratuito, *open-source*, e continua a ser o melhor gestor de ebooks para quem lê fora da Amazon.
+- Descarrega sempre em **[calibre-ebook.com](https://calibre-ebook.com)** — nunca de intermediários.
+- Usa-o para **converter** (EPUB ↔ AZW3 ↔ MOBI ↔ PDF), **enriquecer metadados**, e **enviar para Kindle** via USB ou email.
+- Combina bem com o **Send to Kindle** nativo da Amazon — usa Calibre para o trabalho complexo, *Send to Kindle* para transferência rápida.
+- Emparelha com as fontes legais: **Projecto Gutenberg**, **Standard Ebooks**, **Internet Archive**, **Luso Livros**, **Arquivo Pessoa**.
+
+Com isto e um Kindle, tens acesso a mais de **100.000 títulos em domínio público** sem gastar um cêntimo.
+
+<LojasAmazon
+  pesquisa={'kindle'}
+  titulo="Ver Kindles onde vais ler o que descarregares"
+  legenda="Qualquer Kindle aceita EPUB via Send to Kindle e ficheiros convertidos pelo Calibre. O Paperwhite é a escolha certa em 9 em cada 10 casos."
+/>

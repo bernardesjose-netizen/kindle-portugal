@@ -1,0 +1,27 @@
+---
+import { urlAfiliado, ehLinkAmazon } from '@lib/afiliados';
+
+interface Props {
+  url: string;
+  etiqueta?: string;
+  tamanho?: 'normal' | 'grande';
+}
+
+const { url, etiqueta = 'Ver na Amazon', tamanho = 'normal' } = Astro.props;
+const href = urlAfiliado(url);
+const amazon = ehLinkAmazon(url);
+
+const extra =
+  tamanho === 'grande' ? 'px-7 py-3.5 text-base' : 'px-5 py-2.5 text-sm';
+---
+
+<a
+  href={href}
+  rel="sponsored nofollow noopener"
+  target="_blank"
+  class={`btn-marca ${extra}`}
+  data-afiliado={amazon ? 'amazon' : 'externo'}
+>
+  <slot>{etiqueta}</slot>
+  <span aria-hidden="true">→</span>
+</a>

@@ -1,0 +1,100 @@
+---
+import '@/styles/global.css';
+import Seo from '@components/seo/Seo.astro';
+import JsonLd from '@components/seo/JsonLd.astro';
+import Header from '@components/ui/Header.astro';
+import Footer from '@components/ui/Footer.astro';
+import OrnamentoFundo from '@components/ui/OrnamentoFundo.astro';
+import { SITE } from '@lib/site';
+
+type MotivoOrnamento =
+  | 'livro-aberto'
+  | 'estante'
+  | 'pena'
+  | 'marcador'
+  | 'e-reader'
+  | 'pagina-marcada';
+
+interface Props {
+  titulo: string;
+  descricao: string;
+  canonical?: string;
+  imagem?: string;
+  tipo?: 'website' | 'article';
+  noindex?: boolean;
+  dataPublicacao?: Date;
+  dataRevisao?: Date;
+  autor?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  /** Motivo do ornamento de fundo. Se não definido, é inferido do path. */
+  motivoOrnamento?: MotivoOrnamento;
+  /** Usado pelos layouts interiores (ArtigoLayout, ModeloLayout) que já desenham os seus próprios ornamentos. */
+  semOrnamento?: boolean;
+}
+
+const { jsonLd, motivoOrnamento, semOrnamento = false, ...seoProps } = Astro.props;
+
+function inferirMotivo(pathname: string): { principal: MotivoOrnamento; secundario: MotivoOrnamento } {
+  const p = pathname.replace(/\/+$/, '');
+  if (p === '' || p === '/') return { principal: 'estante', secundario: 'livro-aberto' };
+  if (p === '/modelos') return { principal: 'e-reader', secundario: 'estante' };
+  if (p === '/guias') return { principal: 'livro-aberto', secundario: 'pagina-marcada' };
+  if (p === '/blog') return { principal: 'pena', secundario: 'pagina-marcada' };
+  if (p === '/reviews') return { principal: 'marcador', secundario: 'e-reader' };
+  if (p === '/faq') return { principal: 'marcador', secundario: 'livro-aberto' };
+  if (p === '/contacto') return { principal: 'pena', secundario: 'marcador' };
+  if (p === '/sobre') return { principal: 'livro-aberto', secundario: 'pena' };
+  if (p === '/divulgacao-afiliados') return { principal: 'pagina-marcada', secundario: 'marcador' };
+  if (p === '/politica-privacidade') return { principal: 'pagina-marcada', secundario: 'marcador' };
+  if (p === '/termos') return { principal: 'pagina-marcada', secundario: 'marcador' };
+  return { principal: 'livro-aberto', secundario: 'pagina-marcada' };
+}
+
+const { principal, secundario } = inferirMotivo(Astro.url.pathname);
+const motivoFinal: MotivoOrnamento = motivoOrnamento ?? principal;
+
+const websiteLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE.nome,
+  url: SITE.url,
+  inLanguage: 'pt-PT',
+};
+---
+
+<!doctype html>
+<html lang="pt-PT">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0b111a" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE.nome} — Blog`} href="/blog/rss.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <Seo {...seoProps} />
+    <JsonLd data={websiteLd} />
+    {jsonLd && <JsonLd data={jsonLd} />}
+  </head>
+  <body class="flex min-h-dvh flex-col">
+    <a href="#conteudo" class="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-marinho-900 focus:px-3 focus:py-2 focus:text-white">
+      Saltar para o conteúdo
+    </a>
+    <Header />
+    <main id="conteudo" class="relative flex-1">
+      {!semOrnamento && (
+        <>
+          <OrnamentoFundo motivo={motivoFinal} posicao="topo-direita" intensidade="subtil" tom="marinho" />
+          <OrnamentoFundo motivo={secundario} posicao="fundo-esquerda" intensidade="subtil" tom="dourado" />
+        </>
+      )}
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

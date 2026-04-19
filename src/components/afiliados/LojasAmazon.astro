@@ -1,0 +1,100 @@
+---
+import { linksPorLojaDeAsin, linksPorLojaDePesquisa, MARKETPLACES, temTag } from '@lib/afiliados';
+
+interface Props {
+  asin?: string;
+  pesquisa?: string;
+  categoria?: string;
+  titulo?: string;
+  legenda?: string;
+}
+
+const {
+  asin,
+  pesquisa,
+  categoria,
+  titulo = 'Onde comprar',
+  legenda = 'Escolhe a loja Amazon do teu país. Compras na Amazon.es são as mais comuns em Portugal (envia para PT sem taxas).',
+} = Astro.props;
+
+const lojas = asin
+  ? linksPorLojaDeAsin(asin)
+  : pesquisa
+    ? linksPorLojaDePesquisa(pesquisa, { categoria })
+    : [];
+
+const marketplacesDisponiveis = MARKETPLACES.filter((m) => temTag(m.id)).map((m) => m.id);
+---
+
+{lojas.length > 0 && (
+  <section
+    class="relative mt-12 overflow-hidden rounded-2xl border border-marinho-200 bg-gradient-to-br from-white via-creme-50 to-creme-100 p-6 sm:p-8"
+    style="box-shadow: var(--shadow-media);"
+  >
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-40 blur-3xl"
+      style="background: radial-gradient(circle, #f97e07 0%, transparent 70%);"
+    />
+
+    <div class="relative flex items-start justify-between gap-4">
+      <div>
+        <span class="pill">Onde comprar</span>
+        <h2
+          class="mt-2 text-2xl font-bold text-marinho-900 sm:text-3xl"
+          style="font-family: var(--font-serif); letter-spacing: -0.02em;"
+        >
+          {titulo}
+        </h2>
+      </div>
+    </div>
+    <p class="relative mt-3 max-w-2xl text-sm text-marinho-600">{legenda}</p>
+
+    <ul class="relative mt-6 grid gap-3 sm:grid-cols-2">
+      {lojas.map((loja) => (
+        <li>
+          <a
+            href={loja.url}
+            rel="sponsored nofollow noopener"
+            target="_blank"
+            class="group flex items-center justify-between gap-3 rounded-xl border border-marinho-200 bg-white px-4 py-3.5 text-sm font-semibold text-marinho-800 shadow-[0_1px_2px_rgba(15,26,36,0.04)] transition-all duration-200 hover:-translate-y-0.5 hover:border-marca-500 hover:text-marca-700 hover:shadow-[0_6px_16px_rgba(249,126,7,0.18)]"
+            data-afiliado="amazon"
+            data-mercado={loja.id}
+          >
+            <span class="flex items-center gap-3">
+              <span
+                class="flex h-9 w-9 items-center justify-center rounded-lg bg-marinho-900 text-xs font-bold uppercase tracking-wider text-creme-50 transition-colors group-hover:bg-marca-600"
+                aria-hidden="true"
+              >
+                {loja.id === 'com' ? 'US' : loja.id === 'uk' ? 'GB' : loja.id === 'br' ? 'BR' : loja.id.toUpperCase()}
+              </span>
+              <span>{loja.etiqueta}</span>
+            </span>
+            <span
+              aria-hidden="true"
+              class="text-marinho-400 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-marca-600"
+            >
+              →
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <p class="relative mt-5 text-xs text-marinho-400">
+      Links com identificador de afiliado. Se comprares através deles, podemos receber uma pequena
+      comissão sem custo adicional para ti. Ver a{' '}
+      <a href="/divulgacao-afiliados" class="underline decoration-marca-400 underline-offset-2 hover:text-marca-600">
+        divulgação
+      </a>
+      .
+    </p>
+  </section>
+)}
+
+{marketplacesDisponiveis.length === 0 && (
+  <aside class="mt-10 rounded-xl border border-ambar-100 bg-ambar-50 p-4 text-sm text-ambar-800">
+    <strong>Configuração em falta:</strong> nenhum tracking ID Amazon foi definido em variáveis de
+    ambiente. Preenche <code>PUBLIC_AMAZON_TAG_ES</code> (e outros) em <code>.env</code>.
+  </aside>
+)}

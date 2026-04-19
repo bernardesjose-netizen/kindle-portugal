@@ -1,0 +1,71 @@
+---
+import Container from './Container.astro';
+import { SITE, NAVEGACAO_RODAPE } from '@lib/site';
+
+const ano = new Date().getFullYear();
+---
+
+<footer class="relative mt-24 overflow-hidden border-t border-marinho-100 bg-marinho-900 text-creme-100">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 opacity-[0.12]"
+    style="background-image: radial-gradient(circle at 20% 0%, #f97e07 0%, transparent 55%), radial-gradient(circle at 95% 120%, #d4a84b 0%, transparent 45%);"
+  />
+
+  <Container largura="largo" classe="relative z-10 py-12 text-sm">
+    <div class="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr] md:items-start">
+      <div>
+        <div class="flex items-center gap-2.5 text-creme-50">
+          <svg class="h-8 w-8" viewBox="0 0 32 32" aria-hidden="true">
+            <rect width="32" height="32" rx="7" fill="#f97e07" />
+            <rect x="7" y="5" width="18" height="22" rx="2" fill="#fefbf5" />
+            <rect x="10" y="9" width="12" height="1.4" fill="#4a5568" />
+            <rect x="10" y="12" width="12" height="1.4" fill="#4a5568" />
+            <rect x="10" y="15" width="9" height="1.4" fill="#4a5568" />
+            <circle cx="16" cy="23" r="1.6" fill="#131a24" />
+          </svg>
+          <span class="text-lg font-bold" style="font-family: var(--font-serif);">
+            {SITE.nome}
+          </span>
+        </div>
+        <p class="mt-3 max-w-md text-creme-100/80">{SITE.descricao}</p>
+      </div>
+
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-wider text-marca-300">Navegar</h3>
+        <ul class="mt-3 space-y-2 text-creme-100/90">
+          <li><a href="/modelos" class="hover:text-marca-300">Modelos</a></li>
+          <li><a href="/guias" class="hover:text-marca-300">Guias</a></li>
+          <li><a href="/reviews" class="hover:text-marca-300">Reviews</a></li>
+          <li><a href="/blog" class="hover:text-marca-300">Blog</a></li>
+          <li><a href="/faq" class="hover:text-marca-300">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-xs font-semibold uppercase tracking-wider text-marca-300">Legal</h3>
+        <ul class="mt-3 space-y-2 text-creme-100/90">
+          {
+            NAVEGACAO_RODAPE.map((item) => (
+              <li>
+                <a href={item.href} class="hover:text-marca-300">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-10 border-t border-marinho-700/60 pt-6">
+      <p class="text-xs text-creme-100/60">
+        © {ano} {SITE.nome}. Feito com cuidado em Portugal.
+      </p>
+      <p class="mt-2 text-xs text-creme-100/50">
+        Não somos afiliados oficiais nem parceiros comerciais da Amazon.com, Inc. «Kindle» e o
+        logótipo Amazon são marcas registadas dos respetivos titulares.
+      </p>
+    </div>
+  </Container>
+</footer>

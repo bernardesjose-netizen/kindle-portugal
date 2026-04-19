@@ -1,0 +1,23 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Container from '@components/ui/Container.astro';
+---
+
+<BaseLayout titulo="Página não encontrada" descricao="A página que procuras não existe ou foi movida." noindex>
+  <Container largura="texto" classe="py-24 text-center">
+    <p class="text-xs font-semibold uppercase tracking-wider text-marca-600">Erro 404</p>
+    <h1 class="mt-3 text-4xl font-bold text-marinho-900">Essa página não existe</h1>
+    <p class="mt-4 text-marinho-600">
+      Pode ter sido removida ou o endereço está errado. Experimenta voltar à página inicial ou
+      consultar os nossos guias.
+    </p>
+    <div class="mt-8 flex justify-center gap-3">
+      <a href="/" class="rounded-md bg-marinho-900 px-5 py-3 font-semibold text-creme-50 hover:bg-marinho-800">
+        Página inicial
+      </a>
+      <a href="/guias" class="rounded-md border border-marinho-100 bg-white px-5 py-3 font-semibold text-marinho-800 hover:border-marinho-400">
+        Ver guias
+      </a>
+    </div>
+  </Container>
+</BaseLayout>

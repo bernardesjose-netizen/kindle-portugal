@@ -1,0 +1,9 @@
+# Cloudflare Pages — redirects
+# Canónico: kindleportugal.com (apex)
+
+# www -> apex (permanente)
+https://www.kindleportugal.com/*  https://kindleportugal.com/:splat  301!
+http://www.kindleportugal.com/*   https://kindleportugal.com/:splat  301!
+
+# Forçar HTTPS no apex (belt-and-suspenders; CF também faz isto a nível de zona)
+http://kindleportugal.com/*  https://kindleportugal.com/:splat  301!

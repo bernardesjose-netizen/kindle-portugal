@@ -1,0 +1,71 @@
+---
+interface Props {
+  variante?: 'compacta' | 'completa' | 'discreta';
+}
+const { variante = 'compacta' } = Astro.props;
+---
+
+{
+  variante === 'discreta' ? (
+    <p
+      class="mt-10 border-t border-marinho-100 pt-5 text-center text-xs leading-relaxed text-marinho-400"
+      role="note"
+      aria-label="Divulgação de afiliados"
+    >
+      <strong class="font-semibold text-marinho-500">Divulgação:</strong> esta página contém links de
+      afiliado Amazon. Se comprares através deles, podemos receber uma pequena comissão sem custo
+      adicional para ti.{' '}
+      <a
+        href="/divulgacao-afiliados"
+        class="underline decoration-marinho-300 underline-offset-2 hover:text-marca-600"
+      >
+        Saber mais
+      </a>
+      .
+    </p>
+  ) : variante === 'compacta' ? (
+    <aside
+      class="flex items-start gap-3 rounded-xl border border-dourado-400/30 bg-creme-100/70 px-4 py-3 text-sm text-marinho-600"
+      role="note"
+      aria-label="Divulgação de afiliados"
+    >
+      <svg class="mt-0.5 h-4 w-4 shrink-0 text-dourado-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clip-rule="evenodd" />
+      </svg>
+      <p>
+        <strong class="font-semibold text-marinho-900">Divulgação:</strong> esta página contém links de
+        afiliado. Se comprares através deles, podemos receber uma comissão sem custo adicional para ti.{' '}
+        <a href="/divulgacao-afiliados" class="underline decoration-marca-400 underline-offset-2 hover:text-marca-600">
+          Saber mais
+        </a>
+        .
+      </p>
+    </aside>
+  ) : (
+    <aside
+      class="rounded-2xl border border-dourado-400/30 bg-gradient-to-br from-creme-100 to-creme-50 p-6 text-sm text-marinho-600 shadow-[0_2px_4px_rgba(15,26,36,0.04)]"
+      role="note"
+      aria-label="Divulgação de afiliados"
+    >
+      <div class="flex items-center gap-2">
+        <svg class="h-5 w-5 text-dourado-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clip-rule="evenodd" />
+        </svg>
+        <h2 class="font-semibold text-marinho-900">Como ganhamos dinheiro</h2>
+      </div>
+      <p class="mt-3">
+        Participamos no programa Amazon Associates. Alguns links neste site são links de afiliado: se
+        clicares e fizeres uma compra na Amazon, podemos receber uma pequena comissão —
+        <strong> sem qualquer custo adicional para ti</strong>.
+      </p>
+      <p class="mt-2">
+        Esta relação não influencia o nosso conteúdo editorial. Recomendamos apenas o que
+        consideramos útil com base em pesquisa e, quando possível, teste. Lê a{' '}
+        <a href="/divulgacao-afiliados" class="underline decoration-marca-400 underline-offset-2 hover:text-marca-600">
+          divulgação completa
+        </a>
+        .
+      </p>
+    </aside>
+  )
+}

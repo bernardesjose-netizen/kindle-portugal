@@ -1,0 +1,150 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Container from '@components/ui/Container.astro';
+import DisclosureBanner from '@components/afiliados/DisclosureBanner.astro';
+import OrnamentoFundo from '@components/ui/OrnamentoFundo.astro';
+import { SITE } from '@lib/site';
+import { formatarData } from '@lib/formatters';
+
+type MotivoOrnamento =
+  | 'livro-aberto'
+  | 'estante'
+  | 'pena'
+  | 'marcador'
+  | 'e-reader'
+  | 'pagina-marcada';
+
+const MOTIVO_POR_CATEGORIA: Record<string, MotivoOrnamento> = {
+  comprar: 'estante',
+  utilizar: 'livro-aberto',
+  'converter-e-enviar': 'pena',
+  ebooks: 'pagina-marcada',
+  problemas: 'marcador',
+  comparacoes: 'e-reader',
+  Blog: 'pena',
+};
+
+const PILL_POR_CATEGORIA: Record<string, string> = {
+  comprar: '',
+  utilizar: 'pill-oceano',
+  'converter-e-enviar': 'pill-salvia',
+  ebooks: 'pill-dourado',
+  problemas: 'pill-ambar',
+  comparacoes: 'pill-marinho',
+  Blog: 'pill-dourado',
+};
+
+interface Props {
+  titulo: string;
+  descricao: string;
+  autor?: { nome: string; url?: string };
+  dataPublicacao: Date;
+  dataRevisao?: Date;
+  categoria?: string;
+  tempoLeituraMin?: number;
+  imagem?: string;
+  mostrarDisclosure?: boolean;
+}
+
+const {
+  titulo,
+  descricao,
+  autor,
+  dataPublicacao,
+  dataRevisao,
+  categoria,
+  tempoLeituraMin,
+  imagem,
+  mostrarDisclosure = true,
+} = Astro.props;
+
+const articleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: titulo,
+  description: descricao,
+  inLanguage: 'pt-PT',
+  datePublished: dataPublicacao.toISOString(),
+  dateModified: (dataRevisao ?? dataPublicacao).toISOString(),
+  author: autor
+    ? { '@type': 'Person', name: autor.nome, url: autor.url }
+    : { '@type': 'Organization', name: SITE.autorOrganizacao.nome, url: SITE.autorOrganizacao.url },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE.autorOrganizacao.nome,
+    url: SITE.autorOrganizacao.url,
+  },
+  mainEntityOfPage: new URL(Astro.url.pathname, SITE.url).toString(),
+  ...(imagem ? { image: new URL(imagem, SITE.url).toString() } : {}),
+};
+
+const motivo: MotivoOrnamento = (categoria ? MOTIVO_POR_CATEGORIA[categoria] : undefined) ?? 'livro-aberto';
+const motivoSecundario: MotivoOrnamento =
+  motivo === 'estante' ? 'livro-aberto' : motivo === 'livro-aberto' ? 'pagina-marcada' : 'estante';
+
+const pillCategoriaClass = categoria ? PILL_POR_CATEGORIA[categoria] ?? '' : '';
+---
+
+<BaseLayout
+  titulo={titulo}
+  descricao={descricao}
+  tipo="article"
+  dataPublicacao={dataPublicacao}
+  dataRevisao={dataRevisao}
+  autor={autor?.nome}
+  imagem={imagem}
+  jsonLd={articleLd}
+  semOrnamento={true}
+>
+  <article class="relative py-10 lg:py-16">
+    <OrnamentoFundo motivo={motivo} posicao="topo-direita" intensidade="subtil" tom="marinho" />
+    <OrnamentoFundo motivo={motivoSecundario} posicao="fundo-esquerda" intensidade="subtil" tom="dourado" />
+    <Container largura="texto">
+      <header class="mb-10">
+        {categoria && <span class={`pill ${pillCategoriaClass}`}>{categoria}</span>}
+        <h1
+          class="mt-4 text-[1.875rem] font-bold leading-[1.15] text-marinho-900 sm:text-4xl lg:text-[2.75rem]"
+          style="font-family: var(--font-serif); letter-spacing: -0.025em;"
+        >
+          {titulo}
+        </h1>
+        <p class="mt-5 text-lg text-marinho-600 sm:text-xl">{descricao}</p>
+        <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-marinho-400">
+          {autor && (
+            <span class="flex items-center gap-2">
+              <span class="flex h-6 w-6 items-center justify-center rounded-full bg-marinho-900 text-[10px] font-bold text-creme-50">
+                {autor.nome.split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase()}
+              </span>
+              Por <strong class="font-semibold text-marinho-700">{autor.nome}</strong>
+            </span>
+          )}
+          <span class="text-marinho-200">·</span>
+          <time datetime={dataPublicacao.toISOString()}>
+            {formatarData(dataPublicacao)}
+          </time>
+          {dataRevisao && dataRevisao.valueOf() !== dataPublicacao.valueOf() && (
+            <>
+              <span class="text-marinho-200">·</span>
+              <time datetime={dataRevisao.toISOString()}>
+                Atualizado a {formatarData(dataRevisao)}
+              </time>
+            </>
+          )}
+          {tempoLeituraMin && (
+            <>
+              <span class="text-marinho-200">·</span>
+              <span>{tempoLeituraMin} min de leitura</span>
+            </>
+          )}
+        </div>
+        <div class="separador-dourado !mx-0 !mt-7 !mb-0" />
+      </header>
+
+      <div class="prose-pt max-w-none prose-headings:text-marinho-900 prose-a:text-marca-700 prose-a:underline prose-a:decoration-marca-300 prose-a:underline-offset-2 hover:prose-a:text-marca-600 prose-strong:text-marinho-900">
+        <slot />
+      </div>
+
+      {mostrarDisclosure && <DisclosureBanner variante="discreta" />}
+    </Container>
+  </article>
+</BaseLayout>

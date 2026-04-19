@@ -1,0 +1,135 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Container from '@components/ui/Container.astro';
+import { getCollection } from 'astro:content';
+import { formatarPreco } from '@lib/formatters';
+
+const modelos = (await getCollection('modelos', ({ data }) => !data.rascunho)).sort((a, b) => {
+  const pa = a.data.preco_referencia_eur ?? Number.POSITIVE_INFINITY;
+  const pb = b.data.preco_referencia_eur ?? Number.POSITIVE_INFINITY;
+  return pa - pb;
+});
+
+type IconeId = 'stylus' | 'cor' | 'agua' | 'livro';
+
+function iconePara(m: (typeof modelos)[number]): { id: IconeId; legenda: string } {
+  const e = m.data.especificacoes;
+  if (e.stylus_incluido) return { id: 'stylus', legenda: 'Com stylus incluído' };
+  if (e.ecra_cor) return { id: 'cor', legenda: 'Ecrã a cores' };
+  if (e.resistencia_agua !== 'nenhuma') return { id: 'agua', legenda: 'Resistente à água' };
+  return { id: 'livro', legenda: 'Leitor de ebooks' };
+}
+
+const caixaPorIcone: Record<IconeId, string> = {
+  livro: 'caixa-marinho',
+  agua: 'caixa-oceano',
+  cor: 'caixa-coral',
+  stylus: 'caixa-dourado',
+};
+
+const pillPorIcone: Record<IconeId, string> = {
+  livro: 'pill-marinho',
+  agua: 'pill-oceano',
+  cor: 'pill-coral',
+  stylus: 'pill-dourado',
+};
+---
+
+<BaseLayout
+  titulo="Modelos de Kindle à venda em Portugal (2026)"
+  descricao="Fichas completas de cada modelo de Kindle disponível para Portugal: especificações, preço de referência, pontos fortes e para quem é."
+>
+  <section class="relative overflow-hidden border-b-4 border-marca-500 bg-gradient-to-br from-marinho-900 via-marinho-800 to-oceano-900 text-creme-50">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0"
+      style="background-image: radial-gradient(ellipse at top right, rgb(249 126 7 / 0.20) 0%, transparent 55%), radial-gradient(ellipse at bottom left, rgb(20 110 180 / 0.35) 0%, transparent 50%);"
+    />
+    <Container largura="normal" classe="relative z-10 py-14">
+      <span class="inline-flex items-center gap-1 rounded-full border border-marca-400/40 bg-marca-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-marca-300">
+        Modelos · 2026
+      </span>
+      <h1
+        class="mt-3 text-4xl font-bold text-creme-50 md:text-5xl"
+        style="font-family: var(--font-serif); letter-spacing: -0.03em;"
+      >
+        Modelos de Kindle em Portugal
+      </h1>
+      <p class="mt-4 max-w-2xl text-lg text-oceano-100/90">
+        Os Kindles vendidos pela Amazon com envio para Portugal. Escolhe pelo uso — não pelo preço.
+      </p>
+    </Container>
+  </section>
+
+  <Container largura="normal" classe="py-14">
+
+    {modelos.length === 0 ? (
+      <p class="text-marinho-600">Ainda não há fichas publicadas. Volta em breve.</p>
+    ) : (
+      <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {modelos.map((m) => {
+          const ic = iconePara(m);
+          return (
+            <li class={`caixa ${caixaPorIcone[ic.id]} group relative overflow-hidden`}>
+              <a href={`/modelos/${m.id}`} class="block p-6">
+                <div
+                  class="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-marinho-100 bg-creme-50 text-marinho-500 shadow-sm transition-colors group-hover:border-marca-300 group-hover:text-marca-600"
+                  title={ic.legenda}
+                  aria-label={ic.legenda}
+                >
+                  {ic.id === 'stylus' && (
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M12 19l7-7 3 3-7 7-3-3z" />
+                      <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+                      <path d="M2 2l7.586 7.586" />
+                      <circle cx="11" cy="11" r="2" />
+                    </svg>
+                  )}
+                  {ic.id === 'cor' && (
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="13.5" cy="6.5" r="1.5" fill="currentColor" />
+                      <circle cx="17.5" cy="10.5" r="1.5" fill="currentColor" />
+                      <circle cx="8.5" cy="7.5" r="1.5" fill="currentColor" />
+                      <circle cx="6.5" cy="12.5" r="1.5" fill="currentColor" />
+                      <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.5-.7 1.5-1.5 0-.4-.2-.8-.5-1.1-.3-.3-.5-.7-.5-1.1 0-.8.7-1.5 1.5-1.5H16c3.3 0 6-2.7 6-6 0-5.5-4.5-9-10-9z" />
+                    </svg>
+                  )}
+                  {ic.id === 'agua' && (
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M12 2.5C12 2.5 5 10 5 15a7 7 0 0 0 14 0c0-5-7-12.5-7-12.5z" />
+                    </svg>
+                  )}
+                  {ic.id === 'livro' && (
+                    <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+                    </svg>
+                  )}
+                </div>
+                <span class={`pill ${pillPorIcone[ic.id]}`}>{m.data.fabricante} · {m.data.ano_lancamento}</span>
+                <h2
+                  class="mt-3 pr-10 text-2xl font-bold text-marinho-900 transition-colors group-hover:text-marca-700"
+                  style="font-family: var(--font-serif); letter-spacing: -0.02em;"
+                >
+                  {m.data.nome}
+                </h2>
+                <p class="mt-3 text-marinho-600">{m.data.descricao_curta}</p>
+                {m.data.preco_referencia_eur && (
+                  <p class="mt-5 flex items-baseline gap-2 border-t border-marinho-100 pt-4 text-sm">
+                    <span class="text-marinho-400">a partir de</span>
+                    <strong
+                      class="text-lg text-marinho-900"
+                      style="font-family: var(--font-serif);"
+                    >
+                      {formatarPreco(m.data.preco_referencia_eur)}
+                    </strong>
+                  </p>
+                )}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    )}
+  </Container>
+</BaseLayout>

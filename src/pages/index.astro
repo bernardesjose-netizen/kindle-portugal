@@ -1,0 +1,214 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Container from '@components/ui/Container.astro';
+import DisclosureBanner from '@components/afiliados/DisclosureBanner.astro';
+import { getCollection } from 'astro:content';
+import { SITE } from '@lib/site';
+import { formatarPreco } from '@lib/formatters';
+
+const modelos = (await getCollection('modelos', ({ data }) => !data.rascunho))
+  .sort((a, b) => b.data.ano_lancamento - a.data.ano_lancamento)
+  .slice(0, 4);
+
+const guias = (await getCollection('guias', ({ data }) => !data.rascunho))
+  .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf())
+  .slice(0, 4);
+
+const categoriasGuia: Record<string, string> = {
+  comprar: 'Comprar',
+  utilizar: 'Utilizar',
+  'converter-e-enviar': 'Converter e enviar',
+  ebooks: 'Ebooks',
+  problemas: 'Resolver problemas',
+  comparacoes: 'Comparações',
+};
+
+const caixaPorCategoria: Record<string, string> = {
+  comprar: 'caixa-marca',
+  utilizar: 'caixa-oceano',
+  'converter-e-enviar': 'caixa-salvia',
+  ebooks: 'caixa-dourado',
+  problemas: 'caixa-ambar',
+  comparacoes: 'caixa-marinho',
+};
+
+const pillPorCategoria: Record<string, string> = {
+  comprar: '',
+  utilizar: 'pill-oceano',
+  'converter-e-enviar': 'pill-salvia',
+  ebooks: 'pill-dourado',
+  problemas: 'pill-ambar',
+  comparacoes: 'pill-marinho',
+};
+---
+
+<BaseLayout titulo={SITE.nome} descricao={SITE.descricao}>
+  <!-- HERO — fundo escuro Amazon-style com acentos laranja + azul -->
+  <section class="relative overflow-hidden border-b-4 border-marca-500 bg-gradient-to-br from-marinho-900 via-marinho-800 to-oceano-900 text-creme-50">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0"
+      style="background-image: radial-gradient(ellipse at top right, rgb(249 126 7 / 0.22) 0%, transparent 55%), radial-gradient(ellipse at bottom left, rgb(20 110 180 / 0.35) 0%, transparent 50%);"
+    />
+    <Container largura="normal" classe="relative z-10 py-16 sm:py-20 md:py-28">
+      <span class="inline-flex items-center gap-1 rounded-full border border-marca-400/40 bg-marca-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-marca-300">
+        Em português europeu
+      </span>
+      <h1
+        class="mt-5 max-w-4xl text-[2rem] font-bold leading-[1.1] text-creme-50 sm:text-5xl lg:text-6xl"
+        style="letter-spacing: -0.035em;"
+      >
+        Tudo sobre <span class="relative inline-block text-marca-400">
+          Kindle
+          <svg
+            aria-hidden="true"
+            class="absolute -bottom-2 left-0 w-full"
+            viewBox="0 0 200 12"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M2 9 Q 50 2, 100 7 T 198 5"
+              stroke="#ffbc4a"
+              stroke-width="3"
+              stroke-linecap="round"
+              fill="none"
+              opacity="0.9"
+            />
+          </svg>
+        </span> e ebooks em Portugal.
+      </h1>
+      <p class="mt-6 max-w-2xl text-lg text-oceano-100/90 sm:text-xl">
+        Reviews honestas, guias passo-a-passo e dicas práticas — desde a escolha do modelo até
+        enviar os teus ebooks, converter formatos e encontrar livros em <strong class="font-semibold text-creme-50">português europeu</strong>.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/modelos" class="btn-marca">
+          Ver modelos de Kindle
+          <span aria-hidden="true">→</span>
+        </a>
+        <a
+          href="/guias/ebooks-em-portugues-amazon-kindle"
+          class="inline-flex items-center gap-2 rounded-[0.625rem] border border-oceano-300/40 bg-oceano-500/20 px-6 py-3 font-semibold text-creme-50 backdrop-blur transition hover:-translate-y-0.5 hover:border-oceano-200/70 hover:bg-oceano-500/30"
+        >
+          Guia: Ebooks em PT-PT
+        </a>
+      </div>
+
+      <dl class="mt-14 grid max-w-2xl grid-cols-3 gap-6 border-t border-oceano-400/30 pt-8">
+        <div>
+          <dt class="text-xs font-semibold uppercase tracking-wider text-marca-300">Modelos</dt>
+          <dd class="mt-1 text-2xl font-bold text-creme-50" style="font-family: var(--font-serif);">
+            {modelos.length}
+          </dd>
+        </div>
+        <div>
+          <dt class="text-xs font-semibold uppercase tracking-wider text-oceano-300">Guias</dt>
+          <dd class="mt-1 text-2xl font-bold text-creme-50" style="font-family: var(--font-serif);">
+            {guias.length}
+          </dd>
+        </div>
+        <div>
+          <dt class="text-xs font-semibold uppercase tracking-wider text-dourado-400">PT-PT</dt>
+          <dd class="mt-1 text-2xl font-bold text-creme-50" style="font-family: var(--font-serif);">100%</dd>
+        </div>
+      </dl>
+    </Container>
+  </section>
+
+  {modelos.length > 0 && (
+    <section class="bg-creme-50">
+      <Container largura="normal" classe="py-16">
+        <div class="mb-8 flex items-end justify-between">
+          <div>
+            <span class="pill pill-marinho">Modelos</span>
+            <h2 class="mt-3 text-3xl font-bold text-marinho-900 md:text-4xl" style="letter-spacing: -0.025em;">
+              Modelos em destaque
+            </h2>
+            <p class="mt-2 text-marinho-600">Os Kindles atualmente à venda para Portugal.</p>
+          </div>
+          <a
+            href="/modelos"
+            class="hidden shrink-0 text-sm font-semibold text-marca-600 hover:text-marca-700 sm:inline-flex"
+          >
+            Ver todos →
+          </a>
+        </div>
+        <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {modelos.map((m, i) => {
+            const caixas = ['caixa-marinho', 'caixa-oceano', 'caixa-dourado', 'caixa-marca'];
+            const pills = ['pill-marinho', 'pill-oceano', 'pill-dourado', 'pill'];
+            return (
+              <li class={`caixa ${caixas[i % 4]} group relative overflow-hidden`}>
+                <a href={`/modelos/${m.id}`} class="block p-5">
+                  <span class={`pill ${pills[i % 4]}`}>{m.data.ano_lancamento}</span>
+                  <h3
+                    class="mt-3 text-xl font-bold leading-tight text-marinho-900 transition-colors group-hover:text-marca-700"
+                    style="font-family: var(--font-serif);"
+                  >
+                    {m.data.nome}
+                  </h3>
+                  <p class="mt-2 line-clamp-3 text-sm text-marinho-600">{m.data.descricao_curta}</p>
+                  {m.data.preco_referencia_eur && (
+                    <p class="mt-4 border-t border-marinho-100 pt-3 text-sm">
+                      <span class="text-marinho-400">a partir de </span>
+                      <strong class="text-marinho-900">{formatarPreco(m.data.preco_referencia_eur)}</strong>
+                    </p>
+                  )}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </Container>
+    </section>
+  )}
+
+  {guias.length > 0 && (
+    <section class="relative border-y border-oceano-200 bg-gradient-to-br from-oceano-50 via-white to-oceano-50">
+      <Container largura="normal" classe="py-16">
+        <div class="mb-8 flex items-end justify-between">
+          <div>
+            <span class="pill pill-oceano">Guias</span>
+            <h2 class="mt-3 text-3xl font-bold text-oceano-900 md:text-4xl" style="letter-spacing: -0.025em;">
+              Guias recentes
+            </h2>
+            <p class="mt-2 text-oceano-700/80">Passo-a-passo, sem floreados.</p>
+          </div>
+          <a
+            href="/guias"
+            class="hidden shrink-0 text-sm font-semibold text-oceano-600 hover:text-oceano-700 sm:inline-flex"
+          >
+            Ver todos →
+          </a>
+        </div>
+        <ul class="grid gap-6 md:grid-cols-2">
+          {guias.map((g) => (
+            <li class={`caixa ${caixaPorCategoria[g.data.categoria] ?? 'caixa-marca'} group`}>
+              <a href={`/guias/${g.id}`} class="block p-6">
+                <span class={`pill ${pillPorCategoria[g.data.categoria] ?? ''}`}>
+                  {categoriasGuia[g.data.categoria] ?? g.data.categoria}
+                </span>
+                <h3
+                  class="mt-3 text-2xl font-bold leading-tight text-marinho-900 transition-colors group-hover:text-marca-700"
+                  style="font-family: var(--font-serif);"
+                >
+                  {g.data.titulo}
+                </h3>
+                <p class="mt-3 text-marinho-600">{g.data.descricao}</p>
+                {g.data.tempo_leitura_min && (
+                  <p class="mt-4 text-xs text-marinho-400">
+                    {g.data.tempo_leitura_min} min de leitura
+                  </p>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </section>
+  )}
+
+  <Container largura="normal">
+    <DisclosureBanner variante="discreta" />
+  </Container>
+</BaseLayout>

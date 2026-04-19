@@ -1,0 +1,394 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Tipografia carregada via <link> no BaseLayout (preconnect + display=swap) */
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Fraunces", "Source Serif 4", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* Creme — fundo principal (mais quente que puro branco, remete a papel) */
+  --color-creme-50: #fefbf5;
+  --color-creme-100: #f9f3e8;
+  --color-creme-200: #f0e7d4;
+
+  /* Marinho — navy profundo inspirado no Amazon (#131A22) mas mais sofisticado */
+  --color-marinho-50: #f5f7fa;
+  --color-marinho-100: #e4e8ef;
+  --color-marinho-200: #c9d2de;
+  --color-marinho-300: #9daabd;
+  --color-marinho-400: #6b7a92;
+  --color-marinho-500: #4a5568;
+  --color-marinho-600: #334155;
+  --color-marinho-700: #1e293b;
+  --color-marinho-800: #131a24;
+  --color-marinho-900: #0b111a;
+
+  /* Marca — laranja Amazon atualizado (mais rico, menos néon) */
+  --color-marca-50: #fff8eb;
+  --color-marca-100: #ffecc5;
+  --color-marca-200: #ffd888;
+  --color-marca-300: #ffbc4a;
+  --color-marca-400: #ffa11f;
+  --color-marca-500: #f97e07; /* CTA principal */
+  --color-marca-600: #dd5f02;
+  --color-marca-700: #b74306;
+  --color-marca-800: #94340d;
+  --color-marca-900: #7a2c0f;
+
+  /* Dourado — accent subtil para detalhes (estrelas, separadores, highlights) */
+  --color-dourado-400: #d4a84b;
+  --color-dourado-500: #c08e2c;
+  --color-dourado-700: #8b6914;
+
+  /* Oceano — azul tipo Amazon Prime, para contraste com o laranja e secções frescas */
+  --color-oceano-50: #eff8ff;
+  --color-oceano-100: #dbeafe;
+  --color-oceano-200: #bfdbfe;
+  --color-oceano-300: #93c5fd;
+  --color-oceano-400: #3b82f6;
+  --color-oceano-500: #146eb4;
+  --color-oceano-600: #0b5394;
+  --color-oceano-700: #0a3d6e;
+  --color-oceano-800: #0c2b4e;
+  --color-oceano-900: #0b1f3a;
+
+  /* Coral — rosa-coral quente para realces (pills de categoria, badges) */
+  --color-coral-50: #fff1f2;
+  --color-coral-100: #ffe4e6;
+  --color-coral-400: #fb7185;
+  --color-coral-500: #e11d48;
+  --color-coral-700: #9f1239;
+
+  /* Sálvia — verde sóbrio para sucesso/positive (pros) */
+  --color-salvia-50: #f1f6f2;
+  --color-salvia-100: #dbe8dd;
+  --color-salvia-600: #4a7c59;
+  --color-salvia-700: #2f5c3e;
+
+  /* Âmbar — tom sóbrio para avisos (contras) */
+  --color-ambar-50: #fdf6e3;
+  --color-ambar-100: #f8e5b5;
+  --color-ambar-700: #8a6200;
+  --color-ambar-800: #6a4a00;
+
+  /* Sombras 3D subtis — camadas para profundidade sem exagero */
+  --shadow-suave: 0 1px 2px rgb(15 26 36 / 0.04), 0 1px 3px rgb(15 26 36 / 0.05);
+  --shadow-media: 0 2px 4px rgb(15 26 36 / 0.04), 0 4px 12px rgb(15 26 36 / 0.06);
+  --shadow-forte: 0 4px 8px rgb(15 26 36 / 0.05), 0 12px 24px rgb(15 26 36 / 0.08);
+  --shadow-hover: 0 6px 12px rgb(15 26 36 / 0.06), 0 18px 36px rgb(15 26 36 / 0.10);
+  --shadow-marca: 0 4px 12px rgb(249 126 7 / 0.25), 0 2px 4px rgb(249 126 7 / 0.15);
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  color: var(--color-marinho-800);
+  background: var(--color-creme-50);
+  background-image:
+    radial-gradient(circle at 15% -10%, rgb(255 161 31 / 0.05) 0%, transparent 45%),
+    radial-gradient(circle at 95% 105%, rgb(249 126 7 / 0.04) 0%, transparent 40%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100dvh;
+}
+
+/* Foco visível acessível */
+:focus-visible {
+  outline: 2px solid var(--color-marca-500);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Headings — tipografia editorial elegante */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+}
+
+/* Caixa premium reutilizável */
+.caixa {
+  background: white;
+  border: 1px solid var(--color-marinho-100);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-suave);
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 220ms ease;
+}
+.caixa:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--color-marca-300);
+}
+
+/* Botão marca (CTA principal) */
+.btn-marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.625rem;
+  background-image: linear-gradient(180deg, var(--color-marca-400) 0%, var(--color-marca-600) 100%);
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: var(--shadow-marca);
+  border: 1px solid var(--color-marca-600);
+  transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+}
+.btn-marca:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05) saturate(1.05);
+  box-shadow: 0 8px 20px rgb(249 126 7 / 0.35), 0 3px 6px rgb(249 126 7 / 0.2);
+}
+.btn-marca:active {
+  transform: translateY(0);
+  filter: brightness(0.95);
+}
+
+/* Botão secundário */
+.btn-secundario {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.625rem;
+  background: white;
+  color: var(--color-marinho-800);
+  font-weight: 600;
+  border: 1px solid var(--color-marinho-200);
+  box-shadow: var(--shadow-suave);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+.btn-secundario:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-marinho-400);
+  box-shadow: var(--shadow-media);
+}
+
+/* Pill — etiquetas pequenas para categorias */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--color-marca-50);
+  color: var(--color-marca-700);
+  border: 1px solid var(--color-marca-200);
+}
+
+/* Pills por categoria — cores distintas para quebrar a monotonia */
+.pill-oceano {
+  background: var(--color-oceano-50);
+  color: var(--color-oceano-700);
+  border-color: var(--color-oceano-200);
+}
+.pill-salvia {
+  background: var(--color-salvia-50);
+  color: var(--color-salvia-700);
+  border-color: rgb(74 124 89 / 0.3);
+}
+.pill-dourado {
+  background: #fdf5e3;
+  color: var(--color-dourado-700);
+  border-color: rgb(212 168 75 / 0.4);
+}
+.pill-ambar {
+  background: var(--color-ambar-50);
+  color: var(--color-ambar-800);
+  border-color: var(--color-ambar-100);
+}
+.pill-marinho {
+  background: var(--color-marinho-100);
+  color: var(--color-marinho-800);
+  border-color: var(--color-marinho-200);
+}
+.pill-coral {
+  background: var(--color-coral-50);
+  color: var(--color-coral-700);
+  border-color: var(--color-coral-100);
+}
+
+/* Barra de accent no topo das caixas — agora sempre visível em versão colorida */
+.caixa-oceano {
+  border-top: 3px solid var(--color-oceano-500);
+}
+.caixa-marca {
+  border-top: 3px solid var(--color-marca-500);
+}
+.caixa-salvia {
+  border-top: 3px solid var(--color-salvia-600);
+}
+.caixa-dourado {
+  border-top: 3px solid var(--color-dourado-500);
+}
+.caixa-ambar {
+  border-top: 3px solid var(--color-ambar-700);
+}
+.caixa-marinho {
+  border-top: 3px solid var(--color-marinho-800);
+}
+.caixa-coral {
+  border-top: 3px solid var(--color-coral-500);
+}
+
+/* Link de menu com indicador animado e hover claro */
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  font-weight: 500;
+  color: var(--color-marinho-600);
+  transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0.15rem;
+  width: 0;
+  height: 2px;
+  background: var(--color-marca-500);
+  transition: width 220ms cubic-bezier(0.2, 0.8, 0.2, 1), left 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  border-radius: 2px;
+}
+.nav-link:hover {
+  color: var(--color-marca-700);
+  background: var(--color-marca-50);
+  transform: translateY(-1px);
+}
+.nav-link:hover::after {
+  width: 55%;
+  left: 22.5%;
+}
+.nav-link.ativo {
+  background: var(--color-marinho-900);
+  color: var(--color-creme-50);
+}
+.nav-link.ativo:hover {
+  color: var(--color-creme-50);
+  background: var(--color-marinho-800);
+}
+.nav-link.ativo::after {
+  background: var(--color-marca-400);
+  width: 55%;
+  left: 22.5%;
+}
+
+/* Separador decorativo dourado */
+.separador-dourado {
+  height: 2px;
+  background: linear-gradient(to right,
+    transparent 0%,
+    var(--color-dourado-400) 50%,
+    transparent 100%);
+  width: 96px;
+  margin: 2rem auto;
+  border: 0;
+}
+
+/* Typography refinements para o conteúdo longo */
+.prose-pt {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.72;
+}
+
+.prose-pt :where(p, li) {
+  letter-spacing: -0.003em;
+}
+
+.prose-pt :where(h2) {
+  margin-top: 2.5em;
+  font-size: 1.65rem;
+}
+.prose-pt :where(h3) {
+  margin-top: 2em;
+  font-size: 1.25rem;
+}
+
+.prose-pt :where(blockquote) {
+  font-style: italic;
+  border-left: 3px solid var(--color-dourado-400);
+  padding-left: 1rem;
+  color: var(--color-marinho-600);
+}
+
+.prose-pt :where(table) {
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-suave);
+  font-size: 0.95rem;
+}
+.prose-pt :where(th) {
+  background: var(--color-marinho-800);
+  color: var(--color-creme-50);
+  font-weight: 600;
+  text-align: left;
+}
+.prose-pt :where(th, td) {
+  padding: 0.6rem 0.9rem;
+  border: 1px solid var(--color-marinho-100);
+}
+.prose-pt :where(tbody tr:nth-child(odd)) {
+  background: var(--color-creme-50);
+}
+
+.prose-pt :where(code) {
+  background: var(--color-marinho-100);
+  color: var(--color-marinho-800);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  font-family: var(--font-mono);
+}
+.prose-pt :where(pre) {
+  background: var(--color-marinho-900);
+  color: var(--color-creme-100);
+  border-radius: 0.5rem;
+}
+
+/* Mobile: paragraph spacing mais generoso, heading scaling */
+@media (max-width: 640px) {
+  .prose-pt {
+    font-size: 1rem;
+  }
+  .prose-pt :where(h2) {
+    font-size: 1.4rem;
+    margin-top: 2em;
+  }
+}
+
+/* Esconder scrollbar no nav (mantém scroll funcional em mobile) */
+.nav-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.nav-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Utilitário: efeito "lift" aplicável a qualquer elemento */
+.lift {
+  transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}

@@ -1,0 +1,60 @@
+---
+import { SITE } from '@lib/site';
+
+interface Props {
+  titulo: string;
+  descricao: string;
+  canonical?: string;
+  imagem?: string;
+  tipo?: 'website' | 'article';
+  noindex?: boolean;
+  dataPublicacao?: Date;
+  dataRevisao?: Date;
+  autor?: string;
+}
+
+const {
+  titulo,
+  descricao,
+  canonical,
+  imagem = '/og/default.png',
+  tipo = 'website',
+  noindex = false,
+  dataPublicacao,
+  dataRevisao,
+  autor,
+} = Astro.props;
+
+const url = canonical ?? new URL(Astro.url.pathname, SITE.url).toString();
+const imagemAbsoluta = new URL(imagem, SITE.url).toString();
+const tituloCompleto = titulo === SITE.nome ? titulo : `${titulo} — ${SITE.nome}`;
+---
+
+<title>{tituloCompleto}</title>
+<meta name="description" content={descricao} />
+<link rel="canonical" href={url} />
+
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+
+<meta property="og:type" content={tipo} />
+<meta property="og:site_name" content={SITE.nome} />
+<meta property="og:title" content={tituloCompleto} />
+<meta property="og:description" content={descricao} />
+<meta property="og:url" content={url} />
+<meta property="og:locale" content="pt_PT" />
+<meta property="og:image" content={imagemAbsoluta} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={tituloCompleto} />
+<meta name="twitter:description" content={descricao} />
+<meta name="twitter:image" content={imagemAbsoluta} />
+
+{tipo === 'article' && dataPublicacao && (
+  <meta property="article:published_time" content={dataPublicacao.toISOString()} />
+)}
+{tipo === 'article' && dataRevisao && (
+  <meta property="article:modified_time" content={dataRevisao.toISOString()} />
+)}
+{tipo === 'article' && autor && <meta property="article:author" content={autor} />}

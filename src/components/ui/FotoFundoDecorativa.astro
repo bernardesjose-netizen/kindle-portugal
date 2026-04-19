@@ -1,0 +1,61 @@
+---
+/**
+ * Foto decorativa de fundo — muito transparente, para humanizar a página
+ * sem prejudicar a leitura. Renderiza-se em posição absoluta dentro do
+ * contentor pai (que deve ter `position: relative`), aria-hidden, pointer-events-none.
+ *
+ * Usa fotos gratuitas do Unsplash. Se um URL falhar (404), o onerror oculta
+ * a imagem sem deixar "ícone partido".
+ */
+
+interface Props {
+  /** URL absoluta da foto (Unsplash ou local). */
+  src: string;
+  /** Texto descritivo — mesmo sendo aria-hidden, ajuda SEO se for descoberta. */
+  alt?: string;
+  /** Opacidade base. Default 0.10 — muito subtil. */
+  opacidade?: number;
+  /** Posição vertical dentro do contentor pai. Default 'fundo'. */
+  posicao?: 'topo' | 'fundo' | 'centro' | 'cobrir';
+  /** Altura em rem/px/%. Default '22rem'. */
+  altura?: string;
+  /** Aplicar desfocagem (blur) ligeira para atenuar detalhes. */
+  desfocagem?: boolean;
+}
+
+const {
+  src,
+  alt = '',
+  opacidade = 0.1,
+  posicao = 'fundo',
+  altura = '22rem',
+  desfocagem = true,
+} = Astro.props;
+
+const posClasses: Record<NonNullable<Props['posicao']>, string> = {
+  topo: 'top-0 left-0 right-0',
+  fundo: 'bottom-0 left-0 right-0',
+  centro: 'top-1/2 -translate-y-1/2 left-0 right-0',
+  cobrir: 'inset-0',
+};
+
+const alturaStyle = posicao === 'cobrir' ? '' : `height: ${altura};`;
+const filtro = desfocagem ? 'filter: blur(2px);' : '';
+const estilo = `opacity: ${opacidade}; ${alturaStyle} ${filtro} mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);`;
+---
+
+<div
+  aria-hidden="true"
+  class={`pointer-events-none absolute ${posClasses[posicao]} z-0 overflow-hidden select-none`}
+  style={estilo}
+>
+  <img
+    src={src}
+    alt={alt}
+    class="h-full w-full object-cover"
+    loading="lazy"
+    decoding="async"
+    referrerpolicy="no-referrer"
+    onerror="this.style.display='none'"
+  />
+</div>

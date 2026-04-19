@@ -1,0 +1,63 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Container from '@components/ui/Container.astro';
+import { SITE } from '@lib/site';
+---
+
+<BaseLayout
+  titulo="Política de privacidade"
+  descricao="Como tratamos os teus dados no Kindle Portugal."
+>
+  <Container largura="texto" classe="py-14">
+    <header class="mb-8 border-b border-marinho-100 pb-6">
+      <h1 class="text-3xl font-bold text-marinho-900 md:text-4xl">Política de privacidade</h1>
+      <p class="mt-3 text-marinho-400 text-sm">
+        Em conformidade com o Regulamento (UE) 2016/679 (RGPD) e a Lei n.º 58/2019.
+      </p>
+    </header>
+
+    <div class="prose prose-pt prose-tinta max-w-none">
+      <p class="text-amber-700 italic">
+        Nota: este texto é um rascunho base. Deve ser revisto por alguém qualificado antes da
+        publicação final.
+      </p>
+
+      <h2>Quem é o responsável pelo tratamento</h2>
+      <p>
+        {SITE.nome}, com contacto através de <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+      </p>
+
+      <h2>Dados recolhidos</h2>
+      <p>
+        Este site é estático e não requer registo. Podemos recolher dados agregados e anónimos de
+        visita (país, tipo de dispositivo, páginas mais vistas) através de um serviço de analytics
+        compatível com o RGPD e <strong>sem cookies de rastreamento</strong>.
+      </p>
+
+      <h2>Cookies</h2>
+      <p>
+        Não usamos cookies de tracking nem publicitários. Podem existir cookies estritamente
+        necessários ao funcionamento (por exemplo, preferência de tema).
+      </p>
+
+      <h2>Links de afiliado</h2>
+      <p>
+        Usamos links de afiliado Amazon. Quando clicas num, passas a estar sujeito à política de
+        privacidade da Amazon. Vê a <a href="/divulgacao-afiliados">divulgação de afiliados</a>.
+      </p>
+
+      <h2>Os teus direitos</h2>
+      <p>
+        Tens direito de acesso, retificação, apagamento, oposição, limitação e portabilidade dos
+        teus dados pessoais, bem como o direito de apresentar reclamação à CNPD
+        (<a href="https://www.cnpd.pt" rel="noopener">cnpd.pt</a>).
+      </p>
+
+      <h2>Alterações</h2>
+      <p>
+        Esta política pode ser atualizada. A data da última revisão está indicada no rodapé da
+        versão publicada.
+      </p>
+    </div>
+  </Container>
+</BaseLayout>

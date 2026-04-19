@@ -1,0 +1,47 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Container from '@components/ui/Container.astro';
+import { SITE } from '@lib/site';
+---
+
+<BaseLayout
+  titulo="Sobre"
+  descricao={`Quem está por trás do ${SITE.nome} e qual a metodologia editorial.`}
+>
+  <Container largura="texto" classe="py-14">
+    <header class="mb-8 border-b border-marinho-100 pb-6">
+      <h1 class="text-3xl font-bold text-marinho-900 md:text-4xl">Sobre o {SITE.nome}</h1>
+      <p class="mt-3 text-lg text-marinho-600">
+        Um site independente, em português europeu, sobre Kindle e ebooks.
+      </p>
+    </header>
+
+    <div class="prose prose-pt prose-tinta max-w-none">
+      <h2>A missão</h2>
+      <p>
+        Ajudar quem lê em Portugal a tirar o máximo de um Kindle — desde escolher o modelo certo
+        até dominar os pequenos truques do dia-a-dia. Tudo em PT-PT, sem traduzir à pressa nem
+        reciclar conteúdo anglófono sem contexto local.
+      </p>
+
+      <h2>Metodologia</h2>
+      <ul>
+        <li>Priorizamos a informação verificável e datada.</li>
+        <li>Quando testamos um produto, dizemo-lo. Quando não testámos, também.</li>
+        <li>Evitamos linguagem de marketing. Preferimos dizer o que funciona e o que não.</li>
+        <li>Atualizamos os artigos quando surge informação nova.</li>
+      </ul>
+
+      <h2>Financiamento</h2>
+      <p>
+        Participamos no programa Amazon Associates. Vê a{' '}
+        <a href="/divulgacao-afiliados">divulgação completa</a>.
+      </p>
+
+      <h2>Contacto</h2>
+      <p>
+        Sugestões, correções ou pedidos — <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+      </p>
+    </div>
+  </Container>
+</BaseLayout>
