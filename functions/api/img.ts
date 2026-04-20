@@ -45,68 +45,91 @@ export async function onRequest(context) {
   }
 
   const tag = env[cfg.tagKey] || env.PUBLIC_AMAZON_TAG || '';
-  const widgetUrl =
+
+  // Tentar múltiplas fontes por ordem: o widget adsystem bloqueia pedidos
+  // vindos de IPs Cloudflare (403); m.media-amazon.com é o CDN de produtos
+  // e raramente bloqueia. Primeiro o CDN direto (mais fiável), depois o
+  // widget oficial como backup (que retorna tracking para o programa).
+  const upstreams = [
+    'https://m.media-amazon.com/images/P/' + asin + '.01._SL' + sizeParam + '_.jpg',
+    'https://m.media-amazon.com/images/P/' + asin + '._SL' + sizeParam + '_.jpg',
     'https://' +
-    cfg.widget +
-    '/widgets/q?_encoding=UTF8&MarketPlace=' +
-    cfg.place +
-    '&ASIN=' +
-    asin +
-    '&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL' +
-    sizeParam +
-    '_' +
-    (tag ? '&tag=' + tag : '');
+      cfg.widget +
+      '/widgets/q?_encoding=UTF8&MarketPlace=' +
+      cfg.place +
+      '&ASIN=' +
+      asin +
+      '&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL' +
+      sizeParam +
+      '_' +
+      (tag ? '&tag=' + tag : ''),
+  ];
 
-  try {
-    const upstream = await fetch(widgetUrl, {
-      headers: {
-        'User-Agent':
-          'Mozilla/5.0 (compatible; KindlePortugal/1.0; +https://kindleportugal.com)',
-        Referer: 'https://www.kindleportugal.com/',
-        Accept: 'image/avif,image/webp,image/jpeg,image/png,image/*,*/*;q=0.8',
-      },
-    });
+  const tentativas = [];
 
-    const contentType = upstream.headers.get('Content-Type') || 'image/jpeg';
-    const contentLength = upstream.headers.get('Content-Length');
+  for (const upstreamUrl of upstreams) {
+    try {
+      const upstream = await fetch(upstreamUrl, {
+        headers: {
+          'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36',
+          Referer: 'https://www.kindleportugal.com/',
+          Accept: 'image/avif,image/webp,image/jpeg,image/png,image/*,*/*;q=0.8',
+        },
+      });
 
-    // Modo debug: ?debug=1 devolve info sobre o que a Amazon respondeu
-    if (url.searchParams.get('debug') === '1') {
-      return new Response(
-        JSON.stringify({
-          widgetUrl,
-          status: upstream.status,
-          ok: upstream.ok,
-          contentType,
-          contentLength,
-          allHeaders: Object.fromEntries(upstream.headers.entries()),
-        }, null, 2),
-        { headers: { 'Content-Type': 'application/json' } },
-      );
+      const contentType = upstream.headers.get('Content-Type') || '';
+      const contentLength = upstream.headers.get('Content-Length');
+      const tamanho = contentLength ? parseInt(contentLength, 10) : 0;
+      const validImage =
+        upstream.ok &&
+        contentType.startsWith('image/') &&
+        contentType !== 'image/gif' &&
+        tamanho >= 500;
+
+      tentativas.push({
+        url: upstreamUrl,
+        status: upstream.status,
+        contentType,
+        contentLength,
+        valid: validImage,
+      });
+
+      if (validImage) {
+        // Se estivermos em modo debug, ainda mostrar o diagnóstico
+        if (url.searchParams.get('debug') === '1') {
+          return new Response(
+            JSON.stringify({ escolhido: upstreamUrl, tentativas }, null, 2),
+            { headers: { 'Content-Type': 'application/json' } },
+          );
+        }
+        return new Response(upstream.body, {
+          status: 200,
+          headers: {
+            'Content-Type': contentType,
+            'Cache-Control': 'public, max-age=86400, s-maxage=604800',
+            'X-Source': upstreamUrl.includes('media-amazon') ? 'media-cdn' : 'widget',
+          },
+        });
+      }
+    } catch (erro) {
+      tentativas.push({
+        url: upstreamUrl,
+        erro: erro instanceof Error ? erro.message : String(erro),
+      });
     }
+  }
 
-    // Amazon devolve pixel transparente 1x1 (43 bytes) para ASINs sem imagem
-    // ou tag inválida — redirecionar para placeholder próprio.
-    const tamanho = contentLength ? parseInt(contentLength, 10) : 0;
-    if (!upstream.ok || (tamanho > 0 && tamanho < 200)) {
-      return Response.redirect(
-        new URL('/placeholder-amazon.svg', url.origin).toString(),
-        302,
-      );
-    }
-
-    return new Response(upstream.body, {
-      status: 200,
-      headers: {
-        'Content-Type': contentType,
-        'Cache-Control': 'public, max-age=86400, s-maxage=604800',
-        'X-Source': 'amazon-widget-proxy',
-      },
-    });
-  } catch (_erro) {
-    return Response.redirect(
-      new URL('/placeholder-amazon.svg', url.origin).toString(),
-      302,
+  if (url.searchParams.get('debug') === '1') {
+    return new Response(
+      JSON.stringify({ escolhido: null, tentativas }, null, 2),
+      { headers: { 'Content-Type': 'application/json' } },
     );
   }
+
+  // Nenhuma fonte devolveu imagem válida — placeholder próprio
+  return Response.redirect(
+    new URL('/placeholder-amazon.svg', url.origin).toString(),
+    302,
+  );
 }
