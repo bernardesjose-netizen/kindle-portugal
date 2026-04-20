@@ -121,7 +121,7 @@ const blog = defineCollection({
 });
 
 const faq = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/faq' }),
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/faq' }),
   schema: z.object({
     pergunta: z.string(),
     categoria: z.enum(['geral', 'compra', 'utilizacao', 'ebooks', 'suporte']),

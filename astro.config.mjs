@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
+import { remarkAmazonTag } from './src/lib/remark-amazon-tag.ts';
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,8 +13,13 @@ export default defineConfig({
     defaultLocale: 'pt',
     locales: ['pt'],
   },
+  markdown: {
+    remarkPlugins: [remarkAmazonTag],
+  },
   integrations: [
-    mdx(),
+    mdx({
+      remarkPlugins: [remarkAmazonTag],
+    }),
     sitemap({
       i18n: {
         defaultLocale: 'pt',
