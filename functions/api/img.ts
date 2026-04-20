@@ -1,135 +1,149 @@
 /**
- * Cloudflare Pages Function — proxy de imagens Amazon.
+ * Cloudflare Pages Function — resolve a imagem principal dum produto Amazon
+ * a partir do ASIN, contornando bloqueios a ad-blockers e aos próprios
+ * Workers Cloudflare.
  *
- * Alguns ad-blockers filtram o host `amazon-adsystem.com` (widget oficial
- * do programa Associates), o que fazia com que as imagens aparecessem em
- * branco para uma parte dos visitantes. Esta função busca a imagem à
- * Amazon server-side (edge da Cloudflare) e devolve-a pelo nosso próprio
- * domínio — invisível para ad-blockers.
+ * Estratégia:
+ *   1. Fetch da página de produto (/dp/{ASIN}) no marketplace correspondente.
+ *   2. Extração do og:image — contém um URL do CDN m.media-amazon.com que
+ *      NÃO está nas listas de ad-blockers (serve imagens reais, não ads).
+ *   3. Redireciona (302) o browser para esse URL. Cliente carrega direto do
+ *      CDN Amazon — sem passar pelo Worker para cada imagem, o que poupa
+ *      invocações e faz cache automático no browser.
+ *
+ * Alternativa para quando o og:image não aparece (raro): redireciona para
+ * /placeholder-amazon.svg.
  *
  * Uso: <img src="/api/img?asin=B0CPXQ7YZN&m=es&size=500">
  */
 
-const MARKET_CONFIG = {
-  es: { widget: 'ws-eu.amazon-adsystem.com', place: 'ES', tagKey: 'PUBLIC_AMAZON_TAG_ES' },
-  com: { widget: 'ws-na.amazon-adsystem.com', place: 'US', tagKey: 'PUBLIC_AMAZON_TAG_COM' },
-  uk: { widget: 'ws-eu.amazon-adsystem.com', place: 'GB', tagKey: 'PUBLIC_AMAZON_TAG_UK' },
-  de: { widget: 'ws-eu.amazon-adsystem.com', place: 'DE', tagKey: 'PUBLIC_AMAZON_TAG_DE' },
-  fr: { widget: 'ws-eu.amazon-adsystem.com', place: 'FR', tagKey: 'PUBLIC_AMAZON_TAG_FR' },
-  it: { widget: 'ws-eu.amazon-adsystem.com', place: 'IT', tagKey: 'PUBLIC_AMAZON_TAG_IT' },
+const MARKET_HOST = {
+  es: 'www.amazon.es',
+  com: 'www.amazon.com',
+  uk: 'www.amazon.co.uk',
+  de: 'www.amazon.de',
+  fr: 'www.amazon.fr',
+  it: 'www.amazon.it',
 };
 
-function badRequest(mensagem) {
+const USER_AGENT =
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36';
+
+function bad(mensagem) {
   return new Response(mensagem, {
     status: 400,
     headers: { 'Content-Type': 'text/plain; charset=utf-8' },
   });
 }
 
+function redirectToPlaceholder(originUrl) {
+  return Response.redirect(
+    new URL('/placeholder-amazon.svg', originUrl).toString(),
+    302,
+  );
+}
+
+// Extrai og:image de uma string HTML. Devolve null se não encontrar.
+function extrairOgImage(html) {
+  const padroes = [
+    /<meta\s+property=["']og:image["']\s+content=["']([^"']+)["']/i,
+    /<meta\s+content=["']([^"']+)["']\s+property=["']og:image["']/i,
+    /"hiRes":\s*"(https?:\/\/[^"]+)"/i,
+    /"landingImage":\s*\{[^}]*"url":\s*"([^"]+)"/i,
+  ];
+  for (const padrao of padroes) {
+    const match = html.match(padrao);
+    if (match && match[1]) {
+      return match[1].replace(/\\u002F/g, '/').replace(/\\\//g, '/');
+    }
+  }
+  return null;
+}
+
+// Reescreve o URL do CDN Amazon para o tamanho pedido (250, 500 ou 1000).
+function redimensionar(url, size) {
+  // Padrão tipico: .../I/XXX._AC_SL1500_.jpg ou .../I/XXX._SL500_.jpg
+  // Substituir o token de tamanho pelo que queremos.
+  return url.replace(/\._[A-Z]+[0-9_,]+_\.jpg/i, '._SL' + size + '_.jpg');
+}
+
 export async function onRequest(context) {
-  const { request, env } = context;
+  const { request } = context;
   const url = new URL(request.url);
   const asin = url.searchParams.get('asin') || '';
   const marketplace = (url.searchParams.get('m') || 'es').toLowerCase();
-  const sizeParam = url.searchParams.get('size') || '500';
+  const size = url.searchParams.get('size') || '500';
+  const debug = url.searchParams.get('debug') === '1';
 
-  if (!/^[A-Z0-9]{10}$/.test(asin)) {
-    return badRequest('ASIN inválido');
-  }
-  if (!['250', '500', '1000'].includes(sizeParam)) {
-    return badRequest('Tamanho inválido — use 250, 500 ou 1000');
-  }
-  const cfg = MARKET_CONFIG[marketplace];
-  if (!cfg) {
-    return badRequest('Marketplace inválido — use es, com, uk, de, fr ou it');
-  }
+  if (!/^[A-Z0-9]{10}$/.test(asin)) return bad('ASIN inválido');
+  if (!['250', '500', '1000'].includes(size)) return bad('Tamanho inválido');
+  const host = MARKET_HOST[marketplace];
+  if (!host) return bad('Marketplace inválido');
 
-  const tag = env[cfg.tagKey] || env.PUBLIC_AMAZON_TAG || '';
+  const paginaProduto = 'https://' + host + '/dp/' + asin;
 
-  // Tentar múltiplas fontes por ordem: o widget adsystem bloqueia pedidos
-  // vindos de IPs Cloudflare (403); m.media-amazon.com é o CDN de produtos
-  // e raramente bloqueia. Primeiro o CDN direto (mais fiável), depois o
-  // widget oficial como backup (que retorna tracking para o programa).
-  const upstreams = [
-    'https://m.media-amazon.com/images/P/' + asin + '.01._SL' + sizeParam + '_.jpg',
-    'https://m.media-amazon.com/images/P/' + asin + '._SL' + sizeParam + '_.jpg',
-    'https://' +
-      cfg.widget +
-      '/widgets/q?_encoding=UTF8&MarketPlace=' +
-      cfg.place +
-      '&ASIN=' +
-      asin +
-      '&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL' +
-      sizeParam +
-      '_' +
-      (tag ? '&tag=' + tag : ''),
-  ];
+  try {
+    const resposta = await fetch(paginaProduto, {
+      headers: {
+        'User-Agent': USER_AGENT,
+        Accept:
+          'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+        'Accept-Language': 'pt-PT,pt;q=0.9,es;q=0.8,en;q=0.7',
+      },
+      redirect: 'follow',
+    });
 
-  const tentativas = [];
-
-  for (const upstreamUrl of upstreams) {
-    try {
-      const upstream = await fetch(upstreamUrl, {
-        headers: {
-          'User-Agent':
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36',
-          Referer: 'https://www.kindleportugal.com/',
-          Accept: 'image/avif,image/webp,image/jpeg,image/png,image/*,*/*;q=0.8',
-        },
-      });
-
-      const contentType = upstream.headers.get('Content-Type') || '';
-      const contentLength = upstream.headers.get('Content-Length');
-      const tamanho = contentLength ? parseInt(contentLength, 10) : 0;
-      const validImage =
-        upstream.ok &&
-        contentType.startsWith('image/') &&
-        contentType !== 'image/gif' &&
-        tamanho >= 500;
-
-      tentativas.push({
-        url: upstreamUrl,
-        status: upstream.status,
-        contentType,
-        contentLength,
-        valid: validImage,
-      });
-
-      if (validImage) {
-        // Se estivermos em modo debug, ainda mostrar o diagnóstico
-        if (url.searchParams.get('debug') === '1') {
-          return new Response(
-            JSON.stringify({ escolhido: upstreamUrl, tentativas }, null, 2),
-            { headers: { 'Content-Type': 'application/json' } },
-          );
-        }
-        return new Response(upstream.body, {
-          status: 200,
-          headers: {
-            'Content-Type': contentType,
-            'Cache-Control': 'public, max-age=86400, s-maxage=604800',
-            'X-Source': upstreamUrl.includes('media-amazon') ? 'media-cdn' : 'widget',
-          },
-        });
+    if (!resposta.ok) {
+      if (debug) {
+        return new Response(
+          JSON.stringify({ erro: 'pagina_nao_ok', status: resposta.status, paginaProduto }, null, 2),
+          { headers: { 'Content-Type': 'application/json' } },
+        );
       }
-    } catch (erro) {
-      tentativas.push({
-        url: upstreamUrl,
-        erro: erro instanceof Error ? erro.message : String(erro),
-      });
+      return redirectToPlaceholder(url.origin);
     }
-  }
 
-  if (url.searchParams.get('debug') === '1') {
-    return new Response(
-      JSON.stringify({ escolhido: null, tentativas }, null, 2),
-      { headers: { 'Content-Type': 'application/json' } },
-    );
-  }
+    const html = await resposta.text();
+    const imagemOriginal = extrairOgImage(html);
 
-  // Nenhuma fonte devolveu imagem válida — placeholder próprio
-  return Response.redirect(
-    new URL('/placeholder-amazon.svg', url.origin).toString(),
-    302,
-  );
+    if (!imagemOriginal) {
+      if (debug) {
+        return new Response(
+          JSON.stringify({ erro: 'og_image_nao_encontrado', paginaProduto, tamanhoHtml: html.length }, null, 2),
+          { headers: { 'Content-Type': 'application/json' } },
+        );
+      }
+      return redirectToPlaceholder(url.origin);
+    }
+
+    const imagemFinal = redimensionar(imagemOriginal, size);
+
+    if (debug) {
+      return new Response(
+        JSON.stringify({ paginaProduto, imagemOriginal, imagemFinal }, null, 2),
+        { headers: { 'Content-Type': 'application/json' } },
+      );
+    }
+
+    // Redirecionar com cache agressivo para que o browser não volte a pedir
+    // o mesmo Worker durante 24h. O CDN Amazon já tem os seus próprios
+    // headers de cache, portanto a imagem real também fica em cache no
+    // browser.
+    return new Response(null, {
+      status: 302,
+      headers: {
+        Location: imagemFinal,
+        'Cache-Control': 'public, max-age=86400, s-maxage=604800',
+        'X-Source': 'og-image',
+      },
+    });
+  } catch (erro) {
+    if (debug) {
+      return new Response(
+        JSON.stringify({ erro: String(erro) }, null, 2),
+        { headers: { 'Content-Type': 'application/json' } },
+      );
+    }
+    return redirectToPlaceholder(url.origin);
+  }
 }
