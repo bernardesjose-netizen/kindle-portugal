@@ -10,20 +10,7 @@
  * Uso: <img src="/api/img?asin=B0CPXQ7YZN&m=es&size=500">
  */
 
-interface Env {
-  PUBLIC_AMAZON_TAG?: string;
-  PUBLIC_AMAZON_TAG_ES?: string;
-  PUBLIC_AMAZON_TAG_COM?: string;
-  PUBLIC_AMAZON_TAG_UK?: string;
-  PUBLIC_AMAZON_TAG_DE?: string;
-  PUBLIC_AMAZON_TAG_FR?: string;
-  PUBLIC_AMAZON_TAG_IT?: string;
-}
-
-const MARKET_CONFIG: Record<
-  string,
-  { widget: string; place: string; tagKey: keyof Env }
-> = {
+const MARKET_CONFIG = {
   es: { widget: 'ws-eu.amazon-adsystem.com', place: 'ES', tagKey: 'PUBLIC_AMAZON_TAG_ES' },
   com: { widget: 'ws-na.amazon-adsystem.com', place: 'US', tagKey: 'PUBLIC_AMAZON_TAG_COM' },
   uk: { widget: 'ws-eu.amazon-adsystem.com', place: 'GB', tagKey: 'PUBLIC_AMAZON_TAG_UK' },
@@ -32,18 +19,19 @@ const MARKET_CONFIG: Record<
   it: { widget: 'ws-eu.amazon-adsystem.com', place: 'IT', tagKey: 'PUBLIC_AMAZON_TAG_IT' },
 };
 
-function badRequest(mensagem: string): Response {
+function badRequest(mensagem) {
   return new Response(mensagem, {
     status: 400,
     headers: { 'Content-Type': 'text/plain; charset=utf-8' },
   });
 }
 
-export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
+export async function onRequest(context) {
+  const { request, env } = context;
   const url = new URL(request.url);
-  const asin = url.searchParams.get('asin') ?? '';
-  const marketplace = (url.searchParams.get('m') ?? 'es').toLowerCase();
-  const sizeParam = url.searchParams.get('size') ?? '500';
+  const asin = url.searchParams.get('asin') || '';
+  const marketplace = (url.searchParams.get('m') || 'es').toLowerCase();
+  const sizeParam = url.searchParams.get('size') || '500';
 
   if (!/^[A-Z0-9]{10}$/.test(asin)) {
     return badRequest('ASIN inválido');
@@ -56,8 +44,18 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
     return badRequest('Marketplace inválido — use es, com, uk, de, fr ou it');
   }
 
-  const tag = env[cfg.tagKey] ?? env.PUBLIC_AMAZON_TAG ?? '';
-  const widgetUrl = `https://${cfg.widget}/widgets/q?_encoding=UTF8&MarketPlace=${cfg.place}&ASIN=${asin}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL${sizeParam}_${tag ? `&tag=${tag}` : ''}`;
+  const tag = env[cfg.tagKey] || env.PUBLIC_AMAZON_TAG || '';
+  const widgetUrl =
+    'https://' +
+    cfg.widget +
+    '/widgets/q?_encoding=UTF8&MarketPlace=' +
+    cfg.place +
+    '&ASIN=' +
+    asin +
+    '&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL' +
+    sizeParam +
+    '_' +
+    (tag ? '&tag=' + tag : '');
 
   try {
     const upstream = await fetch(widgetUrl, {
@@ -67,24 +65,19 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
         Referer: 'https://www.kindleportugal.com/',
         Accept: 'image/avif,image/webp,image/jpeg,image/png,image/*,*/*;q=0.8',
       },
-      cf: {
-        // cache no edge Cloudflare por 24h; reduz chamadas à Amazon e custos
-        cacheTtl: 86400,
-        cacheEverything: true,
-      },
     });
 
-    const contentType = upstream.headers.get('Content-Type') ?? 'image/jpeg';
+    const contentType = upstream.headers.get('Content-Type') || 'image/jpeg';
     const contentLength = upstream.headers.get('Content-Length');
 
-    // Se a Amazon devolver um pixel transparente 1x1 (43 bytes) ou erro,
-    // redireciona para o placeholder estático.
-    if (
-      !upstream.ok ||
-      (contentLength && parseInt(contentLength, 10) < 200) ||
-      contentType === 'image/gif' && contentLength === '43'
-    ) {
-      return Response.redirect(new URL('/placeholder-amazon.svg', url.origin).toString(), 302);
+    // Amazon devolve pixel transparente 1x1 (43 bytes) para ASINs sem imagem
+    // ou tag inválida — redirecionar para placeholder próprio.
+    const tamanho = contentLength ? parseInt(contentLength, 10) : 0;
+    if (!upstream.ok || (tamanho > 0 && tamanho < 200)) {
+      return Response.redirect(
+        new URL('/placeholder-amazon.svg', url.origin).toString(),
+        302,
+      );
     }
 
     return new Response(upstream.body, {
@@ -95,7 +88,10 @@ export const onRequestGet: PagesFunction<Env> = async ({ request, env }) => {
         'X-Source': 'amazon-widget-proxy',
       },
     });
-  } catch (erro) {
-    return Response.redirect(new URL('/placeholder-amazon.svg', url.origin).toString(), 302);
+  } catch (_erro) {
+    return Response.redirect(
+      new URL('/placeholder-amazon.svg', url.origin).toString(),
+      302,
+    );
   }
-};
+}
