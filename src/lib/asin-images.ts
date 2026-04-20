@@ -43,11 +43,11 @@ export const ASIN_IMAGES: Record<string, string> = {
   B0D5KR4JQ3: 'https://m.media-amazon.com/images/I/51VAFhs7HRL._AC_SL1000_.jpg',
   B0BN6DYCN1: 'https://m.media-amazon.com/images/I/714OsOjDJ7L._AC_SL1500_.jpg',
 
-  // Kindles (modelos + referenciados em artigos)
+  // Kindles (modelos + referenciados em artigos) — ASINs válidos em Amazon.es
   B0CFPWLGF2: 'https://m.media-amazon.com/images/I/61RI4fvXHqL._AC_SL1000_.jpg', // Kindle Paperwhite 12.ª gen
-  B0CNV9F72P: 'https://m.media-amazon.com/images/I/71q6spMq75L._AC_SL1500_.jpg', // Kindle básico 2024
-  B0CGVSKR1G: 'https://m.media-amazon.com/images/I/71KFrD7KfCL._AC_SL1500_.jpg', // Kindle Colorsoft
-  B0DVQQGMCZ: 'https://m.media-amazon.com/images/I/71PZkFG4qmL._AC_SL1500_.jpg', // Kindle Scribe
+  B0CP32JG8B: 'https://m.media-amazon.com/images/I/61toPUX7aDL._AC_SL1000_.jpg', // Kindle básico 2024
+  B0CX8MQF7R: 'https://m.media-amazon.com/images/I/61RzHzSgEAL._AC_SL1000_.jpg', // Kindle Colorsoft
+  B0CZB5RHWX: 'https://m.media-amazon.com/images/I/71XyttQ0hNL._AC_SL1000_.jpg', // Kindle Scribe 3.ª gen
   B0C8RR4WN3: 'https://m.media-amazon.com/images/I/71l4ubAJ0BL._AC_SL1500_.jpg',
 
   // Kobo

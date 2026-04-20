@@ -92,7 +92,7 @@ export function ehLinkAmazon(url: string | undefined): boolean {
  */
 export const ASIN_POR_MARKET: Record<string, Partial<Record<Marketplace, string | null>>> = {
   // Kindle básico 11.ª gen (2024)
-  B0CNV9F72P: {
+  B0CP32JG8B: {
     uk: 'B0CP31JRLK',
     de: null, // ASIN DE desconhecido — cai para pesquisa
     fr: null,
@@ -108,15 +108,15 @@ export const ASIN_POR_MARKET: Record<string, Partial<Record<Marketplace, string 
     com: null,
   },
   // Kindle Colorsoft
-  B0CGVSKR1G: {
+  B0CX8MQF7R: {
     uk: null,
     de: null,
     fr: null,
     it: null,
     com: null,
   },
-  // Kindle Scribe
-  B0DVQQGMCZ: {
+  // Kindle Scribe 3.ª gen
+  B0CZB5RHWX: {
     uk: null,
     de: null,
     fr: null,
