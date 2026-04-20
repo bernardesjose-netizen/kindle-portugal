@@ -70,6 +70,21 @@ export async function onRequest(context) {
     const contentType = upstream.headers.get('Content-Type') || 'image/jpeg';
     const contentLength = upstream.headers.get('Content-Length');
 
+    // Modo debug: ?debug=1 devolve info sobre o que a Amazon respondeu
+    if (url.searchParams.get('debug') === '1') {
+      return new Response(
+        JSON.stringify({
+          widgetUrl,
+          status: upstream.status,
+          ok: upstream.ok,
+          contentType,
+          contentLength,
+          allHeaders: Object.fromEntries(upstream.headers.entries()),
+        }, null, 2),
+        { headers: { 'Content-Type': 'application/json' } },
+      );
+    }
+
     // Amazon devolve pixel transparente 1x1 (43 bytes) para ASINs sem imagem
     // ou tag inválida — redirecionar para placeholder próprio.
     const tamanho = contentLength ? parseInt(contentLength, 10) : 0;
