@@ -6,11 +6,17 @@ interface Props {
   asin: string;
   /** Texto introdutório (default: "Comprar em:") */
   prefixo?: string;
+  /**
+   * Termo de pesquisa para markets onde o ASIN primário não é válido
+   * (ver ASIN_POR_MARKET em lib/afiliados). Sem isto, esses markets são
+   * omitidos da tira.
+   */
+  pesquisaAlternativa?: string;
 }
 
-const { asin, prefixo = 'Comprar em:' } = Astro.props;
+const { asin, prefixo = 'Comprar em:', pesquisaAlternativa } = Astro.props;
 
-const lojas = linksPorLojaDeAsin(asin);
+const lojas = linksPorLojaDeAsin(asin, { pesquisaAlternativa });
 const temAlgumaLoja = MARKETPLACES.some((m) => temTag(m.id));
 
 const etiquetaCurta: Record<string, string> = {

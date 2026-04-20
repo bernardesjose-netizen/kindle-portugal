@@ -7,6 +7,12 @@ interface Props {
   categoria?: string;
   titulo?: string;
   legenda?: string;
+  /**
+   * Quando `asin` está definido mas não há ASIN válido para um marketplace
+   * específico (ver ASIN_POR_MARKET), gera URL de pesquisa com este termo
+   * em vez de omitir o marketplace.
+   */
+  pesquisaAlternativa?: string;
 }
 
 const {
@@ -15,10 +21,11 @@ const {
   categoria,
   titulo = 'Onde comprar',
   legenda = 'Escolhe a loja Amazon do teu país. Compras na Amazon.es são as mais comuns em Portugal (envia para PT sem taxas).',
+  pesquisaAlternativa,
 } = Astro.props;
 
 const lojas = asin
-  ? linksPorLojaDeAsin(asin)
+  ? linksPorLojaDeAsin(asin, { pesquisaAlternativa, categoriaPesquisa: categoria })
   : pesquisa
     ? linksPorLojaDePesquisa(pesquisa, { categoria })
     : [];
