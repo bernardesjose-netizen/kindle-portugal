@@ -38,21 +38,22 @@ const caixaPorCategoria: Record<string, string> = {
 
 // Mapa slug → ASIN do dispositivo a mostrar como miniatura no card.
 // Cobre Kindles e Kobos (estes não estão na collection 'modelos').
-// Fallback é o Paperwhite, o modelo mais representativo.
+// Distribuição equilibrada para evitar repetir o mesmo aparelho em
+// vários cards (3 Paperwhite, 3 básicos, 3 Colorsoft, 2 Scribes, 2 Kobos).
 const asinPorGuia: Record<string, string> = {
-  'calibre-enviar-ebooks-para-kindle': 'B0CFPWLGF2',
-  'capas-para-kindle-basico': 'B0CP32JG8B',
-  'capas-para-kindle-colorsoft': 'B0CX8MQF7R',
-  'capas-para-kindle-paperwhite': 'B0CFPWLGF2',
-  'capas-para-kindle-scribe': 'B0CZB5RHWX',
-  'comprar-kindle-em-portugal': 'B0CFPWLGF2',
-  'devolver-produto-amazon-em-portugal': 'B0CFPWLGF2',
-  'ebooks-em-portugues-amazon-kindle': 'B0CFPWLGF2',
-  'kindle-colorsoft-vale-a-pena': 'B0CX8MQF7R',
-  'kindle-scribe-caderno-digital-2026': 'B0CZB5RHWX',
-  'kobo-clara-bw-alternativa-kindle': 'B0CZXYV8GT',
-  'kobo-clara-colour-alternativa-kindle': 'B0CZY1LRT4',
-  'qual-kindle-comprar-2026': 'B0CFPWLGF2',
+  'calibre-enviar-ebooks-para-kindle': 'B0CFPWLGF2',     // Paperwhite (leitor comum)
+  'capas-para-kindle-basico': 'B0CP32JG8B',              // básico
+  'capas-para-kindle-colorsoft': 'B0CX8MQF7R',           // Colorsoft
+  'capas-para-kindle-paperwhite': 'B0CFPWLGF2',          // Paperwhite
+  'capas-para-kindle-scribe': 'B0CZB5RHWX',              // Scribe
+  'comprar-kindle-em-portugal': 'B0CFPWLGF2',            // Paperwhite (recomendação)
+  'devolver-produto-amazon-em-portugal': 'B0CX8MQF7R',   // Colorsoft (variar)
+  'ebooks-em-portugues-amazon-kindle': 'B0CP32JG8B',     // básico (entrada na leitura)
+  'kindle-colorsoft-vale-a-pena': 'B0CX8MQF7R',          // Colorsoft
+  'kindle-scribe-caderno-digital-2026': 'B0CZB5RHWX',    // Scribe
+  'kobo-clara-bw-alternativa-kindle': 'B0CZXYV8GT',      // Kobo Clara BW
+  'kobo-clara-colour-alternativa-kindle': 'B0CZY1LRT4',  // Kobo Clara Colour
+  'qual-kindle-comprar-2026': 'B0CP32JG8B',              // básico (entrada na família)
 };
 const ASIN_FALLBACK = 'B0CFPWLGF2';
 ---
