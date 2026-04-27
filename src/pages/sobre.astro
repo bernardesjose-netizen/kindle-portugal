@@ -1,46 +1,172 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
-import { SITE } from '@lib/site';
+import { SITE, AUTOR } from '@lib/site';
+
+const anosKindle = new Date().getFullYear() - AUTOR.desde;
+
+// Schema.org JSON-LD: AboutPage + Person (autor)
+const personLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${SITE.url}/sobre#editor`,
+  name: AUTOR.nome,
+  jobTitle: AUTOR.funcao,
+  description: AUTOR.resumo,
+  url: `${SITE.url}/sobre`,
+  knowsAbout: [
+    'Amazon Kindle',
+    'E-readers',
+    'Ebooks em português',
+    'Calibre (software)',
+    'Kindle Direct Publishing',
+  ],
+};
+
+const aboutPageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: `Sobre o ${SITE.nome}`,
+  description:
+    'Quem é o editor do Kindle Portugal, como recomendamos os produtos e como o site se financia.',
+  url: `${SITE.url}/sobre`,
+  inLanguage: 'pt-PT',
+  publisher: {
+    '@type': 'Organization',
+    name: SITE.autorOrganizacao.nome,
+    url: SITE.autorOrganizacao.url,
+  },
+  author: { '@id': `${SITE.url}/sobre#editor` },
+  mainEntity: { '@id': `${SITE.url}/sobre#editor` },
+};
 ---
 
 <BaseLayout
   titulo="Sobre"
-  descricao={`Quem está por trás do ${SITE.nome} e qual a metodologia editorial.`}
+  descricao={`Quem está por trás do ${SITE.nome}, como recomendamos produtos e como o site se financia. Editor: ${AUTOR.nome}.`}
+  jsonLd={[personLd, aboutPageLd]}
 >
   <Container largura="texto" classe="py-14">
-    <header class="mb-8 border-b border-marinho-100 pb-6">
-      <h1 class="text-3xl font-bold text-marinho-900 md:text-4xl">Sobre o {SITE.nome}</h1>
-      <p class="mt-3 text-lg text-marinho-600">
-        Um site independente, em português europeu, sobre Kindle e ebooks.
+    <header class="mb-10 border-b border-marinho-100 pb-8">
+      <span class="text-xs font-semibold uppercase tracking-wider text-marca-600">
+        Sobre o site
+      </span>
+      <h1 class="mt-3 text-3xl font-bold text-marinho-900 md:text-4xl" style="letter-spacing: -0.02em;">
+        Um site sobre Kindle, em português europeu, escrito por quem lê em Kindle há {anosKindle} anos.
+      </h1>
+      <p class="mt-4 text-lg text-marinho-600">
+        O {SITE.nome} existe para responder, em PT-PT honesto e sem floreados, às perguntas que
+        os leitores portugueses fazem antes e depois de comprar um Kindle.
       </p>
     </header>
 
     <div class="prose prose-pt prose-tinta max-w-none">
-      <h2>A missão</h2>
+      <h2>Quem está por trás</h2>
       <p>
-        Ajudar quem lê em Portugal a tirar o máximo de um Kindle — desde escolher o modelo certo
-        até dominar os pequenos truques do dia a dia. Tudo em PT-PT, sem traduzir à pressa nem
-        reciclar conteúdo anglófono sem contexto local.
+        O editor é <strong>{AUTOR.nome}</strong>. Comprou o primeiro Kindle (um <em>Kindle 2</em>,
+        ainda com teclado físico) em <strong>{AUTOR.desde}</strong>, quando os Kindle ainda não
+        chegavam oficialmente a Portugal. Desde então passou por várias gerações da gama. Os
+        modelos que tem em uso ativo são o <strong>Kindle básico</strong> e o <strong>Kindle
+        Paperwhite</strong>. São, não por acaso, os dois modelos que recomendamos à maioria
+        dos leitores portugueses.
+      </p>
+      <p>
+        Não somos jornalistas profissionais nem trabalhamos para a Amazon. Somos um leitor que
+        decidiu reunir num só sítio a informação que andava espalhada em fóruns, threads do
+        Reddit e blogs PT-BR cheios de imprecisões para quem está em Portugal.
       </p>
 
-      <h2>Metodologia</h2>
+      <p class="text-sm text-marinho-500 italic">
+        Ao longo dos anos, o trabalho em torno do {SITE.nome} chegou a ser referido em meios
+        como o jornal <em>Público</em> e a motivar convites para apresentações de livros e
+        participação na Feira do Livro. Mencionamo-lo aqui apenas para que percebas que há
+        trabalho real por trás do site. Não substitui leitura crítica do que escrevemos.
+      </p>
+
+      <h2>Como recomendamos produtos</h2>
+      <p>
+        A regra é simples: recomendamos com base no <strong>caso de uso</strong>, não na
+        comissão. Em alguns artigos podes ver-nos sugerir o Kindle básico em vez do Paperwhite,
+        ou um Kobo em vez de um Kindle. É deliberado. O melhor produto não é o mais caro. É o
+        que resolve o problema concreto do leitor que está a perguntar.
+      </p>
+      <p>Em concreto, comprometemo-nos a:</p>
       <ul>
-        <li>Priorizamos a informação verificável e datada.</li>
-        <li>Quando testamos um produto, dizemo-lo. Quando não testámos, também.</li>
-        <li>Evitamos linguagem de marketing. Preferimos dizer o que funciona e o que não.</li>
-        <li>Atualizamos os artigos quando surge informação nova.</li>
+        <li>
+          <strong>Testar antes de recomendar.</strong> Os modelos que ocupam posições de
+          destaque nos guias são modelos que tivemos efetivamente nas mãos, durante semanas ou
+          meses. Quando isso não foi possível, por o produto ser muito recente ou nicho,
+          dizemo-lo no artigo em vez de fingir que o testámos.
+        </li>
+        <li>
+          <strong>Admitir limites.</strong> Cada modelo tem uma secção sobre quem
+          <em> não </em> deve comprá-lo. Não há produto perfeito, e fingir que existe insulta o
+          leitor.
+        </li>
+        <li>
+          <strong>Datar os preços.</strong> Os valores que aparecem nos artigos são preços de
+          referência à data indicada. Para o preço atual remetemos sempre para a Amazon, que é
+          a fonte autoritativa.
+        </li>
+        <li>
+          <strong>Atualizar o conteúdo.</strong> Os guias têm campo de <code>data_revisao</code>.
+          Quando um modelo é descontinuado, um preço muda significativamente, ou um passo
+          tutorial deixa de funcionar, voltamos ao artigo e reescrevemo-lo.
+        </li>
+        <li>
+          <strong>Corrigir erros à vista.</strong> Se nos apontares um erro, corrigimo-lo e
+          mantemos nota da correção. Não apagamos versões anteriores em silêncio.
+        </li>
       </ul>
 
-      <h2>Financiamento</h2>
+      <h2>Como o site se financia</h2>
       <p>
-        Participamos no programa Amazon Associates. Vê a{' '}
-        <a href="/divulgacao-afiliados">divulgação completa</a>.
+        Participamos no programa <strong>Amazon Associates</strong> (programa espanhol, que
+        serve Portugal). Quando um leitor clica num link nosso e compra na Amazon, recebemos
+        uma pequena comissão, sem custo adicional para quem compra. É a única forma de
+        receita do site.
       </p>
+      <p>
+        Página dedicada com a explicação completa: <a href="/divulgacao-afiliados">Divulgação
+        de afiliados</a>.
+      </p>
+
+      <h2>O que <em>não</em> vais encontrar aqui</h2>
+      <ul>
+        <li>Reviews de produtos que não testámos.</li>
+        <li>Tutoriais para remover DRM ou descarregar livros pirateados.</li>
+        <li>Publicidade paga disfarçada de conteúdo editorial.</li>
+        <li>Cookies de tracking. Escolhemos analytics sem cookies, RGPD-friendly.</li>
+        <li>
+          Brasileirismos. Se vires um, é erro nosso, escreve-nos e corrigimos. (É de propósito
+          que não dizemos &ldquo;tela&rdquo;, &ldquo;arquivo&rdquo; ou &ldquo;mouse&rdquo;.)
+        </li>
+      </ul>
+
+      <h2>Como nos podes ajudar</h2>
+      <ul>
+        <li>
+          <strong>Aponta erros.</strong> Email para <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+        </li>
+        <li>
+          <strong>Sugere temas.</strong> Se há uma pergunta sobre Kindle que continuas a fazer
+          ao Google sem encontrar resposta clara em PT-PT, conta-nos.
+        </li>
+        <li>
+          <strong>Compra através dos links de afiliado</strong>, se já ias comprar na Amazon na
+          mesma. Para ti não muda nada; para nós é o que paga as horas que vão a este
+          conteúdo.
+        </li>
+      </ul>
 
       <h2>Contacto</h2>
       <p>
-        Sugestões, correções ou pedidos — <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+        <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Respondemos a tudo, exceto
+        promoções e pedidos de publicação patrocinada.
+      </p>
+
+      <p class="text-sm text-marinho-400 mt-12">
+        Última atualização: 27 de abril de 2026.
       </p>
     </div>
   </Container>

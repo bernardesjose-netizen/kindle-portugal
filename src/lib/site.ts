@@ -13,6 +13,21 @@ export const SITE = {
   },
 } as const;
 
+/**
+ * Autor editorial do site. Usado em assinaturas, schemas JSON-LD
+ * (Person/Author) e na página /sobre.
+ *
+ * `desde` é o ano em que se começou a ler em Kindle.
+ */
+export const AUTOR = {
+  nome: 'JC Bernardes',
+  funcao: 'Editor',
+  desde: 2009,
+  modelosAtuais: ['Kindle básico', 'Kindle Paperwhite'] as readonly string[],
+  resumo:
+    'JC Bernardes é o editor do Kindle Portugal. Lê em Kindle desde 2009. Começou num Kindle 2, com teclado físico. Usa atualmente um Kindle básico e um Paperwhite.',
+} as const;
+
 export const NAVEGACAO_PRINCIPAL = [
   { label: 'Modelos', href: '/modelos' },
   { label: 'Guias', href: '/guias' },
