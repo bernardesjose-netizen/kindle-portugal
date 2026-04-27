@@ -1,0 +1,275 @@
+---
+titulo: "Marcações e notas no Kindle: como ver, exportar e organizar (2026)"
+descricao: "Guia em PT-PT para criar, ver, exportar e organizar marcações (highlights) e notas no Kindle. Vista web Notebook, ficheiro My Clippings.txt, Readwise, Notion, Obsidian e limites a conhecer."
+categoria: "utilizar"
+tags:
+  - "marcações Kindle"
+  - "notas Kindle"
+  - "highlights Kindle"
+  - "exportar highlights"
+  - "Readwise"
+  - "Kindle Notebook"
+  - "My Clippings"
+  - "Notion"
+  - "Obsidian"
+autor:
+  nome: "Kindle Portugal"
+data_publicacao: 2026-04-27
+tempo_leitura_min: 13
+modelos_relacionados:
+  - "paperwhite"
+  - "scribe"
+seo:
+  titulo_seo: "Marcações e notas no Kindle: ver, exportar e organizar"
+  descricao_seo: "Como criar, ver e exportar marcações (highlights) e notas no Kindle em PT-PT. Notebook, My Clippings.txt, Readwise, Notion e Obsidian explicados."
+---
+
+import LojasAmazon from '@components/afiliados/LojasAmazon.astro';
+import ImagemProduto from '@components/afiliados/ImagemProduto.astro';
+
+As **marcações** (em inglês *highlights*) e as **notas** são, talvez, a funcionalidade do Kindle mais subutilizada por quem o tem. Servem para guardar uma frase que fica a martelar na cabeça, juntar argumentos para um trabalho académico, montar uma "pilha de citações" para revisitar, ou simplesmente lembrar porque é que aquela página merecia ser revista. Este guia explica tudo o que precisas: como criar, onde ficam guardadas, como vê-las todas num só sítio, como exportar para fora do ecossistema Amazon e como integrar com o Notion, Obsidian ou Readwise.
+
+## Em resumo
+
+- No Kindle, **marcação** é destacar texto, **nota** é escrever algo associado a uma marcação ou ponto do livro, **marcador** é guardar uma página para voltar.
+- Tudo o que destacas em livros comprados na Kindle Store sincroniza automaticamente com a tua conta Amazon e fica visível em [**read.amazon.com/notebook**](https://read.amazon.com/notebook).
+- Em paralelo, o Kindle guarda um ficheiro de texto, `documents/My Clippings.txt`, que copias por USB e abres em qualquer editor.
+- Para exportar de forma cómoda para Notion, Obsidian, Roam ou Logseq, o caminho mais limpo é o **Readwise** (pago, mas com período de avaliação).
+- Existe um **limite de cópia por livro** (o *clipping limit*) imposto pelo editor; é a razão pela qual, às vezes, a Amazon recusa exportar uma marcação.
+- Em livros do **Kindle Unlimited** ou **Prime Reading**, perdes a marcação no dispositivo se devolveres o livro, mas a versão sincronizada na cloud mantém-se associada à tua conta.
+
+## Marcações, notas e marcadores: três coisas diferentes
+
+Antes de avançar, vale a pena distinguir os três tipos de anotação que o Kindle suporta. As pessoas misturam-nos em conversa, mas o software trata-os de forma diferente.
+
+| Tipo | O que é | Onde aparece | Útil para |
+|------|---------|--------------|-----------|
+| **Marcação** (*highlight*) | Texto sublinhado a amarelo (ou azul/rosa/laranja, na app) | No livro e em `notebook` | Guardar uma frase ou um excerto |
+| **Nota** | Texto escrito por ti, ancorado a uma marcação ou ponto | No livro (ícone azul) e em `notebook` | Comentar, refletir, fazer índice próprio |
+| **Marcador** (*bookmark*) | "Cantinho dobrado" virtual numa página | Só no livro, não em `notebook` | Voltar rapidamente a uma página |
+
+Marcações e notas exportam-se. Marcadores não. Se queres lembrar-te de uma página, marca a primeira frase em vez de usar marcador, ficas com registo permanente.
+
+## Como criar marcações e notas
+
+### No Kindle (qualquer modelo com ecrã táctil)
+
+1. **Pousa o dedo** no início da frase a destacar.
+2. **Arrasta** até ao fim da seleção. O texto fica realçado.
+3. Aparece um menu com quatro botões: **Marcador** (cores, na app), **Nota**, **Partilhar** e **Mais**.
+4. Tocar em **Marcação** (ou simplesmente largar o dedo, em alguns modelos) sublinha sem nota.
+5. Tocar em **Nota** abre o teclado para escreveres um comentário associado à seleção.
+
+No Kindle básico, a marcação é monocromática (sublinhado a cinzento). Na **app Kindle** (telemóvel, tablet, PC) podes escolher entre amarelo, azul, rosa e laranja, o que ajuda a categorizar (por exemplo: amarelo para citações, azul para argumentos, rosa para perguntas).
+
+### No Kindle Scribe
+
+O Scribe permite, além das marcações de texto normais, **escrever à mão diretamente sobre as páginas** (chamado *Active Canvas*) e **anotar PDFs** com o stylus. Estas anotações manuscritas funcionam de forma um pouco diferente: ficam guardadas no livro mas, à data de Abril de 2026, **não aparecem em `read.amazon.com/notebook`** nem se exportam como texto sem passar por OCR (a conversão de escrita para texto que o Scribe faz internamente quando lhe pedes).
+
+<ImagemProduto asin="B0CZB5RHWX" alt="Kindle Scribe, único Kindle com escrita à mão sobre as páginas" marketplace="es" formato="pequeno" />
+
+### Na app Kindle e no Kindle Cloud Reader
+
+A **app Kindle** para iOS, Android, Windows e Mac tem o mesmo gesto: tocar e arrastar. O **Kindle Cloud Reader** ([read.amazon.com](https://read.amazon.com)) lê livros no browser sem precisar de descarregar nada, e suporta marcações com o rato.
+
+## Onde ficam guardadas as tuas marcações
+
+O Kindle guarda as anotações em **dois sítios em simultâneo**, e perceber a diferença evita muitas dores de cabeça:
+
+**1. Na cloud Amazon (Whispersync para Marcações).** Se o livro foi comprado, emprestado (KU/Prime Reading) ou enviado via *Send to Kindle* para um ficheiro associado à tua conta, as marcações sincronizam automaticamente entre todos os dispositivos da mesma conta. Se sublinhas no Paperwhite hoje, a marcação aparece no Scribe amanhã e na app do telemóvel daqui a 5 segundos.
+
+**2. Localmente, no ficheiro `My Clippings.txt`.** Independentemente do que sincroniza ou não para a cloud, o Kindle escreve **tudo** num ficheiro de texto simples na pasta `documents`. Este ficheiro é o teu seguro: nunca depende da Amazon, nunca expira, e podes lê-lo num bloco de notas.
+
+A diferença importa em três casos:
+
+- **Livros sem DRM** (EPUBs próprios, PDFs convertidos com Calibre, ebooks do Projecto Gutenberg): as marcações **só ficam no `My Clippings.txt`**. Não vão para a cloud nem aparecem em `notebook`.
+- **Livros do Kindle Unlimited** que devolves: a marcação desaparece do dispositivo, mas a Amazon mantém o registo na cloud associado ao teu histórico, e reaparece se voltares a empréstimo.
+- **PDFs enviados por *Send to Kindle*** (não convertidos): as marcações em PDF têm comportamento errático e nem sempre sincronizam.
+
+## A vista web: read.amazon.com/notebook
+
+Esta é a ferramenta mais útil que muitos donos de Kindle nunca abriram. Vai a [read.amazon.com/notebook](https://read.amazon.com/notebook), inicia sessão com a tua conta Amazon, e tens uma vista de **todas as tuas marcações e notas, agrupadas por livro**, em qualquer browser.
+
+O que podes fazer aqui:
+
+- **Pesquisar** entre todas as marcações de todos os livros (caixa em cima).
+- **Copiar** uma marcação individual com um clique no ícone de cópia.
+- **Editar** o texto de uma nota.
+- **Apagar** uma marcação ou nota (cuidado, é permanente).
+- **Filtrar** por livro, e ordenar por data ou ordem de leitura.
+- **Ver "Marcações populares"** (frases que muitos leitores também sublinharam, com indicação de quantos foram).
+
+Para um leitor regular, esta página vale uma sessão de 30 minutos por mês a passar marcações para um caderno digital ou para uma base de conhecimento.
+
+> **Nota:** se uma marcação aparecer no Kindle mas não em `notebook`, o livro provavelmente é um EPUB sideloaded sem registo na conta. Procura a marcação no `My Clippings.txt`.
+
+## O ficheiro My Clippings.txt: o teu plano B
+
+Liga o Kindle ao computador por cabo USB-C. Ele aparece como uma pen. Abre a pasta `documents` e procura `My Clippings.txt`. Abre num editor de texto (Bloco de Notas, TextEdit, VS Code, qualquer um).
+
+O formato é assim:
+
+```
+Os Maias (Eça de Queirós)
+- Your Highlight on Location 1234-1236 | Added on Sunday, April 19, 2026 11:42:18
+
+E foi assim, naquela manhã morna de Setembro, que Carlos chegou ao Ramalhete.
+==========
+Os Maias (Eça de Queirós)
+- Your Note on Location 1240 | Added on Sunday, April 19, 2026 11:43:01
+
+Início da decadência da família.
+==========
+```
+
+Cada entrada está separada por uma linha de **dez sinais de igual** (`==========`). Cada bloco tem três linhas: título e autor, metadados (tipo + localização + data), e o conteúdo. Encoding **UTF-8** com BOM. Compatível com qualquer editor moderno.
+
+**O que cabe aqui:**
+
+- Marcações de **todos os livros**, incluindo sideloaded sem DRM.
+- Notas escritas no teclado.
+- Marcadores (bookmarks) e referências a "Last Page Read".
+
+**O que não cabe:**
+
+- Notas manuscritas do Scribe (essas vivem só no dispositivo e em `notebook`, em formato imagem).
+- Marcações em PDFs (formato à parte).
+
+## O limite de cópia (clipping limit)
+
+A razão mais comum para uma exportação cortar a meio é o **clipping limit** que cada editor define para o livro: tipicamente entre **10% e 20%** do conteúdo, mas pode ser mais ou menos. Ao atingires o limite, o `notebook` mostra "*Limit Reached*" no botão de cópia daquela marcação, e a frase aparece com o conteúdo escondido.
+
+Notas próprias **não contam** para o limite. Marcações de livros em domínio público (Projecto Gutenberg, Standard Ebooks) também não, porque os ficheiros não trazem essa restrição.
+
+A única forma legítima de contornar o limite é **fazer o pedido de citação ao editor**, ou recorrer ao `My Clippings.txt`, que regista o texto local sem a verificação da cloud (tradicionalmente é mais permissivo, mas isto pode mudar e tem implicações de direitos de autor para uso público).
+
+## Marcações populares e privadas
+
+A predefinição da Amazon é **partilhar** as tuas marcações de forma anónima, alimentando a base de "Marcações populares" que vês em livros publicados pelos grandes editores. Se preferires manter as tuas marcações privadas:
+
+1. Vai a [amazon.es/mycd](https://www.amazon.es/mycd) (ou `.com/mycd`, conforme a tua loja padrão).
+2. **Preferências → Anotações populares**.
+3. Desliga "Mostrar Marcações populares".
+
+Esta opção controla o que **vês** no Kindle. Para impedir a Amazon de **agregar** as tuas marcações, há outra preferência em "Privacidade dos dados de leitura" que vale a pena rever, sobretudo se anotas livros profissionais ou pessoais.
+
+## Exportar marcações: cinco caminhos
+
+### 1. Manualmente, do Notebook
+
+Para uma ou duas marcações pontuais, clica no ícone de cópia em `read.amazon.com/notebook`, cola onde precisas. Funciona até atingires o *clipping limit*.
+
+### 2. Manualmente, do My Clippings.txt
+
+Para um livro específico ou uma exportação completa, abre o ficheiro num editor com **Find & Replace** e isola o livro que te interessa. Em VS Code ou Sublime Text, uma expressão regular como `(?s)Os Maias.*?==========` apanha todos os blocos relevantes. Boa solução para uso ocasional.
+
+### 3. Calibre + plugin Annotations
+
+O **Calibre** (o gestor de ebooks gratuito que cobrimos no [guia dedicado](/guias/calibre-enviar-ebooks-para-kindle)) tem um plugin comunitário, **Annotations**, que importa o `My Clippings.txt` e gera um ebook ou um documento com tudo organizado por livro. Funciona, mas o desenvolvimento foi pouco activo nos últimos anos. Bom para arquivar, menos bom para sincronização contínua.
+
+### 4. Apps de terceiros que lêem My Clippings.txt
+
+- **Klib** (macOS, pago, com versão de avaliação) — lê o ficheiro e organiza tudo por livro com pesquisa rápida e exportação para Markdown, CSV, Evernote.
+- **Kindle Mate** (Windows, pago, ~30 €) — equivalente para Windows.
+- **KindleClippings.com** (web, gratuito) — carregas o ficheiro, baixas tudo formatado em Markdown ou CSV. Útil para uma exportação pontual sem instalar nada.
+
+### 5. Readwise (sincronização contínua)
+
+[**Readwise**](https://readwise.io) é um serviço pago (à data de Abril de 2026, ~7-8 €/mês com período de avaliação gratuito) que se liga à tua conta Amazon e:
+
+- Sincroniza automaticamente todas as tuas marcações novas, várias vezes por dia.
+- Envia-as **diariamente por email**, em pequenas doses, para revisão espaçada (técnica de *spaced repetition* aplicada a leituras).
+- Exporta para **Notion, Obsidian, Roam, Logseq, Evernote, Google Docs** e mais 20+ destinos, com sincronização bidirecional em alguns casos.
+- Importa também marcações de iBooks, Pocket, Instapaper, Hypothesis, Twitter (X), podcasts via Airr/Snipd, e PDFs.
+
+É a solução que recomendamos a quem lê regularmente e quer um sistema de gestão de conhecimento. O custo justifica-se a partir de uns 10-12 livros por ano.
+
+> **Nota histórica:** existiu durante anos um *bookmarklet* gratuito chamado **Bookcision** que extraía marcações da página do Notebook em JSON, Markdown ou CSV. A Amazon mudou a estrutura da página em 2023-2024 e o script deixou de funcionar de forma fiável. Continua útil para alguns livros antigos, mas não conta com ele como solução geral.
+
+## Sincronizar com Notion, Obsidian, Roam ou Logseq
+
+A pergunta mais comum no email do site: "como passo as minhas marcações Kindle para o Notion (ou Obsidian)?". Em 2026, há essencialmente três caminhos:
+
+1. **Readwise (recomendado).** Configuras a integração com Notion ou o plugin oficial para Obsidian, e cada marcação nova aparece na tua base como uma nova página/bloco, com título do livro, autor, localização, e a tua nota. Suporta templates personalizáveis.
+2. **Exportação manual em Markdown** via Klib, Kindle Mate ou KindleClippings.com, e arrastar para a pasta do Obsidian. Bom para arquivos antigos; mau para uso contínuo.
+3. **Webhook do Readwise + Zapier/Make** para casos avançados (criar uma página Notion por livro, com propriedades específicas).
+
+Para o **Notion**, há também integrações pagas standalone como [Notero](https://github.com/dvanoni/notero) ou [Tally](https://tally.so), mas exigem configuração e o resultado é geralmente inferior ao Readwise.
+
+## Casos especiais a conhecer
+
+### Kindle Unlimited e Prime Reading
+
+Quando devolves um livro emprestado, **as marcações desaparecem do dispositivo**, mas a Amazon mantém um registo na tua conta. Se voltares a pedir o livro emprestado mais tarde, todas as marcações reaparecem no sítio certo. **Não perdes nada** se exportares antes de devolver — recomendamos copiar para o Readwise ou para o Notion antes do "return".
+
+### Livros emprestados de bibliotecas (OverDrive/Libby)
+
+Em Portugal, o Libby ainda não tem catálogo significativo. Para livros que tenhas conseguido por essa via (ou por outra biblioteca digital): as marcações ficam **só no `My Clippings.txt`** porque o livro não está associado à tua conta Amazon como compra.
+
+### Livros sideloaded (EPUB/PDF próprios)
+
+Mesma lógica do anterior: marcações só no ficheiro local. Para incluir no Readwise sem comprar, há a opção de **upload manual de Markdown**, que aceita texto preparado por ti.
+
+### Notas manuscritas do Scribe
+
+Como referido antes, as notas escritas à mão no Scribe não exportam como texto a não ser que peças ao próprio Scribe para fazer **OCR** (botão *Convert handwriting to text*). Depois disso, podes copiar o texto para o `notebook` ou enviar por email.
+
+## Boas práticas para anotar e rever
+
+Algumas sugestões que recolhemos de leitores intensivos:
+
+- **Marca menos do que pensas que devias.** Sublinhar tudo é o mesmo que não sublinhar nada. A regra prática: 5 a 10 marcações por capítulo, máximo.
+- **Combina marcação com nota curta.** Uma frase isolada daqui a 6 meses pode não dizer nada; uma marcação com a nota "porque é que esta linha contradiz o cap. 3" é ouro.
+- **Define um sistema de cores na app.** Por exemplo: amarelo para citações, azul para argumentos a estudar, rosa para perguntas, laranja para acção pessoal.
+- **Revê semanalmente.** Sexta-feira à noite, 15 minutos no `notebook` ou no email do Readwise. É o que separa "guardei marcações" de "lembro-me do que li".
+- **Exporta para um sistema permanente.** Notion, Obsidian, ou simplesmente uma pasta com ficheiros Markdown. As marcações no Kindle são úteis para guardar; um cérebro digital fora da Amazon é o que as torna úteis daqui a 5 anos.
+
+## Perguntas frequentes
+
+**As marcações sincronizam entre o Kindle e a app do telemóvel?**
+Sim, em livros associados à mesma conta Amazon. Se não sincronizar, vai a `Definições → Sincronizar dispositivo` no Kindle, ou desliga e liga o Wi-Fi.
+
+**Posso ter marcações de cores diferentes no Kindle?**
+Não. No dispositivo Kindle (e-ink), todas as marcações aparecem como sublinhado neutro. Na **app** Kindle (iOS/Android/PC) podes escolher entre quatro cores. As cores não exportam todas para o `My Clippings.txt`, são uma comodidade de visualização.
+
+**Quantas marcações posso fazer num livro?**
+Não há limite no número de marcações que **fazes**. O limite é na **exportação/cópia**, definido pelo editor. Tipicamente 10-20% do conteúdo do livro.
+
+**O que acontece às marcações se mudar de conta Amazon?**
+Não migram. As marcações estão associadas à conta, não ao dispositivo. Se mudares de `.es` para `.com` ou criares conta nova, perdes a sincronização (mas o `My Clippings.txt` no dispositivo sobrevive).
+
+**Posso partilhar as minhas marcações com um amigo?**
+Sim, frase a frase, através do botão *Partilhar* (envia por email ou redes sociais). Não há forma nativa de partilhar a coleção completa de um livro com outra pessoa de forma estruturada.
+
+**Como apago todas as marcações de um livro de uma vez?**
+Em `read.amazon.com/notebook`: abre o livro, e tens a opção *Delete all*. Cuidado, é permanente. Em alternativa, podes apagar e voltar a descarregar o livro no dispositivo, o que limpa as marcações locais sem afetar a cloud.
+
+**As marcações em livros do Kindle Unlimited contam para o limite mensal?**
+Não. O limite do KU é apenas no **número de livros emprestados em simultâneo** (10 títulos ao mesmo tempo, sem limite de quantos lês por mês). Marcações são gratuitas em qualquer caso.
+
+**O Goodreads importa as minhas marcações automaticamente?**
+Não. O Goodreads (também propriedade da Amazon) sincroniza apenas o **progresso de leitura** com o Kindle, e isso requer ativação no perfil. Para passar marcações para o Goodreads, copia manualmente do `notebook` ou usa o Readwise (que tem integração).
+
+**Posso anotar PDFs no Kindle?**
+Em qualquer Kindle podes adicionar marcadores. Para **escrever** sobre o PDF e fazer marcações reais, precisas do **Kindle Scribe**, que é o único modelo com stylus.
+
+## Em resumo
+
+- **Marcações** e **notas** são a tua memória de leitor: usa-as.
+- O sítio para vê-las todas num só lado é [read.amazon.com/notebook](https://read.amazon.com/notebook); o teu plano B é o ficheiro `documents/My Clippings.txt`, acessível por cabo USB.
+- Cuidado com o **clipping limit**: nem todas as marcações exportam, e o limite vem do editor.
+- Para uso ocasional, copia manualmente do Notebook ou usa o KindleClippings.com gratuito.
+- Para uso regular e integração com Notion/Obsidian/Roam, o **Readwise** é a solução paga que vale o investimento a partir de 10-12 livros por ano.
+- Em livros sem DRM (Projecto Gutenberg, EPUBs próprios), tudo vive no `My Clippings.txt`. Faz cópia de segurança ocasional.
+
+Para tirar partido total disto, ajuda ter um Kindle confortável de andar contigo, sublinhar não custar uma volta ao quarto. O Paperwhite continua a ser o sweet spot para quem lê todos os dias e quer marcar; o Scribe é a opção para quem combina leitura e tomar notas longas à mão.
+
+<LojasAmazon
+  pesquisa={'kindle paperwhite'}
+  titulo="Ver o Kindle Paperwhite na Amazon"
+  legenda="Para quem quer marcar e tomar notas regularmente, o Paperwhite é a escolha sensata. Preço e disponibilidade em tempo real."
+/>
+
+---
+
+_Última atualização: 27 de abril de 2026. Informação verificada com base na documentação pública da Amazon, no Readwise e em ferramentas comunitárias. Os preços e limites de serviços de terceiros podem mudar — confirma sempre na fonte oficial._
