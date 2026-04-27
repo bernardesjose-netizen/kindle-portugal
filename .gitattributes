@@ -1,0 +1,22 @@
+# Defaults: tudo como texto LF, deixar git detetar binários
+* text=auto eol=lf
+
+# Binários explícitos (forçar para evitar deteção errada)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.avif binary
+*.gif binary
+*.ico binary
+*.svg text eol=lf
+*.pdf binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.zip binary
+
+# Scripts Windows mantêm CRLF (sensíveis a EOL)
+*.cmd text eol=crlf
+*.bat text eol=crlf
