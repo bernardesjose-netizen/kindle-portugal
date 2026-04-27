@@ -25,3 +25,6 @@ pnpm-debug.log*
 # os
 .DS_Store
 Thumbs.db
+
+# Cowork (Claude) - worktrees temporarios e settings locais
+.claude/
