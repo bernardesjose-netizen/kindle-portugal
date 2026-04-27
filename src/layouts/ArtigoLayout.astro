@@ -5,6 +5,7 @@ import DisclosureBanner from '@components/afiliados/DisclosureBanner.astro';
 import OrnamentoFundo from '@components/ui/OrnamentoFundo.astro';
 import { SITE } from '@lib/site';
 import { formatarData } from '@lib/formatters';
+import { imagemParaAsin } from '@lib/asin-images';
 
 type MotivoOrnamento =
   | 'livro-aberto'
@@ -43,6 +44,10 @@ interface Props {
   categoria?: string;
   tempoLeituraMin?: number;
   imagem?: string;
+  /** ASIN do dispositivo a mostrar como hero image junto ao título. */
+  heroAsin?: string;
+  /** Texto alternativo para a hero image. */
+  heroAlt?: string;
   mostrarDisclosure?: boolean;
 }
 
@@ -55,8 +60,12 @@ const {
   categoria,
   tempoLeituraMin,
   imagem,
+  heroAsin,
+  heroAlt,
   mostrarDisclosure = true,
 } = Astro.props;
+
+const heroSrc = heroAsin ? imagemParaAsin(heroAsin, 500) : null;
 
 const articleLd = {
   '@context': 'https://schema.org',
@@ -101,40 +110,65 @@ const pillCategoriaClass = categoria ? PILL_POR_CATEGORIA[categoria] ?? '' : '';
     <OrnamentoFundo motivo={motivoSecundario} posicao="fundo-esquerda" intensidade="subtil" tom="dourado" />
     <Container largura="texto">
       <header class="mb-10">
-        {categoria && <span class={`pill ${pillCategoriaClass}`}>{categoria}</span>}
-        <h1
-          class="mt-4 text-[1.875rem] font-bold leading-[1.15] text-marinho-900 sm:text-4xl lg:text-[2.75rem]"
-          style="font-family: var(--font-serif); letter-spacing: -0.025em;"
-        >
-          {titulo}
-        </h1>
-        <p class="mt-5 text-lg text-marinho-600 sm:text-xl">{descricao}</p>
-        <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-marinho-400">
-          {autor && (
-            <span class="flex items-center gap-2">
-              <span class="flex h-6 w-6 items-center justify-center rounded-full bg-marinho-900 text-[10px] font-bold text-creme-50">
-                {autor.nome.split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase()}
-              </span>
-              Por <strong class="font-semibold text-marinho-700">{autor.nome}</strong>
-            </span>
-          )}
-          <span class="text-marinho-200">·</span>
-          <time datetime={dataPublicacao.toISOString()}>
-            {formatarData(dataPublicacao)}
-          </time>
-          {dataRevisao && dataRevisao.valueOf() !== dataPublicacao.valueOf() && (
-            <>
+        <div class={heroSrc ? 'grid gap-8 sm:grid-cols-[1fr_auto] sm:items-start' : ''}>
+          <div>
+            {categoria && <span class={`pill ${pillCategoriaClass}`}>{categoria}</span>}
+            <h1
+              class="mt-4 text-[1.875rem] font-bold leading-[1.15] text-marinho-900 sm:text-4xl lg:text-[2.75rem]"
+              style="font-family: var(--font-serif); letter-spacing: -0.025em;"
+            >
+              {titulo}
+            </h1>
+            <p class="mt-5 text-lg text-marinho-600 sm:text-xl">{descricao}</p>
+            <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-marinho-400">
+              {autor && (
+                <span class="flex items-center gap-2">
+                  <span class="flex h-6 w-6 items-center justify-center rounded-full bg-marinho-900 text-[10px] font-bold text-creme-50">
+                    {autor.nome.split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase()}
+                  </span>
+                  Por <strong class="font-semibold text-marinho-700">{autor.nome}</strong>
+                </span>
+              )}
               <span class="text-marinho-200">·</span>
-              <time datetime={dataRevisao.toISOString()}>
-                Atualizado a {formatarData(dataRevisao)}
+              <time datetime={dataPublicacao.toISOString()}>
+                {formatarData(dataPublicacao)}
               </time>
-            </>
-          )}
-          {tempoLeituraMin && (
-            <>
-              <span class="text-marinho-200">·</span>
-              <span>{tempoLeituraMin} min de leitura</span>
-            </>
+              {dataRevisao && dataRevisao.valueOf() !== dataPublicacao.valueOf() && (
+                <>
+                  <span class="text-marinho-200">·</span>
+                  <time datetime={dataRevisao.toISOString()}>
+                    Atualizado a {formatarData(dataRevisao)}
+                  </time>
+                </>
+              )}
+              {tempoLeituraMin && (
+                <>
+                  <span class="text-marinho-200">·</span>
+                  <span>{tempoLeituraMin} min de leitura</span>
+                </>
+              )}
+            </div>
+          </div>
+
+          {heroSrc && (
+            <figure class="relative mx-auto w-32 shrink-0 sm:mx-0 sm:w-40 lg:w-48" aria-hidden="true">
+              <div
+                class="absolute -inset-6 rounded-full opacity-50 blur-2xl"
+                style="background: radial-gradient(ellipse at center, rgba(249, 126, 7, 0.30) 0%, rgba(20, 110, 180, 0.15) 50%, transparent 75%);"
+              />
+              <img
+                src={heroSrc}
+                alt={heroAlt ?? ''}
+                loading="eager"
+                decoding="async"
+                width="200"
+                height="240"
+                class="relative block h-auto w-full object-contain"
+                style="mix-blend-mode: multiply; filter: drop-shadow(0 12px 18px rgba(15,26,36,0.22));"
+                referrerpolicy="no-referrer-when-downgrade"
+                onerror="this.style.display='none'"
+              />
+            </figure>
           )}
         </div>
         <div class="separador-dourado !mx-0 !mt-7 !mb-0" />

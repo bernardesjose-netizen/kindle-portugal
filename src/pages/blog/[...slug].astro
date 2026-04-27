@@ -10,9 +10,31 @@ export async function getStaticPaths() {
   }));
 }
 
+// Mapa slug → ASIN do dispositivo a usar como hero image junto ao título.
+// Cobre o catálogo Kindle e Kobo. Fallback Paperwhite.
+const heroPorPost: Record<string, { asin: string; alt: string }> = {
+  'kindle-no-amazon-warehouse': {
+    asin: 'B0CFPWLGF2',
+    alt: 'Kindle Paperwhite, modelo frequente no Amazon Warehouse',
+  },
+  'loja-oficial-kobo-amazon': {
+    asin: 'B0CZXYV8GT',
+    alt: 'Kobo Clara BW, agora vendido pela loja oficial Kobo na Amazon',
+  },
+  'kindle-vs-tablet-melhor-leitura': {
+    asin: 'B0CFPWLGF2',
+    alt: 'Kindle Paperwhite, o e-reader recomendado para leitura prolongada',
+  },
+  'ola-mundo': {
+    asin: 'B0CFPWLGF2',
+    alt: 'Kindle Paperwhite',
+  },
+};
+
 const { artigo } = Astro.props;
 const { Content } = await render(artigo);
 const d = artigo.data;
+const hero = heroPorPost[artigo.id];
 ---
 
 <ArtigoLayout
@@ -21,6 +43,8 @@ const d = artigo.data;
   autor={d.autor}
   dataPublicacao={d.data_publicacao}
   categoria="Blog"
+  heroAsin={hero?.asin}
+  heroAlt={hero?.alt}
 >
   <Content />
 </ArtigoLayout>

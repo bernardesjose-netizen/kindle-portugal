@@ -1,0 +1,147 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Container from '@components/ui/Container.astro';
+
+export async function getStaticPaths() {
+  const perguntas = await getCollection('faq', ({ data }) => !data.rascunho);
+  return perguntas.map((p) => ({
+    params: { slug: p.id },
+    props: { pergunta: p, todas: perguntas },
+  }));
+}
+
+const { pergunta, todas } = Astro.props;
+const { Content } = await render(pergunta);
+const d = pergunta.data;
+
+const categoriasNomes: Record<string, string> = {
+  geral: 'Geral',
+  compra: 'Compra',
+  utilizacao: 'Utilização',
+  ebooks: 'Ebooks',
+  suporte: 'Suporte',
+};
+
+const pillPorCategoria: Record<string, string> = {
+  geral: '',
+  compra: 'pill-marca',
+  utilizacao: 'pill-oceano',
+  ebooks: 'pill-dourado',
+  suporte: 'pill-marinho',
+};
+
+// Outras perguntas da mesma categoria (excluindo a actual)
+const relacionadas = todas
+  .filter((p) => p.id !== pergunta.id && p.data.categoria === d.categoria)
+  .sort((a, b) => a.data.ordem - b.data.ordem)
+  .slice(0, 4);
+
+// Schema.org QAPage
+const qaPageLd = {
+  '@context': 'https://schema.org',
+  '@type': 'QAPage',
+  mainEntity: {
+    '@type': 'Question',
+    name: d.pergunta,
+    text: d.pergunta,
+    answerCount: 1,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: pergunta.body ?? '',
+      author: {
+        '@type': 'Organization',
+        name: 'Kindle Portugal',
+        url: 'https://kindleportugal.com',
+      },
+    },
+  },
+};
+
+// Breadcrumb estruturado
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Início', item: 'https://kindleportugal.com/' },
+    { '@type': 'ListItem', position: 2, name: 'FAQ', item: 'https://kindleportugal.com/faq' },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: d.pergunta,
+      item: `https://kindleportugal.com/faq/${pergunta.id}`,
+    },
+  ],
+};
+---
+
+<BaseLayout
+  titulo={d.pergunta}
+  descricao={`${d.pergunta} Resposta clara e prática para Portugal, em PT-PT.`.slice(0, 155)}
+  tipo="article"
+  jsonLd={[qaPageLd, breadcrumbLd]}
+>
+  <Container largura="texto" classe="py-10 lg:py-14">
+    <nav aria-label="Trilho" class="mb-6 text-xs text-marinho-400">
+      <ol class="flex flex-wrap items-center gap-1.5">
+        <li><a href="/" class="hover:text-marca-600">Início</a></li>
+        <li aria-hidden="true">›</li>
+        <li><a href="/faq" class="hover:text-marca-600">FAQ</a></li>
+        <li aria-hidden="true">›</li>
+        <li class="truncate text-marinho-700" aria-current="page">{categoriasNomes[d.categoria] ?? d.categoria}</li>
+      </ol>
+    </nav>
+
+    <header class="mb-8 border-b border-marinho-100 pb-6">
+      <span class={`pill ${pillPorCategoria[d.categoria] ?? ''}`}>
+        {categoriasNomes[d.categoria] ?? d.categoria}
+      </span>
+      <h1
+        class="mt-3 text-3xl font-bold leading-tight text-marinho-900 sm:text-4xl"
+        style="font-family: var(--font-serif); letter-spacing: -0.02em;"
+      >
+        {d.pergunta}
+      </h1>
+      {d.data_revisao && (
+        <p class="mt-3 text-xs text-marinho-400">
+          Última revisão: <time datetime={d.data_revisao.toISOString()}>
+            {d.data_revisao.toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' })}
+          </time>
+        </p>
+      )}
+    </header>
+
+    <article class="prose prose-pt max-w-none text-marinho-700 prose-headings:text-marinho-900 prose-strong:text-marinho-900 prose-a:text-marca-700 prose-a:underline prose-a:decoration-marca-300 prose-a:underline-offset-2 hover:prose-a:text-marca-600">
+      <Content />
+    </article>
+
+    {relacionadas.length > 0 && (
+      <section class="mt-12 rounded-2xl border border-marinho-100 bg-creme-50 p-6">
+        <h2 class="text-base font-semibold uppercase tracking-wider text-marinho-500">
+          Outras perguntas {categoriasNomes[d.categoria]?.toLowerCase() ?? ''}
+        </h2>
+        <ul class="mt-4 space-y-2">
+          {relacionadas.map((p) => (
+            <li>
+              <a
+                href={`/faq/${p.id}`}
+                class="group flex items-start gap-2 text-marinho-700 hover:text-marca-700"
+              >
+                <span aria-hidden="true" class="mt-1 text-marca-500">›</span>
+                <span class="underline decoration-marinho-200 underline-offset-2 group-hover:decoration-marca-500">
+                  {p.data.pergunta}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <p class="mt-10 text-sm text-marinho-500">
+      <a href="/faq" class="font-semibold text-marca-700 hover:text-marca-800">
+        ← Voltar a todas as perguntas
+      </a>
+    </p>
+  </Container>
+</BaseLayout>
