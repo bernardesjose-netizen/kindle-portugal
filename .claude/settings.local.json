@@ -33,7 +33,11 @@
       "Bash(curl -s -o /tmp/pw.html -w \"HTTP %{http_code}\\\\n\" \"http://localhost:4321/modelos/paperwhite\")",
       "Bash(curl -s -o /tmp/pw.html -w \"HTTP %{http_code} bytes=%{size_download}\\\\n\" \"http://localhost:4321/modelos/paperwhite\")",
       "Bash(where npm *)",
-      "Read(//c/Program Files/nodejs//**)"
+      "Read(//c/Program Files/nodejs//**)",
+      "Bash(where gh *)",
+      "Bash(gh --version)",
+      "Bash(gh auth *)",
+      "WebFetch(domain:kindle-portugal.pages.dev)"
     ]
   }
 }
