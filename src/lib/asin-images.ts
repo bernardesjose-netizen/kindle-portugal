@@ -53,6 +53,8 @@ export const ASIN_IMAGES: Record<string, string> = {
   // Kobo
   B0CZXYV8GT: 'https://m.media-amazon.com/images/I/61DMtK4OPLL._AC_SL1080_.jpg', // Kobo Clara BW
   B0CZY1LRT4: 'https://m.media-amazon.com/images/I/51q5W1jepqL._AC_SL1080_.jpg', // Kobo Clara Colour
+  B0CZXX465Z: 'https://m.media-amazon.com/images/I/61DFpVsTxNL._AC_SL1080_.jpg', // Kobo Libra Colour
+  B0C15G7J3V: 'https://m.media-amazon.com/images/I/81ntO7Zf-sL._AC_SL1500_.jpg', // Kobo Elipsa 2E
 };
 
 /**
