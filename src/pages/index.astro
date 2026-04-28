@@ -7,13 +7,15 @@ import { SITE } from '@lib/site';
 import { formatarPreco } from '@lib/formatters';
 import { imagemParaAsin } from '@lib/asin-images';
 
-const modelos = (await getCollection('modelos', ({ data }) => !data.rascunho))
-  .sort((a, b) => b.data.ano_lancamento - a.data.ano_lancamento)
-  .slice(0, 4);
+const modelosTodos = (await getCollection('modelos', ({ data }) => !data.rascunho))
+  .sort((a, b) => b.data.ano_lancamento - a.data.ano_lancamento);
+const totalModelos = modelosTodos.length;
+const modelos = modelosTodos.slice(0, 4);
 
-const guias = (await getCollection('guias', ({ data }) => !data.rascunho))
-  .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf())
-  .slice(0, 4);
+const guiasTodos = (await getCollection('guias', ({ data }) => !data.rascunho))
+  .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf());
+const totalGuias = guiasTodos.length;
+const guias = guiasTodos.slice(0, 4);
 
 const categoriasGuia: Record<string, string> = {
   comprar: 'Comprar',
@@ -101,13 +103,13 @@ const pillPorCategoria: Record<string, string> = {
             <div>
               <dt class="text-xs font-semibold uppercase tracking-wider text-marca-300">Modelos</dt>
               <dd class="mt-1 text-2xl font-bold text-creme-50" style="font-family: var(--font-serif);">
-                {modelos.length}
+                {totalModelos}
               </dd>
             </div>
             <div>
               <dt class="text-xs font-semibold uppercase tracking-wider text-oceano-300">Guias</dt>
               <dd class="mt-1 text-2xl font-bold text-creme-50" style="font-family: var(--font-serif);">
-                {guias.length}
+                {totalGuias}
               </dd>
             </div>
             <div>
