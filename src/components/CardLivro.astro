@@ -1,0 +1,93 @@
+---
+import { imagemParaAsin } from '@lib/asin-images';
+
+interface Props {
+  asin: string;
+  titulo: string;
+  autor: string;
+  editora: string;
+  ano?: number;
+  marketplace?: 'es' | 'com' | 'uk' | 'de' | 'fr' | 'it';
+  comentario: string;
+  numero: number;
+}
+
+const { asin, titulo, autor, editora, ano, marketplace = 'es', comentario, numero } = Astro.props;
+
+const capaSrc = imagemParaAsin(asin, 500);
+const dominioPorMarketplace: Record<string, string> = {
+  es: 'amazon.es',
+  com: 'amazon.com',
+  uk: 'amazon.co.uk',
+  de: 'amazon.de',
+  fr: 'amazon.fr',
+  it: 'amazon.it',
+};
+const dominio = dominioPorMarketplace[marketplace];
+const linkCompra = `https://www.${dominio}/dp/${asin}/`;
+
+// Os parágrafos do comentário separam-se por linhas em branco no YAML.
+// Aqui dividimos para renderizar com espaçamento adequado.
+const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
+---
+
+<article class="not-prose my-10 overflow-hidden rounded-2xl border border-marinho-100 bg-creme-50 shadow-sm transition-shadow hover:shadow-md">
+  <div class="grid gap-6 p-6 sm:grid-cols-[auto_1fr] sm:gap-8 sm:p-8">
+    <figure class="relative mx-auto w-32 shrink-0 sm:mx-0 sm:w-44">
+      <div
+        class="absolute -inset-4 rounded-full opacity-40 blur-xl"
+        aria-hidden="true"
+        style="background: radial-gradient(ellipse at center, rgba(20, 110, 180, 0.25) 0%, rgba(212, 168, 75, 0.15) 50%, transparent 75%);"
+      />
+      <img
+        src={capaSrc}
+        alt={`Capa de ${titulo}`}
+        loading="lazy"
+        decoding="async"
+        width="200"
+        height="300"
+        class="relative block h-auto w-full rounded-md object-contain"
+        style="filter: drop-shadow(0 8px 14px rgba(15,26,36,0.18));"
+        referrerpolicy="no-referrer-when-downgrade"
+        onerror="this.style.display='none'"
+      />
+    </figure>
+
+    <div class="flex flex-col">
+      <span class="text-xs font-semibold uppercase tracking-wider text-marca-600">
+        Livro {numero} de 3
+      </span>
+      <h2 class="mt-2 text-2xl font-bold leading-tight text-marinho-900" style="font-family: var(--font-serif); letter-spacing: -0.02em;">
+        {titulo}
+      </h2>
+      <p class="mt-1 text-marinho-600">
+        <strong class="font-semibold text-marinho-700">{autor}</strong>
+        <span class="text-marinho-300"> · </span>
+        {editora}
+        {ano && (
+          <>
+            <span class="text-marinho-300"> · </span>
+            {ano}
+          </>
+        )}
+      </p>
+
+      <div class="mt-4 space-y-3 text-marinho-700 leading-relaxed">
+        {paragrafos.map((p) => <p>{p}</p>)}
+      </div>
+
+      <div class="mt-5">
+        <a
+          href={linkCompra}
+          rel="nofollow sponsored"
+          class="inline-flex items-center gap-2 rounded-lg bg-marinho-900 px-4 py-2.5 text-sm font-semibold text-creme-50 transition-colors hover:bg-marca-700"
+        >
+          Comprar para Kindle na Amazon
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</article>
