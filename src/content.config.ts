@@ -12,6 +12,18 @@ const seo = z.object({
   noindex: z.boolean().default(false),
 });
 
+const livroDestaque = z.object({
+  asin: z
+    .string()
+    .regex(/^B0[A-Z0-9]{8}$/, 'ASIN inválido (deve começar por B0 e ter 10 caracteres)'),
+  titulo: z.string(),
+  autor: z.string(),
+  editora: z.string(),
+  ano: z.number().int().min(1900).optional(),
+  marketplace: z.enum(['es', 'com', 'uk', 'de', 'fr', 'it']).default('es'),
+  comentario: z.string().min(50).max(800),
+});
+
 const modelos = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/modelos' }),
   schema: ({ image }) =>
@@ -131,4 +143,23 @@ const faq = defineCollection({
   }),
 });
 
-export const collections = { modelos, guias, reviews, blog, faq };
+const tresLivros = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/tres-livros' }),
+  schema: ({ image }) =>
+    z.object({
+      titulo: z.string(),
+      descricao: z.string().max(200),
+      autor: autor,
+      data_publicacao: z.coerce.date(),
+      livros: z
+        .array(livroDestaque)
+        .length(3, 'A rubrica chama-se Três Livros — exatamente três'),
+      tags: z.array(z.string()).default([]),
+      imagem_hero: image().optional(),
+      imagem_hero_alt: z.string().optional(),
+      rascunho: z.boolean().default(false),
+      seo: seo.optional(),
+    }),
+});
+
+export const collections = { modelos, guias, reviews, blog, faq, tresLivros };
