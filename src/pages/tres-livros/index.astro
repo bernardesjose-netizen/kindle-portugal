@@ -1,69 +1,442 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
+import DisclosureBanner from '@components/afiliados/DisclosureBanner.astro';
 import { getCollection } from 'astro:content';
-import { formatarData } from '@lib/formatters';
+import { SITE } from '@lib/site';
+import { formatarPreco, formatarData } from '@lib/formatters';
+import { imagemParaAsin } from '@lib/asin-images';
 import { urlCapaLivro } from '@lib/capa-livro';
 
-const posts = (await getCollection('tresLivros', ({ data }) => !data.rascunho)).sort(
-  (a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf(),
-);
+const modelosTodos = (await getCollection('modelos', ({ data }) => !data.rascunho))
+  .sort((a, b) => b.data.ano_lancamento - a.data.ano_lancamento);
+const totalModelos = modelosTodos.length;
+const modelos = modelosTodos.slice(0, 4);
+
+const guiasTodos = (await getCollection('guias', ({ data }) => !data.rascunho))
+  .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf());
+const totalGuias = guiasTodos.length;
+const guias = guiasTodos.slice(0, 4);
+
+const tresLivrosTodos = (await getCollection('tresLivros', ({ data }) => !data.rascunho))
+  .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf());
+const ultimoTresLivros = tresLivrosTodos[0];
+
+const categoriasGuia: Record<string, string> = {
+  comprar: 'Comprar',
+  utilizar: 'Utilizar',
+  'converter-e-enviar': 'Converter e enviar',
+  ebooks: 'Ebooks',
+  problemas: 'Resolver problemas',
+  comparacoes: 'Comparações',
+};
+
+const caixaPorCategoria: Record<string, string> = {
+  comprar: 'caixa-marca',
+  utilizar: 'caixa-oceano',
+  'converter-e-enviar': 'caixa-salvia',
+  ebooks: 'caixa-dourado',
+  problemas: 'caixa-ambar',
+  comparacoes: 'caixa-marinho',
+};
+
+const pillPorCategoria: Record<string, string> = {
+  comprar: '',
+  utilizar: 'pill-oceano',
+  'converter-e-enviar': 'pill-salvia',
+  ebooks: 'pill-dourado',
+  problemas: 'pill-ambar',
+  comparacoes: 'pill-marinho',
+};
 ---
 
-<BaseLayout
-  titulo="Três Livros"
-  descricao="Sugestões semanais de três livros em português europeu para Kindle. Editoras portuguesas, autores nacionais, traduções PT-PT."
->
-  <section class="relative overflow-hidden border-b-4 border-dourado-500 bg-gradient-to-br from-marinho-900 via-oceano-800 to-marinho-800 text-creme-50">
+<BaseLayout titulo={SITE.nome} descricao={SITE.descricao}>
+  <!-- HERO — fundo escuro Amazon-style com acentos laranja + azul -->
+  <section class="relative overflow-hidden border-b-4 border-marca-500 bg-gradient-to-br from-marinho-900 via-marinho-800 to-oceano-900 text-creme-50">
     <div
       aria-hidden="true"
       class="pointer-events-none absolute inset-0"
-      style="background-image: radial-gradient(ellipse at top right, rgb(212 168 75 / 0.30) 0%, transparent 55%), radial-gradient(ellipse at bottom left, rgb(20 110 180 / 0.35) 0%, transparent 50%);"
+      style="background-image: radial-gradient(ellipse at top right, rgb(249 126 7 / 0.22) 0%, transparent 55%), radial-gradient(ellipse at bottom left, rgb(20 110 180 / 0.35) 0%, transparent 50%);"
     />
-    <Container largura="normal" classe="relative z-10 py-14">
-      <span class="inline-flex items-center gap-1 rounded-full border border-dourado-400/40 bg-dourado-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-dourado-400">
-        Rubrica semanal
-      </span>
-      <h1 class="mt-3 text-3xl font-bold text-creme-50 md:text-4xl" style="font-family: var(--font-serif);">
-        Três Livros
-      </h1>
-      <p class="mt-3 max-w-2xl text-oceano-100/90">
-        Todas as semanas, três livros em português europeu para o seu Kindle. Editoras portuguesas, autores nacionais, traduções feitas em Portugal. Tudo o que a Kindle Store mistura connosco e que aqui ajudamos a separar.
-      </p>
+    <Container largura="normal" classe="relative z-10 py-16 sm:py-20 md:py-24">
+      <div class="grid items-center gap-12 lg:grid-cols-[1.6fr_1fr] lg:gap-16">
+        <div>
+          <span class="inline-flex items-center gap-1 rounded-full border border-marca-400/40 bg-marca-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-marca-300">
+            Em português europeu
+          </span>
+          <h1
+            class="mt-5 text-[2rem] font-bold leading-[1.1] text-creme-50 sm:text-5xl lg:text-[3.5rem]"
+            style="letter-spacing: -0.035em;"
+          >
+            Tudo sobre <span class="relative inline-block text-marca-400">
+              Kindle
+              <svg
+                aria-hidden="true"
+                class="absolute -bottom-2 left-0 w-full"
+                viewBox="0 0 200 12"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M2 9 Q 50 2, 100 7 T 198 5"
+                  stroke="#ffbc4a"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  fill="none"
+                  opacity="0.9"
+                />
+              </svg>
+            </span> e ebooks em Portugal.
+          </h1>
+          <p class="mt-6 text-lg text-oceano-100/90 sm:text-xl">
+            Reviews honestas, guias passo-a-passo e dicas práticas, desde a escolha do modelo até
+            enviar os teus ebooks, converter formatos e encontrar livros em <strong class="font-semibold text-creme-50">português europeu</strong>.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="/modelos" class="btn-marca">
+              Ver modelos de Kindle
+              <span aria-hidden="true">→</span>
+            </a>
+            <a
+              href="/guias/ebooks-em-portugues-amazon-kindle"
+              class="inline-flex items-center gap-2 rounded-[0.625rem] border border-oceano-300/40 bg-oceano-500/20 px-6 py-3 font-semibold text-creme-50 backdrop-blur transition hover:-translate-y-0.5 hover:border-oceano-200/70 hover:bg-oceano-500/30"
+            >
+              Guia: Ebooks em PT-PT
+            </a>
+          </div>
+
+          <dl class="mt-14 grid max-w-2xl grid-cols-3 gap-6 border-t border-oceano-400/30 pt-8">
+            <div>
+              <dt class="text-xs font-semibold uppercase tracking-wider text-marca-300">Modelos</dt>
+              <dd class="mt-1 text-2xl font-bold text-creme-50" style="font-family: var(--font-serif);">
+                {totalModelos}
+              </dd>
+            </div>
+            <div>
+              <dt class="text-xs font-semibold uppercase tracking-wider text-oceano-300">Guias</dt>
+              <dd class="mt-1 text-2xl font-bold text-creme-50" style="font-family: var(--font-serif);">
+                {totalGuias}
+              </dd>
+            </div>
+            <div>
+              <dt class="text-xs font-semibold uppercase tracking-wider text-dourado-400">PT-PT</dt>
+              <dd class="mt-1 text-2xl font-bold text-creme-50" style="font-family: var(--font-serif);">100%</dd>
+            </div>
+          </dl>
+        </div>
+
+        <figure class="kindle-perspective relative mx-auto w-full max-w-xs sm:max-w-sm lg:max-w-none">
+          {/* Halo radial: cor + serve de "fundo claro" para o multiply funcionar sem moldura visível */}
+          <div
+            aria-hidden="true"
+            class="absolute -inset-8 rounded-full opacity-90 blur-3xl sm:-inset-12"
+            style="background: radial-gradient(ellipse at 50% 50%, rgba(255, 247, 235, 0.55) 0%, rgba(249, 126, 7, 0.40) 30%, rgba(20, 110, 180, 0.25) 60%, transparent 80%);"
+          />
+
+          {/* Pedestal: sombra elíptica suave por baixo do aparelho */}
+          <div
+            aria-hidden="true"
+            class="absolute bottom-2 left-1/2 h-6 w-3/5 -translate-x-1/2 rounded-full opacity-50 blur-xl"
+            style="background: radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, transparent 70%);"
+          />
+
+          <a
+            href="/modelos/paperwhite"
+            class="kindle-tilt relative block"
+            aria-label="Ver Kindle Paperwhite"
+          >
+            <img
+              src="https://m.media-amazon.com/images/I/61RI4fvXHqL._AC_SL1000_.jpg"
+              alt="Kindle Paperwhite, o modelo recomendado para a maioria dos leitores"
+              loading="eager"
+              decoding="async"
+              width="500"
+              height="500"
+              class="kindle-img mx-auto block h-auto max-h-72 w-auto object-contain sm:max-h-80 lg:max-h-[26rem]"
+              referrerpolicy="no-referrer-when-downgrade"
+              onerror="this.onerror=null;this.src='/placeholder-amazon.svg'"
+            />
+          </a>
+
+          <figcaption class="relative mt-5 text-center">
+            <span class="inline-flex items-center gap-1 rounded-full border border-marca-400/40 bg-marca-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-marca-300">
+              Recomendado
+            </span>
+            <p class="mt-2 text-xs font-semibold text-creme-100/70" style="font-family: var(--font-serif);">
+              Kindle Paperwhite
+            </p>
+          </figcaption>
+        </figure>
+      </div>
     </Container>
   </section>
 
-  <Container largura="normal" classe="py-14">
-    {posts.length === 0 ? (
-      <p class="text-marinho-600">Ainda não há posts publicados nesta rubrica.</p>
-    ) : (
-      <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {posts.map((p) => {
-          const capa1 = urlCapaLivro(p.data.livros[0].asin, 'pequeno');
-          const capa2 = urlCapaLivro(p.data.livros[1].asin, 'pequeno');
-          const capa3 = urlCapaLivro(p.data.livros[2].asin, 'pequeno');
-          return (
-            <li class="group">
-              <a href={`/tres-livros/${p.id}`} class="block">
-                <div class="relative mb-4 grid grid-cols-3 gap-2 rounded-xl bg-gradient-to-br from-marinho-50 to-creme-100 p-4 transition-transform group-hover:-translate-y-1">
-                  <img src={capa1} alt={`Capa de ${p.data.livros[0].titulo}`} loading="lazy" decoding="async" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="no-referrer-when-downgrade" onerror="this.style.display='none'" />
-                  <img src={capa2} alt={`Capa de ${p.data.livros[1].titulo}`} loading="lazy" decoding="async" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="no-referrer-when-downgrade" onerror="this.style.display='none'" />
-                  <img src={capa3} alt={`Capa de ${p.data.livros[2].titulo}`} loading="lazy" decoding="async" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="no-referrer-when-downgrade" onerror="this.style.display='none'" />
-                </div>
-                <h2 class="text-lg font-semibold leading-snug text-marinho-900 group-hover:text-marca-600">
-                  {p.data.titulo}
-                </h2>
-                <p class="mt-2 text-sm text-marinho-600">{p.data.descricao}</p>
-                <p class="mt-2 text-xs text-marinho-400">
-                  <time datetime={p.data.data_publicacao.toISOString()}>
-                    {formatarData(p.data.data_publicacao)}
-                  </time>
-                </p>
+  {modelos.length > 0 && (
+    <section class="bg-creme-50">
+      <Container largura="normal" classe="py-16">
+        <div class="mb-8 flex items-end justify-between">
+          <div>
+            <span class="pill pill-marinho">Modelos</span>
+            <h2 class="mt-3 text-3xl font-bold text-marinho-900 md:text-4xl" style="letter-spacing: -0.025em;">
+              Modelos em destaque
+            </h2>
+            <p class="mt-2 text-marinho-600">Os Kindles atualmente à venda para Portugal.</p>
+          </div>
+          <a
+            href="/modelos"
+            class="hidden shrink-0 text-sm font-semibold text-marca-600 hover:text-marca-700 sm:inline-flex"
+          >
+            Ver todos →
+          </a>
+        </div>
+        <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {modelos.map((m, i) => {
+            const caixas = ['caixa-marinho', 'caixa-oceano', 'caixa-dourado', 'caixa-marca'];
+            const pills = ['pill-marinho', 'pill-oceano', 'pill-dourado', 'pill'];
+            const imgSrc = m.data.asin ? imagemParaAsin(m.data.asin, 500) : null;
+            return (
+              <li class={`caixa ${caixas[i % 4]} group relative overflow-hidden`}>
+                <a href={`/modelos/${m.id}`} class="block p-5">
+                  <span class={`pill ${pills[i % 4]}`}>{m.data.ano_lancamento}</span>
+                  {imgSrc && (
+                    <div class="mt-4 flex h-36 items-center justify-center" aria-hidden="true">
+                      <img
+                        src={imgSrc}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        width="160"
+                        height="160"
+                        class="block max-h-36 w-auto object-contain transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-105"
+                        style="mix-blend-mode: multiply; filter: drop-shadow(0 8px 12px rgba(15,26,36,0.15));"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        onerror="this.style.display='none'"
+                      />
+                    </div>
+                  )}
+                  <h3
+                    class="mt-4 text-xl font-bold leading-tight text-marinho-900 transition-colors group-hover:text-marca-700"
+                    style="font-family: var(--font-serif);"
+                  >
+                    {m.data.nome}
+                  </h3>
+                  <p class="mt-2 line-clamp-3 text-sm text-marinho-600">{m.data.descricao_curta}</p>
+                  {m.data.preco_referencia_eur && (
+                    <p class="mt-4 border-t border-marinho-100 pt-3 text-sm">
+                      <span class="text-marinho-400">a partir de </span>
+                      <strong class="text-marinho-900">{formatarPreco(m.data.preco_referencia_eur)}</strong>
+                    </p>
+                  )}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </Container>
+    </section>
+  )}
+
+  {ultimoTresLivros && (
+    <section class="relative overflow-hidden border-y border-dourado-200/70 bg-gradient-to-br from-dourado-50 via-creme-50 to-dourado-100/50">
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 opacity-60"
+        style="background-image: radial-gradient(ellipse at 15% 25%, rgb(212 168 75 / 0.18) 0%, transparent 50%), radial-gradient(ellipse at 85% 80%, rgb(249 126 7 / 0.10) 0%, transparent 50%);"
+      />
+      <Container largura="normal" classe="relative z-10 py-16">
+        <div class="mb-8 flex items-end justify-between">
+          <div>
+            <span class="pill pill-dourado">Rubrica semanal</span>
+            <h2 class="mt-3 text-3xl font-bold text-marinho-900 md:text-4xl" style="font-family: var(--font-serif); letter-spacing: -0.025em;">
+              Três Livros para o seu Kindle
+            </h2>
+            <p class="mt-2 max-w-xl text-marinho-600">
+              Sugestões semanais em português europeu. Editoras portuguesas, autores nacionais,
+              traduções PT-PT.
+            </p>
+          </div>
+          <a
+            href="/tres-livros"
+            class="hidden shrink-0 text-sm font-semibold text-marca-600 hover:text-marca-700 sm:inline-flex"
+          >
+            Ver rubrica →
+          </a>
+        </div>
+
+        <article class="group overflow-hidden rounded-2xl border border-dourado-200/60 bg-creme-50/90 shadow-sm backdrop-blur-sm transition-all hover:shadow-md">
+          <a href={`/tres-livros/${ultimoTresLivros.id}`} class="grid gap-8 p-8 md:grid-cols-[auto_1fr] md:items-center md:gap-10 md:p-10">
+            <div class="relative mx-auto w-full max-w-sm md:mx-0 md:w-80 lg:w-96">
+              <div
+                class="absolute -inset-4 rounded-full opacity-40 blur-2xl"
+                aria-hidden="true"
+                style="background: radial-gradient(ellipse at center, rgba(212, 168, 75, 0.45) 0%, rgba(20, 110, 180, 0.20) 60%, transparent 80%);"
+              />
+              <div class="relative grid grid-cols-3 gap-3">
+                {ultimoTresLivros.data.livros.map((livro, i) => (
+                  <img
+                    src={urlCapaLivro(livro.asin, 'medio')}
+                    alt={`Capa de ${livro.titulo}`}
+                    loading="lazy"
+                    decoding="async"
+                    width="200"
+                    height="300"
+                    class="block h-auto w-full rounded object-contain transition-transform duration-500"
+                    style={`filter: drop-shadow(0 8px 14px rgba(15,26,36,0.20)); transform: rotate(${i === 0 ? '-2deg' : i === 1 ? '0deg' : '2deg'}); transform-origin: bottom;`}
+                    referrerpolicy="no-referrer-when-downgrade"
+                    onerror="this.style.display='none'"
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-marca-600">
+                <time datetime={ultimoTresLivros.data.data_publicacao.toISOString()}>
+                  {formatarData(ultimoTresLivros.data.data_publicacao)}
+                </time>
+              </p>
+              <h3
+                class="mt-2 text-2xl font-bold leading-tight text-marinho-900 transition-colors group-hover:text-marca-700 md:text-3xl"
+                style="font-family: var(--font-serif); letter-spacing: -0.02em;"
+              >
+                {ultimoTresLivros.data.titulo}
+              </h3>
+              <p class="mt-4 text-marinho-600">{ultimoTresLivros.data.descricao}</p>
+
+              <ul class="mt-5 space-y-1.5 text-sm text-marinho-700">
+                {ultimoTresLivros.data.livros.map((livro) => (
+                  <li class="flex items-start gap-2">
+                    <span class="mt-2 inline-block h-1 w-1 shrink-0 rounded-full bg-dourado-500" aria-hidden="true" />
+                    <span>
+                      <strong class="font-semibold text-marinho-900">{livro.titulo}</strong>
+                      <span class="text-marinho-500"> — {livro.autor} · {livro.editora}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <p class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-marca-600 group-hover:text-marca-700">
+                Ler edição completa
+                <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+              </p>
+            </div>
+          </a>
+        </article>
+
+        <div class="mt-6 text-center sm:hidden">
+          <a href="/tres-livros" class="text-sm font-semibold text-marca-600 hover:text-marca-700">
+            Ver rubrica completa →
+          </a>
+        </div>
+      </Container>
+    </section>
+  )}
+
+  {guias.length > 0 && (
+    <section class="relative border-y border-oceano-200 bg-gradient-to-br from-oceano-50 via-white to-oceano-50">
+      <Container largura="normal" classe="py-16">
+        <div class="mb-8 flex items-end justify-between">
+          <div>
+            <span class="pill pill-oceano">Guias</span>
+            <h2 class="mt-3 text-3xl font-bold text-oceano-900 md:text-4xl" style="letter-spacing: -0.025em;">
+              Guias recentes
+            </h2>
+            <p class="mt-2 text-oceano-700/80">Passo-a-passo, sem floreados.</p>
+          </div>
+          <a
+            href="/guias"
+            class="hidden shrink-0 text-sm font-semibold text-oceano-600 hover:text-oceano-700 sm:inline-flex"
+          >
+            Ver todos →
+          </a>
+        </div>
+        <ul class="grid gap-6 md:grid-cols-2">
+          {guias.map((g) => (
+            <li class={`caixa ${caixaPorCategoria[g.data.categoria] ?? 'caixa-marca'} group`}>
+              <a href={`/guias/${g.id}`} class="block p-6">
+                <span class={`pill ${pillPorCategoria[g.data.categoria] ?? ''}`}>
+                  {categoriasGuia[g.data.categoria] ?? g.data.categoria}
+                </span>
+                <h3
+                  class="mt-3 text-2xl font-bold leading-tight text-marinho-900 transition-colors group-hover:text-marca-700"
+                  style="font-family: var(--font-serif);"
+                >
+                  {g.data.titulo}
+                </h3>
+                <p class="mt-3 text-marinho-600">{g.data.descricao}</p>
+                {g.data.tempo_leitura_min && (
+                  <p class="mt-4 text-xs text-marinho-400">
+                    {g.data.tempo_leitura_min} min de leitura
+                  </p>
+                )}
               </a>
             </li>
-          );
-        })}
-      </ul>
-    )}
+          ))}
+        </ul>
+      </Container>
+    </section>
+  )}
+
+  <Container largura="normal">
+    <DisclosureBanner variante="discreta" />
   </Container>
 </BaseLayout>
+
+<style>
+  /* Hero — efeito 3D no Kindle */
+  .kindle-perspective {
+    perspective: 1200px;
+  }
+
+  .kindle-tilt {
+    transition: transform 700ms cubic-bezier(0.2, 0.9, 0.4, 1);
+    transform-style: preserve-3d;
+    will-change: transform;
+    transform: rotateY(-4deg) rotateX(2deg);
+  }
+
+  .kindle-tilt:hover {
+    transform: rotateY(-12deg) rotateX(6deg) translateZ(30px) scale(1.05);
+  }
+
+  .kindle-img {
+    mix-blend-mode: multiply;
+    filter:
+      drop-shadow(0 30px 35px rgba(0, 0, 0, 0.55))
+      drop-shadow(0 12px 18px rgba(20, 110, 180, 0.30));
+    transition: filter 700ms cubic-bezier(0.2, 0.9, 0.4, 1);
+  }
+
+  .kindle-tilt:hover .kindle-img {
+    filter:
+      drop-shadow(0 40px 45px rgba(0, 0, 0, 0.65))
+      drop-shadow(0 18px 25px rgba(249, 126, 7, 0.35));
+  }
+
+  /* Mobile / touch: sem hover, anima leve "respiro" */
+  @media (hover: none) {
+    .kindle-tilt {
+      animation: kindle-breathe 7s ease-in-out infinite;
+    }
+  }
+
+  @keyframes kindle-breathe {
+    0%, 100% {
+      transform: rotateY(-4deg) rotateX(2deg) translateY(0);
+    }
+    50% {
+      transform: rotateY(-6deg) rotateX(3deg) translateY(-10px);
+    }
+  }
+
+  /* Respeitar utilizadores que pediram menos movimento */
+  @media (prefers-reduced-motion: reduce) {
+    .kindle-tilt,
+    .kindle-img {
+      transition: none;
+      animation: none;
+    }
+    .kindle-tilt {
+      transform: none;
+    }
+  }
+</style>
