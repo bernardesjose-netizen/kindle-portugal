@@ -1,0 +1,48 @@
+---
+import { getCollection, render } from 'astro:content';
+import ArtigoLayout from '@layouts/ArtigoLayout.astro';
+import CardLivro from '@components/CardLivro.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('tresLivros', ({ data }) => !data.rascunho);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+
+// O hero usa a capa do primeiro livro do post.
+const heroAsin = d.livros[0].asin;
+const heroAlt = `Capa de ${d.livros[0].titulo}, de ${d.livros[0].autor}`;
+---
+
+<ArtigoLayout
+  titulo={d.titulo}
+  descricao={d.descricao}
+  autor={d.autor}
+  dataPublicacao={d.data_publicacao}
+  categoria="Três Livros"
+  heroAsin={heroAsin}
+  heroAlt={heroAlt}
+>
+  <Content />
+
+  <section aria-label="Os três livros desta edição" class="not-prose">
+    {d.livros.map((livro, i) => (
+      <CardLivro
+        asin={livro.asin}
+        titulo={livro.titulo}
+        autor={livro.autor}
+        editora={livro.editora}
+        ano={livro.ano}
+        marketplace={livro.marketplace}
+        comentario={livro.comentario}
+        numero={i + 1}
+      />
+    ))}
+  </section>
+</ArtigoLayout>
