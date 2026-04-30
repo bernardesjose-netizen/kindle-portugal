@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import ArtigoLayout from '@layouts/ArtigoLayout.astro';
 import CardLivro from '@components/CardLivro.astro';
+import { urlCapaLivro } from '@lib/capa-livro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('tresLivros', ({ data }) => !data.rascunho);
@@ -15,8 +16,10 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 const d = post.data;
 
-// O hero usa a capa do primeiro livro do post.
-const heroAsin = d.livros[0].asin;
+// Hero: capa do primeiro livro do post.
+// Construímos o URL aqui em vez de usar `heroAsin` (que o ArtigoLayout
+// resolve via imagemParaAsin, função que só conhece dispositivos Kindle).
+const heroSrc = urlCapaLivro(d.livros[0].asin, 'grande');
 const heroAlt = `Capa de ${d.livros[0].titulo}, de ${d.livros[0].autor}`;
 ---
 
@@ -26,8 +29,7 @@ const heroAlt = `Capa de ${d.livros[0].titulo}, de ${d.livros[0].autor}`;
   autor={d.autor}
   dataPublicacao={d.data_publicacao}
   categoria="Três Livros"
-  heroAsin={heroAsin}
-  heroAlt={heroAlt}
+  imagem={heroSrc}
 >
   <Content />
 
