@@ -32,6 +32,7 @@ export const NAVEGACAO_PRINCIPAL = [
   { label: 'Modelos', href: '/modelos' },
   { label: 'Guias', href: '/guias' },
   { label: 'Reviews', href: '/reviews' },
+  { label: 'Três Livros', href: '/tres-livros' },
   { label: 'Blog', href: '/blog' },
   { label: 'FAQ', href: '/faq' },
 ] as const;
