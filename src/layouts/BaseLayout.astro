@@ -40,6 +40,7 @@ function inferirMotivo(pathname: string): { principal: MotivoOrnamento; secundar
   if (p === '/modelos') return { principal: 'e-reader', secundario: 'estante' };
   if (p === '/guias') return { principal: 'livro-aberto', secundario: 'pagina-marcada' };
   if (p === '/blog') return { principal: 'pena', secundario: 'pagina-marcada' };
+  if (p === '/tres-livros') return { principal: 'livro-aberto', secundario: 'estante' };
   if (p === '/reviews') return { principal: 'marcador', secundario: 'e-reader' };
   if (p === '/faq') return { principal: 'marcador', secundario: 'livro-aberto' };
   if (p === '/contacto') return { principal: 'pena', secundario: 'marcador' };
@@ -71,6 +72,7 @@ const websiteLd = {
     <meta name="theme-color" content="#0b111a" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" type="application/rss+xml" title={`${SITE.nome} — Blog`} href="/blog/rss.xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE.nome} — Três Livros`} href="/tres-livros/rss.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
