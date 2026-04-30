@@ -1,5 +1,5 @@
 ---
-import { imagemParaAsin } from '@lib/asin-images';
+import { urlCapaLivro } from '@lib/capa-livro';
 
 interface Props {
   asin: string;
@@ -14,7 +14,7 @@ interface Props {
 
 const { asin, titulo, autor, editora, ano, marketplace = 'es', comentario, numero } = Astro.props;
 
-const capaSrc = imagemParaAsin(asin, 500);
+const capaSrc = urlCapaLivro(asin, 'medio');
 const dominioPorMarketplace: Record<string, string> = {
   es: 'amazon.es',
   com: 'amazon.com',
