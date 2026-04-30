@@ -3,7 +3,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
 import { getCollection } from 'astro:content';
 import { formatarData } from '@lib/formatters';
-import { imagemParaAsin } from '@lib/asin-images';
+import { urlCapaLivro } from '@lib/capa-livro';
 
 const posts = (await getCollection('tresLivros', ({ data }) => !data.rascunho)).sort(
   (a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf(),
@@ -39,9 +39,9 @@ const posts = (await getCollection('tresLivros', ({ data }) => !data.rascunho)).
     ) : (
       <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {posts.map((p) => {
-          const capa1 = imagemParaAsin(p.data.livros[0].asin, 300);
-          const capa2 = imagemParaAsin(p.data.livros[1].asin, 300);
-          const capa3 = imagemParaAsin(p.data.livros[2].asin, 300);
+          const capa1 = urlCapaLivro(p.data.livros[0].asin, 'pequeno');
+          const capa2 = urlCapaLivro(p.data.livros[1].asin, 'pequeno');
+          const capa3 = urlCapaLivro(p.data.livros[2].asin, 'pequeno');
           return (
             <li class="group">
               <a href={`/tres-livros/${p.id}`} class="block">
