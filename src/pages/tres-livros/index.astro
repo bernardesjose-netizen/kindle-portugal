@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
+import WookWidget from '@components/afiliados/WookWidget.astro';
 import { getCollection } from 'astro:content';
 import { formatarData } from '@lib/formatters';
 import { urlCapaLivro } from '@lib/capa-livro';
@@ -32,6 +33,13 @@ const posts = (await getCollection('tresLivros', ({ data }) => !data.rascunho)).
       </p>
     </Container>
   </section>
+
+  <Container largura="normal" classe="pt-10">
+    <WookWidget
+      titulo="Mais livros em português, sempre que precisares"
+      legenda="As nossas três sugestões semanais cobrem o essencial. Para tudo o resto — clássicos, novidades, livros em PT-PT que a Kindle Store não mostra — a Wook tem o maior catálogo nacional."
+    />
+  </Container>
 
   <Container largura="normal" classe="py-14">
     {posts.length === 0 ? (

@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
 import DisclosureBanner from '@components/afiliados/DisclosureBanner.astro';
+import WookWidget from '@components/afiliados/WookWidget.astro';
 import { getCollection } from 'astro:content';
 import { SITE } from '@lib/site';
 import { formatarPreco, formatarData } from '@lib/formatters';
@@ -330,6 +331,13 @@ const pillPorCategoria: Record<string, string> = {
       </Container>
     </section>
   )}
+
+  <Container largura="normal" classe="pt-2 pb-8">
+    <WookWidget
+      titulo="Procuras o próximo livro em português?"
+      legenda="A Wook é a maior livraria online portuguesa: catálogo extenso em PT-PT, ebooks compatíveis com Kindle via Send to Kindle, envio para todo o país. Parceiro oficial do Kindle Portugal."
+    />
+  </Container>
 
   {guias.length > 0 && (
     <section class="relative border-y border-oceano-200 bg-gradient-to-br from-oceano-50 via-white to-oceano-50">
