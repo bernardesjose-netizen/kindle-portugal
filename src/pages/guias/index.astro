@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
+import WookWidget from '@components/afiliados/WookWidget.astro';
 import { getCollection } from 'astro:content';
 import { formatarData } from '@lib/formatters';
 import { imagemParaAsin } from '@lib/asin-images';
@@ -138,5 +139,12 @@ const ASIN_FALLBACK = 'B0CFPWLGF2';
         })}
       </ul>
     )}
+  </Container>
+
+  <Container largura="normal" classe="pb-14">
+    <WookWidget
+      titulo="Já tens o Kindle. E os livros em português?"
+      legenda="Estes guias mostram como tirar o máximo do Kindle. Para o catálogo PT-PT — clássicos, novidades, traduções feitas em Portugal — a Wook é o complemento natural."
+    />
   </Container>
 </BaseLayout>
