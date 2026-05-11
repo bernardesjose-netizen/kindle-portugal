@@ -1,0 +1,48 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Público (Portugal) — receita Calibre para o feed público gratuito.
+
+Versão do kindleportugal.com — usa o FeedBurner público (sem login),
+em alternativa à receita oficial do Calibre que exige subscrição premium.
+
+Site: https://www.publico.pt
+Feed: https://feeds.feedburner.com/PublicoRSS
+
+Notas:
+- Cobre apenas artigos gratuitos (os de paywall aparecem truncados).
+- Para conteúdo premium completo, usa a receita oficial 'Publico.PT'
+  do Calibre com as tuas credenciais de subscritor.
+"""
+
+from calibre.web.feeds.news import BasicNewsRecipe
+
+
+class PublicoPT(BasicNewsRecipe):
+    title = 'Público'
+    description = 'Jornal português Público — feed gratuito, artigos abertos'
+    language = 'pt'
+    publisher = 'Público Comunicação Social, S.A.'
+    publication_type = 'newspaper'
+    category = 'notícias, política, economia, cultura, Portugal'
+    masthead_url = 'https://static.publico.pt/files/header/img/publico.png'
+    oldest_article = 2
+    max_articles_per_feed = 40
+    no_stylesheets = True
+    remove_javascript = True
+    use_embedded_content = False
+    encoding = 'utf-8'
+    auto_cleanup = True
+
+    feeds = [
+        ('Últimas notícias', 'https://feeds.feedburner.com/PublicoRSS'),
+    ]
+
+    remove_tags = [
+        dict(name=['script', 'noscript', 'iframe', 'aside', 'footer']),
+        dict(attrs={'class': lambda x: x and any(
+            cls in x for cls in [
+                'social', 'newsletter', 'related', 'comments',
+                'paywall', 'advertisement', 'banner', 'sharing'
+            ])}),
+    ]

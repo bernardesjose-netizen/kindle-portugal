@@ -1,0 +1,57 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Notícias ao Minuto (Portugal) — receita Calibre multi-secção.
+
+Site: https://www.noticiasaominuto.com
+Feeds: 11 secções RSS oficiais
+
+Notas:
+- Site generalista 100% gratuito, sem paywall.
+- Ritmo muito rápido: dezenas de notícias por dia em cada secção.
+- Recomenda-se max_articles_per_feed baixo (15-20) para um "Notícias ao
+  Minuto" diário com dimensão razoável.
+- Para um digest mais conciso, comenta as secções menos importantes.
+"""
+
+from calibre.web.feeds.news import BasicNewsRecipe
+
+
+class NoticiasAoMinuto(BasicNewsRecipe):
+    title = 'Notícias ao Minuto'
+    description = 'Portal de notícias português Notícias ao Minuto'
+    language = 'pt'
+    publisher = 'MyBrand Media'
+    publication_type = 'newspaper'
+    category = 'notícias, atualidade, Portugal'
+    oldest_article = 1
+    max_articles_per_feed = 15
+    no_stylesheets = True
+    remove_javascript = True
+    use_embedded_content = False
+    encoding = 'utf-8'
+    auto_cleanup = True
+
+    feeds = [
+        ('Última hora', 'https://www.noticiasaominuto.com/rss/ultima-hora'),
+        ('País',        'https://www.noticiasaominuto.com/rss/pais'),
+        ('Mundo',       'https://www.noticiasaominuto.com/rss/mundo'),
+        ('Política',    'https://www.noticiasaominuto.com/rss/politica'),
+        ('Economia',    'https://www.noticiasaominuto.com/rss/economia'),
+        ('Desporto',    'https://www.noticiasaominuto.com/rss/desporto'),
+        ('Tech',        'https://www.noticiasaominuto.com/rss/tech'),
+        ('Cultura',     'https://www.noticiasaominuto.com/rss/cultura'),
+        # Comenta as secções abaixo se quiseres uma edição mais curta:
+        ('Fama',        'https://www.noticiasaominuto.com/rss/fama'),
+        ('Lifestyle',   'https://www.noticiasaominuto.com/rss/lifestyle'),
+        ('Auto',        'https://www.noticiasaominuto.com/rss/auto'),
+    ]
+
+    remove_tags = [
+        dict(name=['script', 'noscript', 'iframe', 'aside', 'footer']),
+        dict(attrs={'class': lambda x: x and any(
+            cls in x for cls in [
+                'social', 'newsletter', 'related', 'comments',
+                'advertisement', 'banner', 'tags', 'sharing'
+            ])}),
+    ]

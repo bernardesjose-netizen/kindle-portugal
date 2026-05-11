@@ -1,0 +1,54 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+RTP Notícias (Portugal) — receita Calibre multi-secção.
+
+Site: https://www.rtp.pt/noticias
+Feeds: 8 secções RSS oficiais da RTP
+
+Notas:
+- Serviço público, 100% gratuito, sem paywall.
+- Tom mais sóbrio e formal do que portais comerciais.
+- Inclui Áudio (peças de rádio Antena 1) que não traz texto útil — fica
+  comentado por defeito.
+"""
+
+from calibre.web.feeds.news import BasicNewsRecipe
+
+
+class RTPNoticias(BasicNewsRecipe):
+    title = 'RTP Notícias'
+    description = 'Notícias da Rádio e Televisão de Portugal (serviço público)'
+    language = 'pt'
+    publisher = 'Rádio e Televisão de Portugal'
+    publication_type = 'newspaper'
+    category = 'notícias, serviço público, Portugal'
+    oldest_article = 1
+    max_articles_per_feed = 20
+    no_stylesheets = True
+    remove_javascript = True
+    use_embedded_content = False
+    encoding = 'utf-8'
+    auto_cleanup = True
+
+    feeds = [
+        ('Últimas',  'https://www.rtp.pt/noticias/rss'),
+        ('País',     'https://www.rtp.pt/noticias/rss/pais'),
+        ('Mundo',    'https://www.rtp.pt/noticias/rss/mundo'),
+        ('Política', 'https://www.rtp.pt/noticias/rss/politica'),
+        ('Economia', 'https://www.rtp.pt/noticias/rss/economia'),
+        ('Desporto', 'https://www.rtp.pt/noticias/rss/desporto'),
+        ('Cultura',  'https://www.rtp.pt/noticias/rss/cultura'),
+        # ('Vídeos', 'https://www.rtp.pt/noticias/rss/videos'),
+        # ('Áudios', 'https://www.rtp.pt/noticias/rss/audios'),
+    ]
+
+    remove_tags = [
+        dict(name=['script', 'noscript', 'iframe', 'aside', 'footer', 'video']),
+        dict(attrs={'class': lambda x: x and any(
+            cls in x for cls in [
+                'social', 'newsletter', 'related', 'comments',
+                'advertisement', 'banner', 'tags', 'sharing',
+                'video-wrapper', 'audio-wrapper'
+            ])}),
+    ]

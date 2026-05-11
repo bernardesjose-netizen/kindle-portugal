@@ -1,0 +1,46 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Observador (Portugal) — receita Calibre.
+
+Site: https://observador.pt
+Feed: https://feeds.feedburner.com/obs-ultimas
+
+Notas:
+- Diário online generalista. Combina notícia, análise e opinião.
+- Tem paywall em algumas peças (especialmente Observador Premium).
+  Conteúdo aberto chega normalmente; o restante surge truncado.
+- O título e o lead estão sempre disponíveis mesmo em artigos premium.
+"""
+
+from calibre.web.feeds.news import BasicNewsRecipe
+
+
+class ObservadorPT(BasicNewsRecipe):
+    title = 'Observador'
+    description = 'Diário português Observador — última hora, política e opinião'
+    language = 'pt'
+    publisher = 'Observador On Time, S.A.'
+    publication_type = 'newspaper'
+    category = 'notícias, política, opinião, Portugal'
+    oldest_article = 1
+    max_articles_per_feed = 40
+    no_stylesheets = True
+    remove_javascript = True
+    use_embedded_content = False
+    encoding = 'utf-8'
+    auto_cleanup = True
+
+    feeds = [
+        ('Observador — Últimas', 'https://feeds.feedburner.com/obs-ultimas'),
+    ]
+
+    remove_tags = [
+        dict(name=['script', 'noscript', 'iframe', 'aside', 'footer']),
+        dict(attrs={'class': lambda x: x and any(
+            cls in x for cls in [
+                'social', 'newsletter', 'related', 'comments',
+                'paywall', 'premium', 'advertisement', 'banner',
+                'tags', 'sharing', 'author-meta'
+            ])}),
+    ]
