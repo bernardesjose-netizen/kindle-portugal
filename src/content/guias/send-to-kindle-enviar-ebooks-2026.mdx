@@ -1,0 +1,435 @@
+---
+titulo: "Send to Kindle em 2026: enviar ebooks por email, app, browser e telemóvel"
+descricao: "Os cinco métodos oficiais para enviar EPUB, PDF e DOCX para o Kindle. Limites reais, formatos aceites, casos de uso na vida real e resolução de problemas — tudo em PT-PT."
+categoria: "converter-e-enviar"
+tags:
+  - "Send to Kindle"
+  - "enviar ebooks"
+  - "EPUB para Kindle"
+  - "PDF Kindle"
+  - "email kindle.com"
+  - "app Send to Kindle"
+  - "Amazon Kindle"
+autor:
+  nome: "Kindle Portugal"
+data_publicacao: 2026-05-11
+tempo_leitura_min: 15
+modelos_relacionados:
+  - "paperwhite"
+  - "basico"
+  - "scribe"
+  - "colorsoft"
+seo:
+  titulo_seo: "Send to Kindle 2026: enviar ebooks por email, app e browser"
+  descricao_seo: "Guia em PT-PT do Send to Kindle: enviar EPUB, PDF e DOCX por email, app, website ou telemóvel. Limites, formatos e resolução de problemas."
+---
+
+import { Image } from 'astro:assets';
+import ImagemProduto from '@components/afiliados/ImagemProduto.astro';
+import LojasAmazon from '@components/afiliados/LojasAmazon.astro';
+import fotoCafe from '@/assets/imagens/guias/send-to-kindle-cafe.jpg';
+import fotoAconchego from '@/assets/imagens/guias/send-to-kindle-aconchego.jpg';
+import fotoCama from '@/assets/imagens/guias/send-to-kindle-cama.jpg';
+import fotoJardim from '@/assets/imagens/guias/send-to-kindle-jardim.jpg';
+import fotoProduto from '@/assets/imagens/guias/send-to-kindle-produto.jpg';
+
+O **Send to Kindle** é a forma oficial da Amazon para colocares no Kindle aquilo que não compraste na Kindle Store: o EPUB que descarregaste da Wook, o PDF do trabalho, o manuscrito em Word, o artigo longo do *Público* que querias ler com calma no comboio. Há cinco caminhos para o fazer — email, app de computador, website, extensão de browser e app de telemóvel — e todos chegam ao mesmo destino: o livro aparece em segundos na biblioteca de todos os Kindles ligados à tua conta.
+
+Este guia explica cada método passo a passo, mostra os limites reais (que variam consoante o método escolhido), enumera todos os formatos aceites e termina com a resolução dos problemas que mais frequentemente aparecem na caixa de entrada.
+
+<div class="my-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+  <ImagemProduto asin="B0CP32JG8B" alt="Kindle básico (12.ª geração, 2024)" marketplace="es" formato="pequeno" />
+  <ImagemProduto asin="B0CFPWLGF2" alt="Kindle Paperwhite (12.ª geração, 2024)" marketplace="es" formato="pequeno" />
+  <ImagemProduto asin="B0CX8MQF7R" alt="Kindle Colorsoft" marketplace="es" formato="pequeno" />
+  <ImagemProduto asin="B0CZB5RHWX" alt="Kindle Scribe (3.ª geração, 2024)" marketplace="es" formato="pequeno" />
+</div>
+
+## Em resumo
+
+- **Cinco métodos oficiais e gratuitos:** email para `algo@kindle.com`, **app Send to Kindle** para Windows e Mac, **website** [amazon.es/sendtokindle](https://www.amazon.es/sendtokindle), **extensão para Chrome / Edge** e **app Kindle** no Android / iOS.
+- **Não há app oficial para Linux** — em Linux usa-se o website (limite mais alto) ou o [Calibre](/guias/calibre-enviar-ebooks-para-kindle).
+- **Limite de tamanho varia:** **50 MB** por email e pela app de computador, **200 MB** pelo website. O teu fornecedor de email tem o seu próprio limite (no Gmail são 25 MB).
+- **Formatos aceites:** EPUB, PDF, DOC, DOCX, TXT, RTF, HTM, HTML, JPG, PNG, GIF, BMP. O **MOBI** saiu da lista oficial; usa EPUB.
+- **EPUB e DOCX** chegam convertidos para formato Kindle, com texto fluído e fonte ajustável. **PDF** chega tal qual, com o layout original. Podes pedir conversão do PDF escrevendo **`convert`** no assunto do email.
+- **Passo único de preparação:** autorizar o teu email pessoal na lista de remetentes aprovados — sem isto, nada chega.
+
+## O que é o Send to Kindle (e a mudança que tudo alterou em 2022)
+
+O Send to Kindle nasceu em **2011** como serviço simples de email: cada Kindle ganhou um endereço `@kindle.com` para onde se podiam mandar ficheiros. Durante mais de uma década, funcionou — mas com uma limitação grande: o Kindle não aceitava EPUB, o formato aberto que o resto do mundo dos ebooks usa. Quem comprasse fora da Amazon tinha de converter primeiro para MOBI, no Calibre ou noutra ferramenta.
+
+Em **maio de 2022**, a Amazon mudou a regra silenciosamente: o Send to Kindle passou a aceitar **EPUB nativamente** e a convertê-lo internamente para o formato Kindle (KFX). Foi a mudança mais importante para utilizadores fora do ecossistema fechado da Amazon nos últimos quinze anos. Em paralelo, a empresa investiu nos restantes métodos:
+
+- **2023** — Lançamento da **app Send to Kindle** para Windows e Mac, com arrastar-e-largar e integração no menu de contexto do sistema operativo.
+- **2024** — Retirada gradual do **MOBI** da lista oficial de formatos aceites. Ainda funciona em muitos casos, mas a Amazon recomenda EPUB.
+- **2025** — Limite do website subiu para **200 MB**, quatro vezes mais do que pela app ou pelo email.
+
+Hoje, em 2026, o Send to Kindle é a forma mais simples e legítima de pôr no Kindle qualquer ficheiro teu que não tenha proteção DRM proprietária. Trabalha com ebooks comprados na **Wook**, **Bertrand** ou **Kobo.com**, com PDFs académicos, com DOCX do Word e do Google Docs, e com páginas web (via extensão).
+
+> **DRM e o que fica de fora.** O Send to Kindle não aceita ebooks com **DRM Adobe** — caso de muitos empréstimos de bibliotecas estrangeiras com Libby ou da Adobe Digital Editions. Esses não passam: tens de os ler na app do próprio fornecedor.
+
+## Preparação única (2 minutos, faz uma vez)
+
+Antes de usares qualquer dos cinco métodos, há dois passos que precisas de fazer uma única vez. Demoram menos do que ferver água para o chá.
+
+<figure class="my-8 overflow-hidden rounded-2xl border border-marinho-200 bg-creme-50 shadow-[var(--shadow-suave)]">
+  <div class="aspect-[16/9] flex items-center justify-center bg-gradient-to-br from-creme-100 to-marinho-50">
+    {/* TODO foto: captura de ecrã da página amazon.es/mycd, separador "Dispositivos", com o endereço @kindle.com de um Kindle visível (anonimizado). Formato 1600x900, guardar em src/assets/imagens/guias/send-to-kindle-mycd-endereco.png. */}
+    <span class="text-sm text-marinho-400 italic">[Foto a inserir: ecrã do "Gerir Conteúdo e Dispositivos" com o endereço @kindle.com em destaque]</span>
+  </div>
+  <figcaption class="px-5 py-3 text-xs text-marinho-600 border-t border-marinho-100">
+    O endereço `@kindle.com` de cada dispositivo aparece em amazon.es/mycd → Dispositivos.
+  </figcaption>
+</figure>
+
+### 1. Descobre o endereço `@kindle.com` do teu Kindle
+
+Cada Kindle ligado à tua conta tem um email próprio, gerado pela Amazon — algo como `pedro_silva_42@kindle.com`. É este o destinatário dos teus envios por email. Quem usa a app, o website ou a extensão escolhe o dispositivo no momento; quem envia por email tem de saber este endereço.
+
+- Vai a **[amazon.es/mycd](https://www.amazon.es/mycd)** → **Dispositivos** → clica no teu Kindle.
+- O endereço aparece em **"Email Send-to-Kindle"**. Podes editá-lo, se quiseres algo mais memorável.
+
+Se tens **vários Kindles** na mesma conta (ou Kindles e a app Kindle no telemóvel, que também conta como dispositivo), cada um tem o seu endereço. Envia para o que quiseres receber o livro, ou usa os métodos que escolhem destino automaticamente.
+
+### 2. Autoriza o teu email na lista de remetentes aprovados
+
+Para impedir spam, **só emails autorizados** podem mandar ficheiros para o teu `@kindle.com`. Sem este passo, qualquer anexo é descartado em silêncio.
+
+- Ainda em **[amazon.es/mycd](https://www.amazon.es/mycd)** → **Preferências** → **Configurações de Documentos Pessoais** → **Lista de email pessoal aprovada**.
+- Adiciona aí o(s) email(s) de onde vais enviar: gmail.com, outlook.com, o teu domínio próprio, o email do trabalho.
+
+Se enviares um anexo e não chegar nada ao Kindle, o suspeito habitual é este. Começa sempre por aqui na resolução de problemas.
+
+## Método 1 — Por email (o clássico, funciona em qualquer lado)
+
+O método mais antigo continua a ser o mais flexível: funciona a partir de qualquer dispositivo com email, em qualquer sistema operativo, sem instalações.
+
+**Passos:**
+
+1. Compõe um email **normal** a partir do teu email autorizado.
+2. **Destinatário:** o endereço `@kindle.com` do teu Kindle.
+3. **Assunto:** pode ficar vazio. Excepção importante: se escreveres exatamente **`convert`** no assunto e o anexo for um PDF, a Amazon tenta converter o PDF para formato Kindle (texto fluído) em vez de o entregar tal qual.
+4. **Anexo:** o ficheiro EPUB, PDF, DOCX ou outro formato aceite. Um por email, idealmente.
+5. Envia. Em **1 a 5 minutos** o livro aparece na biblioteca, desde que o Kindle esteja com Wi-Fi ligado.
+
+A Amazon responde com email de confirmação ou de erro. Se algo falhar — formato inválido, ficheiro grande de mais, remetente não autorizado —, recebes aí o motivo.
+
+**Limites a conhecer:**
+
+- **50 MB** por anexo do lado da Amazon.
+- **O teu fornecedor de email** também tem limite: **25 MB** no Gmail, ~33 MB no Outlook gratuito, variável noutros.
+- Para ficheiros maiores, usa o **website** (até 200 MB) ou a **app de computador**.
+
+**Quando este método brilha:**
+
+- Encaminhar um anexo que recebeste no telemóvel.
+- Guardar PDFs do trabalho num computador onde não queres instalar nada.
+- Em Linux, onde não há app oficial.
+
+<figure class="my-8 overflow-hidden rounded-2xl border border-marinho-200 bg-creme-50 shadow-[var(--shadow-suave)]">
+  <Image
+    src={fotoCafe}
+    alt="Mãos a segurar um Kindle sobre um livro de papel aberto, com café e croissant ao fundo"
+    widths={[600, 900, 1200, 1600]}
+    sizes="(min-width: 768px) 800px, 100vw"
+    class="block w-full h-auto"
+    loading="lazy"
+  />
+  <figcaption class="px-5 py-3 text-xs text-marinho-600 border-t border-marinho-100">
+    O email é o método mais universal: o EPUB recebido na sexta-feira chega ao Kindle a tempo do pequeno-almoço de sábado.
+  </figcaption>
+</figure>
+
+## Método 2 — App Send to Kindle para Windows e Mac
+
+A Amazon lançou em **2023** uma app nativa para computador, substituindo a antiga utilidade de linha de comandos. É a forma mais cómoda para quem envia ebooks com regularidade.
+
+**Onde descarregar:** [amazon.com/sendtokindle](https://www.amazon.com/sendtokindle) — instaladores oficiais para **Windows 10/11** e **macOS** (Intel e Apple Silicon).
+
+**Como funciona:**
+
+1. Instalas e inicias sessão com a tua conta Amazon.es.
+2. Aparece uma janela simples com a área "arrastar ficheiros para aqui".
+3. **Arrasta** o EPUB, PDF ou DOCX para a janela. Em alternativa, clica com o botão direito no ficheiro a partir do Explorador do Windows ou do Finder e escolhe **"Send to Kindle"**.
+4. A app pergunta para que **dispositivos** queres enviar (todos os Kindles e apps Kindle da conta aparecem na lista) e mostra os metadados do ficheiro — podes editar **título** e **autor** antes do envio.
+5. Carrega em **Enviar**. Em segundos, o ficheiro sobe e fica disponível em todos os destinos escolhidos.
+
+**Vantagens face ao email:**
+
+- Sem dependência do limite do teu servidor de email.
+- Múltiplos ficheiros em simultâneo (arrasta vários de uma vez).
+- Edição de metadados (título, autor) antes do envio.
+- Aparece no menu do botão direito — dois cliques e está feito.
+
+**Limite:** 50 MB por ficheiro. Para PDFs grandes (manuais técnicos, livros digitalizados), salta para o método seguinte.
+
+## Método 3 — Pelo website (também serve para Linux)
+
+Para quem prefere não instalar nada, está num computador alheio, ou usa Linux.
+
+**Como funciona:**
+
+1. Vai a **[amazon.es/sendtokindle](https://www.amazon.es/sendtokindle)**.
+2. Inicia sessão na tua conta Amazon.
+3. **Arrasta os ficheiros** para a área indicada (ou clica para os escolher do disco).
+4. Escolhe o dispositivo de destino na lista.
+5. Carrega em **Enviar**.
+
+Funciona em qualquer browser moderno: Chrome, Firefox, Safari, Edge, Brave.
+
+**O que torna este método especial:**
+
+- **Limite de 200 MB por ficheiro** — o mais alto de todos os métodos. É o que tens de usar para PDFs académicos extensos ou livros digitalizados com muitas imagens.
+- **Não exige instalação** — bom para computadores partilhados, ou se estás num computador do trabalho com restrições.
+- **Único método oficial em Linux** — a Amazon não tem app para distribuições Linux. Os utilizadores de Ubuntu, Fedora ou Arch passam por aqui.
+
+<figure class="my-8 overflow-hidden rounded-2xl border border-marinho-200 bg-creme-50 shadow-[var(--shadow-suave)]">
+  <Image
+    src={fotoProduto}
+    alt="Vista da traseira de um Kindle com o logótipo Amazon, segurado numa mão"
+    widths={[400, 600, 900]}
+    sizes="(min-width: 768px) 600px, 100vw"
+    class="block w-full h-auto"
+    loading="lazy"
+  />
+  <figcaption class="px-5 py-3 text-xs text-marinho-600 border-t border-marinho-100">
+    O website é o único método com limite de 200 MB por ficheiro — e o único oficial em Linux, onde não existe app dedicada.
+  </figcaption>
+</figure>
+
+## Método 4 — Extensão Send to Kindle para Chrome (e Edge)
+
+A Amazon mantém uma **extensão oficial** que adiciona um botão na barra do browser para enviar páginas web inteiras para o Kindle. Funciona no **Google Chrome** e, por extensão, no **Microsoft Edge** e em qualquer outro browser baseado em Chromium (Brave, Vivaldi, Opera).
+
+**Onde instalar:** procura por **"Send to Kindle for Google Chrome"** na Chrome Web Store, publicada pela Amazon. No Edge usa a mesma fonte através de "Permitir extensões de outras lojas".
+
+**O que faz:**
+
+- **Envia a página atual** como artigo formatado, com tipografia limpa e sem publicidade — semelhante ao *modo leitura* do browser, mas a chegar ao Kindle.
+- **Envia só uma selecção de texto** — útil para guardar um excerto de um artigo, mantendo o link para a fonte.
+- Permite **previsualizar** como o conteúdo vai aparecer no Kindle antes de enviar.
+- Pede **título e autor** para a entrada na biblioteca.
+- Escolhe **um dispositivo específico** ou envia para todos.
+
+**Casos de uso típicos:**
+
+- *Longreads* do **Público**, **Expresso**, **Observador**, **The Atlantic**, **The New Yorker**.
+- *Newsletters* do **Substack** que ficam grandes para ler no computador.
+- Documentação técnica longa que prefere texto fluído em vez de scroll infinito.
+
+**Limitação:** envia conteúdo web, não ficheiros do teu disco. Para ficheiros, usa um dos métodos anteriores.
+
+<figure class="my-8 overflow-hidden rounded-2xl border border-marinho-200 bg-creme-50 shadow-[var(--shadow-suave)]">
+  <Image
+    src={fotoCama}
+    alt="Kindle Paperwhite sobre lençóis brancos, ao lado de um café com latte art e frutos vermelhos"
+    widths={[600, 900, 1200, 1600]}
+    sizes="(min-width: 768px) 800px, 100vw"
+    class="block w-full h-auto"
+    loading="lazy"
+  />
+  <figcaption class="px-5 py-3 text-xs text-marinho-600 border-t border-marinho-100">
+    A extensão do browser é a melhor amiga de quem coleciona artigos para "ler depois". Em vez de abrir 17 separadores, mandas tudo para o Kindle ao longo da semana e lês ao domingo de manhã.
+  </figcaption>
+</figure>
+
+## Método 5 — App Kindle no telemóvel (Android e iOS)
+
+A app **Kindle** para Android e iOS — a mesma que usas para ler livros — sabe também **enviar ficheiros** para a tua conta. Útil quando recebes um EPUB no WhatsApp ou um PDF por email diretamente no telemóvel.
+
+**Android:**
+
+1. No gestor de ficheiros (Files do Google, Samsung Files ou outro), abre o EPUB ou PDF.
+2. Toca em **Partilhar**.
+3. Escolhe **Kindle** na lista de aplicações.
+4. Confirma o destino e envia.
+
+**iOS:**
+
+1. No Mail, Ficheiros ou Safari, toca no botão **Partilhar** (ícone de quadrado com seta para cima).
+2. Se não vires **Kindle** entre as opções, toca em **Mais** e ativa-o.
+3. Toca **Kindle**, escolhe o dispositivo e confirma.
+
+O ficheiro entra na cloud da Amazon e aparece em todos os teus dispositivos como qualquer outro envio. Ideal para o cenário "alguém mandou-me um PDF no WhatsApp e quero ler-lo no Kindle esta noite".
+
+<figure class="my-8 overflow-hidden rounded-2xl border border-marinho-200 bg-creme-50 shadow-[var(--shadow-suave)]">
+  <Image
+    src={fotoJardim}
+    alt="Criança com chapéu de sol a segurar um Kindle Paperwhite no jardim, com relva ao fundo"
+    widths={[600, 900, 1200, 1600]}
+    sizes="(min-width: 768px) 800px, 100vw"
+    class="block w-full h-auto"
+    loading="lazy"
+  />
+  <figcaption class="px-5 py-3 text-xs text-marinho-600 border-t border-marinho-100">
+    Como qualquer envio entra na cloud da conta, o ficheiro fica disponível em todos os dispositivos ligados — incluindo o Kindle dos miúdos no plano familiar.
+  </figcaption>
+</figure>
+
+## Comparação rápida dos cinco métodos
+
+| Método | Plataformas | Limite por ficheiro | Pontos fortes |
+|---|---|---|---|
+| **Email** | Universal | 50 MB (+ limite do teu email) | Funciona em qualquer lado, sem instalações. Único com truque `convert` para PDFs. |
+| **App de computador** | Windows, macOS | 50 MB | Arrastar e largar, menu de contexto, edição de metadados. |
+| **Website** | Qualquer browser (incl. Linux) | **200 MB** | Limite mais alto. Não exige instalação. |
+| **Extensão Chrome / Edge** | Chrome, Edge, Brave, Vivaldi | Páginas web | Envia artigos e seleções de texto, não ficheiros. |
+| **App Kindle no telemóvel** | Android, iOS | 50 MB | Integra com o "Partilhar" do sistema operativo. |
+
+A regra simples: **para ficheiros grandes, website. Para tudo o resto, o que tiveres mais à mão.**
+
+## Formatos aceites e o que esperar de cada um
+
+A lista oficial de formatos aceites pelo Send to Kindle em 2026:
+
+**Ebooks e documentos:** EPUB, PDF, DOC, DOCX, TXT, RTF, HTM, HTML
+**Imagens:** JPG, JPEG, PNG, GIF, BMP
+
+Notas importantes:
+
+- **MOBI saiu da lista oficial.** Ainda funciona em muitos casos por compatibilidade legada, mas a Amazon recomenda converter para EPUB. Se tens biblioteca antiga em MOBI, vale a pena converter no [Calibre](/guias/calibre-enviar-ebooks-para-kindle).
+- **AZW3** não está na lista — é formato interno do Kindle. Não precisas de enviar; já é o formato em que os teus livros lá vivem.
+- **ZIP** é tratado como contentor: a Amazon abre o ZIP e processa os ficheiros suportados que estiverem lá dentro. Útil para enviar uma pasta inteira de uma só vez.
+
+### O que acontece a cada formato quando chega ao Kindle
+
+| Formato | É convertido? | Resultado | Bom para |
+|---|---|---|---|
+| **EPUB** | Sim, para KFX (formato Kindle) | Texto fluído, fonte e tamanho ajustáveis | Ebooks de qualquer loja sem DRM (Wook, Bertrand, Kobo.com, Standard Ebooks). |
+| **DOC / DOCX** | Sim, para formato Kindle | Texto fluído. Títulos, listas e negritos preservados | Manuscritos próprios, relatórios de Word, exportações do Google Docs. |
+| **RTF / TXT / HTML** | Sim, para formato Kindle | Texto fluído, simples | Texto puro, notas, transcrições. |
+| **PDF (entrega normal)** | Não | Layout exato, como num computador. Texto **não ajustável** | PDFs com layout importante (manuais, partituras, livros digitalizados). |
+| **PDF com `convert` no assunto** | Tentativa de conversão | Texto fluído quando possível | PDFs de texto corrido sem formatação crítica. |
+| **JPG / PNG / GIF / BMP** | Não | Aparece como "documento" com a imagem em página única | Mapas, esquemas, capturas de ecrã para consulta. |
+
+## EPUB, PDF e DOCX: qual escolher para cada conteúdo
+
+A pergunta certa não é "que formato envio?" — é "que experiência de leitura quero?". Aqui ficam os casos típicos:
+
+- **Livro de uma loja PT** (Wook, Bertrand) — chega em EPUB sem DRM. Envia diretamente; lê com texto fluído.
+- **Manuscrito teu em Word ou Google Docs** — exporta DOCX e envia. Excelente para reler trabalho antes de submeter, sem imprimir.
+- **Artigo académico em PDF de texto corrido** — manda como PDF com **`convert`** no assunto (por email) para conseguir texto fluído. Se o PDF for complexo, mantém-no como PDF e usa o zoom do Kindle.
+- **Manual técnico com diagramas, fórmulas, tabelas** — mantém PDF. Lê no **[Kindle Scribe](/modelos/scribe)** (10,2″) ou no [Paperwhite](/modelos/paperwhite) (7″). No [Kindle básico](/modelos/basico) de 6″ os PDFs ficam apertados.
+- **Páginas web e *longreads*** — usa a **extensão de browser**, que entrega conteúdo já formatado em texto fluído.
+- **Apresentação PowerPoint** — exporta para PDF primeiro; o Send to Kindle não aceita PPTX.
+
+## Quando o Send to Kindle não chega — e entra o Calibre
+
+O Send to Kindle cobre 80% dos casos para quem só quer pôr ficheiros no Kindle. Para o resto, o **[Calibre](/guias/calibre-enviar-ebooks-para-kindle)** continua imbatível:
+
+- **Conversões avançadas** que o Send to Kindle não faz bem: PDF → EPUB com texto fluído, HTML → EPUB de qualidade, MOBI legado → AZW3.
+- **Limpeza e edição de metadados** em massa (centenas de ficheiros de uma vez, com download de capas e descrições do Amazon, Google Books e Goodreads).
+- **Gestão local da biblioteca** com 500+ livros: o Send to Kindle é serviço de transferência, não gestor.
+- **Descarregador de notícias** (Público, Expresso, The Guardian) entregues em formato ebook diário, automaticamente.
+- **Ficheiros maiores do que 200 MB** que não passam por nenhum método oficial — converte e reduz no Calibre antes de enviar.
+
+A combinação ótima para a maioria das pessoas: **Calibre para gerir a biblioteca e fazer conversões**, **Send to Kindle para a transferência rápida do último passo**, sem cabos.
+
+## Casos reais — como isto se usa no dia a dia
+
+<figure class="my-8 overflow-hidden rounded-2xl border border-marinho-200 bg-creme-50 shadow-[var(--shadow-suave)]">
+  <Image
+    src={fotoAconchego}
+    alt="Kindle Paperwhite com texto em português ao lado de uma chávena de café e um pratinho com macarons coloridos"
+    widths={[600, 900, 1200, 1600]}
+    sizes="(min-width: 768px) 800px, 100vw"
+    class="block w-full h-auto"
+    loading="lazy"
+  />
+  <figcaption class="px-5 py-3 text-xs text-marinho-600 border-t border-marinho-100">
+    O Send to Kindle deixa o Kindle deixar de ser "só o aparelho onde leio o que comprei na Amazon" — passa a ser o leitor de tudo o que tens em formato ebook.
+  </figcaption>
+</figure>
+
+### Sexta à tarde, antes de uma viagem de comboio
+
+Recebes por email três PDFs do trabalho que querias rever no fim de semana. Cada um tem 8 MB. Encaminhas o email para o teu `@kindle.com` (com um dos três como anexo de cada vez). Em 5 minutos, antes mesmo de saíres do escritório, os três relatórios estão no Kindle. Lê-los no Intercidades para Coimbra é melhor do que olhar para o telemóvel.
+
+### Domingo, a preparar férias
+
+Tens cinco EPUBs comprados na Wook e na Bertrand ao longo dos últimos meses, mais um PDF académico que querias ler na praia. Abres a app Send to Kindle no Mac, arrastas os seis ficheiros de uma vez, escolhes "Enviar para todos os dispositivos". Em 30 segundos está feito. Levas o Kindle Paperwhite para a praia da Comporta com semanas de leitura — e bateria que dura toda a viagem.
+
+### Quarta à noite, a fechar um relatório próprio
+
+Acabaste de escrever um relatório de 40 páginas no Google Docs. Antes de o entregar, queres ler tudo de cabeça fresca para apanhar erros. Exportas para DOCX, abres a app Send to Kindle no Windows, edita-se o título para "Relatório Q2 — revisão final", envia-se para o Kindle. Lês a 600 metros do computador, com tipografia decente, sem ver email a piscar.
+
+### Domingo de manhã, ao pequeno-almoço
+
+Tens 12 separadores abertos no Chrome com artigos longos que ias ler "quando tivesses tempo". Com a extensão Send to Kindle, mandas-os um a um para o Kindle ao longo de cinco minutos. À tarde, no sofá, lês os 12 em sequência sem distrações, sem cookies, sem pop-ups, sem ofertas de newsletter.
+
+## Resolução de problemas comuns
+
+**Enviei um EPUB e não chegou ao Kindle.**
+
+- O email de origem está na **lista de emails aprovados**? (passo 2 da preparação inicial). É a causa mais frequente.
+- O Kindle está **ligado e com Wi-Fi**? Os ficheiros entram na cloud da Amazon de imediato, mas só descem para o aparelho quando este se liga à rede.
+- Em **[amazon.es/mycd](https://www.amazon.es/mycd)** → **Conteúdo** → filtra por **Documentos**: o ficheiro está lá? Se sim, sincroniza o Kindle manualmente: toca em cima do ecrã → ícone de definições → **Sincronizar**.
+- A confirmação que a Amazon envia por email referia algum erro? Lê com atenção.
+
+**O PDF chega cortado, minúsculo ou ilegível.**
+
+- É a natureza do formato: o PDF preserva o layout original. Soluções: **rodar o Kindle** para leitura horizontal, **zoom** com dois dedos, ou enviar com **`convert`** no assunto para tentar texto fluído.
+- Para PDFs académicos pesados, o **Kindle Scribe** com ecrã de 10,2″ é o único Kindle realmente confortável. O Paperwhite (7″) é o passo abaixo decente.
+
+**O livro aparece sem capa ou com título estranho.**
+
+- O ficheiro original tinha metadados incompletos. Corrige os metadados antes de enviar (no Calibre, **Editar metadados → Descarregar metadados e capa**) ou usa a app de computador, que permite editar título e autor à hora do envio.
+
+**Ficheiro maior do que o limite.**
+
+- Se for 50–200 MB, usa o **website** em vez do email ou da app.
+- Acima de 200 MB, divide o PDF em capítulos com uma ferramenta gratuita ([pdf24.org](https://tools.pdf24.org)) ou converte para EPUB no Calibre — quase sempre fica 10× mais pequeno.
+
+**O EPUB foi recusado por ter DRM.**
+
+- É o caso de empréstimos de bibliotecas com Adobe Digital Editions, ou de algumas lojas estrangeiras. O Send to Kindle não aceita ficheiros com DRM Adobe. Lê esse livro na **app do fornecedor** (Libby, Adobe Digital Editions) num tablet ou telemóvel.
+
+**Enviei MOBI e dá erro.**
+
+- A Amazon retirou o MOBI da lista oficial em 2024. Converte o ficheiro para EPUB no Calibre (Conversão → AZW3 ou EPUB) e reenvia.
+
+## Perguntas frequentes
+
+**Posso usar Send to Kindle a partir de uma conta Amazon.com em vez de Amazon.es?**
+Sim. O serviço funciona em qualquer loja Amazon onde tenhas conta com Kindle registado. Em Portugal o normal é usar Amazon.es porque é a Kindle Store oficial para PT, mas se tens conta .com herdada de quando moravas no estrangeiro, também funciona.
+
+**Há custo por usar o Send to Kindle?**
+Não. É gratuito. Os antigos Kindles 3G/4G chegaram a ter taxa por transferência via rede móvel; isso foi descontinuado e os Kindles atuais usam apenas Wi-Fi, sem qualquer custo.
+
+**Há limite diário de envios?**
+A Amazon **não publica um limite diário oficial**, mas há limites práticos: enviar centenas de ficheiros em sequência pode disparar proteções anti-spam. Para grandes migrações de biblioteca, espalha por vários dias ou usa o Calibre por USB.
+
+**Os ficheiros enviados ocupam espaço na cloud Amazon?**
+Sim, ficam guardados em **"Documentos Pessoais"** na tua conta, com **5 GB de armazenamento grátis** vitalício para documentos pessoais. Acima disso, pagas armazenamento extra ou apagas o que já não precisas.
+
+**Posso apagar livros enviados?**
+Sim, em [amazon.es/mycd](https://www.amazon.es/mycd) → **Documentos** → seleciona → **Apagar**. Ou diretamente no Kindle, mantém o dedo em cima do livro → **Remover da conta**.
+
+**O Send to Kindle funciona com o Kindle Scribe igual aos outros?**
+Sim. Aliás, PDFs no Scribe são particularmente úteis: podes **anotar à mão** com o stylus por cima de qualquer PDF enviado, e exportar as anotações depois por email. Ver mais no [guia do Scribe](/guias/kindle-scribe-caderno-digital-2026).
+
+**E para Kobo ou outros e-readers?**
+O Send to Kindle é específico Amazon. Para Kobo, a equivalência é a integração com **Pocket** (já incluída no firmware) e a app **Kobo**. Cobrimos os modelos comparáveis nos guias da [Kobo Clara BW](/guias/kobo-clara-bw-alternativa-kindle) e da [Kobo Clara Colour](/guias/kobo-clara-colour-alternativa-kindle).
+
+**Posso usar Send to Kindle sem ter Kindle físico?**
+Sim. Se tens a **app Kindle** no telemóvel, no tablet ou no computador, conta como dispositivo. Envia para essa app e lê aí, sem nunca teres comprado um Kindle. Útil para experimentar antes de comprar.
+
+## Em resumo
+
+- O **Send to Kindle** é a forma oficial e gratuita de pôr os teus ficheiros no Kindle, sem cabos.
+- Configura **uma vez** o endereço `@kindle.com` e a lista de remetentes aprovados — e está feito para sempre.
+- Cinco métodos, cada um com o seu lugar: **email** (universal), **app de computador** (frequência alta), **website** (até 200 MB e único oficial em Linux), **extensão de browser** (páginas web), **app Kindle no telemóvel** (a partir do telemóvel).
+- **EPUB** chega convertido para texto fluído. **PDF** mantém o layout (a menos que peças `convert`). **DOCX** funciona bem para texto corrido.
+- Para conversões complexas e gestão de biblioteca a sério, combina com o **[Calibre](/guias/calibre-enviar-ebooks-para-kindle)**.
+- Em caso de problemas, o suspeito habitual é a **lista de emails aprovados**. Começa sempre por aí.
+
+Com isto configurado, o teu Kindle deixa de ser só "o aparelho onde leio o que compro na Amazon" e passa a aceitar tudo o que tens em formato ebook. É a peça que liga o resto da tua biblioteca digital ao leitor — em casa, no café, no jardim, no sofá ao domingo de manhã.
+
+<LojasAmazon
+  pesquisa={'kindle paperwhite'}
+  titulo="O Kindle certo para receber o que envias"
+  legenda="O Paperwhite é o que melhor equilibra preço, qualidade de ecrã e versatilidade. O Scribe é a escolha óbvia se vais ler muitos PDFs académicos."
+/>
+
+<p class="mt-10 text-xs text-marinho-400 leading-relaxed">
+  Fotos lifestyle: Freestocks, Luana Ribeiro, Adrienne Andersen, Mayara Klingner e Kasra Askari, via <a href="https://www.pexels.com" rel="noopener" class="underline decoration-marinho-200 underline-offset-2 hover:text-marinho-700">Pexels</a> (licença Pexels, uso comercial gratuito).
+</p>
