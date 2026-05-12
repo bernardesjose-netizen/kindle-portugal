@@ -70,25 +70,28 @@ const ASIN_FALLBACK = 'B0CFPWLGF2';
       style="background-image: radial-gradient(ellipse at top right, rgb(20 110 180 / 0.45) 0%, transparent 55%), radial-gradient(ellipse at bottom left, rgb(249 126 7 / 0.15) 0%, transparent 50%);"
     />
     <Container largura="normal" classe="relative z-10 py-14">
-      <span class="inline-flex items-center gap-1 rounded-full border border-oceano-300/40 bg-oceano-400/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-oceano-200">
-        Guias
-      </span>
-      <h1
-        class="mt-3 text-4xl font-bold text-creme-50 md:text-5xl"
-        style="font-family: var(--font-serif); letter-spacing: -0.03em;"
-      >
-        Guias práticos
-      </h1>
-      <p class="mt-4 max-w-2xl text-lg text-oceano-100/90">
-        Passo-a-passo sem floreados. Começa pelo essencial ou salta direto ao problema que queres
-        resolver.
-      </p>
+      <div class="grid items-center gap-10 lg:grid-cols-[1.8fr_1fr] lg:gap-12">
+        <div>
+          <span class="inline-flex items-center gap-1 rounded-full border border-oceano-300/40 bg-oceano-400/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-oceano-200">
+            Guias
+          </span>
+          <h1
+            class="mt-3 text-4xl font-bold text-creme-50 md:text-5xl"
+            style="font-family: var(--font-serif); letter-spacing: -0.03em;"
+          >
+            Guias práticos
+          </h1>
+          <p class="mt-4 max-w-2xl text-lg text-oceano-100/90">
+            Passo-a-passo sem floreados. Começa pelo essencial ou salta direto ao problema que queres
+            resolver.
+          </p>
+        </div>
+        <div class="lg:justify-self-end">
+          <WookWidget variante="escuro" prioridade classe="w-full max-w-sm mx-auto lg:mx-0" />
+        </div>
+      </div>
     </Container>
   </section>
-
-  <Container largura="normal" classe="pt-6">
-    <WookWidget prioridade />
-  </Container>
 
   <Container largura="normal" classe="py-14">
     {guias.length === 0 ? (
