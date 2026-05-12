@@ -86,6 +86,10 @@ const ASIN_FALLBACK = 'B0CFPWLGF2';
     </Container>
   </section>
 
+  <Container largura="normal" classe="pt-6">
+    <WookWidget prioridade />
+  </Container>
+
   <Container largura="normal" classe="py-14">
     {guias.length === 0 ? (
       <p class="text-marinho-600">Ainda não há guias publicados. Volta em breve.</p>
@@ -139,12 +143,5 @@ const ASIN_FALLBACK = 'B0CFPWLGF2';
         })}
       </ul>
     )}
-  </Container>
-
-  <Container largura="normal" classe="pb-14">
-    <WookWidget
-      titulo="Já tens o Kindle. E os livros em português?"
-      legenda="Estes guias mostram como tirar o máximo do Kindle. Para o catálogo PT-PT — clássicos, novidades, traduções feitas em Portugal — a Wook é o complemento natural."
-    />
   </Container>
 </BaseLayout>

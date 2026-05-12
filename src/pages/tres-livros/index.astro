@@ -34,11 +34,8 @@ const posts = (await getCollection('tresLivros', ({ data }) => !data.rascunho)).
     </Container>
   </section>
 
-  <Container largura="normal" classe="pt-10">
-    <WookWidget
-      titulo="Mais livros em português, sempre que precisares"
-      legenda="As nossas três sugestões semanais cobrem o essencial. Para tudo o resto — clássicos, novidades, livros em PT-PT que a Kindle Store não mostra — a Wook tem o maior catálogo nacional."
-    />
+  <Container largura="normal" classe="pt-6">
+    <WookWidget prioridade />
   </Container>
 
   <Container largura="normal" classe="py-14">
