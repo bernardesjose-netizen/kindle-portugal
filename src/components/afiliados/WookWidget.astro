@@ -43,19 +43,19 @@ const fundoCartao =
     : 'border-marinho-200 bg-white text-marinho-900';
 ---
 
-<aside class:list={['relative', classe]} aria-label="Parceria Wook" data-afiliado="wook">
+<aside class:list={['relative', classe]} aria-label="Afiliado Wook" data-afiliado="wook">
   <a
     href={linkUrl}
     rel="sponsored nofollow noopener"
     target="_blank"
     class:list={[
-      'group block rounded-2xl border px-6 py-6 text-center transition-all hover:-translate-y-0.5',
+      'group relative block rounded-2xl border px-6 py-6 text-center transition-all hover:-translate-y-0.5',
       fundoCartao,
     ]}
     style="box-shadow: var(--shadow-media);"
   >
-    <span class="inline-block rounded-full bg-marinho-50 px-2.5 py-0.5 text-[0.625rem] font-bold uppercase tracking-[0.12em] text-marinho-500">
-      Parceria Wook
+    <span class="absolute left-3 top-3 text-[0.625rem] font-semibold uppercase tracking-[0.14em] text-marinho-400">
+      Afiliado
     </span>
 
     <img
@@ -67,10 +67,11 @@ const fundoCartao =
       decoding="async"
       fetchpriority={prioridade ? 'high' : 'auto'}
       class="mx-auto mt-4 block h-auto w-full max-w-[180px]"
+      style="mix-blend-mode: multiply;"
     />
 
-    <p class="mt-3 text-xs font-medium uppercase tracking-wider text-marinho-500">
-      Livros em português europeu
+    <p class="mt-3 text-sm font-medium text-marinho-600">
+      Livros, Puzzles, Bilhetes, Música e muito mais
     </p>
 
     <p class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-marca-600 transition-colors group-hover:text-marca-700">
