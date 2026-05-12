@@ -1,101 +1,98 @@
 ---
-import { WOOK_AID, WOOK_BID_MODULO, urlWidgetModulo } from '@lib/wook';
+import { WOOK_AID } from '@lib/wook';
 
 /**
- * Widget Wook (afiliados) — embute o iframe oficial fornecido pela Wook
- * com um cartão editorial à volta, em vez de o pôr como banner solto.
+ * Banner Wook (afiliado) — versão imagem estática, em vez de iframe widget.
  *
- * Notas:
- * - A JS de auto-resize que vem no embed Wook não funciona (cross-origin
- *   bloqueia o acesso ao DOM do iframe). Usamos altura fixa configurável.
- * - O iframe carrega lazy para não impactar a primeira pintura.
- * - Disclosure de afiliado vem embutida.
+ * Usa o banner gráfico oficial servido por afiliados.wook.pt + o pixel
+ * de tracking de programadeafiliados.wook.pt. É leve, indexável,
+ * sem cross-origin issues.
+ *
+ * Por defeito mostra o banner "WOOK" 600×226 (a_bid=581bfdfb).
+ * Para outros banners do portal Wook, passar `bid`, `imagemUrl`,
+ * `largura` e `altura`.
  */
 
 interface Props {
-  titulo?: string;
-  legenda?: string;
-  /** Altura do iframe em pixels. Ajustar consoante o widget Wook escolhido. */
-  altura?: number;
-  /** Identificador de afiliado Wook (a_aid). Por omissão, lê de env / fallback. */
-  aid?: string;
-  /** Identificador do banner/módulo (a_bid). Por omissão, lê de env / fallback. */
+  /** ID do banner Wook (a_bid). */
   bid?: string;
-  /** Classes Tailwind extra na secção exterior. */
+  /** URL absoluto da imagem do banner. Forçar HTTPS para evitar mixed content. */
+  imagemUrl?: string;
+  /** Largura nativa da imagem em pixels (para o atributo width). */
+  largura?: number;
+  /** Altura nativa da imagem em pixels (para o atributo height). */
+  altura?: number;
+  /** Texto alternativo da imagem. */
+  alt?: string;
+  /** Frase curta de contexto sob o banner (opcional). */
+  legenda?: string;
+  /** Classes extra na secção exterior. */
   classe?: string;
+  /** Carregar com prioridade (sem lazy). Usar quando o banner está acima do fold. */
+  prioridade?: boolean;
 }
 
 const {
-  titulo = 'Livros em português para o teu Kindle',
-  legenda = 'A Wook é a maior livraria online portuguesa, com forte catálogo em PT-PT, incluindo ebooks compatíveis com Kindle via Send to Kindle. Esta é a nossa parceira em Portugal.',
-  altura = 460,
-  aid = WOOK_AID,
-  bid = WOOK_BID_MODULO,
+  bid = '581bfdfb',
+  imagemUrl = 'https://afiliados.wook.pt/accounts/default1/banners/wook_logo_vF_rgb_2.jpg',
+  largura = 600,
+  altura = 226,
+  alt = 'WOOK — livraria online portuguesa',
+  legenda = '',
   classe = '',
+  prioridade = false,
 } = Astro.props;
 
-const widgetUrl = urlWidgetModulo(bid, aid);
+const linkUrl = `https://www.wook.pt/?a_aid=${WOOK_AID}&a_bid=${bid}`;
+const pixelUrl = `https://programadeafiliados.wook.pt/scripts/qgm99l1ix25?a_aid=${WOOK_AID}&a_bid=${bid}`;
 ---
 
-<section
-  class:list={[
-    'relative my-12 overflow-hidden rounded-2xl border border-salvia-200 bg-gradient-to-br from-white via-salvia-50 to-creme-50 p-6 sm:p-8',
-    classe,
-  ]}
-  style="box-shadow: var(--shadow-media);"
-  aria-label="Sugestões da Wook"
+<aside
+  class:list={['my-6 text-center', classe]}
+  aria-label="Banner Wook"
+  data-afiliado="wook"
 >
-  <div
-    aria-hidden="true"
-    class="pointer-events-none absolute -right-12 -top-12 h-48 w-48 rounded-full opacity-40 blur-3xl"
-    style="background: radial-gradient(circle, #8aa593 0%, transparent 70%);"
-  />
-
-  <div class="relative">
-    <span class="pill pill-salvia">Parceiro PT — Wook</span>
-    <h2
-      class="mt-2 text-2xl font-bold text-marinho-900 sm:text-3xl"
-      style="font-family: var(--font-serif); letter-spacing: -0.02em;"
-    >
-      {titulo}
-    </h2>
-    <p class="mt-3 max-w-2xl text-sm text-marinho-600">{legenda}</p>
-  </div>
-
-  <div
-    class="relative mt-6 overflow-hidden rounded-xl bg-white"
-    style="border: 1px solid rgba(15,26,36,0.06);"
+  <a
+    href={linkUrl}
+    rel="sponsored nofollow noopener"
+    target="_blank"
+    class="inline-block max-w-full align-middle transition-opacity hover:opacity-90"
   >
-    <iframe
-      src={widgetUrl}
-      title="Sugestões de livros — Wook"
-      loading="lazy"
-      width="100%"
+    <img
+      src={imagemUrl}
+      alt={alt}
+      width={largura}
       height={altura}
-      frameborder="0"
-      class="block w-full"
-      data-afiliado="wook"
-      referrerpolicy="no-referrer-when-downgrade"
+      loading={prioridade ? 'eager' : 'lazy'}
+      decoding="async"
+      fetchpriority={prioridade ? 'high' : 'auto'}
+      class="mx-auto block h-auto max-w-full"
     />
-  </div>
+  </a>
 
-  <p class="relative mt-4 text-xs text-marinho-400">
-    Conteúdo da nossa parceira{' '}
+  <p class="mt-2 text-xs text-marinho-400">
+    <span class="font-medium text-marinho-500">Conteúdo afiliado</span> ·{' '}
     <a
       href="https://www.wook.pt"
       rel="sponsored nofollow noopener"
       target="_blank"
       class="underline decoration-marinho-200 underline-offset-2 hover:text-marinho-700"
-    >
-      Wook
-    </a>
-    . Compras feitas a partir do widget podem render comissão sem custo adicional para ti. Ver a{' '}
+    >Wook</a>
+    {legenda ? ` · ${legenda}` : ''} ·{' '}
     <a
       href="/divulgacao-afiliados"
       class="underline decoration-marca-400 underline-offset-2 hover:text-marca-600"
-    >
-      divulgação
-    </a>
-    .
+    >divulgação</a>
   </p>
-</section>
+
+  {/* Pixel de tracking 1×1 — mantido fora de viewport para não criar layout-shift */}
+  <img
+    src={pixelUrl}
+    width="1"
+    height="1"
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    style="border:0;position:absolute;left:-9999px;width:1px;height:1px;"
+  />
+</aside>

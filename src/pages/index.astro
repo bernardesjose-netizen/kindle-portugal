@@ -171,6 +171,10 @@ const pillPorCategoria: Record<string, string> = {
     </Container>
   </section>
 
+  <Container largura="normal" classe="pt-6">
+    <WookWidget prioridade />
+  </Container>
+
   {modelos.length > 0 && (
     <section class="bg-creme-50">
       <Container largura="normal" classe="py-16">
@@ -331,13 +335,6 @@ const pillPorCategoria: Record<string, string> = {
       </Container>
     </section>
   )}
-
-  <Container largura="normal" classe="pt-2 pb-8">
-    <WookWidget
-      titulo="Procuras o próximo livro em português?"
-      legenda="A Wook é a maior livraria online portuguesa: catálogo extenso em PT-PT, ebooks compatíveis com Kindle via Send to Kindle, envio para todo o país. Parceiro oficial do Kindle Portugal."
-    />
-  </Container>
 
   {guias.length > 0 && (
     <section class="relative border-y border-oceano-200 bg-gradient-to-br from-oceano-50 via-white to-oceano-50">

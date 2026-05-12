@@ -12,7 +12,11 @@ const WOOK_AID_FALLBACK = '69f36f37be1b4';
 
 export const WOOK_AID: string = env.PUBLIC_WOOK_AID ?? WOOK_AID_FALLBACK;
 
+/** Widget módulo iframe (pesquisa Wook) — `a_bid=3032b7ad`. */
 export const WOOK_BID_MODULO: string = env.PUBLIC_WOOK_BID_MODULO ?? '3032b7ad';
+
+/** Banner gráfico Wook 600×226 — imagem estática, sem iframe. */
+export const WOOK_BID_BANNER: string = env.PUBLIC_WOOK_BID_BANNER ?? '581bfdfb';
 
 /**
  * Acrescenta o parâmetro de afiliado a um URL Wook arbitrário.
