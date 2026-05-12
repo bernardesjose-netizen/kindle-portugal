@@ -2,13 +2,15 @@
 import { WOOK_AID, WOOK_BID_BANNER } from '@lib/wook';
 
 /**
- * Cartão de parceria Wook — versão sem imagem externa.
+ * Cartão de parceria Wook.
  *
- * A imagem oficial em afiliados.wook.pt é hotlink-protected (403 em
- * pedidos vindos de fora do portal de afiliados). Em vez disso,
- * recriamos o wordmark "wook" em texto colorido com as cores da marca,
- * num cartão branco que destaca em fundo escuro (hero) ou claro
- * (conteúdo).
+ * Usa o logotipo oficial alojado em `public/banners/wook-logo.png`
+ * (alojamos localmente porque o `afiliados.wook.pt` tem hotlink
+ * protection — pedidos de fora do portal logado dão 403).
+ *
+ * O cartão é branco em ambas as variantes; a variante `escuro`
+ * apenas escurece a sombra e os textos auxiliares à volta para
+ * destacar contra fundos dark gradient (hero das listings).
  *
  * O pixel 1×1 da `programadeafiliados.wook.pt` continua a contar
  * impressões — esse não tem proteção.
@@ -56,13 +58,16 @@ const fundoCartao =
       Parceria Wook
     </span>
 
-    <div
-      class="mt-4 select-none font-extrabold leading-none tracking-tight"
-      style="font-family: var(--font-serif); font-size: clamp(2.5rem, 6vw, 3.75rem); letter-spacing: -0.02em;"
-      aria-label="wook"
-    >
-      <span style="color: #e94b6b">w</span><span style="color: #f39a2b">o</span><span style="color: #f4d33e">o</span><span style="color: #5bba8e">k</span>
-    </div>
+    <img
+      src="/banners/wook-logo.png"
+      alt="wook"
+      width="600"
+      height="226"
+      loading={prioridade ? 'eager' : 'lazy'}
+      decoding="async"
+      fetchpriority={prioridade ? 'high' : 'auto'}
+      class="mx-auto mt-4 block h-auto w-full max-w-[180px]"
+    />
 
     <p class="mt-3 text-xs font-medium uppercase tracking-wider text-marinho-500">
       Livros em português europeu
