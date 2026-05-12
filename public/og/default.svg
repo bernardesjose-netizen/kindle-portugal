@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b111a"/>
+      <stop offset="0.5" stop-color="#162236"/>
+      <stop offset="1" stop-color="#0e2949"/>
+    </linearGradient>
+    <radialGradient id="glow-orange" cx="0.85" cy="0.1" r="0.5">
+      <stop offset="0" stop-color="#f97e07" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#f97e07" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-blue" cx="0.1" cy="0.95" r="0.55">
+      <stop offset="0" stop-color="#146eb4" stop-opacity="0.40"/>
+      <stop offset="1" stop-color="#146eb4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow-orange)"/>
+  <rect width="1200" height="630" fill="url(#glow-blue)"/>
+
+  <!-- Kindle logo (escalado de 32x32 para 200x200) -->
+  <g transform="translate(120, 215)">
+    <rect width="200" height="200" rx="44" fill="#fefbf5"/>
+    <rect x="44" y="31" width="113" height="138" rx="13" fill="#0b111a"/>
+    <rect x="62" y="56" width="76" height="9" fill="#d6d3c8"/>
+    <rect x="62" y="75" width="76" height="9" fill="#d6d3c8"/>
+    <rect x="62" y="94" width="57" height="9" fill="#d6d3c8"/>
+    <circle cx="100" cy="144" r="10" fill="#f97e07"/>
+  </g>
+
+  <!-- Wordmark: "Kindle Portugal" -->
+  <g transform="translate(360, 290)">
+    <text x="0" y="0" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="100" font-weight="700" fill="#fefbf5" letter-spacing="-3">Kindle</text>
+    <text x="0" y="110" font-family="Fraunces, 'Times New Roman', Georgia, serif" font-size="100" font-weight="700" fill="#f97e07" letter-spacing="-3">Portugal</text>
+  </g>
+
+  <!-- Underline accent (squiggle) -->
+  <path d="M 360 415 Q 460 405 560 410 T 720 408" stroke="#ffbc4a" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.85"/>
+
+  <!-- Tagline -->
+  <text x="120" y="525" font-family="Inter, system-ui, sans-serif" font-size="34" font-weight="500" fill="#cfe1f3" letter-spacing="-0.5">Tudo sobre Kindle e ebooks em Portugal.</text>
+
+  <!-- Domain pill at the bottom -->
+  <g transform="translate(120, 555)">
+    <rect x="0" y="0" width="270" height="44" rx="22" fill="rgba(249, 126, 7, 0.18)" stroke="rgba(249, 126, 7, 0.45)" stroke-width="1"/>
+    <text x="135" y="29" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="600" fill="#ffbc4a" letter-spacing="2">KINDLEPORTUGAL.COM</text>
+  </g>
+</svg>
