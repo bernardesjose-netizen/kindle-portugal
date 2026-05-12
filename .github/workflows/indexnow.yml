@@ -1,0 +1,93 @@
+name: IndexNow ping
+
+# Notifica Bing, Yandex, Naver e Seznam sempre que conteúdo (mdx/md
+# dentro de src/content/) muda em main. Indexa em minutos em vez de
+# dias.
+#
+# A key e o keyLocation correspondem ao ficheiro public/<key>.txt;
+# alterar em ambos os sítios se rodada.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/content/**'
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout (precisa do commit anterior para o diff)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Calcular URLs alteradas e enviar ping
+        env:
+          INDEXNOW_KEY: 6ca1bb380a929ae82fda9f1bee6aef70
+          SITE_HOST: kindleportugal.com
+        run: |
+          set -euo pipefail
+
+          # Apanha ficheiros adicionados ou modificados em src/content/
+          # (exclui apagados, que ja nao existem). git diff entre o
+          # commit anterior e o atual cobre PRs com squash-merge (1
+          # commit por PR).
+          CHANGED=$(git diff --name-only --diff-filter=AM HEAD~1 HEAD -- 'src/content/' \
+            | grep -E '\.(mdx?|md)$' || true)
+
+          if [ -z "$CHANGED" ]; then
+            echo "Sem mudancas relevantes em src/content/. Nada a notificar."
+            exit 0
+          fi
+
+          echo "Ficheiros alterados:"
+          echo "$CHANGED"
+          echo ""
+
+          # Constroi a lista JSON de URLs:
+          #   src/content/guias/foo.mdx -> https://kindleportugal.com/guias/foo
+          URLS=$(echo "$CHANGED" | while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            slug_path=$(echo "$f" | sed -E 's|^src/content/||; s|\.(mdx?|md)$||')
+            printf '"https://%s/%s",' "$SITE_HOST" "$slug_path"
+          done | sed 's/,$//')
+
+          PAYLOAD=$(cat <<EOF
+          {
+            "host": "${SITE_HOST}",
+            "key": "${INDEXNOW_KEY}",
+            "keyLocation": "https://${SITE_HOST}/${INDEXNOW_KEY}.txt",
+            "urlList": [${URLS}]
+          }
+          EOF
+          )
+
+          echo "Payload IndexNow:"
+          echo "$PAYLOAD"
+          echo ""
+
+          echo "A enviar para api.indexnow.org..."
+          STATUS=$(curl -sS -o /tmp/resp.txt -w "%{http_code}" \
+            -X POST "https://api.indexnow.org/IndexNow" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD" \
+            --max-time 15)
+
+          echo "HTTP $STATUS"
+          echo "Resposta:"
+          cat /tmp/resp.txt
+          echo ""
+
+          # IndexNow devolve 200 (sucesso), 202 (aceite, em fila),
+          # ou 422 (URLs invalidos). Tratamos 2xx como OK.
+          if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 300 ]; then
+            echo "OK — IndexNow aceitou."
+          else
+            echo "FALHOU."
+            exit 1
+          fi
