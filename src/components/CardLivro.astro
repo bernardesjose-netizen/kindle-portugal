@@ -1,5 +1,6 @@
 ---
 import { urlCapaLivro } from '@lib/capa-livro';
+import { linkWook } from '@lib/wook';
 
 interface Props {
   asin: string;
@@ -10,9 +11,10 @@ interface Props {
   marketplace?: 'es' | 'com' | 'uk' | 'de' | 'fr' | 'it';
   comentario: string;
   numero: number;
+  urlWook?: string;
 }
 
-const { asin, titulo, autor, editora, ano, marketplace = 'es', comentario, numero } = Astro.props;
+const { asin, titulo, autor, editora, ano, marketplace = 'es', comentario, numero, urlWook } = Astro.props;
 
 const capaSrc = urlCapaLivro(asin, 'medio');
 const dominioPorMarketplace: Record<string, string> = {
@@ -25,6 +27,7 @@ const dominioPorMarketplace: Record<string, string> = {
 };
 const dominio = dominioPorMarketplace[marketplace];
 const linkCompra = `https://www.${dominio}/dp/${asin}/`;
+const linkWookAfiliado = urlWook ? linkWook(urlWook) : undefined;
 
 // Os parágrafos do comentário separam-se por linhas em branco no YAML.
 // Aqui dividimos para renderizar com espaçamento adequado.
@@ -76,7 +79,7 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
         {paragrafos.map((p) => <p>{p}</p>)}
       </div>
 
-      <div class="mt-5">
+      <div class="mt-5 flex flex-wrap gap-3">
         <a
           href={linkCompra}
           rel="nofollow sponsored"
@@ -87,6 +90,18 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
             <path d="M5 12h14M13 5l7 7-7 7"/>
           </svg>
         </a>
+        {linkWookAfiliado && (
+          <a
+            href={linkWookAfiliado}
+            rel="nofollow sponsored"
+            class="inline-flex items-center gap-2 rounded-lg border border-marinho-900 px-4 py-2.5 text-sm font-semibold text-marinho-900 transition-colors hover:bg-marinho-900 hover:text-creme-50"
+          >
+            Comprar na Wook
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7"/>
+            </svg>
+          </a>
+        )}
       </div>
     </div>
   </div>
