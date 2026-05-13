@@ -154,7 +154,7 @@ const tresLivros = defineCollection({
       data_publicacao: z.coerce.date(),
       livros: z
         .array(livroDestaque)
-        .length(3, 'A rubrica chama-se Três Livros — exatamente três'),
+        .length(3, 'A rubrica chama-se Três Ebooks — exatamente três'),
       tags: z.array(z.string()).default([]),
       imagem_hero: image().optional(),
       imagem_hero_alt: z.string().optional(),
