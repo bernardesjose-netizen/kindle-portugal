@@ -1,0 +1,112 @@
+name: Publicar posts agendados
+
+# Todos os dias de manha verifica se algum post de "Tres Ebooks"
+# agendado (rascunho: true) chegou a data de publicacao. Em caso
+# afirmativo, muda para rascunho: false, faz commit/push (o que aciona
+# o deploy do host) e notifica o IndexNow para indexacao rapida.
+#
+# Correr a mao: separador Actions > "Publicar posts agendados" > Run.
+#
+# Para desligar a automacao, basta apagar este ficheiro.
+
+on:
+  schedule:
+    # 06:00 UTC (~07:00 em Portugal). O post fica no ar na manha da
+    # data marcada. O cron corre todos os dias mas so publica quando
+    # ha algo cuja data ja chegou.
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publicar-agendados
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Detetar e publicar posts cuja data ja chegou
+        id: detetar
+        run: |
+          set -euo pipefail
+          SLUGS=$(node scripts/publicar-agendados.mjs)
+          echo "Slugs publicados:"
+          echo "${SLUGS:-(nenhum)}"
+          {
+            echo "slugs<<SLUGS_EOF"
+            echo "$SLUGS"
+            echo "SLUGS_EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Commit e push das alteracoes
+        id: push
+        run: |
+          set -euo pipefail
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Sem alteracoes — nada para publicar hoje."
+            echo "publicou=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/tres-livros
+          git commit -m "Publica automaticamente posts agendados ($(date -u +%Y-%m-%d))"
+          git push
+          echo "publicou=true" >> "$GITHUB_OUTPUT"
+
+      - name: Notificar IndexNow
+        if: steps.push.outputs.publicou == 'true'
+        env:
+          INDEXNOW_KEY: 6ca1bb380a929ae82fda9f1bee6aef70
+          SITE_HOST: kindleportugal.com
+          SLUGS: ${{ steps.detetar.outputs.slugs }}
+        run: |
+          set -euo pipefail
+
+          URLS=$(echo "$SLUGS" | while IFS= read -r s; do
+            [ -z "$s" ] && continue
+            printf '"https://%s/tres-livros/%s",' "$SITE_HOST" "$s"
+          done | sed 's/,$//')
+
+          if [ -z "$URLS" ]; then
+            echo "Sem URLs para notificar."
+            exit 0
+          fi
+
+          PAYLOAD=$(cat <<EOF
+          {
+            "host": "${SITE_HOST}",
+            "key": "${INDEXNOW_KEY}",
+            "keyLocation": "https://${SITE_HOST}/${INDEXNOW_KEY}.txt",
+            "urlList": [${URLS}]
+          }
+          EOF
+          )
+
+          echo "Payload IndexNow:"
+          echo "$PAYLOAD"
+          echo ""
+
+          STATUS=$(curl -sS -o /tmp/resp.txt -w "%{http_code}" \
+            -X POST "https://api.indexnow.org/IndexNow" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD" \
+            --max-time 15)
+
+          echo "HTTP $STATUS"
+          cat /tmp/resp.txt
+          echo ""
+
+          if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 300 ]; then
+            echo "OK — IndexNow aceitou."
+          else
+            echo "FALHOU."
+            exit 1
+          fi
