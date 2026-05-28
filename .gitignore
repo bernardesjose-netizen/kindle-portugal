@@ -10,6 +10,12 @@ node_modules/
 .env.local
 .env.*.local
 
+# credenciais / segredos — NUNCA commitar
+*credentials*.csv
+*-credentials.*
+secrets.*
+*.secret
+
 # logs
 npm-debug.log*
 yarn-debug.log*
