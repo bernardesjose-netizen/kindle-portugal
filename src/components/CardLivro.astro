@@ -1,6 +1,7 @@
 ---
 import { urlCapaLivro } from '@lib/capa-livro';
 import { linkWook } from '@lib/wook';
+import { urlAfiliado } from '@lib/afiliados';
 
 interface Props {
   asin: string;
@@ -26,7 +27,7 @@ const dominioPorMarketplace: Record<string, string> = {
   it: 'amazon.it',
 };
 const dominio = dominioPorMarketplace[marketplace];
-const linkCompra = `https://www.${dominio}/dp/${asin}/`;
+const linkCompra = urlAfiliado(`https://www.${dominio}/dp/${asin}/`);
 const linkWookAfiliado = urlWook ? linkWook(urlWook) : undefined;
 
 // Os parágrafos do comentário separam-se por linhas em branco no YAML.
