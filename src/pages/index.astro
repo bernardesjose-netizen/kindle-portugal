@@ -144,6 +144,22 @@ const pillPorCategoria: Record<string, string> = {
             style="background: radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, transparent 70%);"
           />
 
+          {/* Pill flutuante: chama a atenção para a rubrica semanal Três Ebooks */}
+          {ultimoTresLivros && (
+            <a
+              href="/tres-livros"
+              class="group/nov absolute -top-3 right-0 z-20 inline-flex items-center gap-1.5 rounded-full border border-dourado-400/50 bg-marinho-900/85 px-3 py-1.5 text-xs font-semibold text-creme-50 shadow-lg backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-dourado-400 hover:bg-marinho-900 sm:-right-3 sm:-top-4"
+              aria-label="Três Ebooks: novos livros todas as semanas — ver novidades"
+            >
+              <span class="relative flex h-2 w-2" aria-hidden="true">
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-dourado-400 opacity-75"></span>
+                <span class="relative inline-flex h-2 w-2 rounded-full bg-dourado-400"></span>
+              </span>
+              Novos livros toda a semana
+              <span aria-hidden="true" class="text-dourado-400 transition-transform group-hover/nov:translate-x-0.5">→</span>
+            </a>
+          )}
+
           <a
             href="/modelos/paperwhite"
             class="kindle-tilt relative block"
