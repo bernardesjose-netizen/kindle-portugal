@@ -19,6 +19,10 @@ const guiasTodos = (await getCollection('guias', ({ data }) => !data.rascunho))
 const totalGuias = guiasTodos.length;
 const guias = guiasTodos.slice(0, 4);
 
+const blogTodos = (await getCollection('blog', ({ data }) => !data.rascunho))
+  .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf());
+const ultimoPost = blogTodos[0];
+
 const tresLivrosTodos = (await getCollection('tresLivros', ({ data }) => !data.rascunho))
   .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf());
 const ultimoTresLivros = tresLivrosTodos[0];
@@ -89,7 +93,7 @@ const pillPorCategoria: Record<string, string> = {
             </span> e ebooks em Portugal.
           </h1>
           <p class="mt-6 text-lg text-oceano-100/90 sm:text-xl">
-            Reviews honestas, guias passo-a-passo e dicas práticas, desde a escolha do modelo até
+            Guias passo-a-passo, comparações e dicas práticas, desde a escolha do modelo até
             enviar os teus ebooks, converter formatos e encontrar livros em <strong class="font-semibold text-creme-50">português europeu</strong>.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
@@ -170,6 +174,37 @@ const pillPorCategoria: Record<string, string> = {
       </div>
     </Container>
   </section>
+
+  {ultimoPost && (
+    <Container largura="normal" classe="pt-8">
+      <a
+        href={`/blog/${ultimoPost.id}`}
+        class="group flex flex-col gap-3 rounded-2xl border border-marca-200 bg-gradient-to-r from-marca-50 via-creme-50 to-oceano-50 p-5 transition-all hover:-translate-y-0.5 hover:border-marca-300 hover:shadow-md sm:flex-row sm:items-center sm:gap-5 sm:p-6"
+        aria-label={`Novo no blog: ${ultimoPost.data.titulo}`}
+      >
+        <span class="inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-marca-500 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-sm sm:self-center">
+          <span class="relative flex h-2 w-2" aria-hidden="true">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
+          </span>
+          Novidade
+        </span>
+        <div class="min-w-0 flex-1">
+          <p class="text-xs font-semibold uppercase tracking-wider text-marca-600">Novo no blog</p>
+          <p
+            class="mt-0.5 text-lg font-bold leading-snug text-marinho-900 transition-colors group-hover:text-marca-700"
+            style="font-family: var(--font-serif);"
+          >
+            {ultimoPost.data.titulo}
+          </p>
+        </div>
+        <span class="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-marca-600 group-hover:text-marca-700">
+          Ler agora
+          <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+        </span>
+      </a>
+    </Container>
+  )}
 
   <Container largura="normal" classe="pt-6">
     <WookWidget prioridade />

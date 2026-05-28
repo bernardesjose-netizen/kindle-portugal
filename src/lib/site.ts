@@ -1,8 +1,8 @@
 export const SITE = {
   nome: 'Kindle Portugal',
-  tagline: 'Guias, reviews e dicas sobre Kindle e ebooks em Portugal',
+  tagline: 'Guias, comparações e dicas sobre Kindle e ebooks em Portugal',
   descricao:
-    'O que saber antes de comprar um Kindle em Portugal, como enviar ebooks, conversores, bibliotecas digitais e reviews honestas, em português europeu.',
+    'O que saber antes de comprar um Kindle em Portugal, como enviar ebooks, converter formatos, usar bibliotecas digitais e encontrar livros em português europeu.',
   url: import.meta.env.PUBLIC_SITE_URL ?? 'https://kindleportugal.com',
   idioma: 'pt-PT',
   email: import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'kindleportugal@gmail.com',
@@ -29,9 +29,9 @@ export const AUTOR = {
 } as const;
 
 export const NAVEGACAO_PRINCIPAL = [
+  { label: 'Início', href: '/' },
   { label: 'Modelos', href: '/modelos' },
   { label: 'Guias', href: '/guias' },
-  { label: 'Reviews', href: '/reviews' },
   { label: 'Três Ebooks', href: '/tres-livros' },
   { label: 'Blog', href: '/blog' },
   { label: 'FAQ', href: '/faq' },

@@ -93,30 +93,6 @@ const guias = defineCollection({
     }),
 });
 
-const reviews = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/reviews' }),
-  schema: ({ image }) =>
-    z.object({
-      titulo: z.string(),
-      produto: z.string(),
-      tipo: z.enum(['dispositivo', 'ebook', 'acessorio', 'servico']),
-      classificacao: z.number().min(1).max(5),
-      autor: autor,
-      data_publicacao: z.coerce.date(),
-      data_revisao: z.coerce.date().optional(),
-      pros: z.array(z.string()).min(1),
-      contras: z.array(z.string()).min(1),
-      veredito: z.string(),
-      preco_referencia_eur: z.number().positive().optional(),
-      preco_data: z.coerce.date().optional(),
-      url_amazon: z.string().url().optional(),
-      imagem_hero: image().optional(),
-      imagem_hero_alt: z.string().optional(),
-      rascunho: z.boolean().default(false),
-      seo: seo.optional(),
-    }),
-});
-
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
   schema: ({ image }) =>
@@ -163,4 +139,4 @@ const tresLivros = defineCollection({
     }),
 });
 
-export const collections = { modelos, guias, reviews, blog, faq, tresLivros };
+export const collections = { modelos, guias, blog, faq, tresLivros };

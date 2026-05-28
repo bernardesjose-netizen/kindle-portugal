@@ -41,7 +41,6 @@ function inferirMotivo(pathname: string): { principal: MotivoOrnamento; secundar
   if (p === '/guias') return { principal: 'livro-aberto', secundario: 'pagina-marcada' };
   if (p === '/blog') return { principal: 'pena', secundario: 'pagina-marcada' };
   if (p === '/tres-livros') return { principal: 'livro-aberto', secundario: 'estante' };
-  if (p === '/reviews') return { principal: 'marcador', secundario: 'e-reader' };
   if (p === '/faq') return { principal: 'marcador', secundario: 'livro-aberto' };
   if (p === '/contacto') return { principal: 'pena', secundario: 'marcador' };
   if (p === '/sobre') return { principal: 'livro-aberto', secundario: 'pena' };

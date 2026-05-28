@@ -33,6 +33,57 @@ const pillPorIcone: Record<IconeId, string> = {
   cor: 'pill-coral',
   stylus: 'pill-dourado',
 };
+
+const destaques = [
+  {
+    etiqueta: 'Guias',
+    titulo: 'Guias práticos',
+    texto: 'Enviar ebooks, converter formatos, escolher a capa certa e resolver problemas — passo a passo.',
+    href: '/guias',
+    caixa: 'caixa-oceano',
+    pill: 'pill-oceano',
+  },
+  {
+    etiqueta: 'Comparação',
+    titulo: 'Kindle ou Kobo?',
+    texto: 'A comparação honesta para quem lê sobretudo em português europeu.',
+    href: '/blog/kindle-ou-kobo-livros-portugues-comparacao-2026',
+    caixa: 'caixa-marinho',
+    pill: 'pill-marinho',
+  },
+  {
+    etiqueta: 'Ebooks',
+    titulo: 'Comprar ebooks para Kobo',
+    texto: 'Kobo Store, FNAC, Wook e BiblioLED, com o passo-a-passo do Adobe Digital Editions.',
+    href: '/guias/comprar-ebooks-para-kobo-portugal',
+    caixa: 'caixa-dourado',
+    pill: 'pill-dourado',
+  },
+  {
+    etiqueta: 'Rubrica semanal',
+    titulo: 'Três Ebooks',
+    texto: 'Sugestões semanais em português europeu: editoras e autores nacionais.',
+    href: '/tres-livros',
+    caixa: 'caixa-salvia',
+    pill: 'pill-salvia',
+  },
+  {
+    etiqueta: 'FAQ',
+    titulo: 'Perguntas frequentes',
+    texto: 'Respostas diretas às dúvidas mais comuns sobre Kindle e ebooks em Portugal.',
+    href: '/faq',
+    caixa: 'caixa-marca',
+    pill: 'pill',
+  },
+  {
+    etiqueta: 'Blog',
+    titulo: 'Notícias e análises',
+    texto: 'Contexto, novidades e análises sobre o universo Kindle e a leitura digital.',
+    href: '/blog',
+    caixa: 'caixa-coral',
+    pill: 'pill-coral',
+  },
+] as const;
 ---
 
 <BaseLayout
@@ -132,4 +183,41 @@ const pillPorIcone: Record<IconeId, string> = {
       </ul>
     )}
   </Container>
+
+  <section class="border-t border-marinho-100 bg-creme-100/50">
+    <Container largura="normal" classe="py-14">
+      <div class="mb-8 max-w-2xl">
+        <span class="pill">Explorar</span>
+        <h2
+          class="mt-3 text-3xl font-bold text-marinho-900 md:text-4xl"
+          style="font-family: var(--font-serif); letter-spacing: -0.025em;"
+        >
+          Já escolheste? Há mais para ver
+        </h2>
+        <p class="mt-2 text-marinho-600">
+          O aparelho é só metade. A outra é enchê-lo de bons livros e tirar-lhe partido. Por onde continuar:
+        </p>
+      </div>
+      <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {destaques.map((d) => (
+          <li class={`caixa ${d.caixa} group`}>
+            <a href={d.href} class="flex h-full flex-col p-6">
+              <span class={`pill ${d.pill}`}>{d.etiqueta}</span>
+              <h3
+                class="mt-3 text-xl font-bold leading-tight text-marinho-900 transition-colors group-hover:text-marca-700"
+                style="font-family: var(--font-serif);"
+              >
+                {d.titulo}
+              </h3>
+              <p class="mt-2 flex-1 text-sm text-marinho-600">{d.texto}</p>
+              <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-marca-600 group-hover:text-marca-700">
+                Abrir
+                <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </Container>
+  </section>
 </BaseLayout>
