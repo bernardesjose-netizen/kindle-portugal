@@ -66,6 +66,63 @@ const modelos = defineCollection({
     }),
 });
 
+// Leitores BOOX (Onyx International) vendidos em Portugal pela WOOK.
+// Esquema próprio: ao contrário do Kindle, são aparelhos Android com
+// Play Store, microSD e áudio, por isso captamos essas características.
+const boox = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/boox' }),
+  schema: ({ image }) =>
+    z.object({
+      nome: z.string(),
+      fabricante: z.string().default('BOOX'),
+      ano_lancamento: z.number().int().min(2007),
+      geracao: z.string().optional(),
+      descricao_curta: z.string().max(200),
+      preco_referencia_eur: z.number().positive().optional(),
+      preco_data: z.coerce.date().optional(),
+      url_wook: z.string().url().optional(),
+      url_amazon: z.string().url().optional(),
+      asin: z.string().optional(),
+      especificacoes: z.object({
+        ecra_polegadas: z.number().positive(),
+        ecra_tecnologia: z.string(), // ex.: "E Ink Carta 1200", "E Ink Kaleido 3"
+        ecra_ppi: z.number().int().positive(), // a preto e branco
+        ecra_ppi_cor: z.number().int().positive().optional(), // a cores (Kaleido)
+        ecra_cor: z.boolean().default(false),
+        sistema: z.string(), // ex.: "Android 13"
+        play_store: z.boolean().default(true),
+        ram_gb: z.number().positive(),
+        armazenamento_gb: z.number().int().positive(),
+        microsd: z.boolean().default(false),
+        microsd_max: z.string().optional(), // ex.: "até 2 TB"
+        processador: z.string().optional(),
+        peso_g: z.number().int().positive(),
+        dimensoes_mm: z.string().optional(),
+        bateria_mah: z.number().int().positive().optional(),
+        carregamento: z.string().default('USB-C'),
+        luz_frontal: z.boolean().default(true),
+        luz_ajustavel_temperatura: z.boolean().default(false),
+        audio: z.boolean().default(false), // altifalante e/ou microfone
+        bluetooth: z.boolean().default(false),
+        resistencia_agua: z.enum(['nenhuma', 'IPX7', 'IPX8']).default('nenhuma'),
+        leitor_digitais: z.boolean().default(false),
+        botoes_pagina: z.boolean().default(false),
+        cores: z.array(z.string()).default([]),
+      }),
+      destaques: z.array(z.string()).max(6).default([]),
+      pros: z.array(z.string()).default([]),
+      contras: z.array(z.string()).default([]),
+      veredito: z.string(),
+      publico_alvo: z.array(z.string()).default([]),
+      imagem_hero: image().optional(),
+      imagem_hero_alt: z.string().optional(),
+      data_publicacao: z.coerce.date(),
+      data_revisao: z.coerce.date().optional(),
+      rascunho: z.boolean().default(false),
+      seo: seo.optional(),
+    }),
+});
+
 const guias = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/guias' }),
   schema: ({ image }) =>
@@ -139,4 +196,4 @@ const tresLivros = defineCollection({
     }),
 });
 
-export const collections = { modelos, guias, blog, faq, tresLivros };
+export const collections = { modelos, boox, guias, blog, faq, tresLivros };

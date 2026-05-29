@@ -1,0 +1,19 @@
+---
+import { getCollection, render } from 'astro:content';
+import BooxLayout from '@layouts/BooxLayout.astro';
+
+export async function getStaticPaths() {
+  const modelos = await getCollection('boox', ({ data }) => !data.rascunho);
+  return modelos.map((modelo) => ({
+    params: { slug: modelo.id },
+    props: { modelo },
+  }));
+}
+
+const { modelo } = Astro.props;
+const { Content } = await render(modelo);
+---
+
+<BooxLayout modelo={modelo}>
+  <Content />
+</BooxLayout>
