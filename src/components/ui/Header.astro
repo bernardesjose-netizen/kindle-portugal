@@ -5,7 +5,9 @@ import { SITE, NAVEGACAO_PRINCIPAL } from '@lib/site';
 const caminhoAtual = Astro.url.pathname;
 function ativo(href: string) {
   if (href === '/') return caminhoAtual === '/';
-  return caminhoAtual.startsWith(href);
+  // Correspondência exata ou por segmento, para que /modelos não acione
+  // em /modelos-boox (e vice-versa).
+  return caminhoAtual === href || caminhoAtual.startsWith(href + '/');
 }
 ---
 

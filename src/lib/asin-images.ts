@@ -55,6 +55,11 @@ export const ASIN_IMAGES: Record<string, string> = {
   B0CZY1LRT4: 'https://m.media-amazon.com/images/I/51q5W1jepqL._AC_SL1080_.jpg', // Kobo Clara Colour
   B0CZXX465Z: 'https://m.media-amazon.com/images/I/61DFpVsTxNL._AC_SL1080_.jpg', // Kobo Libra Colour
   B0C15G7J3V: 'https://m.media-amazon.com/images/I/81ntO7Zf-sL._AC_SL1500_.jpg', // Kobo Elipsa 2E
+
+  // Leitores BOOX (Onyx) — vendidos pela WOOK; ASINs válidos em Amazon.es
+  B0DGTSHLWH: 'https://m.media-amazon.com/images/I/51Lev8774kL._AC_SL1500_.jpg', // BOOX Go 6
+  B0F5495T8C: 'https://m.media-amazon.com/images/I/71CPZqw8VxL._AC_SL1500_.jpg', // BOOX Go 7
+  B0F5B6KZ1H: 'https://m.media-amazon.com/images/I/612d-Gx6SNL._AC_SL1500_.jpg', // BOOX Go Color 7 (Gen II)
 };
 
 /**
