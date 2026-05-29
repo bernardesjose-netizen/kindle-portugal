@@ -18,8 +18,12 @@ const { modelo } = Astro.props;
 const d = modelo.data;
 const e = d.especificacoes;
 
-// Há um link de afiliado Amazon na página? (só então mostramos a divulgação)
-const temAfiliadoAmazon = Boolean(d.asin || d.url_amazon);
+// Que redes de afiliado há na página? Amazon (url_amazon/asin) e/ou WOOK (url_wook).
+const temAmazon = Boolean(d.url_amazon || d.asin);
+const temWook = Boolean(d.url_wook);
+const redesAfiliado = [temAmazon ? 'Amazon' : null, temWook ? 'WOOK' : null]
+  .filter(Boolean)
+  .join(' e ');
 
 // Foto decorativa de fundo (Unsplash, hotlink pelo CDN oficial; o
 // componente esconde a imagem se o URL falhar). Genérica de leitura.
@@ -362,7 +366,7 @@ const productLd = {
         </section>
       )}
 
-      {temAfiliadoAmazon && <DisclosureBanner variante="discreta" />}
+      {redesAfiliado && <DisclosureBanner variante="discreta" redes={redesAfiliado} />}
     </Container>
   </article>
 </BaseLayout>

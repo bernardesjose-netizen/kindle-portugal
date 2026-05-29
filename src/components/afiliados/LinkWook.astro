@@ -1,0 +1,29 @@
+---
+// Link de afiliado WOOK para texto/inline. Encaminha o href pelo helper
+// linkWook, que aplica o ID de afiliado (a_aid) a qualquer URL wook.pt.
+import { linkWook } from '@lib/wook';
+
+interface Props {
+  /** URL da WOOK (wook.pt) */
+  href: string;
+  /** Rel extra — default já inclui sponsored nofollow noopener */
+  rel?: string;
+  /** Target — default _blank */
+  target?: string;
+  /** Classes CSS extra */
+  class?: string;
+}
+
+const {
+  href,
+  rel = 'sponsored nofollow noopener',
+  target = '_blank',
+  class: classe,
+} = Astro.props;
+
+const finalHref = linkWook(href);
+---
+
+<a href={finalHref} rel={rel} target={target} data-afiliado="wook" class={classe}>
+  <slot />
+</a>

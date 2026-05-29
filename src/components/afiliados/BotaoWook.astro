@@ -1,8 +1,9 @@
 ---
 // Botão de compra na WOOK (wook.pt). Os leitores BOOX vendem-se em
-// Portugal pela WOOK, não pela Amazon. Estes links são links normais de
-// loja (não de afiliado) — se vier a existir um programa de afiliados da
-// WOOK, basta encaminhar o URL por um helper aqui.
+// Portugal pela WOOK. O URL é encaminhado pelo helper linkWook, que
+// aplica o ID de afiliado (a_aid) da WOOK.
+import { linkWook } from '@lib/wook';
+
 interface Props {
   url: string;
   etiqueta?: string;
@@ -10,15 +11,16 @@ interface Props {
 }
 
 const { url, etiqueta = 'Ver na WOOK', tamanho = 'normal' } = Astro.props;
+const href = linkWook(url);
 const extra = tamanho === 'grande' ? 'px-7 py-3.5 text-base' : 'px-5 py-2.5 text-sm';
 ---
 
 <a
-  href={url}
-  rel="noopener nofollow"
+  href={href}
+  rel="sponsored nofollow noopener"
   target="_blank"
   class={`inline-flex items-center gap-2 rounded-lg bg-marinho-900 font-semibold text-creme-50 no-underline shadow-sm transition-colors hover:bg-marca-700 ${extra}`}
-  data-loja="wook"
+  data-afiliado="wook"
 >
   <slot>{etiqueta}</slot>
   <span aria-hidden="true">→</span>
