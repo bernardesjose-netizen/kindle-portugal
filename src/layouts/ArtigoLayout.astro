@@ -107,7 +107,7 @@ const pillCategoriaClass = categoria ? PILL_POR_CATEGORIA[categoria] ?? '' : '';
   jsonLd={articleLd}
   semOrnamento={true}
 >
-  <article class="relative py-10 lg:py-16">
+  <article class:list={["relative py-10 lg:py-16", categoria === 'Blog' && 'tipografia-blog']}>
     <OrnamentoFundo motivo={motivo} posicao="topo-direita" intensidade="subtil" tom="marinho" />
     <OrnamentoFundo motivo={motivoSecundario} posicao="fundo-esquerda" intensidade="subtil" tom="dourado" />
     <Container largura="texto">
@@ -117,7 +117,7 @@ const pillCategoriaClass = categoria ? PILL_POR_CATEGORIA[categoria] ?? '' : '';
             {categoria && <span class={`pill ${pillCategoriaClass}`}>{categoria}</span>}
             <h1
               class="mt-4 text-[1.875rem] font-bold leading-[1.15] text-marinho-900 sm:text-4xl lg:text-[2.75rem]"
-              style="font-family: var(--font-serif); letter-spacing: -0.025em;"
+              style={`font-family: var(--font-${categoria === 'Blog' ? 'blog' : 'serif'}); letter-spacing: ${categoria === 'Blog' ? '-0.035em' : '-0.025em'};`}
             >
               {titulo}
             </h1>
