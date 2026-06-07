@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b111a"/>
+      <stop offset="0.5" stop-color="#142e30"/>
+      <stop offset="1" stop-color="#0e3236"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.85" cy="0.1" r="0.55">
+      <stop offset="0" stop-color="#5cc4b1" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#5cc4b1" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <text x="120" y="220" font-family="Fraunces,Georgia,serif" font-size="40" font-weight="500" fill="#a8e0d0" opacity="0.7">Blog</text>
+  <text x="120" y="320" font-family="Fraunces,Georgia,serif" font-size="86" font-weight="700" fill="#fefbf5" letter-spacing="-3">BOOX na Wook</text>
+  <text x="120" y="410" font-family="Fraunces,Georgia,serif" font-size="86" font-weight="700" fill="#5cc4b1" letter-spacing="-3">+ 2 ebooks</text>
+  <text x="120" y="490" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="500" fill="#cfe1f3">A campanha de Junho 2026 em destaque.</text>
+  <g transform="translate(120, 555)">
+    <rect width="280" height="40" rx="20" fill="rgba(92,196,177,0.18)" stroke="rgba(92,196,177,0.45)" stroke-width="1"/>
+    <text x="140" y="26" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="600" fill="#a8e0d0" letter-spacing="2">KINDLEPORTUGAL.COM</text>
+  </g>
+</svg>

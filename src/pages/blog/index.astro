@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { formatarData } from '@lib/formatters';
 
@@ -36,14 +37,29 @@ const artigos = (await getCollection('blog', ({ data }) => !data.rascunho)).sort
     {artigos.length === 0 ? (
       <p class="text-marinho-600">Ainda não há artigos publicados.</p>
     ) : (
-      <ul class="space-y-6">
+      <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {artigos.map((a) => (
-          <li class="border-b border-marinho-100 pb-6 last:border-b-0">
-            <a href={`/blog/${a.id}`} class="group block">
-              <h2 class="text-xl font-semibold text-marinho-900 group-hover:text-marca-600">
+          <li class="group">
+            <a href={`/blog/${a.id}`} class="block">
+              {a.data.imagem_hero ? (
+                <div class="mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-marinho-50 to-creme-100 transition-transform group-hover:-translate-y-1">
+                  <Image
+                    src={a.data.imagem_hero}
+                    alt={a.data.imagem_hero_alt ?? a.data.titulo}
+                    widths={[400, 600, 800]}
+                    sizes="(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
+                    class="block aspect-[1200/630] w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              ) : (
+                <div class="mb-4 aspect-[1200/630] w-full rounded-xl bg-gradient-to-br from-marinho-100 to-creme-200 transition-transform group-hover:-translate-y-1" />
+              )}
+              <h2 class="text-lg font-semibold leading-snug text-marinho-900 group-hover:text-marca-600">
                 {a.data.titulo}
               </h2>
-              <p class="mt-2 text-marinho-600">{a.data.descricao}</p>
+              <p class="mt-2 text-sm text-marinho-600">{a.data.descricao}</p>
               <p class="mt-2 text-xs text-marinho-400">
                 <time datetime={a.data.data_publicacao.toISOString()}>
                   {formatarData(a.data.data_publicacao)}
