@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b111a"/>
+      <stop offset="0.5" stop-color="#162236"/>
+      <stop offset="1" stop-color="#0e2949"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.85" cy="0.1" r="0.55">
+      <stop offset="0" stop-color="#f97e07" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#f97e07" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.1" cy="0.95" r="0.5">
+      <stop offset="0" stop-color="#146eb4" stop-opacity="0.40"/>
+      <stop offset="1" stop-color="#146eb4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+
+  <g transform="translate(120, 210)">
+    <rect width="120" height="120" rx="26" fill="#fefbf5"/>
+    <rect x="26" y="19" width="68" height="82" rx="8" fill="#0b111a"/>
+    <rect x="37" y="33" width="46" height="5" fill="#d6d3c8"/>
+    <rect x="37" y="45" width="46" height="5" fill="#d6d3c8"/>
+    <rect x="37" y="57" width="34" height="5" fill="#d6d3c8"/>
+    <circle cx="60" cy="86" r="6" fill="#f97e07"/>
+  </g>
+
+  <text x="280" y="270" font-family="Fraunces,Georgia,serif" font-size="56" font-weight="700" fill="#fefbf5" letter-spacing="-2">Kindle</text>
+  <text x="280" y="328" font-family="Fraunces,Georgia,serif" font-size="56" font-weight="700" fill="#f97e07" letter-spacing="-2">Portugal</text>
+
+  <text x="120" y="425" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="44" font-weight="500" fill="#cfe1f3" letter-spacing="-0.8">O que vais encontrar aqui</text>
+
+  <text x="120" y="490" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="22" font-weight="400" fill="#a4cde9">Reviews, guias e dicas em português europeu — sem floreados.</text>
+
+  <g transform="translate(120, 555)">
+    <rect width="280" height="40" rx="20" fill="rgba(249,126,7,0.18)" stroke="rgba(249,126,7,0.45)" stroke-width="1"/>
+    <text x="140" y="26" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="600" fill="#ffbc4a" letter-spacing="2">KINDLEPORTUGAL.COM</text>
+  </g>
+</svg>

@@ -395,26 +395,34 @@ h1, h2, h3, h4 {
 }
 
 /* ---------- Tipografia do Blog ----------
-   O blog usa Bricolage Grotesque nos títulos e leads, em vez do
-   Fraunces (serif) padrão. Distingue o conteúdo editorial do
-   restante do site, mantendo Inter no corpo para legibilidade.
+   O blog usa Bricolage Grotesque em todo o corpo editorial — títulos,
+   subtítulos, parágrafos, listas, citações — para distinguir
+   claramente uma página do blog de qualquer outra parte do site, que
+   se mantém em Fraunces serif (títulos) e Inter (corpo).
 */
+.tipografia-blog,
+.tipografia-blog p,
+.tipografia-blog li,
+.tipografia-blog blockquote,
+.tipografia-blog .lead,
 .tipografia-blog h1,
 .tipografia-blog h2,
 .tipografia-blog h3,
 .tipografia-blog h4,
-.tipografia-blog .lead,
+.tipografia-blog .prose-pt,
+.tipografia-blog .prose-pt p,
+.tipografia-blog .prose-pt li,
+.tipografia-blog .prose-pt blockquote,
 .tipografia-blog .prose-pt h1,
 .tipografia-blog .prose-pt h2,
 .tipografia-blog .prose-pt h3,
 .tipografia-blog .prose-pt h4 {
   font-family: var(--font-blog);
   font-optical-sizing: auto;
-  letter-spacing: -0.025em;
 }
 
-/* H1 e H2 do blog ganham um peso ligeiramente mais firme para
-   contrastar com a serif do resto do site, sem perder elegância. */
+/* H1 e H2 do blog ganham um peso firme e tracking ligeiramente
+   apertado para o efeito moderno típico do Bricolage. */
 .tipografia-blog h1,
 .tipografia-blog .prose-pt h1 {
   font-weight: 700;
@@ -425,4 +433,21 @@ h1, h2, h3, h4 {
 .tipografia-blog .prose-pt h2 {
   font-weight: 600;
   letter-spacing: -0.025em;
+}
+
+.tipografia-blog h3,
+.tipografia-blog .prose-pt h3,
+.tipografia-blog h4,
+.tipografia-blog .prose-pt h4 {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+/* No corpo do parágrafo, deixar o tracking neutro para preservar
+   legibilidade em leitura longa. */
+.tipografia-blog p,
+.tipografia-blog li,
+.tipografia-blog .prose-pt p,
+.tipografia-blog .prose-pt li {
+  letter-spacing: 0;
 }
