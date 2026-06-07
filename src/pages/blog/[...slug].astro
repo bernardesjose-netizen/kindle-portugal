@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 }
 
 // Mapa slug → ASIN do dispositivo a usar como hero image junto ao título.
-// Cobre o catálogo Kindle e Kobo. Fallback Paperwhite.
+// Cobre o catálogo Kindle, Kobo e BOOX. Fallback Paperwhite.
 const heroPorPost: Record<string, { asin: string; alt: string }> = {
   'kindle-no-amazon-warehouse': {
     asin: 'B0CFPWLGF2',
@@ -24,6 +24,26 @@ const heroPorPost: Record<string, { asin: string; alt: string }> = {
   'kindle-vs-tablet-melhor-leitura': {
     asin: 'B0CFPWLGF2',
     alt: 'Kindle Paperwhite, o e-reader recomendado para leitura prolongada',
+  },
+  'kindle-ou-kobo-livros-portugues-comparacao-2026': {
+    asin: 'B0CZXYV8GT',
+    alt: 'Kobo Clara BW, comparação direta com o Kindle Paperwhite',
+  },
+  'ebooks-wook-no-kindle-2026': {
+    asin: 'B0CFPWLGF2',
+    alt: 'Kindle Paperwhite, leitor de referência para ebooks comprados fora da Amazon',
+  },
+  'boox-wook-2-ebooks-oferta-2026': {
+    asin: 'B0F5B6KZ1H',
+    alt: 'BOOX Go Color 7, vendido pela Wook com oferta de 2 ebooks',
+  },
+  'novidades-literatura-portuguesa-kindle-2026': {
+    asin: 'B0CP32JG8B',
+    alt: 'Kindle básico, porta de entrada para ler em português europeu',
+  },
+  'amazon-prime-portugal-vale-a-pena': {
+    asin: 'B0CFPWLGF2',
+    alt: 'Kindle Paperwhite, modelo coberto pelos benefícios Prime',
   },
   'ola-mundo': {
     asin: 'B0CFPWLGF2',
