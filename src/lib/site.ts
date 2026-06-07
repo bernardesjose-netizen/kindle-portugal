@@ -30,11 +30,11 @@ export const AUTOR = {
 
 export const NAVEGACAO_PRINCIPAL = [
   { label: 'Início', href: '/' },
+  { label: 'Blog', href: '/blog' },
   { label: 'Modelos Kindle', href: '/modelos' },
   { label: 'Modelos BOOX', href: '/modelos-boox' },
   { label: 'Guias', href: '/guias' },
   { label: 'Três Ebooks', href: '/tres-livros' },
-  { label: 'Blog', href: '/blog' },
   { label: 'Amazon Prime', href: '/blog/amazon-prime-portugal-vale-a-pena' },
   { label: 'FAQ', href: '/faq' },
 ] as const;
