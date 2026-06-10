@@ -1,6 +1,6 @@
 name: Publicar posts agendados
 
-# Todos os dias de manha verifica se algum post de "Tres Ebooks"
+# Todos os dias verifica se algum post do blog ou de "Tres Ebooks"
 # agendado (rascunho: true) chegou a data de publicacao. Em caso
 # afirmativo, muda para rascunho: false, faz commit/push (o que aciona
 # o deploy do host) e notifica o IndexNow para indexacao rapida.
@@ -11,10 +11,12 @@ name: Publicar posts agendados
 
 on:
   schedule:
-    # 06:00 UTC (~07:00 em Portugal). O post fica no ar na manha da
-    # data marcada. O cron corre todos os dias mas so publica quando
-    # ha algo cuja data ja chegou.
-    - cron: '0 6 * * *'
+    # 11:30 UTC = 12:30 em Portugal continental no horario de verao
+    # (no inverno passa a 11:30; ajustar para '30 12 * * *' se quiseres
+    # manter as 12:30 todo o ano). O cron do GitHub pode atrasar alguns
+    # minutos. Corre todos os dias mas so publica quando ha algo cuja
+    # data ja chegou.
+    - cron: '30 11 * * *'
   workflow_dispatch:
 
 permissions:
@@ -56,7 +58,7 @@ jobs:
           fi
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/content/tres-livros
+          git add src/content/blog src/content/tres-livros
           git commit -m "Publica automaticamente posts agendados ($(date -u +%Y-%m-%d))"
           git push
           echo "publicou=true" >> "$GITHUB_OUTPUT"
@@ -72,7 +74,7 @@ jobs:
 
           URLS=$(echo "$SLUGS" | while IFS= read -r s; do
             [ -z "$s" ] && continue
-            printf '"https://%s/tres-livros/%s",' "$SITE_HOST" "$s"
+            printf '"https://%s/%s",' "$SITE_HOST" "$s"
           done | sed 's/,$//')
 
           if [ -z "$URLS" ]; then
@@ -104,9 +106,4 @@ jobs:
           cat /tmp/resp.txt
           echo ""
 
-          if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 300 ]; then
-            echo "OK — IndexNow aceitou."
-          else
-            echo "FALHOU."
-            exit 1
-          fi
+          if [ "$STATUS" -ge 200 ] && [ "$S
