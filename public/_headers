@@ -1,0 +1,12 @@
+# Cloudflare Pages — cabeçalhos de segurança
+# Aplicados a todas as páginas. Se algum widget novo deixar de carregar,
+# acrescentar o domínio à diretiva certa da Content-Security-Policy.
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), browsing-topics=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Cross-Origin-Opener-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://ws-eu.amazon-adsystem.com https://m.media-amazon.com; connect-src 'self'; frame-src https://ws-eu.amazon-adsystem.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
