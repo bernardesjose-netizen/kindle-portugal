@@ -1,9 +1,10 @@
-// Publica automaticamente os posts de "Três Ebooks" agendados.
+// Publica automaticamente os posts agendados do blog e de "Três Ebooks".
 //
-// Percorre src/content/tres-livros, procura ficheiros com
-// `rascunho: true` cuja `data_publicacao` ja chegou (<= hoje, UTC) e
-// muda-os para `rascunho: false`. Imprime no stdout o slug de cada
-// post publicado (um por linha) para o workflow consumir; as mensagens
+// Percorre src/content/blog e src/content/tres-livros, procura ficheiros
+// com `rascunho: true` cuja `data_publicacao` ja chegou (<= hoje, UTC) e
+// muda-os para `rascunho: false`. Imprime no stdout o caminho de cada
+// post publicado (um por linha, no formato `blog/slug` ou
+// `tres-livros/slug`) para o workflow consumir; as mensagens
 // informativas vao para o stderr.
 //
 // So mexe no frontmatter (primeiro bloco --- ... ---) e so altera o
@@ -14,15 +15,17 @@
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const DIR = 'src/content/tres-livros';
+// Coleções abrangidas: o nome da pasta coincide com o segmento do URL.
+const DIRS = ['blog', 'tres-livros'];
 const hoje = new Date().toISOString().slice(0, 10); // YYYY-MM-DD (UTC)
 
 const publicados = [];
 
-for (const nome of readdirSync(DIR)) {
+for (const colecao of DIRS)
+for (const nome of readdirSync(join('src/content', colecao))) {
   if (!/\.(mdx?|md)$/.test(nome)) continue;
 
-  const caminho = join(DIR, nome);
+  const caminho = join('src/content', colecao, nome);
   const texto = readFileSync(caminho, 'utf8');
 
   // Isola o frontmatter: primeiro bloco entre --- e ---
@@ -46,7 +49,7 @@ for (const nome of readdirSync(DIR)) {
   const novoTexto = texto.replace(bloco, () => novoBloco);
   writeFileSync(caminho, novoTexto, 'utf8');
 
-  publicados.push(nome.replace(/\.(mdx?|md)$/, ''));
+  publicados.push(`${colecao}/${nome.replace(/\.(mdx?|md)$/, '')}`);
 }
 
 if (publicados.length === 0) {
@@ -55,5 +58,5 @@ if (publicados.length === 0) {
   console.error(`Publicados hoje (${hoje}): ${publicados.join(', ')}`);
 }
 
-// stdout: um slug por linha (consumido pelo GitHub Action)
+// stdout: um caminho por linha, ex. `blog/slug` (consumido pelo GitHub Action)
 for (const slug of publicados) console.log(slug);
