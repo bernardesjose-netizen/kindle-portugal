@@ -3,7 +3,9 @@ interface Props {
   data: Record<string, unknown> | Record<string, unknown>[];
 }
 const { data } = Astro.props;
-const json = JSON.stringify(data);
+// Escapa `<` para impedir que conteúdo com `</script>` quebre o bloco
+// JSON-LD e injete HTML (hardening XSS). `\u003c` é JSON válido.
+const json = JSON.stringify(data).replace(/</g, '\\u003c');
 ---
 
 <script type="application/ld+json" is:inline set:html={json} />
