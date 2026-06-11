@@ -17,6 +17,11 @@ on:
     # minutos. Corre todos os dias mas so publica quando ha algo cuja
     # data ja chegou.
     - cron: '30 11 * * *'
+    # Corrida extra unica: 00:00 de 23/06 em Lisboa (= 22/06 23:00 UTC),
+    # para o post do Prime Day sair no arranque do evento.
+    # Inofensiva nos outros anos (nao havendo rascunhos, nao faz nada);
+    # pode remover-se depois de junho de 2026.
+    - cron: '0 23 22 6 *'
   workflow_dispatch:
 
 permissions:
