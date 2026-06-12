@@ -111,4 +111,9 @@ jobs:
           cat /tmp/resp.txt
           echo ""
 
-          if [ "$STATUS" -ge 200 ] && [ "$S
+          if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 300 ]; then
+            echo "IndexNow notificado com sucesso."
+          else
+            echo "Falha ao notificar o IndexNow (HTTP $STATUS)." >&2
+            exit 1
+          fi
