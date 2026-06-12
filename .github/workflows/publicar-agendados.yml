@@ -112,8 +112,8 @@ jobs:
           echo ""
 
           if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 300 ]; then
-            echo "IndexNow notificado com sucesso."
+            echo "OK — IndexNow aceitou."
           else
-            echo "Falha ao notificar o IndexNow (HTTP $STATUS)." >&2
+            echo "FALHOU — IndexNow devolveu HTTP $STATUS."
             exit 1
           fi
