@@ -111,4 +111,9 @@ jobs:
           cat /tmp/resp.txt
           echo ""
 
-          if [ "$STATUS" -ge 200 ] && [ "$S
+          if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 300 ]; then
+            echo "OK — IndexNow aceitou."
+          else
+            echo "FALHOU — IndexNow devolveu HTTP $STATUS."
+            exit 1
+          fi
