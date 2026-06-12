@@ -162,6 +162,7 @@ const blog = defineCollection({
       imagem_hero: image().optional(),
       imagem_hero_alt: z.string().optional(),
       rascunho: z.boolean().default(false),
+      mostrar_disclosure: z.boolean().default(true),
       seo: seo.optional(),
     }),
 });
