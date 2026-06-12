@@ -46,6 +46,10 @@ interface Props {
   categoria?: string;
   tempoLeituraMin?: number;
   imagem?: string;
+  /** Título/descrição para SEO (frontmatter seo.*), se diferirem dos visíveis. */
+  tituloSeo?: string;
+  descricaoSeo?: string;
+  noindex?: boolean;
   /** ASIN do dispositivo a mostrar como hero image junto ao título. */
   heroAsin?: string;
   /** Texto alternativo para a hero image. */
@@ -61,6 +65,9 @@ const {
   dataRevisao,
   categoria,
   tempoLeituraMin,
+  tituloSeo,
+  descricaoSeo,
+  noindex,
   imagem,
   heroAsin,
   heroAlt,
@@ -97,8 +104,9 @@ const pillCategoriaClass = categoria ? PILL_POR_CATEGORIA[categoria] ?? '' : '';
 ---
 
 <BaseLayout
-  titulo={titulo}
-  descricao={descricao}
+  titulo={tituloSeo ?? titulo}
+  descricao={descricaoSeo ?? descricao}
+  noindex={noindex}
   tipo="article"
   dataPublicacao={dataPublicacao}
   dataRevisao={dataRevisao}
@@ -168,7 +176,7 @@ const pillCategoriaClass = categoria ? PILL_POR_CATEGORIA[categoria] ?? '' : '';
                 class="relative block h-auto w-full object-contain"
                 style="mix-blend-mode: multiply; filter: drop-shadow(0 12px 18px rgba(15,26,36,0.22));"
                 referrerpolicy="no-referrer-when-downgrade"
-                onerror="this.style.display='none'"
+                data-fallback="hide"
               />
             </figure>
           )}

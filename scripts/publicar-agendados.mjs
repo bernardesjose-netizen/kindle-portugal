@@ -28,7 +28,7 @@ for (const nome of readdirSync(join('src/content', colecao))) {
   if (!/\.(mdx?|md)$/.test(nome)) continue;
 
   const caminho = join('src/content', colecao, nome);
-  const texto = readFileSync(caminho, 'utf8');
+  const texto = readFileSync(caminho, 'utf8').replace(/^\uFEFF/, '');
 
   // Isola o frontmatter: primeiro bloco entre --- e ---
   const fm = texto.match(/^---\r?\n([\s\S]*?)\r?\n---/);
@@ -36,7 +36,7 @@ for (const nome of readdirSync(join('src/content', colecao))) {
   const bloco = fm[1];
 
   // So nos interessam os que estao mesmo em rascunho
-  if (!/^\s*rascunho:\s*true\s*$/m.test(bloco)) continue;
+  if (!/^rascunho:\s*true\s*$/m.test(bloco)) continue;
 
   // Le a data de publicacao (YYYY-MM-DD)
   const md = bloco.match(/^\s*data_publicacao:\s*['"]?(\d{4}-\d{2}-\d{2})/m);
@@ -47,7 +47,7 @@ for (const nome of readdirSync(join('src/content', colecao))) {
   if (data > hoje) continue; // ainda nao chegou a data
 
   // Muda rascunho: true -> false, apenas dentro do frontmatter
-  const novoBloco = bloco.replace(/^(\s*rascunho:\s*)true(\s*)$/m, '$1false$2');
+  const novoBloco = bloco.replace(/^(rascunho:\s*)true(\s*)$/m, '$1false$2');
   const novoTexto = texto.replace(bloco, () => novoBloco);
   writeFileSync(caminho, novoTexto, 'utf8');
 

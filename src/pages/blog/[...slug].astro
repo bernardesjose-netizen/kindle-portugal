@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 }
 
 // Mapa slug → ASIN do dispositivo a usar como hero image junto ao título.
-// Cobre o catálogo Kindle, Kobo e BOOX. Fallback Paperwhite.
+// Posts sem entrada aqui não mostram hero de produto.
 const heroPorPost: Record<string, { asin: string; alt: string }> = {
   'kindle-no-amazon-warehouse': {
     asin: 'B0CFPWLGF2',
@@ -64,6 +64,9 @@ const hero = heroPorPost[artigo.id];
 <ArtigoLayout
   titulo={d.titulo}
   descricao={d.descricao}
+  tituloSeo={d.seo?.titulo_seo}
+  descricaoSeo={d.seo?.descricao_seo}
+  noindex={d.seo?.noindex}
   autor={d.autor}
   dataPublicacao={d.data_publicacao}
   categoria="Blog"

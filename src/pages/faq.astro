@@ -1,4 +1,5 @@
 ---
+import { mdParaTexto } from '@lib/texto';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
 import { getCollection, render } from 'astro:content';
@@ -22,7 +23,7 @@ const faqLd = {
     name: p.data.pergunta,
     acceptedAnswer: {
       '@type': 'Answer',
-      text: p.body ?? '',
+      text: mdParaTexto(p.body ?? ''),
     },
   })),
 };
@@ -65,7 +66,6 @@ const faqLd = {
                 href={`/faq/${entry.id}`}
                 class="shrink-0 self-center rounded-md border border-marinho-100 px-2 py-0.5 text-xs font-normal text-marinho-500 transition hover:border-marca-500 hover:text-marca-700"
                 aria-label={`Ver página dedicada: ${entry.data.pergunta}`}
-                onclick="event.stopPropagation()"
               >
                 Página dedicada →
               </a>

@@ -31,7 +31,7 @@ const posts = (await getCollection('tresLivros', ({ data }) => !data.rascunho)).
             Três Ebooks
           </h1>
           <p class="mt-3 max-w-2xl text-oceano-100/90">
-            Todas as semanas, três ebooks em português europeu para qualquer leitor. Editoras portuguesas, autores nacionais, traduções feitas em Portugal. Tudo o que as livrarias digitais misturam um pouco e que aqui ajudamos a encontrar.
+            Todas as semanas, três ebooks em português europeu para qualquer leitor. Editoras portuguesas, autores nacionais, traduções feitas em Portugal. Tudo o que as livrarias digitais tendem a misturar — e que aqui separamos para ti.
           </p>
         </div>
         <div class="lg:justify-self-end">
@@ -54,9 +54,9 @@ const posts = (await getCollection('tresLivros', ({ data }) => !data.rascunho)).
             <li class="group">
               <a href={`/tres-livros/${p.id}`} class="block">
                 <div class="relative mb-4 grid grid-cols-3 gap-2 rounded-xl bg-gradient-to-br from-marinho-50 to-creme-100 p-4 transition-transform group-hover:-translate-y-1">
-                  <img src={capa1} alt={`Capa de ${p.data.livros[0].titulo}`} loading="lazy" decoding="async" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="no-referrer-when-downgrade" onerror="this.style.display='none'" />
-                  <img src={capa2} alt={`Capa de ${p.data.livros[1].titulo}`} loading="lazy" decoding="async" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="no-referrer-when-downgrade" onerror="this.style.display='none'" />
-                  <img src={capa3} alt={`Capa de ${p.data.livros[2].titulo}`} loading="lazy" decoding="async" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="no-referrer-when-downgrade" onerror="this.style.display='none'" />
+                  <img src={capa1} alt={`Capa de ${p.data.livros[0].titulo}`} loading="lazy" decoding="async" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="no-referrer-when-downgrade" data-fallback="hide" />
+                  <img src={capa2} alt={`Capa de ${p.data.livros[1].titulo}`} loading="lazy" decoding="async" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="no-referrer-when-downgrade" data-fallback="hide" />
+                  <img src={capa3} alt={`Capa de ${p.data.livros[2].titulo}`} loading="lazy" decoding="async" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="no-referrer-when-downgrade" data-fallback="hide" />
                 </div>
                 <h2 class="text-lg font-semibold leading-snug text-marinho-900 group-hover:text-marca-600">
                   {p.data.titulo}

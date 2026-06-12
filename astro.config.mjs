@@ -32,6 +32,10 @@ export default defineConfig({
   },
   build: {
     assets: 'assets',
+    // 'file' gera /pagina.html (servida em /pagina sem redirect no
+    // Cloudflare Pages) — coerente com trailingSlash: 'never' e com os
+    // canonicals/sitemap sem barra final.
+    format: 'file',
   },
   prefetch: {
     prefetchAll: false,

@@ -93,7 +93,7 @@ const pillPorCategoria: Record<string, string> = {
             </span> e ebooks em Portugal.
           </h1>
           <p class="mt-6 text-lg text-oceano-100/90 sm:text-xl">
-            Guias passo-a-passo, comparações e dicas práticas, desde a escolha do modelo até
+            Guias passo a passo, comparações e dicas práticas, desde a escolha do modelo até
             enviar os teus ebooks, converter formatos e encontrar livros em <strong class="font-semibold text-creme-50">português europeu</strong>.
           </p>
           <div class="mt-8 flex flex-wrap gap-3">
@@ -174,7 +174,7 @@ const pillPorCategoria: Record<string, string> = {
               height="500"
               class="kindle-img mx-auto block h-auto max-h-72 w-auto object-contain sm:max-h-80 lg:max-h-[26rem]"
               referrerpolicy="no-referrer-when-downgrade"
-              onerror="this.onerror=null;this.src='/placeholder-amazon.svg'"
+              data-fallback="/placeholder-amazon.svg"
             />
           </a>
 
@@ -265,7 +265,7 @@ const pillPorCategoria: Record<string, string> = {
                         class="block max-h-36 w-auto object-contain transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-105"
                         style="mix-blend-mode: multiply; filter: drop-shadow(0 8px 12px rgba(15,26,36,0.15));"
                         referrerpolicy="no-referrer-when-downgrade"
-                        onerror="this.style.display='none'"
+                        data-fallback="hide"
                       />
                     </div>
                   )}
@@ -338,7 +338,7 @@ const pillPorCategoria: Record<string, string> = {
                     class="block h-auto w-full rounded object-contain transition-transform duration-500"
                     style={`filter: drop-shadow(0 8px 14px rgba(15,26,36,0.20)); transform: rotate(${i === 0 ? '-2deg' : i === 1 ? '0deg' : '2deg'}); transform-origin: bottom;`}
                     referrerpolicy="no-referrer-when-downgrade"
-                    onerror="this.style.display='none'"
+                    data-fallback="hide"
                   />
                 ))}
               </div>
@@ -396,7 +396,7 @@ const pillPorCategoria: Record<string, string> = {
             <h2 class="mt-3 text-3xl font-bold text-oceano-900 md:text-4xl" style="letter-spacing: -0.025em;">
               Guias recentes
             </h2>
-            <p class="mt-2 text-oceano-700/80">Passo-a-passo, sem floreados.</p>
+            <p class="mt-2 text-oceano-700/80">Passo a passo, sem floreados.</p>
           </div>
           <a
             href="/guias"
