@@ -9,4 +9,4 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=(), browsing-topics=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   Cross-Origin-Opener-Policy: same-origin
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://ws-eu.amazon-adsystem.com https://m.media-amazon.com; connect-src 'self'; frame-src https://ws-eu.amazon-adsystem.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://ws-eu.amazon-adsystem.com https://ws-na.amazon-adsystem.com https://m.media-amazon.com https://programadeafiliados.wook.pt; connect-src 'self'; frame-src https://ws-eu.amazon-adsystem.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
