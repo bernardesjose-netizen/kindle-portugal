@@ -1,7 +1,7 @@
 name: Publicar posts agendados
 
-# Todos os dias verifica se algum post do blog ou de "Tres Ebooks"
-# agendado (rascunho: true) chegou a data de publicacao. Em caso
+# Todos os dias verifica se algum post do blog, de "Tres Ebooks" ou
+# dos guias agendado (rascunho: true) chegou a data de publicacao. Em caso
 # afirmativo, muda para rascunho: false, faz commit/push (o que aciona
 # o deploy do host) e notifica o IndexNow para indexacao rapida.
 #
@@ -63,7 +63,7 @@ jobs:
           fi
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/content/blog src/content/tres-livros
+          git add src/content/blog src/content/tres-livros src/content/guias
           git commit -m "Publica automaticamente posts agendados ($(date -u +%Y-%m-%d))"
           git push
           echo "publicou=true" >> "$GITHUB_OUTPUT"
