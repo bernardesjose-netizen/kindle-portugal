@@ -129,7 +129,7 @@ const pillPorCategoria: Record<string, string> = {
           </dl>
         </div>
 
-        <figure class="kindle-perspective relative mx-auto w-full max-w-xs sm:max-w-sm lg:max-w-none">
+        <figure class="kindle-perspective relative mx-auto mt-12 w-full max-w-xs sm:max-w-sm lg:mt-0 lg:max-w-none">
           {/* Halo radial: cor + serve de "fundo claro" para o multiply funcionar sem moldura visível */}
           <div
             aria-hidden="true"
@@ -137,10 +137,10 @@ const pillPorCategoria: Record<string, string> = {
             style="background: radial-gradient(ellipse at 50% 50%, rgba(255, 247, 235, 0.55) 0%, rgba(249, 126, 7, 0.40) 30%, rgba(20, 110, 180, 0.25) 60%, transparent 80%);"
           />
 
-          {/* Pedestal: sombra elíptica suave por baixo do aparelho */}
+          {/* Pedestal: sombra elíptica que respira em sincronia com a levitação */}
           <div
             aria-hidden="true"
-            class="absolute bottom-2 left-1/2 h-6 w-3/5 -translate-x-1/2 rounded-full opacity-50 blur-xl"
+            class="kindle-pedestal absolute bottom-2 left-1/2 h-6 w-3/5 rounded-full blur-xl"
             style="background: radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, transparent 70%);"
           />
 
@@ -165,17 +165,19 @@ const pillPorCategoria: Record<string, string> = {
             class="kindle-tilt relative block"
             aria-label="Ver Kindle Paperwhite"
           >
-            <img
-              src="https://m.media-amazon.com/images/I/61RI4fvXHqL._AC_SL1000_.jpg"
-              alt="Kindle Paperwhite, o modelo recomendado para a maioria dos leitores"
-              loading="eager"
-              decoding="async"
-              width="500"
-              height="500"
-              class="kindle-img mx-auto block h-auto max-h-72 w-auto object-contain sm:max-h-80 lg:max-h-[26rem]"
-              referrerpolicy="no-referrer-when-downgrade"
-              onerror="this.onerror=null;this.src='/placeholder-amazon.svg'"
-            />
+            <span class="kindle-float block">
+              <img
+                src="https://m.media-amazon.com/images/I/61RI4fvXHqL._AC_SL1000_.jpg"
+                alt="Kindle Paperwhite, o modelo recomendado para a maioria dos leitores"
+                loading="eager"
+                decoding="async"
+                width="500"
+                height="500"
+                class="kindle-img mx-auto block h-auto max-h-72 w-auto object-contain sm:max-h-80 lg:max-h-[26rem]"
+                referrerpolicy="no-referrer-when-downgrade"
+                onerror="this.onerror=null;this.src='/placeholder-amazon.svg'"
+              />
+            </span>
           </a>
 
           <figcaption class="relative mt-5 text-center">
@@ -438,20 +440,24 @@ const pillPorCategoria: Record<string, string> = {
 </BaseLayout>
 
 <style>
-  /* Hero — efeito 3D no Kindle */
+  /* Hero — Kindle a levitar, com tilt 3D que segue o cursor no desktop.
+     A levitação (kindle-float) corre sempre, incluindo em mobile; o
+     pedestal de sombra encolhe em sincronia, vendendo a ilusão de
+     altura. O tilt é controlado por JS via --rx/--ry (só pointer fino). */
   .kindle-perspective {
-    perspective: 1200px;
+    perspective: 1100px;
   }
 
   .kindle-tilt {
-    transition: transform 700ms cubic-bezier(0.2, 0.9, 0.4, 1);
     transform-style: preserve-3d;
+    transform: rotateY(var(--ry, -4deg)) rotateX(var(--rx, 2deg));
+    transition: transform 250ms cubic-bezier(0.2, 0.9, 0.4, 1);
     will-change: transform;
-    transform: rotateY(-4deg) rotateX(2deg);
   }
 
-  .kindle-tilt:hover {
-    transform: rotateY(-12deg) rotateX(6deg) translateZ(30px) scale(1.05);
+  .kindle-float {
+    animation: kindle-float 6s ease-in-out infinite;
+    will-change: transform;
   }
 
   .kindle-img {
@@ -459,40 +465,56 @@ const pillPorCategoria: Record<string, string> = {
     filter:
       drop-shadow(0 30px 35px rgba(0, 0, 0, 0.55))
       drop-shadow(0 12px 18px rgba(20, 110, 180, 0.30));
-    transition: filter 700ms cubic-bezier(0.2, 0.9, 0.4, 1);
   }
 
-  .kindle-tilt:hover .kindle-img {
-    filter:
-      drop-shadow(0 40px 45px rgba(0, 0, 0, 0.65))
-      drop-shadow(0 18px 25px rgba(249, 126, 7, 0.35));
+  .kindle-pedestal {
+    transform: translateX(-50%);
+    animation: kindle-pedestal 6s ease-in-out infinite;
   }
 
-  /* Mobile / touch: sem hover, anima leve "respiro" */
-  @media (hover: none) {
-    .kindle-tilt {
-      animation: kindle-breathe 7s ease-in-out infinite;
-    }
+  @keyframes kindle-float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-16px); }
   }
 
-  @keyframes kindle-breathe {
-    0%, 100% {
-      transform: rotateY(-4deg) rotateX(2deg) translateY(0);
-    }
-    50% {
-      transform: rotateY(-6deg) rotateX(3deg) translateY(-10px);
-    }
+  @keyframes kindle-pedestal {
+    0%, 100% { transform: translateX(-50%) scaleX(1);    opacity: 0.5; }
+    50%      { transform: translateX(-50%) scaleX(0.78); opacity: 0.3; }
   }
 
   /* Respeitar utilizadores que pediram menos movimento */
   @media (prefers-reduced-motion: reduce) {
-    .kindle-tilt,
-    .kindle-img {
-      transition: none;
+    .kindle-float,
+    .kindle-pedestal {
       animation: none;
     }
     .kindle-tilt {
+      transition: none;
       transform: none;
     }
   }
 </style>
+
+<script>
+  // Tilt 3D do Kindle a seguir o cursor sobre o hero (desktop apenas).
+  // Em ecrãs táteis ou com preferência de movimento reduzido não faz nada;
+  // a levitação CSS continua a correr por si.
+  const tilt = document.querySelector<HTMLElement>('.kindle-tilt');
+  const hero = tilt?.closest('section');
+  const pointerFino = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const movimentoOk = window.matchMedia('(prefers-reduced-motion: no-preference)');
+
+  if (tilt && hero && pointerFino.matches && movimentoOk.matches) {
+    hero.addEventListener('pointermove', (e) => {
+      const r = hero.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      tilt.style.setProperty('--ry', `${(x * 18).toFixed(2)}deg`);
+      tilt.style.setProperty('--rx', `${(-y * 12).toFixed(2)}deg`);
+    });
+    hero.addEventListener('pointerleave', () => {
+      tilt.style.removeProperty('--ry');
+      tilt.style.removeProperty('--rx');
+    });
+  }
+</script>
