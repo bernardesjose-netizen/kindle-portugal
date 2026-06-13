@@ -375,6 +375,17 @@ h1, h2, h3, h4 {
   }
 }
 
+/* Tabelas em ecrãs estreitos: passam a scroll horizontal próprio,
+   em vez de empurrarem a página inteira para fora do viewport. */
+@media (max-width: 640px) {
+  .prose-pt :where(table) {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 /* Esconder scrollbar no nav (mantém scroll funcional em mobile) */
 .nav-scroll {
   scrollbar-width: none;
