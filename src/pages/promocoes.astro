@@ -1,0 +1,298 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Container from '@components/ui/Container.astro';
+import DisclosureBanner from '@components/afiliados/DisclosureBanner.astro';
+import { getCollection } from 'astro:content';
+import { CAMPANHA, campanhaAtiva } from '@lib/promocoes';
+import { SITE } from '@lib/site';
+import { formatarPreco, formatarData } from '@lib/formatters';
+import { imagemParaAsin } from '@lib/asin-images';
+import { linksPorLojaDeAsin, urlAfiliado, MARKETPLACES, temTag } from '@lib/afiliados';
+
+const ativa = campanhaAtiva();
+
+const modelos = await getCollection('modelos', ({ data }) => !data.rascunho);
+
+const itens = CAMPANHA.itens
+  .map((it) => {
+    const modelo = modelos.find((m) => m.id === it.slug);
+    return modelo ? { ...it, modelo } : null;
+  })
+  .filter((x): x is NonNullable<typeof x> => x !== null);
+
+const paisesComTag = MARKETPLACES.filter((m) => temTag(m.id)).map((m) => m.etiqueta.replace('Amazon ', ''));
+
+const titulo = ativa ? 'Promoções Kindle — Prime Day 2026' : 'Promoções Kindle';
+const descricao = ativa
+  ? `Kindle com grandes promoções na Amazon durante o Prime Day 2026: Paperwhite, básico, Colorsoft e Scribe. Vê o desconto de cada modelo e onde comprar. Válido até ${formatarData(CAMPANHA.fim)}.`
+  : 'Quando houver promoções de Kindle a decorrer, ficam aqui. Vê entretanto todos os modelos e os preços de referência.';
+
+// Esquema ItemList → só anuncia `price` quando o preço promocional foi
+// confirmado (preco_promo != null). Caso contrário, não afirma um preço atual.
+const jsonLd = ativa
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: CAMPANHA.nome,
+      itemListElement: itens.map((it, i) => {
+        const url = new URL(`/modelos/${it.modelo.id}`, SITE.url).toString();
+        const imagem = it.modelo.data.asin ? imagemParaAsin(it.modelo.data.asin, 1000) : null;
+        const product: Record<string, unknown> = {
+          '@type': 'Product',
+          name: it.modelo.data.nome,
+          url,
+          ...(imagem ? { image: imagem } : {}),
+        };
+        if (it.preco_promo != null) {
+          product.offers = {
+            '@type': 'Offer',
+            priceCurrency: 'EUR',
+            price: it.preco_promo,
+            priceValidUntil: CAMPANHA.fim.toISOString().slice(0, 10),
+            availability: 'https://schema.org/InStock',
+            url,
+          };
+        }
+        return { '@type': 'ListItem', position: i + 1, item: product };
+      }),
+    }
+  : undefined;
+
+const bandeiras: Record<string, string> = {
+  es: '🇪🇸',
+  com: '🇺🇸',
+  uk: '🇬🇧',
+  de: '🇩🇪',
+  fr: '🇫🇷',
+  it: '🇮🇹',
+};
+---
+
+<BaseLayout titulo={titulo} descricao={descricao} noindex={!ativa} jsonLd={jsonLd} motivoOrnamento="e-reader">
+  <!-- HERO -->
+  <section class="relative overflow-hidden border-b-4 border-marca-500 bg-gradient-to-br from-marinho-900 via-marinho-800 to-oceano-900 text-creme-50">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0"
+      style="background-image: radial-gradient(ellipse at top right, rgb(249 126 7 / 0.25) 0%, transparent 55%), radial-gradient(ellipse at bottom left, rgb(20 110 180 / 0.35) 0%, transparent 50%);"
+    />
+    <Container largura="normal" classe="relative z-10 py-14 sm:py-16">
+      {ativa ? (
+        <>
+          <span class="inline-flex items-center gap-1.5 rounded-full bg-marca-500 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-sm">
+            <span class="relative flex h-2 w-2" aria-hidden="true">
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
+              <span class="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
+            </span>
+            {CAMPANHA.etiqueta} · a decorrer
+          </span>
+          <h1 class="mt-5 text-[2rem] font-bold leading-[1.1] sm:text-5xl" style="letter-spacing: -0.035em;">
+            Kindle com grandes promoções
+          </h1>
+          <p class="mt-5 max-w-2xl text-lg text-oceano-100/90">{CAMPANHA.slogan}</p>
+          <p class="mt-6 inline-flex items-center gap-2 rounded-lg border border-marca-400/40 bg-marca-500/15 px-4 py-2 text-sm font-semibold text-marca-200">
+            <span aria-hidden="true">⏳</span>
+            Válido até {formatarData(CAMPANHA.fim)}
+          </p>
+        </>
+      ) : (
+        <>
+          <span class="pill pill-marinho">Promoções</span>
+          <h1 class="mt-5 text-[2rem] font-bold leading-[1.1] sm:text-5xl" style="letter-spacing: -0.035em;">
+            Promoções de Kindle
+          </h1>
+          <p class="mt-5 max-w-2xl text-lg text-oceano-100/90">
+            De momento não há nenhuma campanha a decorrer. Assim que houver descontos de
+            Kindle na Amazon, aparecem aqui em primeira mão.
+          </p>
+          <a href="/modelos" class="mt-8 inline-flex btn-marca">
+            Ver todos os modelos
+            <span aria-hidden="true">→</span>
+          </a>
+        </>
+      )}
+    </Container>
+  </section>
+
+  {ativa && (
+    <Container largura="normal" classe="py-12 sm:py-16">
+      <DisclosureBanner />
+
+      <p class="mt-6 rounded-xl border border-ambar-100 bg-ambar-50 p-4 text-sm text-ambar-800">
+        <strong>Os preços na Amazon mudam ao minuto.</strong> Indicamos o preço de referência
+        com a respetiva data; o valor que conta é sempre o que vês na Amazon ao abrir o link.
+        Não garantimos preços nem disponibilidade.
+      </p>
+
+      <div class="mt-10 space-y-8">
+        {itens.map((it) => {
+          const m = it.modelo;
+          const imgSrc = m.data.asin ? imagemParaAsin(m.data.asin, 500) : null;
+          const lojas = m.data.asin
+            ? linksPorLojaDeAsin(m.data.asin, {
+                pesquisaAlternativa: m.data.nome,
+                categoriaPesquisa: 'electronics',
+              })
+            : [];
+          const temPromo = it.preco_promo != null;
+          const precoNormal = it.preco_normal ?? m.data.preco_referencia_eur ?? null;
+          return (
+            <article class="caixa caixa-marca overflow-hidden">
+              <div class="grid gap-6 p-6 sm:grid-cols-[220px_1fr] sm:gap-8 sm:p-8">
+                {/* Imagem */}
+                <div class="relative flex items-center justify-center">
+                  {it.desconto_pct != null && (
+                    <span class="absolute -left-2 -top-2 z-10 rounded-full bg-marca-600 px-3 py-1 text-sm font-bold text-white shadow-md">
+                      −{it.desconto_pct}%
+                    </span>
+                  )}
+                  {imgSrc ? (
+                    <a href={`/modelos/${m.id}`} class="block">
+                      <img
+                        src={imgSrc}
+                        alt={`Kindle ${m.data.nome} em promoção`}
+                        loading="lazy"
+                        decoding="async"
+                        width="220"
+                        height="220"
+                        class="block max-h-48 w-auto object-contain"
+                        style="mix-blend-mode: multiply; filter: drop-shadow(0 8px 14px rgba(15,26,36,0.18));"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        onerror="this.style.display='none'"
+                      />
+                    </a>
+                  ) : (
+                    <div class="flex h-40 w-full items-center justify-center rounded-xl bg-marinho-50 text-marinho-300">
+                      <span class="text-sm">sem imagem</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Detalhes */}
+                <div class="flex flex-col">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <h2 class="text-2xl font-bold leading-tight text-marinho-900" style="font-family: var(--font-serif);">
+                      <a href={`/modelos/${m.id}`} class="transition-colors hover:text-marca-700">{m.data.nome}</a>
+                    </h2>
+                    {it.destaque && <span class="pill">Melhor escolha</span>}
+                  </div>
+                  <p class="mt-2 text-marinho-600">{m.data.descricao_curta}</p>
+
+                  {/* Bloco de preço */}
+                  <div class="mt-5 rounded-xl border border-marinho-100 bg-white/70 p-4">
+                    {temPromo ? (
+                      <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                        <span class="text-3xl font-bold text-marca-700">{formatarPreco(it.preco_promo)}</span>
+                        {precoNormal != null && (
+                          <span class="text-base text-marinho-400 line-through">
+                            {formatarPreco(precoNormal)}
+                          </span>
+                        )}
+                        {it.desconto_pct != null && (
+                          <span class="rounded bg-marca-100 px-2 py-0.5 text-sm font-bold text-marca-700">
+                            poupas {it.desconto_pct}%
+                          </span>
+                        )}
+                      </div>
+                    ) : (
+                      <div>
+                        {it.nota ? (
+                          <span class="inline-flex items-center gap-1.5 rounded-full bg-marinho-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-marinho-700">
+                            Sem desconto neste Prime Day
+                          </span>
+                        ) : (
+                          <span class="inline-flex items-center gap-1.5 rounded-full bg-marca-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-marca-700">
+                            Promoção {CAMPANHA.etiqueta}
+                          </span>
+                        )}
+                        {m.data.preco_referencia_eur != null && (
+                          <p class="mt-2 text-sm text-marinho-600">
+                            Preço de referência <strong class="text-marinho-900">{formatarPreco(m.data.preco_referencia_eur)}</strong>
+                            {m.data.preco_data && <span class="text-marinho-400"> · à data de {formatarData(m.data.preco_data)}</span>}
+                          </p>
+                        )}
+                        {it.nota ? (
+                          <p class="mt-2 text-sm text-marinho-600">{it.nota}</p>
+                        ) : (
+                          <p class="mt-1 text-sm font-semibold text-marca-700">Vê o preço atual na Amazon ↓</p>
+                        )}
+                      </div>
+                    )}
+                    {temPromo && CAMPANHA.verificado_em && (
+                      <p class="mt-2 text-xs text-marinho-400">
+                        Preço verificado a {formatarData(CAMPANHA.verificado_em)}. Pode ter mudado entretanto.
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Destaque: variante alternativa em promoção (ex.: geração anterior) */}
+                  {it.alternativa && (
+                    <div class="mt-4 rounded-xl border border-dourado-300/60 bg-dourado-50/60 p-4">
+                      <p class="text-xs font-bold uppercase tracking-wider text-dourado-700">
+                        <span aria-hidden="true">💡</span> {it.alternativa.etiqueta}
+                      </p>
+                      <div class="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                        <span class="text-2xl font-bold text-marca-700">{formatarPreco(it.alternativa.preco_promo)}</span>
+                        <span class="text-sm text-marinho-400 line-through">{formatarPreco(it.alternativa.preco_normal)}</span>
+                        <span class="rounded bg-marca-100 px-2 py-0.5 text-sm font-bold text-marca-700">−{it.alternativa.desconto_pct}%</span>
+                      </div>
+                      <a
+                        href={urlAfiliado(`https://www.amazon.es/dp/${it.alternativa.asin}`)}
+                        rel="sponsored nofollow noopener"
+                        target="_blank"
+                        data-afiliado="amazon"
+                        data-mercado="es"
+                        class="mt-3 inline-flex items-center gap-2 rounded-lg bg-marinho-900 px-4 py-2 text-sm font-semibold text-creme-50 transition-all hover:-translate-y-0.5 hover:bg-marca-600"
+                      >
+                        Ver oferta na Amazon.es
+                        <span aria-hidden="true">↗</span>
+                      </a>
+                      <p class="mt-2 text-xs text-marinho-400">
+                        Modelo da geração anterior, vendido enquanto houver stock.
+                        {CAMPANHA.verificado_em && ` Preço verificado a ${formatarData(CAMPANHA.verificado_em)}.`}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Botões por país */}
+                  {lojas.length > 0 && (
+                    <div class="mt-5">
+                      <p class="text-xs font-semibold uppercase tracking-wider text-marinho-500">Comprar na Amazon</p>
+                      <ul class="mt-2 flex flex-wrap gap-2">
+                        {lojas.map((loja) => (
+                          <li>
+                            <a
+                              href={loja.url}
+                              rel="sponsored nofollow noopener"
+                              target="_blank"
+                              data-afiliado="amazon"
+                              data-mercado={loja.id}
+                              class="inline-flex items-center gap-2 rounded-lg border border-marinho-200 bg-white px-3.5 py-2 text-sm font-semibold text-marinho-800 transition-all hover:-translate-y-0.5 hover:border-marca-500 hover:text-marca-700 hover:shadow-[0_6px_16px_rgba(249,126,7,0.18)]"
+                            >
+                              <span aria-hidden="true">{bandeiras[loja.id] ?? '🛒'}</span>
+                              {loja.etiqueta.replace('Amazon ', '')}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <a href={`/modelos/${m.id}`} class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-marca-600 hover:text-marca-700">
+                    Ver ficha completa
+                    <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <p class="mt-8 text-center text-sm text-marinho-500">
+        Compras na <strong>Amazon.es</strong> são as mais comuns em Portugal (envia para PT sem
+        taxas adicionais). Disponível também em {paisesComTag.join(', ')}.
+      </p>
+    </Container>
+  )}
+</BaseLayout>

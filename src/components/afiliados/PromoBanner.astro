@@ -1,0 +1,81 @@
+---
+import Container from '@components/ui/Container.astro';
+import { getCollection } from 'astro:content';
+import { CAMPANHA, campanhaAtiva } from '@lib/promocoes';
+import { formatarData } from '@lib/formatters';
+import { imagemParaAsin } from '@lib/asin-images';
+
+const ativa = campanhaAtiva();
+
+let thumbs: string[] = [];
+if (ativa) {
+  const modelos = await getCollection('modelos');
+  thumbs = CAMPANHA.itens
+    .map((it) => modelos.find((m) => m.id === it.slug))
+    .map((m) => (m?.data.asin ? imagemParaAsin(m.data.asin, 250) : null))
+    .filter((url): url is string => Boolean(url))
+    .slice(0, 4);
+}
+---
+
+{ativa && (
+  <aside class="relative overflow-hidden border-b-4 border-marca-500 bg-gradient-to-r from-marinho-900 via-marinho-800 to-oceano-900 text-creme-50">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0"
+      style="background-image: radial-gradient(ellipse at right, rgb(249 126 7 / 0.30) 0%, transparent 55%);"
+    />
+    <Container largura="largo" classe="relative z-10 py-3 sm:py-3.5">
+      <a
+        href="/promocoes"
+        class="group flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-center sm:flex-nowrap sm:justify-between sm:text-left"
+        aria-label={`${CAMPANHA.nome} — ver promoções`}
+      >
+        <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 sm:flex-nowrap">
+          <span class="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-marca-500 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-sm">
+            <span class="relative flex h-2 w-2" aria-hidden="true">
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
+              <span class="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
+            </span>
+            {CAMPANHA.etiqueta}
+          </span>
+          <span class="text-sm font-semibold text-creme-50 sm:text-base">
+            {CAMPANHA.slogan}
+          </span>
+        </div>
+
+        <div class="flex shrink-0 items-center gap-4">
+          {thumbs.length > 0 && (
+            <ul class="hidden items-center -space-x-2 lg:flex" aria-hidden="true">
+              {thumbs.map((src) => (
+                <li class="flex h-9 w-9 items-center justify-center rounded-full border border-creme-50/30 bg-creme-50 shadow-sm">
+                  <img
+                    src={src}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    width="36"
+                    height="36"
+                    class="block max-h-7 w-auto object-contain"
+                    style="mix-blend-mode: multiply;"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    onerror="this.closest('li').style.display='none'"
+                  />
+                </li>
+              ))}
+            </ul>
+
+            <span class="hidden text-xs font-medium text-oceano-100/80 sm:inline">
+              Válido até {formatarData(CAMPANHA.fim)}
+            </span>
+          )}
+
+          <span class="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-creme-50 px-4 py-2 text-sm font-bold text-marinho-900 shadow-sm transition-all group-hover:-translate-y-0.5 group-hover:bg-marca-50 group-hover:text-marca-700">
+            Ver promoções
+            <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+          </span>
+        </div>
+      </a>
+    </Container>
+  </aside>
+)}
