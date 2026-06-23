@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
 import DisclosureBanner from '@components/afiliados/DisclosureBanner.astro';
+import PromoBanner from '@components/afiliados/PromoBanner.astro';
 import WookWidget from '@components/afiliados/WookWidget.astro';
 import { getCollection } from 'astro:content';
 import { SITE } from '@lib/site';
@@ -56,6 +57,9 @@ const pillPorCategoria: Record<string, string> = {
 ---
 
 <BaseLayout titulo={SITE.nome} descricao={SITE.descricao}>
+  {/* Banner de promoções — só aparece dentro da janela da campanha (ver src/lib/promocoes.ts) */}
+  <PromoBanner />
+
   <!-- HERO — fundo escuro Amazon-style com acentos laranja + azul -->
   <section class="relative overflow-hidden border-b-4 border-marca-500 bg-gradient-to-br from-marinho-900 via-marinho-800 to-oceano-900 text-creme-50">
     <div
