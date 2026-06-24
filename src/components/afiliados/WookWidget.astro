@@ -96,14 +96,15 @@ const fundoCartao =
     >divulgação</a>
   </p>
 
-  {/* Pixel 1×1 — Wook tracking; fora do viewport para não causar layout-shift */}
+  {/* Pixel 1×1 — Wook tracking; fora do viewport para não causar layout-shift.
+      Sempre eager: com lazy, um elemento fora do viewport pode nunca carregar. */}
   <img
     src={pixelUrl}
     width="1"
     height="1"
     alt=""
     aria-hidden="true"
-    loading={prioridade ? 'eager' : 'lazy'}
+    loading="eager"
     style="border:0;position:absolute;left:-9999px;width:1px;height:1px;"
   />
 </aside>

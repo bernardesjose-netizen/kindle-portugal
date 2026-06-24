@@ -78,8 +78,10 @@ const websiteLd = {
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap"
     />
+    <link rel="alternate" hreflang="pt-PT" href={new URL(Astro.url.pathname, SITE.url).toString()} />
     <Seo {...seoProps} />
     <JsonLd data={websiteLd} />
+    <script is:inline defer src="/js/fallbacks.js"></script>
     {jsonLd && <JsonLd data={jsonLd} />}
   </head>
   <body class="flex min-h-dvh flex-col">

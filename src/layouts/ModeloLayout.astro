@@ -43,7 +43,6 @@ const productLd = {
           price: d.preco_referencia_eur,
           url: d.url_amazon,
           availability: 'https://schema.org/InStock',
-          priceValidUntil: (d.preco_data ?? new Date()).toISOString().slice(0, 10),
         },
       }
     : {}),

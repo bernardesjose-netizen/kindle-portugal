@@ -4,7 +4,7 @@ interface Props {
   /** Redes de afiliado a nomear no texto (ex.: 'Amazon', 'Amazon e WOOK'). */
   redes?: string;
 }
-const { variante = 'compacta', redes = 'Amazon' } = Astro.props;
+const { variante = 'compacta', redes = '' } = Astro.props;
 ---
 
 {
@@ -15,7 +15,7 @@ const { variante = 'compacta', redes = 'Amazon' } = Astro.props;
       aria-label="Divulgação de afiliados"
     >
       <strong class="font-semibold text-marinho-500">Divulgação:</strong> esta página contém links de
-      afiliado {redes}. Se comprares através deles, podemos receber uma pequena comissão sem custo
+      afiliado{redes ? ` ${redes}` : ''}. Se comprares através deles, podemos receber uma pequena comissão sem custo
       adicional para ti.{' '}
       <a
         href="/divulgacao-afiliados"
@@ -56,8 +56,8 @@ const { variante = 'compacta', redes = 'Amazon' } = Astro.props;
         <h2 class="font-semibold text-marinho-900">Como ganhamos dinheiro</h2>
       </div>
       <p class="mt-3">
-        Participamos no programa Amazon Associates. Alguns links neste site são links de afiliado: se
-        clicares e fizeres uma compra na Amazon, podemos receber uma pequena comissão —
+        Participamos nos programas de afiliados Amazon Associates e WOOK. Alguns links neste
+        site são links de afiliado: se clicares e fizeres uma compra, podemos receber uma pequena comissão —
         <strong> sem qualquer custo adicional para ti</strong>.
       </p>
       <p class="mt-2">

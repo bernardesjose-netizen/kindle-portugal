@@ -22,11 +22,14 @@ const HOST_TO_MARKET: Record<string, Marketplace> = {
   'amazon.it': 'it',
 };
 
+// Reserva embutida para o marketplace ES — ver nota em src/lib/afiliados.ts.
+const TAG_ES_FALLBACK = 'compleitdee04-21';
+
 function tagPara(m: Marketplace): string {
   const env = process.env;
   const fallback = env.PUBLIC_AMAZON_TAG ?? '';
   const especificas: Record<Marketplace, string | undefined> = {
-    es: env.PUBLIC_AMAZON_TAG_ES,
+    es: env.PUBLIC_AMAZON_TAG_ES || env.PUBLIC_AMAZON_TAG || TAG_ES_FALLBACK,
     com: env.PUBLIC_AMAZON_TAG_COM,
     uk: env.PUBLIC_AMAZON_TAG_UK,
     de: env.PUBLIC_AMAZON_TAG_DE,

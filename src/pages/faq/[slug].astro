@@ -1,4 +1,5 @@
 ---
+import { mdParaTexto } from '@lib/texto';
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
@@ -48,7 +49,7 @@ const qaPageLd = {
     answerCount: 1,
     acceptedAnswer: {
       '@type': 'Answer',
-      text: pergunta.body ?? '',
+      text: mdParaTexto(pergunta.body ?? ''),
       author: {
         '@type': 'Organization',
         name: 'Kindle Portugal',

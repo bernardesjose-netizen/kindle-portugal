@@ -38,10 +38,10 @@ O **Send to Kindle** é a forma oficial da Amazon para colocares no Kindle aquil
 Este guia explica cada método passo a passo, mostra os limites reais (que variam consoante o método escolhido), enumera todos os formatos aceites e termina com a resolução dos problemas que mais frequentemente aparecem na caixa de entrada.
 
 <div class="my-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
-  <ImagemProduto asin="B0CP32JG8B" alt="Kindle básico (12.ª geração, 2024)" marketplace="es" formato="pequeno" />
+  <ImagemProduto asin="B0CP32JG8B" alt="Kindle básico (11.ª geração, 2024)" marketplace="es" formato="pequeno" />
   <ImagemProduto asin="B0CFPWLGF2" alt="Kindle Paperwhite (12.ª geração, 2024)" marketplace="es" formato="pequeno" />
   <ImagemProduto asin="B0CX8MQF7R" alt="Kindle Colorsoft" marketplace="es" formato="pequeno" />
-  <ImagemProduto asin="B0CZB5RHWX" alt="Kindle Scribe (3.ª geração, 2024)" marketplace="es" formato="pequeno" />
+  <ImagemProduto asin="B0CZB5RHWX" alt="Kindle Scribe (3.ª geração, 2025)" marketplace="es" formato="pequeno" />
 </div>
 
 ## Em resumo
@@ -63,7 +63,7 @@ Em **maio de 2022**, a Amazon mudou a regra silenciosamente: o Send to Kindle pa
 - **2024** — Retirada gradual do **MOBI** da lista oficial de formatos aceites. Ainda funciona em muitos casos, mas a Amazon recomenda EPUB.
 - **2025** — Limite do website subiu para **200 MB**, quatro vezes mais do que pela app ou pelo email.
 
-Hoje, em 2026, o Send to Kindle é a forma mais simples e legítima de pôr no Kindle qualquer ficheiro teu que não tenha proteção DRM proprietária. Trabalha com ebooks comprados na **Wook**, **Bertrand** ou **Kobo.com**, com PDFs académicos, com DOCX do Word e do Google Docs, e com páginas web (via extensão).
+Hoje, em 2026, o Send to Kindle é a forma mais simples e legítima de pôr no Kindle qualquer ficheiro teu que não tenha proteção DRM proprietária. Trabalha com EPUB **sem DRM** (de catálogos livres como o Projeto Gutenberg ou de lojas que vendam sem proteção), com PDFs académicos, com DOCX do Word e do Google Docs, e com páginas web (via extensão). Atenção: os ebooks da **Wook** têm DRM próprio e **não passam para o Kindle** — explicamos porquê no [artigo dedicado](/blog/ebooks-wook-no-kindle-2026).
 
 > **DRM e o que fica de fora.** O Send to Kindle não aceita ebooks com **DRM Adobe** — caso de muitos empréstimos de bibliotecas estrangeiras com Libby ou da Adobe Digital Editions. Esses não passam: tens de os ler na app do próprio fornecedor.
 
@@ -97,7 +97,7 @@ O método mais antigo continua a ser o mais flexível: funciona a partir de qual
 
 1. Compõe um email **normal** a partir do teu email autorizado.
 2. **Destinatário:** o endereço `@kindle.com` do teu Kindle.
-3. **Assunto:** pode ficar vazio. Excepção importante: se escreveres exatamente **`convert`** no assunto e o anexo for um PDF, a Amazon tenta converter o PDF para formato Kindle (texto fluído) em vez de o entregar tal qual.
+3. **Assunto:** pode ficar vazio. Exceção importante: se escreveres exatamente **`convert`** no assunto e o anexo for um PDF, a Amazon tenta converter o PDF para formato Kindle (texto fluído) em vez de o entregar tal qual.
 4. **Anexo:** o ficheiro EPUB, PDF, DOCX ou outro formato aceite. Um por email, idealmente.
 5. Envia. Em **1 a 5 minutos** o livro aparece na biblioteca, desde que o Kindle esteja com Wi-Fi ligado.
 
@@ -195,7 +195,7 @@ A Amazon mantém uma **extensão oficial** que adiciona um botão na barra do br
 **O que faz:**
 
 - **Envia a página atual** como artigo formatado, com tipografia limpa e sem publicidade — semelhante ao *modo leitura* do browser, mas a chegar ao Kindle.
-- **Envia só uma selecção de texto** — útil para guardar um excerto de um artigo, mantendo o link para a fonte.
+- **Envia só uma seleção de texto** — útil para guardar um excerto de um artigo, mantendo o link para a fonte.
 - Permite **previsualizar** como o conteúdo vai aparecer no Kindle antes de enviar.
 - Pede **título e autor** para a entrada na biblioteca.
 - Escolhe **um dispositivo específico** ou envia para todos.
@@ -239,7 +239,7 @@ A app **Kindle** para Android e iOS — a mesma que usas para ler livros — sab
 2. Se não vires **Kindle** entre as opções, toca em **Mais** e ativa-o.
 3. Toca **Kindle**, escolhe o dispositivo e confirma.
 
-O ficheiro entra na cloud da Amazon e aparece em todos os teus dispositivos como qualquer outro envio. Ideal para o cenário "alguém mandou-me um PDF no WhatsApp e quero ler-lo no Kindle esta noite".
+O ficheiro entra na cloud da Amazon e aparece em todos os teus dispositivos como qualquer outro envio. Ideal para o cenário "alguém mandou-me um PDF no WhatsApp e quero lê-lo no Kindle esta noite".
 
 <figure class="my-8 overflow-hidden rounded-2xl border border-marinho-200 bg-creme-50 shadow-[var(--shadow-suave)]">
   <Image
@@ -284,7 +284,7 @@ Notas importantes:
 
 | Formato | É convertido? | Resultado | Bom para |
 |---|---|---|---|
-| **EPUB** | Sim, para KFX (formato Kindle) | Texto fluído, fonte e tamanho ajustáveis | Ebooks de qualquer loja sem DRM (Wook, Bertrand, Kobo.com, Standard Ebooks). |
+| **EPUB** | Sim, para KFX (formato Kindle) | Texto fluído, fonte e tamanho ajustáveis | Ebooks sem DRM (Standard Ebooks, Projeto Gutenberg, Luso Livros). |
 | **DOC / DOCX** | Sim, para formato Kindle | Texto fluído. Títulos, listas e negritos preservados | Manuscritos próprios, relatórios de Word, exportações do Google Docs. |
 | **RTF / TXT / HTML** | Sim, para formato Kindle | Texto fluído, simples | Texto puro, notas, transcrições. |
 | **PDF (entrega normal)** | Não | Layout exato, como num computador. Texto **não ajustável** | PDFs com layout importante (manuais, partituras, livros digitalizados). |
@@ -295,10 +295,10 @@ Notas importantes:
 
 A pergunta certa não é "que formato envio?" — é "que experiência de leitura quero?". Aqui ficam os casos típicos:
 
-- **Livro de uma loja PT** (Wook, Bertrand) — chega em EPUB sem DRM. Envia diretamente; lê com texto fluído.
+- **Livro de uma loja PT** — confirma primeiro o DRM: os da Wook têm proteção própria e não passam para o Kindle. Um EPUB sem DRM envia-se diretamente e lê-se com texto fluído.
 - **Manuscrito teu em Word ou Google Docs** — exporta DOCX e envia. Excelente para reler trabalho antes de submeter, sem imprimir.
 - **Artigo académico em PDF de texto corrido** — manda como PDF com **`convert`** no assunto (por email) para conseguir texto fluído. Se o PDF for complexo, mantém-no como PDF e usa o zoom do Kindle.
-- **Manual técnico com diagramas, fórmulas, tabelas** — mantém PDF. Lê no **[Kindle Scribe](/modelos/scribe)** (10,2″) ou no [Paperwhite](/modelos/paperwhite) (7″). No [Kindle básico](/modelos/basico) de 6″ os PDFs ficam apertados.
+- **Manual técnico com diagramas, fórmulas, tabelas** — mantém PDF. Lê no **[Kindle Scribe](/modelos/scribe)** (11″) ou no [Paperwhite](/modelos/paperwhite) (7″). No [Kindle básico](/modelos/basico) de 6″ os PDFs ficam apertados.
 - **Páginas web e *longreads*** — usa a **extensão de browser**, que entrega conteúdo já formatado em texto fluído.
 - **Apresentação PowerPoint** — exporta para PDF primeiro; o Send to Kindle não aceita PPTX.
 
@@ -336,7 +336,7 @@ Recebes por email três PDFs do trabalho que querias rever no fim de semana. Cad
 
 ### Domingo, a preparar férias
 
-Tens cinco EPUBs comprados na Wook e na Bertrand ao longo dos últimos meses, mais um PDF académico que querias ler na praia. Abres a app Send to Kindle no Mac, arrastas os seis ficheiros de uma vez, escolhes "Enviar para todos os dispositivos". Em 30 segundos está feito. Levas o Kindle Paperwhite para a praia da Comporta com semanas de leitura — e bateria que dura toda a viagem.
+Tens cinco EPUBs sem DRM comprados ao longo dos últimos meses, mais um PDF académico que querias ler na praia. Abres a app Send to Kindle no Mac, arrastas os seis ficheiros de uma vez, escolhes "Enviar para todos os dispositivos". Em 30 segundos está feito. Levas o Kindle Paperwhite para a praia da Comporta com semanas de leitura — e bateria que dura toda a viagem.
 
 ### Quarta à noite, a fechar um relatório próprio
 
@@ -358,7 +358,7 @@ Tens 12 separadores abertos no Chrome com artigos longos que ias ler "quando tiv
 **O PDF chega cortado, minúsculo ou ilegível.**
 
 - É a natureza do formato: o PDF preserva o layout original. Soluções: **rodar o Kindle** para leitura horizontal, **zoom** com dois dedos, ou enviar com **`convert`** no assunto para tentar texto fluído.
-- Para PDFs académicos pesados, o **Kindle Scribe** com ecrã de 10,2″ é o único Kindle realmente confortável. O Paperwhite (7″) é o passo abaixo decente.
+- Para PDFs académicos pesados, o **Kindle Scribe** com ecrã de 11″ é o único Kindle realmente confortável. O Paperwhite (7″) é o passo abaixo decente.
 
 **O livro aparece sem capa ou com título estranho.**
 
