@@ -2,6 +2,7 @@
 import '@/styles/global.css';
 import Seo from '@components/seo/Seo.astro';
 import JsonLd from '@components/seo/JsonLd.astro';
+import GoogleAnalytics from '@components/seo/GoogleAnalytics.astro';
 import Header from '@components/ui/Header.astro';
 import Footer from '@components/ui/Footer.astro';
 import OrnamentoFundo from '@components/ui/OrnamentoFundo.astro';
@@ -81,6 +82,7 @@ const websiteLd = {
     <Seo {...seoProps} />
     <JsonLd data={websiteLd} />
     {jsonLd && <JsonLd data={jsonLd} />}
+    <GoogleAnalytics />
   </head>
   <body class="flex min-h-dvh flex-col">
     <a href="#conteudo" class="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:rounded focus:bg-marinho-900 focus:px-3 focus:py-2 focus:text-white">
