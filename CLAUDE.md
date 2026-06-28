@@ -13,7 +13,7 @@ Ser a referência em PT-PT para quem considera comprar um Kindle ou já tem um e
 - **Tailwind CSS** para estilos
 - **TypeScript** estrito
 - **Cloudflare Pages** ou Netlify para deployment
-- **Plausible/Umami** para analytics (sem cookies, RGPD-friendly)
+- **Google Analytics 4** (gtag.js) para analytics — usa cookies (`_ga`, `_ga_*`); divulgado na política de privacidade
 
 ## Comandos
 
@@ -110,7 +110,7 @@ O programa Amazon Associates permite usar imagens oficiais dos produtos que prom
 - Afirmações sobre preços sem data.
 - Links para ebooks pirateados ou métodos de remoção de DRM para distribuir conteúdo.
 - Brasileirismos (ver secção de idioma).
-- Cookies de tracking sem consentimento — escolhemos analytics sem cookies precisamente para isto.
+- Cookies publicitários ou de remarketing. O site usa o Google Analytics (cookies de medição, divulgados na política de privacidade), mas não publicidade comportamental.
 - Dependências JS pesadas — manter o site rápido (Lighthouse ≥95 em Performance).
 
 ## Legal
