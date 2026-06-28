@@ -1,0 +1,23 @@
+---
+// Google Analytics 4 (gtag.js).
+//
+// Só carrega em produção (import.meta.env.PROD), para não poluir as
+// estatísticas com tráfego de desenvolvimento e de pré-visualização.
+//
+// A configuração inline vive em /gtag-init.js porque a CSP do site
+// (ver public/_headers) não permite scripts inline. O loader externo
+// precisa de googletagmanager.com na diretiva script-src.
+//
+// ATENÇÃO RGPD: o GA4 escreve cookies (_ga, _ga_*). Ao ativar, a
+// política de privacidade deixa de poder afirmar "sem cookies" e, em
+// rigor, passa a exigir consentimento prévio. Ver nota no PR.
+const GA_ID = 'G-MYS02Z55WX';
+const ativar = import.meta.env.PROD;
+---
+
+{ativar && (
+  <>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+    <script is:inline src="/gtag-init.js"></script>
+  </>
+)}
