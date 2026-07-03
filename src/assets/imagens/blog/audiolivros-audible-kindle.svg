@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b111a"/>
+      <stop offset="0.5" stop-color="#1a1a2e"/>
+      <stop offset="1" stop-color="#0e2949"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.85" cy="0.1" r="0.55">
+      <stop offset="0" stop-color="#a78bfa" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.1" cy="0.95" r="0.5">
+      <stop offset="0" stop-color="#f97e07" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#f97e07" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+  <g stroke="#a78bfa" stroke-width="6" stroke-linecap="round" opacity="0.9">
+    <line x1="930" y1="165" x2="930" y2="215"/>
+    <line x1="965" y1="140" x2="965" y2="240"/>
+    <line x1="1000" y1="115" x2="1000" y2="265"/>
+    <line x1="1035" y1="150" x2="1035" y2="230"/>
+    <line x1="1070" y1="175" x2="1070" y2="205"/>
+  </g>
+  <text x="120" y="220" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="40" font-weight="500" fill="#cfe1f3" opacity="0.7">Blog</text>
+  <text x="120" y="335" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="84" font-weight="800" fill="#fefbf5" letter-spacing="-3">Audiolivros no Kindle</text>
+  <text x="120" y="420" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="78" font-weight="700" fill="#a78bfa" letter-spacing="-3">com o Audible</text>
+  <text x="120" y="490" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="26" font-weight="400" fill="#cfe1f3">Bluetooth, planos e catálogo, explicados a partir de Portugal.</text>
+  <g transform="translate(120, 555)">
+    <rect width="280" height="40" rx="20" fill="rgba(167,139,250,0.16)" stroke="rgba(167,139,250,0.45)" stroke-width="1"/>
+    <text x="140" y="26" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="600" fill="#c9b8fc" letter-spacing="2">KINDLEPORTUGAL.COM</text>
+  </g>
+</svg>

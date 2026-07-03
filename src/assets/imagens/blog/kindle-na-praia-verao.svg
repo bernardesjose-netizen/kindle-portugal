@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b111a"/>
+      <stop offset="0.5" stop-color="#0f2433"/>
+      <stop offset="1" stop-color="#0e3949"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="0.85" cy="0.1" r="0.55">
+      <stop offset="0" stop-color="#f6c453" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#f6c453" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="0.1" cy="0.95" r="0.5">
+      <stop offset="0" stop-color="#4cc3e8" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#4cc3e8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow1)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+  <circle cx="985" cy="185" r="52" fill="none" stroke="#f6c453" stroke-width="5" opacity="0.9"/>
+  <g stroke="#f6c453" stroke-width="5" stroke-linecap="round" opacity="0.9">
+    <line x1="985" y1="105" x2="985" y2="120"/>
+    <line x1="985" y1="250" x2="985" y2="265"/>
+    <line x1="905" y1="185" x2="920" y2="185"/>
+    <line x1="1050" y1="185" x2="1065" y2="185"/>
+    <line x1="928" y1="128" x2="939" y2="139"/>
+    <line x1="1031" y1="231" x2="1042" y2="242"/>
+    <line x1="1042" y1="128" x2="1031" y2="139"/>
+    <line x1="939" y1="231" x2="928" y2="242"/>
+  </g>
+  <text x="120" y="220" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="40" font-weight="500" fill="#cfe1f3" opacity="0.7">Blog</text>
+  <text x="120" y="335" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="96" font-weight="800" fill="#4cc3e8" letter-spacing="-3">Kindle na praia</text>
+  <text x="120" y="420" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="78" font-weight="700" fill="#fefbf5" letter-spacing="-3">e na piscina</text>
+  <text x="120" y="490" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="26" font-weight="400" fill="#cfe1f3">Água, areia e sol: o que aguenta cada modelo, sem sustos.</text>
+  <g transform="translate(120, 555)">
+    <rect width="280" height="40" rx="20" fill="rgba(76,195,232,0.16)" stroke="rgba(76,195,232,0.45)" stroke-width="1"/>
+    <text x="140" y="26" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="600" fill="#93dcf2" letter-spacing="2">KINDLEPORTUGAL.COM</text>
+  </g>
+</svg>
