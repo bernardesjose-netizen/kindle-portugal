@@ -1,0 +1,54 @@
+---
+import { getCollection, render } from 'astro:content';
+import ArtigoLayout from '@layouts/ArtigoLayout.astro';
+import CardProdutoEstrela from '@components/CardProdutoEstrela.astro';
+import { imagemParaAsin } from '@lib/asin-images';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('produtosEstrela', ({ data }) => !data.rascunho);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const d = post.data;
+
+// Hero: imagem do primeiro produto com ASIN conhecido.
+const primeiroComAsin = d.produtos.find((p) => p.asin);
+const heroSrc = primeiroComAsin?.asin ? (imagemParaAsin(primeiroComAsin.asin, 1000) ?? undefined) : undefined;
+---
+
+<ArtigoLayout
+  titulo={d.titulo}
+  descricao={d.descricao}
+  autor={d.autor}
+  dataPublicacao={d.data_publicacao}
+  categoria="Produtos Estrela"
+  imagem={heroSrc}
+>
+  <Content />
+
+  <section aria-label="Os produtos desta edição" class="not-prose">
+    {d.produtos.map((p, i) => (
+      <CardProdutoEstrela
+        nome={p.nome}
+        loja={p.loja}
+        asin={p.asin}
+        urlWorten={p.url_worten}
+        urlWook={p.url_wook}
+        precoEur={p.preco_eur}
+        precoAnteriorEur={p.preco_anterior_eur}
+        precoData={p.preco_data}
+        classificacao={p.classificacao}
+        numAvaliacoes={p.num_avaliacoes}
+        etiqueta={p.etiqueta}
+        comentario={p.comentario}
+        numero={i + 1}
+        total={d.produtos.length}
+      />
+    ))}
+  </section>
+</ArtigoLayout>

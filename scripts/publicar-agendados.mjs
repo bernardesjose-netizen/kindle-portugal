@@ -17,7 +17,7 @@ import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 // Coleções abrangidas: o nome da pasta coincide com o segmento do URL.
-const DIRS = ['blog', 'tres-livros', 'guias'];
+const DIRS = ['blog', 'tres-livros', 'guias', 'produtos-estrela'];
 // YYYY-MM-DD na hora local de Portugal (en-CA da formato ISO).
 // Assim, a corrida da meia-noite de Lisboa ja conta o dia novo.
 const hoje = new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/Lisbon' });
