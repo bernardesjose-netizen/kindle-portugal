@@ -60,6 +60,15 @@ export const ASIN_IMAGES: Record<string, string> = {
   B0DGTSHLWH: 'https://m.media-amazon.com/images/I/51Lev8774kL._AC_SL1500_.jpg', // BOOX Go 6
   B0F5495T8C: 'https://m.media-amazon.com/images/I/71CPZqw8VxL._AC_SL1500_.jpg', // BOOX Go 7
   B0F5B6KZ1H: 'https://m.media-amazon.com/images/I/612d-Gx6SNL._AC_SL1500_.jpg', // BOOX Go Color 7 (Gen II)
+
+  // Achados Tech (produtos Amazon fora do universo e-reader)
+  B09B9CX8PW: 'https://m.media-amazon.com/images/I/61vuWkj2tIL._AC_SL1000_.jpg', // Echo Dot 5.ª gen
+  B0DKLGMX7R: 'https://m.media-amazon.com/images/I/71b+Eht2R5L._AC_SL1500_.jpg', // Echo Dot Max
+  B0F7ZFWVTC: 'https://m.media-amazon.com/images/I/615KD4BiJKL._AC_SL1500_.jpg', // Fire TV Stick 4K Plus
+  B0GJTFY58R: 'https://m.media-amazon.com/images/I/61lBuevDnnL._AC_SL1500_.jpg', // Apple AirTag 2.ª gen
+  B08VDJYLS5: 'https://m.media-amazon.com/images/I/51KgWxg+Y6L._AC_SL1000_.jpg', // JBL Tune 510BT
+  B0C9CJKCH3: 'https://m.media-amazon.com/images/I/614OfiBkyZL._AC_SL1500_.jpg', // Anker Nano Power Bank 10k
+  B07Z5JD3T4: 'https://m.media-amazon.com/images/I/71aEoXvgIwL._SL1500_.jpg', // TP-Link Tapo P100
 };
 
 /**

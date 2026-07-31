@@ -36,6 +36,7 @@ export const NAVEGACAO_PRINCIPAL = [
   { label: 'Guias', href: '/guias' },
   { label: 'Três Ebooks', href: '/tres-livros' },
   { label: 'Produtos Estrela', href: '/produtos-estrela' },
+  { label: 'Achados Tech', href: '/achados-tech' },
   { label: 'Amazon Prime', href: '/blog/amazon-prime-portugal-vale-a-pena' },
   { label: 'FAQ', href: '/faq' },
 ] as const;
