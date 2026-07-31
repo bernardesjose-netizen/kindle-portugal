@@ -9,7 +9,7 @@ export async function GET(context: APIContext) {
   );
 
   return rss({
-    title: `${SITE.nome} — Três Ebooks`,
+    title: `${SITE.nome} · Três Ebooks`,
     description:
       'Sugestões semanais de três ebooks em português europeu para qualquer leitor. Editoras portuguesas, autores nacionais, traduções PT-PT.',
     site: context.site ?? SITE.url,

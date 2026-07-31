@@ -1,6 +1,6 @@
 ---
 /**
- * Foto decorativa de fundo — muito transparente, para humanizar a página
+ * Foto decorativa de fundo, muito transparente, para humanizar a página
  * sem prejudicar a leitura. Renderiza-se em posição absoluta dentro do
  * contentor pai (que deve ter `position: relative`), aria-hidden, pointer-events-none.
  *
@@ -11,9 +11,9 @@
 interface Props {
   /** URL absoluta da foto (Unsplash ou local). */
   src: string;
-  /** Texto descritivo — mesmo sendo aria-hidden, ajuda SEO se for descoberta. */
+  /** Texto descritivo, mesmo sendo aria-hidden, ajuda SEO se for descoberta. */
   alt?: string;
-  /** Opacidade base. Default 0.10 — muito subtil. */
+  /** Opacidade base. Default 0.10, muito subtil. */
   opacidade?: number;
   /** Posição vertical dentro do contentor pai. Default 'fundo'. */
   posicao?: 'topo' | 'fundo' | 'centro' | 'cobrir';

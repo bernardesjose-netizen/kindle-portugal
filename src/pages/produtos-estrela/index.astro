@@ -30,7 +30,7 @@ const posts = (await getCollection('produtosEstrela', ({ data }) => !data.rascun
       <p class="mt-3 max-w-2xl text-oceano-100/90">
         De poucos em poucos dias, destacamos leitores e acessórios que valem mesmo a pena:
         Kindle na Amazon, Kobo e BOOX na Worten e na Wook. Cada preço traz a data em que o
-        confirmámos na loja — e quando um produto tem limitações, dizemo-lo.
+        confirmámos na loja, e quando um produto tem limitações, dizemo-lo.
       </p>
     </Container>
   </section>
@@ -78,11 +78,9 @@ const posts = (await getCollection('produtosEstrela', ({ data }) => !data.rascun
       </ul>
     )}
 
-    <p class="mt-12 rounded-xl border border-marinho-100 bg-marinho-50/60 p-4 text-sm text-marinho-600">
+    <p class="mt-12 text-xs text-marinho-400">
       Os preços indicados foram confirmados na loja respetiva na data que acompanha cada produto
-      e podem mudar a qualquer momento. Alguns links são de afiliado — se comprares através
-      deles, podemos receber uma comissão sem custo adicional para ti.
-      <a href="/divulgacao-afiliados" class="underline underline-offset-2 hover:text-marca-700">Sabe mais</a>.
+      e podem mudar a qualquer momento.
     </p>
   </Container>
 </BaseLayout>
