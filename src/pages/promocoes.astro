@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
-import DisclosureBanner from '@components/afiliados/DisclosureBanner.astro';
 import { getCollection } from 'astro:content';
 import { CAMPANHA, campanhaAtiva } from '@lib/promocoes';
 import { SITE } from '@lib/site';
@@ -22,7 +21,7 @@ const itens = CAMPANHA.itens
 
 const paisesComTag = MARKETPLACES.filter((m) => temTag(m.id)).map((m) => m.etiqueta.replace('Amazon ', ''));
 
-const titulo = ativa ? 'Promoções Kindle — Prime Day 2026' : 'Promoções Kindle';
+const titulo = ativa ? 'Promoções Kindle, Prime Day 2026' : 'Promoções Kindle';
 const descricao = ativa
   ? `Kindle com grandes promoções na Amazon durante o Prime Day 2026: Paperwhite, básico, Colorsoft e Scribe. Vê o desconto de cada modelo e onde comprar. Válido até ${formatarData(CAMPANHA.fim)}.`
   : 'Quando houver promoções de Kindle a decorrer, ficam aqui. Vê entretanto todos os modelos e os preços de referência.';
@@ -116,7 +115,6 @@ const bandeiras: Record<string, string> = {
 
   {ativa && (
     <Container largura="normal" classe="py-12 sm:py-16">
-      <DisclosureBanner />
 
       <p class="mt-6 rounded-xl border border-ambar-100 bg-ambar-50 p-4 text-sm text-ambar-800">
         <strong>Os preços na Amazon mudam ao minuto.</strong> Indicamos o preço de referência

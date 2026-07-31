@@ -9,7 +9,7 @@ export async function GET(context: APIContext) {
   );
 
   return rss({
-    title: `${SITE.nome} — Produtos Estrela`,
+    title: `${SITE.nome} · Produtos Estrela`,
     description:
       'Oportunidades verificadas em leitores e acessórios: Kindle na Amazon, Kobo e BOOX na Worten e na Wook. Preços confirmados com data.',
     site: context.site ?? SITE.url,

@@ -1,7 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
-import DisclosureBanner from '@components/afiliados/DisclosureBanner.astro';
 import OrnamentoFundo from '@components/ui/OrnamentoFundo.astro';
 import { SITE } from '@lib/site';
 import { formatarData } from '@lib/formatters';
@@ -182,7 +181,6 @@ const pillCategoriaClass = categoria ? PILL_POR_CATEGORIA[categoria] ?? '' : '';
         <slot />
       </div>
 
-      {mostrarDisclosure && <DisclosureBanner variante="discreta" />}
     </Container>
   </article>
 </BaseLayout>

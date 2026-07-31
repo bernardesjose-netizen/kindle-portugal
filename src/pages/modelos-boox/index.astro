@@ -2,7 +2,6 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
 import BotaoWook from '@components/afiliados/BotaoWook.astro';
-import DisclosureBanner from '@components/afiliados/DisclosureBanner.astro';
 import ImagemProduto from '@components/afiliados/ImagemProduto.astro';
 import { getCollection } from 'astro:content';
 import { formatarPreco } from '@lib/formatters';
@@ -202,6 +201,5 @@ const destaques = [
   </section>
 
   <Container largura="normal" classe="pb-12">
-    <DisclosureBanner variante="discreta" redes="WOOK" />
   </Container>
 </BaseLayout>
