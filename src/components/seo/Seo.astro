@@ -27,7 +27,7 @@ const {
 
 const url = canonical ?? new URL(Astro.url.pathname, SITE.url).toString();
 const imagemAbsoluta = new URL(imagem, SITE.url).toString();
-const tituloCompleto = titulo === SITE.nome ? titulo : `${titulo} — ${SITE.nome}`;
+const tituloCompleto = titulo === SITE.nome ? titulo : `${titulo} · ${SITE.nome}`;
 ---
 
 <title>{tituloCompleto}</title>

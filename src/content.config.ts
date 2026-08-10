@@ -197,4 +197,47 @@ const tresLivros = defineCollection({
     }),
 });
 
-export const collections = { modelos, boox, guias, blog, faq, tresLivros };
+// Rubrica "Produtos Estrela": oportunidades verificadas na Amazon, na Worten
+// e na Wook. Cada artigo destaca 1 a 4 produtos com preço datado — nunca se
+// afirma um preço sem a data em que foi confirmado na loja.
+const produtoEstrela = z.object({
+  nome: z.string(),
+  /** Loja onde o preço foi verificado e onde aponta o botão principal. */
+  loja: z.enum(['amazon', 'worten', 'wook']),
+  asin: z
+    .string()
+    .regex(/^B0[A-Z0-9]{8}$/, 'ASIN inválido (deve começar por B0 e ter 10 caracteres)')
+    .optional(),
+  /** URL do produto na Worten (obrigatório quando loja = worten). */
+  url_worten: z.string().url().optional(),
+  /** URL do produto na Wook (o a_aid é acrescentado pelo componente). */
+  url_wook: z.string().url().optional(),
+  preco_eur: z.number().positive().optional(),
+  preco_anterior_eur: z.number().positive().optional(),
+  /** Data em que o preço foi confirmado na loja. */
+  preco_data: z.coerce.date().optional(),
+  classificacao: z.number().min(1).max(5).optional(),
+  num_avaliacoes: z.number().int().positive().optional(),
+  /** Selo curto no cartão, ex.: "Novidade" ou "−17% face à tabela". */
+  etiqueta: z.string().max(40).optional(),
+  comentario: z.string().min(50).max(1000),
+});
+
+const produtosEstrela = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/produtos-estrela' }),
+  schema: ({ image }) =>
+    z.object({
+      titulo: z.string(),
+      descricao: z.string().max(200),
+      autor: autor,
+      data_publicacao: z.coerce.date(),
+      produtos: z.array(produtoEstrela).min(1).max(4),
+      tags: z.array(z.string()).default([]),
+      imagem_hero: image().optional(),
+      imagem_hero_alt: z.string().optional(),
+      rascunho: z.boolean().default(false),
+      seo: seo.optional(),
+    }),
+});
+
+export const collections = { modelos, boox, guias, blog, faq, tresLivros, produtosEstrela };

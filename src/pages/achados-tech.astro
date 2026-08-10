@@ -1,0 +1,81 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Container from '@components/ui/Container.astro';
+import CardProdutoEstrela from '@components/CardProdutoEstrela.astro';
+import { ACHADOS_TECH, VERIFICADO_EM } from '@lib/achados-tech';
+import { formatarData } from '@lib/formatters';
+
+const CATEGORIAS = ['Casa inteligente', 'Streaming', 'Áudio', 'Para levar no bolso'] as const;
+const porCategoria = CATEGORIAS.map((c) => ({
+  categoria: c,
+  itens: ACHADOS_TECH.filter((a) => a.categoria === c),
+})).filter((g) => g.itens.length > 0);
+---
+
+<BaseLayout
+  titulo="Achados Tech na Amazon"
+  descricao="Tecnologia que vale mesmo a pena na Amazon.es, fora do universo Kindle: Echo, Fire TV, áudio, powerbanks e casa inteligente. Preços verificados com data, sem hype."
+  motivoOrnamento="e-reader"
+>
+  <section class="relative overflow-hidden border-b-4 border-oceano-500 bg-gradient-to-br from-marinho-900 via-oceano-800 to-marinho-800 text-creme-50">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0"
+      style="background-image: radial-gradient(ellipse at top right, rgb(20 110 180 / 0.40) 0%, transparent 55%), radial-gradient(ellipse at bottom left, rgb(249 126 7 / 0.22) 0%, transparent 50%);"
+    />
+    <Container largura="normal" classe="relative z-10 py-14">
+      <span class="inline-flex items-center gap-1 rounded-full border border-oceano-400/40 bg-oceano-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-oceano-200">
+        Fora do universo Kindle
+      </span>
+      <h1 class="mt-3 text-3xl font-bold text-creme-50 md:text-4xl" style="font-family: var(--font-serif);">
+        Achados Tech na Amazon
+      </h1>
+      <p class="mt-3 max-w-2xl text-oceano-100/90">
+        Nem só de leitores vive a Amazon. Esta página junta a tecnologia que recomendaríamos a
+        um amigo: produtos com classificação alta, milhares de avaliações e utilidade real.
+        Os mesmos critérios de sempre, preço com data, qualidades e limitações ditas com franqueza.
+      </p>
+      <p class="mt-5 inline-flex items-center gap-2 rounded-lg border border-creme-50/20 bg-creme-50/10 px-4 py-2 text-sm text-creme-50/90">
+        <span aria-hidden="true">🗓️</span>
+        Preços verificados na Amazon.es a {formatarData(VERIFICADO_EM)}
+      </p>
+    </Container>
+  </section>
+
+  <Container largura="normal" classe="py-12 sm:py-14">
+
+    <p class="mt-6 rounded-xl border border-ambar-100 bg-ambar-50 p-4 text-sm text-ambar-800">
+      <strong>Os preços na Amazon mudam ao minuto.</strong> Indicamos o valor confirmado na data
+      acima; o que conta é sempre o que vês na Amazon ao abrir o link. Não garantimos preços nem
+      disponibilidade.
+    </p>
+
+    {porCategoria.map((grupo) => (
+      <section class="mt-12">
+        <h2 class="text-2xl font-bold text-marinho-900" style="font-family: var(--font-serif); letter-spacing: -0.02em;">
+          {grupo.categoria}
+        </h2>
+        {grupo.itens.map((a) => (
+          <CardProdutoEstrela
+            nome={a.nome}
+            loja="amazon"
+            asin={a.asin}
+            precoEur={a.preco_eur}
+            precoData={VERIFICADO_EM}
+            classificacao={a.classificacao}
+            numAvaliacoes={a.num_avaliacoes}
+            etiqueta={a.etiqueta}
+            comentario={a.comentario}
+            numero={1}
+            total={1}
+          />
+        ))}
+      </section>
+    ))}
+
+    <p class="mt-10 text-center text-sm text-marinho-500">
+      Procuras leitores e acessórios de leitura? Essas oportunidades vivem na rubrica
+      <a href="/produtos-estrela" class="font-semibold text-marca-600 hover:text-marca-700">Produtos Estrela</a>.
+    </p>
+  </Container>
+</BaseLayout>

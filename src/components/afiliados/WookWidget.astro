@@ -6,14 +6,14 @@ import { WOOK_AID, WOOK_BID_BANNER } from '@lib/wook';
  *
  * Usa o logotipo oficial alojado em `public/banners/wook-logo.png`
  * (alojamos localmente porque o `afiliados.wook.pt` tem hotlink
- * protection — pedidos de fora do portal logado dão 403).
+ * protection, pedidos de fora do portal logado dão 403).
  *
  * O cartão é branco em ambas as variantes; a variante `escuro`
  * apenas escurece a sombra e os textos auxiliares à volta para
  * destacar contra fundos dark gradient (hero das listings).
  *
  * O pixel 1×1 da `programadeafiliados.wook.pt` continua a contar
- * impressões — esse não tem proteção.
+ * impressões, esse não tem proteção.
  */
 
 interface Props {
@@ -23,7 +23,7 @@ interface Props {
   classe?: string;
   /** Carregar pixel com prioridade quando o banner aparece acima do fold. */
   prioridade?: boolean;
-  /** Variante de cor — útil para ajustar contra fundos claros vs escuros. */
+  /** Variante de cor, útil para ajustar contra fundos claros vs escuros. */
   variante?: 'claro' | 'escuro';
 }
 
@@ -96,7 +96,7 @@ const fundoCartao =
     >divulgação</a>
   </p>
 
-  {/* Pixel 1×1 — Wook tracking; fora do viewport para não causar layout-shift.
+  {/* Pixel 1×1, Wook tracking; fora do viewport para não causar layout-shift.
       Sempre eager: com lazy, um elemento fora do viewport pode nunca carregar. */}
   <img
     src={pixelUrl}

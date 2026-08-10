@@ -1,7 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
-import DisclosureBanner from '@components/afiliados/DisclosureBanner.astro';
 import OrnamentoFundo from '@components/ui/OrnamentoFundo.astro';
 import { SITE } from '@lib/site';
 import { formatarData } from '@lib/formatters';
@@ -24,6 +23,7 @@ const MOTIVO_POR_CATEGORIA: Record<string, MotivoOrnamento> = {
   comparacoes: 'e-reader',
   Blog: 'pena',
   'Três Ebooks': 'livro-aberto',
+  'Produtos Estrela': 'e-reader',
 };
 
 const PILL_POR_CATEGORIA: Record<string, string> = {
@@ -35,6 +35,7 @@ const PILL_POR_CATEGORIA: Record<string, string> = {
   comparacoes: 'pill-marinho',
   Blog: 'pill-dourado',
   'Três Ebooks': 'pill-marinho',
+  'Produtos Estrela': 'pill-ambar',
 };
 
 interface Props {
@@ -188,7 +189,6 @@ const pillCategoriaClass = categoria ? PILL_POR_CATEGORIA[categoria] ?? '' : '';
         <slot />
       </div>
 
-      {mostrarDisclosure && <DisclosureBanner variante="discreta" />}
     </Container>
   </article>
 </BaseLayout>

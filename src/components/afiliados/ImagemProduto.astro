@@ -7,7 +7,7 @@ interface Props {
   asin: string;
   /** Marketplace para pedir a imagem (default: es) */
   marketplace?: Marketplace;
-  /** Texto alternativo — obrigatório para acessibilidade e SEO */
+  /** Texto alternativo, obrigatório para acessibilidade e SEO */
   alt: string;
   /** Largura em px da imagem servida pela Amazon (250, 500 ou 1000) */
   tamanho?: 250 | 500 | 1000;
@@ -49,7 +49,7 @@ const classesFormato: Record<'normal' | 'pequeno' | 'destaque', string> = {
 // o fundo da página (creme). Sem isto, aparece um rectângulo branco.
 const imgStyle = 'mix-blend-mode: multiply;';
 
-// Amazon Image Widget — ferramenta oficial do programa Associates.
+// Amazon Image Widget, ferramenta oficial do programa Associates.
 // A Amazon serve a imagem e regista a impressão ligada ao tracking ID.
 const marketConfig: Record<
   Marketplace,

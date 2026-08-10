@@ -13,7 +13,7 @@ Ser a referência em PT-PT para quem considera comprar um Kindle ou já tem um e
 - **Tailwind CSS** para estilos
 - **TypeScript** estrito
 - **Cloudflare Pages** ou Netlify para deployment
-- **Plausible/Umami** para analytics (sem cookies, RGPD-friendly)
+- **Google Analytics 4** (gtag.js) para analytics — usa cookies (`_ga`, `_ga_*`); divulgado na política de privacidade
 
 ## Comandos
 
@@ -37,6 +37,9 @@ npm run check       # astro check + type-check
 ### Tom
 Informativo, próximo e honesto. Nada de hype. Admitir limitações dos produtos. Recomendar com base em casos de uso, não em marketing.
 
+### Pontuação — travessões PROIBIDOS
+**Nunca usar travessões (—) na prosa**: em PT são sinónimo de escrita por IA. Substituir por vírgula, dois pontos, parênteses ou ponto final. Em separadores de título/UI usar «·».
+
 ### Estrutura de artigos
 - Título claro e pesquisável (SEO sem clickbait).
 - Parágrafo introdutório de 2-3 linhas que responde à pergunta central.
@@ -46,7 +49,7 @@ Informativo, próximo e honesto. Nada de hype. Admitir limitações dos produtos
 
 ## Afiliados — regras **obrigatórias**
 
-1. **Disclosure visível** em qualquer página com links de afiliado. Componente reutilizável. Texto base: *"Esta página contém links de afiliado. Se comprares através deles, podemos receber uma comissão sem custo adicional para ti."*
+1. **Disclosure discreta**: uma única linha em letra pequena no rodapé global (Footer) com link para `/divulgacao-afiliados`. **Nunca** banners ou avisos de comissão no corpo das páginas ou no topo dos artigos. Não exagerar nas menções a comissões.
 2. Página dedicada `/divulgacao-afiliados` com explicação completa.
 3. Usar **tag Amazon Associates ES** (a definir em variável de ambiente `PUBLIC_AMAZON_TAG`).
 4. Nunca mascarar ou encurtar links de afiliado de forma que esconda o destino.
@@ -110,7 +113,7 @@ O programa Amazon Associates permite usar imagens oficiais dos produtos que prom
 - Afirmações sobre preços sem data.
 - Links para ebooks pirateados ou métodos de remoção de DRM para distribuir conteúdo.
 - Brasileirismos (ver secção de idioma).
-- Cookies de tracking sem consentimento — escolhemos analytics sem cookies precisamente para isto.
+- Cookies publicitários ou de remarketing. O site usa o Google Analytics (cookies de medição, divulgados na política de privacidade), mas não publicidade comportamental.
 - Dependências JS pesadas — manter o site rápido (Lighthouse ≥95 em Performance).
 
 ## Legal
