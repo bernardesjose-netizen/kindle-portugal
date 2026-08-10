@@ -99,7 +99,7 @@ const marketplacesDisponiveis = MARKETPLACES.filter((m) => temTag(m.id)).map((m)
   </section>
 )}
 
-{marketplacesDisponiveis.length === 0 && (
+{import.meta.env.DEV && marketplacesDisponiveis.length === 0 && (
   <aside class="mt-10 rounded-xl border border-ambar-100 bg-ambar-50 p-4 text-sm text-ambar-800">
     <strong>Configuração em falta:</strong> nenhum tracking ID Amazon foi definido em variáveis de
     ambiente. Preenche <code>PUBLIC_AMAZON_TAG_ES</code> (e outros) em <code>.env</code>.

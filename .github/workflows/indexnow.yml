@@ -24,7 +24,7 @@ jobs:
       - name: Checkout (precisa do commit anterior para o diff)
         uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 50
 
       - name: Calcular URLs alteradas e enviar ping
         env:
@@ -37,8 +37,22 @@ jobs:
           # (exclui apagados, que ja nao existem). git diff entre o
           # commit anterior e o atual cobre PRs com squash-merge (1
           # commit por PR).
-          CHANGED=$(git diff --name-only --diff-filter=AM HEAD~1 HEAD -- 'src/content/' \
+          BASE="${{ github.event.before }}"
+          if [ -z "$BASE" ] || ! git cat-file -e "$BASE" 2>/dev/null; then
+            BASE=$(git rev-parse HEAD~1)
+          fi
+          CHANGED=$(git diff --name-only --diff-filter=AM "$BASE" HEAD -- 'src/content/' \
             | grep -E '\.(mdx?|md)$' || true)
+
+          # Excluir rascunhos (rascunho: true) — ainda nao tem pagina publicada
+          CHANGED=$(echo "$CHANGED" | while IFS= read -r f; do
+            [ -z "$f" ] && continue
+            if head -40 "$f" | grep -qE '^rascunho:[[:space:]]*true[[:space:]]*$'; then
+              echo "A ignorar rascunho: $f" >&2
+              continue
+            fi
+            echo "$f"
+          done)
 
           if [ -z "$CHANGED" ]; then
             echo "Sem mudancas relevantes em src/content/. Nada a notificar."
@@ -53,7 +67,7 @@ jobs:
           #   src/content/guias/foo.mdx -> https://kindleportugal.com/guias/foo
           URLS=$(echo "$CHANGED" | while IFS= read -r f; do
             [ -z "$f" ] && continue
-            slug_path=$(echo "$f" | sed -E 's|^src/content/||; s|\.(mdx?|md)$||')
+            slug_path=$(echo "$f" | sed -E 's|^src/content/||; s|\.(mdx?|md)$||; s|^boox/|modelos-boox/|')
             printf '"https://%s/%s",' "$SITE_HOST" "$slug_path"
           done | sed 's/,$//')
 

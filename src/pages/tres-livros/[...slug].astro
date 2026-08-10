@@ -26,6 +26,9 @@ const heroAlt = `Capa de ${d.livros[0].titulo}, de ${d.livros[0].autor}`;
 <ArtigoLayout
   titulo={d.titulo}
   descricao={d.descricao}
+  tituloSeo={d.seo?.titulo_seo}
+  descricaoSeo={d.seo?.descricao_seo}
+  noindex={d.seo?.noindex}
   autor={d.autor}
   dataPublicacao={d.data_publicacao}
   categoria="Três Ebooks"

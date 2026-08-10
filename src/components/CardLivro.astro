@@ -53,7 +53,7 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
         class="relative block h-auto w-full rounded-md object-contain"
         style="filter: drop-shadow(0 8px 14px rgba(15,26,36,0.18));"
         referrerpolicy="no-referrer-when-downgrade"
-        onerror="this.style.display='none'"
+        data-fallback="hide"
       />
     </figure>
 
@@ -83,7 +83,7 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
       <div class="mt-5 flex flex-wrap gap-3">
         <a
           href={linkCompra}
-          rel="nofollow sponsored"
+          rel="nofollow sponsored noopener"
           class="inline-flex items-center gap-2 rounded-lg bg-marinho-900 px-4 py-2.5 text-sm font-semibold text-creme-50 transition-colors hover:bg-marca-700"
         >
           Comprar para Kindle na Amazon
@@ -94,7 +94,7 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
         {linkWookAfiliado && (
           <a
             href={linkWookAfiliado}
-            rel="nofollow sponsored"
+            rel="nofollow sponsored noopener"
             class="inline-flex items-center gap-2 rounded-lg border border-marinho-900 px-4 py-2.5 text-sm font-semibold text-marinho-900 transition-colors hover:bg-marinho-900 hover:text-creme-50"
           >
             Comprar na Wook

@@ -112,7 +112,7 @@ const imgClasses = `object-contain ${classesFormato[formato]} ${classe}`.trim();
         class={imgClasses}
         style={imgStyle}
         referrerpolicy="no-referrer-when-downgrade"
-        onerror={`this.onerror=null;this.src='${srcFallback}'`}
+        data-fallback={srcFallback}
       />
     </a>
   ) : (
@@ -124,7 +124,7 @@ const imgClasses = `object-contain ${classesFormato[formato]} ${classe}`.trim();
       class={imgClasses}
       style={imgStyle}
       referrerpolicy="no-referrer-when-downgrade"
-      onerror={`this.onerror=null;this.src='${srcFallback}'`}
+      data-fallback={srcFallback}
     />
   )
 }
