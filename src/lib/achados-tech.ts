@@ -8,7 +8,7 @@
  * e remete para a Amazon para o valor do momento.
  */
 
-export const VERIFICADO_EM = new Date('2026-08-01');
+export const VERIFICADO_EM = new Date('2026-08-03');
 
 export interface AchadoTech {
   nome: string;
@@ -26,7 +26,7 @@ export const ACHADOS_TECH: AchadoTech[] = [
     nome: 'Echo Dot (5.ª geração)',
     asin: 'B09B9CX8PW',
     categoria: 'Casa inteligente',
-    preco_eur: 51.02,
+    preco_eur: 66.06,
     classificacao: 4.7,
     num_avaliacoes: 2900,
     comentario:
@@ -36,7 +36,7 @@ export const ACHADOS_TECH: AchadoTech[] = [
     nome: 'Echo Dot Max',
     asin: 'B0DKLGMX7R',
     categoria: 'Casa inteligente',
-    preco_eur: 86.36,
+    preco_eur: 111.81,
     classificacao: 4.6,
     num_avaliacoes: 32,
     etiqueta: 'Novidade',
@@ -47,19 +47,19 @@ export const ACHADOS_TECH: AchadoTech[] = [
     nome: 'TP-Link Tapo P100 (tomada inteligente)',
     asin: 'B07Z5JD3T4',
     categoria: 'Casa inteligente',
-    preco_eur: 7.84,
+    preco_eur: 9.64,
     classificacao: 4.6,
     num_avaliacoes: 42200,
     comentario:
-      'O produto com melhor relação preço-utilidade desta lista: uma tomada Wi-Fi que se comanda pelo telemóvel ou por voz (Alexa e Google Home), programa horários e desliga aparelhos à distância. Mais de quarenta mil avaliações compradas a menos de 8 € — difícil errar. Há pack de 4 por cerca de 29 €.',
+      'O produto com melhor relação preço-utilidade desta lista: uma tomada Wi-Fi que se comanda pelo telemóvel ou por voz (Alexa e Google Home), programa horários e desliga aparelhos à distância. Mais de quarenta mil avaliações compradas por menos de 10 € — difícil errar. Há pack de 4 por cerca de 29 €.',
   },
   {
     nome: 'Fire TV Stick 4K Plus',
     asin: 'B0F7ZFWVTC',
     categoria: 'Streaming',
-    preco_eur: 54.95,
+    preco_eur: 71.14,
     classificacao: 4.6,
-    num_avaliacoes: 38500,
+    num_avaliacoes: 38600,
     etiqueta: 'Wi-Fi 6',
     comentario:
       'Transforma qualquer televisão com HDMI numa smart TV rápida: Netflix, Prime Video, Disney+, RTP Play e companhia, com 4K, Dolby Vision e Dolby Atmos. A versão atual traz Wi-Fi 6 e comando com controlo da televisão. Para televisões mais antigas ou secundárias, é a forma mais barata de as modernizar.',
@@ -78,9 +78,9 @@ export const ACHADOS_TECH: AchadoTech[] = [
     nome: 'Apple AirTag (2.ª geração)',
     asin: 'B0GJTFY58R',
     categoria: 'Para levar no bolso',
-    preco_eur: 21.69,
+    preco_eur: 28.45,
     classificacao: 4.7,
-    num_avaliacoes: 1300,
+    num_avaliacoes: 1400,
     etiqueta: 'Novidade',
     comentario:
       'A segunda geração do localizador da Apple, com maior alcance na busca de precisão. Nas chaves, na mala de viagem ou na mochila do portátil, avisa onde as coisas ficaram — requer iPhone. O pack de 4 fica sensivelmente ao preço de três unidades avulsas.',
