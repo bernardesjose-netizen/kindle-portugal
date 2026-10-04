@@ -1,0 +1,141 @@
+---
+/**
+ * Conta decrescente até uma data (ex.: abertura do Prime Big Deal Days).
+ *
+ * A contagem é calculada no browser, por isso não depende da hora do build:
+ * num site estático, um valor fixado no build ficaria desatualizado horas
+ * depois. Para quem tem o JavaScript desligado, o componente já vem com os
+ * dias e as horas calculados no momento do build, que é informação suficiente.
+ */
+interface Props {
+  /** Momento para onde a contagem corre. */
+  alvo: Date;
+  /** Texto curto acima dos números. */
+  etiqueta?: string;
+  /** Mensagem a mostrar quando a contagem chega a zero. */
+  mensagem_fim?: string;
+  /** `escuro` para fundos marinho/oceano, `claro` para fundo creme. */
+  tema?: 'claro' | 'escuro';
+  classe?: string;
+}
+
+const {
+  alvo,
+  etiqueta = 'Começa dentro de',
+  mensagem_fim = 'Já começou.',
+  tema = 'escuro',
+  classe = '',
+} = Astro.props;
+
+const restante = alvo.getTime() - Date.now();
+const dias = Math.max(0, Math.floor(restante / 86_400_000));
+const horas = Math.max(0, Math.floor((restante % 86_400_000) / 3_600_000));
+const minutos = Math.max(0, Math.floor((restante % 3_600_000) / 60_000));
+
+const unidades = [
+  { chave: 'dias', valor: dias, etiqueta: dias === 1 ? 'dia' : 'dias' },
+  { chave: 'horas', valor: horas, etiqueta: horas === 1 ? 'hora' : 'horas' },
+  { chave: 'minutos', valor: minutos, etiqueta: minutos === 1 ? 'minuto' : 'minutos' },
+  { chave: 'segundos', valor: 0, etiqueta: 'segundos' },
+];
+
+const caixaClasse =
+  tema === 'escuro'
+    ? 'border-creme-50/25 bg-creme-50/10 text-creme-50'
+    : 'border-marinho-100 bg-white text-marinho-900';
+const etiquetaClasse = tema === 'escuro' ? 'text-oceano-100/80' : 'text-marinho-500';
+const unidadeClasse = tema === 'escuro' ? 'text-oceano-100/70' : 'text-marinho-500';
+---
+
+<div class={`${classe}`} data-contagem data-alvo={alvo.toISOString()}>
+  <p class={`text-xs font-semibold uppercase tracking-wider ${etiquetaClasse}`}>{etiqueta}</p>
+
+  <div class="mt-2 flex flex-wrap items-stretch gap-2" data-contagem-numeros>
+    {unidades.map((u) => (
+      <div class={`min-w-[4.25rem] rounded-xl border px-3 py-2 text-center ${caixaClasse}`}>
+        <span
+          class="block text-2xl font-bold leading-none sm:text-3xl"
+          style="font-variant-numeric: tabular-nums;"
+          data-contagem-valor={u.chave}>{String(u.valor).padStart(2, '0')}</span>
+        <span
+          class={`mt-1 block text-[0.65rem] font-medium uppercase tracking-wide ${unidadeClasse}`}
+          data-contagem-rotulo={u.chave}>{u.etiqueta}</span>
+      </div>
+    ))}
+  </div>
+
+  <p class={`mt-2 hidden text-sm font-semibold ${tema === 'escuro' ? 'text-marca-200' : 'text-marca-700'}`} data-contagem-fim>
+    {mensagem_fim}
+  </p>
+</div>
+
+<script is:inline>
+  (function () {
+    if (window.__contagemDecrescenteKP) return;
+    window.__contagemDecrescenteKP = true;
+
+    var ROTULOS = {
+      dias: ['dia', 'dias'],
+      horas: ['hora', 'horas'],
+      minutos: ['minuto', 'minutos'],
+      segundos: ['segundo', 'segundos'],
+    };
+
+    function atualizar() {
+      var blocos = document.querySelectorAll('[data-contagem]');
+      for (var i = 0; i < blocos.length; i++) {
+        var bloco = blocos[i];
+        var alvo = Date.parse(bloco.getAttribute('data-alvo'));
+        if (isNaN(alvo)) continue;
+
+        var ms = alvo - Date.now();
+        var numeros = bloco.querySelector('[data-contagem-numeros]');
+        var fim = bloco.querySelector('[data-contagem-fim]');
+
+        if (ms <= 0) {
+          if (numeros) numeros.classList.add('hidden');
+          if (fim) fim.classList.remove('hidden');
+          bloco.removeAttribute('aria-label');
+          continue;
+        }
+
+        var total = Math.floor(ms / 1000);
+        var valores = {
+          dias: Math.floor(total / 86400),
+          horas: Math.floor((total % 86400) / 3600),
+          minutos: Math.floor((total % 3600) / 60),
+          segundos: total % 60,
+        };
+
+        for (var chave in valores) {
+          if (!Object.prototype.hasOwnProperty.call(valores, chave)) continue;
+          var alvoValor = bloco.querySelector('[data-contagem-valor="' + chave + '"]');
+          if (alvoValor) {
+            var texto = String(valores[chave]);
+            alvoValor.textContent = texto.length < 2 ? '0' + texto : texto;
+          }
+          var alvoRotulo = bloco.querySelector('[data-contagem-rotulo="' + chave + '"]');
+          if (alvoRotulo) {
+            alvoRotulo.textContent = ROTULOS[chave][valores[chave] === 1 ? 0 : 1];
+          }
+        }
+
+        // Rótulo acessível sem ler os segundos de dois em dois segundos.
+        bloco.setAttribute(
+          'aria-label',
+          'Faltam ' +
+            valores.dias +
+            ' ' +
+            ROTULOS.dias[valores.dias === 1 ? 0 : 1] +
+            ' e ' +
+            valores.horas +
+            ' ' +
+            ROTULOS.horas[valores.horas === 1 ? 0 : 1]
+        );
+      }
+    }
+
+    atualizar();
+    setInterval(atualizar, 1000);
+  })();
+</script>

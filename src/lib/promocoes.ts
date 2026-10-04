@@ -1,19 +1,21 @@
 /**
- * Campanha de promoções ativa (ex.: Prime Day).
+ * Campanha de promoções ativa (ex.: Prime Day, Prime Big Deal Days).
  *
- * REGRA DO PROJETO (CLAUDE.md): nunca inventar preços. Por isso `preco_promo`
- * e `desconto_pct` começam a `null`. Enquanto estiverem a `null`, o site mostra
- * o preço de referência (com data) do modelo e remete para a Amazon para o
- * preço atual — não inventa nenhum desconto.
+ * REGRA DO PROJETO (CLAUDE.md): nunca inventar preços. Todos os valores abaixo
+ * foram lidos na ficha do produto na Amazon.es, com entrega para Portugal, na
+ * data indicada em `verificado_em`. Quando um preço não se consegue confirmar,
+ * fica a `null` e o site mostra o preço de referência do modelo (com data) em
+ * vez de afirmar um desconto.
  *
- * Quando tiveres os números reais do Prime Day, preenche em cada item:
- *   - `preco_promo`   → o preço promocional em euros (ex.: 139.99)
- *   - `desconto_pct`  → a percentagem de desconto inteira (ex.: 18)
- * e atualiza `verificado_em` com a data em que confirmaste os preços na Amazon.
+ * A campanha tem três fases, devolvidas por `faseCampanha()`:
+ *   - `antecipacao`  entre `antecipacao` e `inicio`: conta decrescente e ofertas
+ *                    que a Amazon já abriu antes do evento;
+ *   - `ativa`        entre `inicio` e `fim`: campanha a decorrer;
+ *   - `fora`         fora dessas janelas, ou com `ativa: false`.
  *
- * A campanha só aparece no site enquanto `ativa === true` E a data atual
- * estiver dentro da janela [inicio, fim]. Como o site é estático e reconstrói
- * diariamente (publicação agendada), o banner desaparece sozinho após `fim`.
+ * Como o site é estático e reconstrói diariamente (publicação agendada), a
+ * passagem de fase acontece sozinha. A conta decrescente é calculada no browser
+ * a partir de `inicio`, por isso não depende da hora do build.
  */
 
 export interface ItemPromocao {
@@ -33,13 +35,13 @@ export interface ItemPromocao {
   /**
    * Nota curta sobre o estado do desconto deste modelo (ex.: explicar que a
    * geração mais recente não está em promoção). Se definida, o cartão mostra
-   * "Sem desconto Prime Day" em vez de "Promoção".
+   * "Sem desconto nesta campanha" em vez de "Promoção".
    */
   nota?: string;
   /**
-   * Variante alternativa em promoção (ex.: a geração anterior em saldo), com o
-   * seu próprio ASIN e preços (IVA incluído). Mostrada como destaque extra no
-   * cartão, com botão de compra próprio.
+   * Variante alternativa em promoção (ex.: a geração seguinte, ou a anterior em
+   * saldo), com o seu próprio ASIN e preços (IVA incluído). Mostrada como
+   * destaque extra no cartão, com botão de compra próprio.
    */
   alternativa?: {
     etiqueta: string;
@@ -50,6 +52,8 @@ export interface ItemPromocao {
   } | null;
 }
 
+export type FaseCampanha = 'antecipacao' | 'ativa' | 'fora';
+
 export interface Campanha {
   /** Interruptor geral. `false` = nunca mostra, independentemente das datas. */
   ativa: boolean;
@@ -59,51 +63,103 @@ export interface Campanha {
   etiqueta: string;
   /** Frase de abertura, vista no banner e no topo da página. */
   slogan: string;
+  /** Frase usada apenas na fase de antecipação, antes de o evento abrir. */
+  slogan_antecipacao: string;
+  /** A partir de quando mostrar a conta decrescente e as ofertas antecipadas. */
+  antecipacao: Date;
   /** Início e fim (inclusive) da janela, com fuso de Portugal (verão = +01:00). */
   inicio: Date;
   fim: Date;
   /** Data em que os preços promocionais foram verificados na Amazon. */
   verificado_em: Date | null;
+  /** Onde foram confirmadas as datas do evento (rastreabilidade editorial). */
+  fonte_datas: string;
   /** Modelos em promoção, pela ordem em que aparecem. */
   itens: ItemPromocao[];
 }
 
 export const CAMPANHA: Campanha = {
   ativa: true,
-  nome: 'Promoções Kindle — Prime Day 2026',
-  etiqueta: 'Prime Day',
-  slogan: 'Kindle com grandes promoções na Amazon — até −40%, só durante alguns dias.',
-  inicio: new Date('2026-06-23T00:00:00+01:00'),
-  fim: new Date('2026-06-25T23:59:59+01:00'),
-  verificado_em: new Date('2026-06-23'),
+  nome: 'Promoções Kindle · Prime Big Deal Days 2026',
+  etiqueta: 'Prime Big Deal Days',
+  slogan: 'Kindle com grandes descontos na Amazon.es, só para membros Prime.',
+  slogan_antecipacao:
+    'O Prime Big Deal Days é a 6 e 7 de outubro, mas há Kindle já com desconto antes da abertura.',
+  antecipacao: new Date('2026-09-28T00:00:00+01:00'),
+  inicio: new Date('2026-10-06T00:00:00+01:00'),
+  fim: new Date('2026-10-07T23:59:59+01:00'),
+  verificado_em: new Date('2026-10-04'),
+  fonte_datas: 'Anúncio oficial da Amazon (aboutamazon.com), consultado a 04/10/2026.',
   itens: [
-    // Preços IVA incluído (consumidor PT), Amazon.es, verificados a 23/06/2026.
-    { slug: 'paperwhite', preco_promo: 142.3, preco_normal: 182.96, desconto_pct: 22, destaque: true },
-    { slug: 'basico', preco_promo: 103.68, preco_normal: 121.98, desconto_pct: 15 },
-    { slug: 'colorsoft', preco_promo: 172.8, preco_normal: 274.45, desconto_pct: 37 },
-    // Scribe: a 3.ª geração (ASIN B0CZB5RHWX, a que documentamos) NÃO tem
-    // desconto neste Prime Day. Quem está em saldo a −40% é a geração anterior
-    // (Kindle Scribe 2024, ASIN B0CZB73S5L) — destacada como alternativa.
+    // Preços IVA incluído (consumidor PT), Amazon.es, verificados a 04/10/2026.
+    // O "preço normal" é o preço recomendado que a Amazon mostra riscado na ficha.
+    {
+      slug: 'basico',
+      preco_promo: 91.39,
+      preco_normal: 172.8,
+      desconto_pct: 47,
+      destaque: true,
+    },
+    {
+      slug: 'colorsoft',
+      preco_promo: 166.71,
+      preco_normal: 304.95,
+      desconto_pct: 45,
+    },
+    // Paperwhite: sem desconto. A ficha que documentamos (12.ª geração, 2024)
+    // estava a 228,71 € a 04/10 e a Amazon já anuncia a geração seguinte, com
+    // lançamento marcado para 11 de novembro de 2026.
+    {
+      slug: 'paperwhite',
+      preco_promo: null,
+      preco_normal: null,
+      desconto_pct: null,
+      nota:
+        'O Paperwhite de 2024 não está em promoção e subiu de preço nos últimos meses. A Amazon já aceita reservas da geração seguinte, mais fina e leve, com lançamento a 11 de novembro de 2026, o que costuma explicar a falta de desconto no modelo a sair.',
+    },
+    // Scribe: o ASIN que documentamos na ficha (B0CZB5RHWX, 3.ª geração, 16 GB)
+    // aparecia como indisponível a 04/10, sem previsão de reposição. Quem está
+    // em promoção é a geração seguinte, destacada como alternativa.
     {
       slug: 'scribe',
       preco_promo: null,
       preco_normal: null,
       desconto_pct: null,
-      nota: 'A 3.ª geração (a mais recente, que documentamos na ficha) não está em promoção neste Prime Day — mantém o preço habitual.',
+      nota:
+        'O Scribe desta ficha estava indisponível na Amazon.es a 4 de outubro, sem previsão de reposição. Em promoção está a geração seguinte, mais fina e rápida, com 32 GB.',
       alternativa: {
-        etiqueta: 'Geração anterior (Kindle Scribe 2024) em saldo de Prime Day',
-        asin: 'B0CZB73S5L',
-        preco_promo: 274.45,
-        preco_normal: 457.42,
-        desconto_pct: 40,
+        etiqueta: 'Geração mais recente do Kindle Scribe, em promoção',
+        asin: 'B0FC1XB22K',
+        preco_promo: 370.02,
+        preco_normal: 528.58,
+        desconto_pct: 30,
       },
     },
   ],
 };
 
+/** Fase em que a campanha se encontra na data indicada. */
+export function faseCampanha(agora: Date = new Date()): FaseCampanha {
+  if (!CAMPANHA.ativa) return 'fora';
+  if (agora >= CAMPANHA.inicio && agora <= CAMPANHA.fim) return 'ativa';
+  if (agora >= CAMPANHA.antecipacao && agora < CAMPANHA.inicio) return 'antecipacao';
+  return 'fora';
+}
+
 /**
- * Indica se a campanha deve estar visível agora. Usa a data de build/runtime.
+ * Indica se a campanha está a decorrer agora (fase `ativa`). Usa a data de
+ * build/runtime.
  */
 export function campanhaAtiva(agora: Date = new Date()): boolean {
-  return CAMPANHA.ativa && agora >= CAMPANHA.inicio && agora <= CAMPANHA.fim;
+  return faseCampanha(agora) === 'ativa';
+}
+
+/** Indica se a campanha deve estar visível no site (antecipação ou a decorrer). */
+export function campanhaVisivel(agora: Date = new Date()): boolean {
+  return faseCampanha(agora) !== 'fora';
+}
+
+/** Itens com desconto confirmado, para destacar antes e durante o evento. */
+export function itensComDesconto(): ItemPromocao[] {
+  return CAMPANHA.itens.filter((it) => it.preco_promo != null);
 }
