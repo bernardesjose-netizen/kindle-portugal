@@ -1,0 +1,195 @@
+---
+/**
+ * Destaque grande da campanha em curso, para o topo da página de entrada.
+ *
+ * Aparece acima do herói, logo é a primeira coisa visível sem rolar. Só existe
+ * enquanto a campanha estiver visível (antecipação ou a decorrer), por isso
+ * desaparece sozinho quando a janela fecha e o site reconstrói.
+ *
+ * Mostra apenas modelos com `preco_promo` confirmado: nunca anuncia um desconto
+ * que não tenha sido verificado na Amazon (regra do CLAUDE.md).
+ */
+import Container from '@components/ui/Container.astro';
+import ContagemDecrescente from '@components/afiliados/ContagemDecrescente.astro';
+import { getCollection } from 'astro:content';
+import { CAMPANHA, campanhaVisivel, faseCampanha } from '@lib/promocoes';
+import { formatarPreco, formatarData } from '@lib/formatters';
+import { imagemParaAsin } from '@lib/asin-images';
+import { urlAfiliado } from '@lib/afiliados';
+
+const visivel = campanhaVisivel();
+const aDecorrer = faseCampanha() === 'ativa';
+
+type Destaque = {
+  slug: string;
+  nome: string;
+  asin: string | undefined;
+  preco_promo: number;
+  preco_normal: number | null;
+  desconto_pct: number | null;
+};
+
+let destaques: Destaque[] = [];
+
+if (visivel) {
+  const modelos = await getCollection('modelos', ({ data }) => !data.rascunho);
+  destaques = CAMPANHA.itens
+    .filter((it) => it.preco_promo != null)
+    .map((it) => {
+      const m = modelos.find((x) => x.id === it.slug);
+      if (!m) return null;
+      return {
+        slug: it.slug,
+        nome: m.data.nome,
+        asin: m.data.asin,
+        preco_promo: it.preco_promo as number,
+        preco_normal: it.preco_normal ?? m.data.preco_referencia_eur ?? null,
+        desconto_pct: it.desconto_pct,
+      };
+    })
+    .filter((x): x is Destaque => x !== null)
+    .slice(0, 2);
+}
+
+const maiorCorte = destaques.reduce((max, d) => Math.max(max, d.desconto_pct ?? 0), 0);
+---
+
+{visivel && destaques.length > 0 && (
+  <section
+    class="relative overflow-hidden border-b-4 border-marca-600 bg-gradient-to-br from-marca-700 via-marca-600 to-marinho-900 text-creme-50"
+    aria-labelledby="destaque-campanha-titulo"
+  >
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0"
+      style="background-image: radial-gradient(ellipse at top left, rgb(255 188 74 / 0.30) 0%, transparent 55%), radial-gradient(ellipse at bottom right, rgb(15 26 36 / 0.45) 0%, transparent 60%);"
+    />
+
+    <Container largura="normal" classe="relative z-10 py-8 sm:py-10">
+      <div class="grid items-center gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
+        {/* Lado esquerdo: mensagem e contagem */}
+        <div>
+          <span class="inline-flex items-center gap-1.5 rounded-full bg-creme-50/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-creme-50 ring-1 ring-inset ring-creme-50/30">
+            <span class="relative flex h-2 w-2" aria-hidden="true">
+              {aDecorrer && (
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-creme-50 opacity-75"></span>
+              )}
+              <span class="relative inline-flex h-2 w-2 rounded-full bg-creme-50"></span>
+            </span>
+            {CAMPANHA.etiqueta} · {aDecorrer ? 'a decorrer' : `${formatarData(CAMPANHA.inicio)}`}
+          </span>
+
+          <h2
+            id="destaque-campanha-titulo"
+            class="mt-4 text-[1.75rem] font-bold leading-[1.1] sm:text-4xl"
+            style="letter-spacing: -0.03em; font-family: var(--font-serif);"
+          >
+            {aDecorrer
+              ? `Kindle até −${maiorCorte}% na Amazon.es`
+              : `Os descontos já abriram: Kindle até −${maiorCorte}%`}
+          </h2>
+
+          <p class="mt-3 max-w-xl text-creme-50/90">
+            {aDecorrer
+              ? 'Campanha reservada a membros Prime. Preços confirmados por nós, com data.'
+              : 'Não é preciso esperar pelo dia 6. A Amazon já libertou parte das ofertas, e estas foram confirmadas por nós hoje.'}
+          </p>
+
+          {!aDecorrer && (
+            <ContagemDecrescente
+              alvo={CAMPANHA.inicio}
+              etiqueta="Abre dentro de"
+              mensagem_fim="Já abriu. Vê os preços do momento na Amazon."
+              tema="escuro"
+              classe="mt-6"
+            />
+          )}
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a
+              href="/promocoes"
+              class="inline-flex items-center gap-2 rounded-[0.625rem] bg-creme-50 px-5 py-3 font-bold text-marinho-900 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-md"
+            >
+              Ver todas as promoções
+              <span aria-hidden="true">→</span>
+            </a>
+            <a
+              href="/guias/prime-big-deal-days-2026"
+              class="inline-flex items-center gap-2 rounded-[0.625rem] border border-creme-50/40 bg-creme-50/10 px-5 py-3 font-semibold text-creme-50 backdrop-blur transition hover:-translate-y-0.5 hover:border-creme-50/70 hover:bg-creme-50/20"
+            >
+              Como aproveitar sem pagar Prime
+            </a>
+          </div>
+        </div>
+
+        {/* Lado direito: os modelos com desconto confirmado */}
+        <ul class="grid gap-3 sm:grid-cols-2">
+          {destaques.map((d) => {
+            const img = d.asin ? imagemParaAsin(d.asin, 300) : null;
+            return (
+              <li class="rounded-2xl border border-creme-50/25 bg-marinho-900/35 p-4 backdrop-blur-sm">
+                <a href={`/modelos/${d.slug}`} class="group block">
+                  <div class="flex items-center gap-3">
+                    {img && (
+                      <img
+                        src={img}
+                        alt=""
+                        loading="eager"
+                        decoding="async"
+                        width="56"
+                        height="56"
+                        class="h-14 w-14 shrink-0 rounded-lg bg-creme-50 object-contain p-1"
+                        style="mix-blend-mode: multiply;"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        data-fallback="hide"
+                      />
+                    )}
+                    <div class="min-w-0">
+                      <p class="truncate text-sm font-bold text-creme-50 transition-colors group-hover:text-dourado-300">
+                        {d.nome}
+                      </p>
+                      {d.desconto_pct != null && (
+                        <span class="mt-1 inline-block rounded bg-dourado-400 px-1.5 py-0.5 text-[0.7rem] font-bold text-marinho-900">
+                          −{d.desconto_pct}%
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <p class="mt-3 flex flex-wrap items-baseline gap-x-2">
+                    <span class="text-2xl font-bold text-creme-50">{formatarPreco(d.preco_promo)}</span>
+                    {d.preco_normal != null && (
+                      <span class="text-sm text-creme-50/60 line-through">{formatarPreco(d.preco_normal)}</span>
+                    )}
+                  </p>
+                </a>
+
+                {d.asin && (
+                  <a
+                    href={urlAfiliado(`https://www.amazon.es/dp/${d.asin}`)}
+                    rel="sponsored nofollow noopener"
+                    target="_blank"
+                    data-afiliado="amazon"
+                    data-mercado="es"
+                    class="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-creme-50/15 px-3 py-2 text-xs font-bold text-creme-50 ring-1 ring-inset ring-creme-50/25 transition-all hover:bg-creme-50 hover:text-marinho-900"
+                  >
+                    Ver na Amazon.es
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      {CAMPANHA.verificado_em && (
+        <p class="mt-6 text-xs text-creme-50/70">
+          Preços confirmados na Amazon.es a {formatarData(CAMPANHA.verificado_em)}, com entrega para
+          Portugal. Mudam ao minuto e não garantimos disponibilidade: o valor que conta é o da ficha
+          ao abrir o link.
+        </p>
+      )}
+    </Container>
+  </section>
+)}
