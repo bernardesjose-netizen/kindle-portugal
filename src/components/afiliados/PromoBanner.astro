@@ -1,11 +1,18 @@
 ---
 import Container from '@components/ui/Container.astro';
 import { getCollection } from 'astro:content';
-import { CAMPANHA, campanhaAtiva } from '@lib/promocoes';
+import { CAMPANHA, campanhaVisivel, faseCampanha } from '@lib/promocoes';
 import { formatarData } from '@lib/formatters';
 import { imagemParaAsin } from '@lib/asin-images';
 
-const ativa = campanhaAtiva();
+const fase = faseCampanha();
+const ativa = campanhaVisivel();
+const aDecorrer = fase === 'ativa';
+
+const slogan = aDecorrer ? CAMPANHA.slogan : CAMPANHA.slogan_antecipacao;
+const nota = aDecorrer
+  ? `Válido até ${formatarData(CAMPANHA.fim)}`
+  : `Começa a ${formatarData(CAMPANHA.inicio)}`;
 
 let thumbs: string[] = [];
 if (ativa) {
@@ -34,13 +41,15 @@ if (ativa) {
         <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 sm:flex-nowrap">
           <span class="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-marca-500 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-sm">
             <span class="relative flex h-2 w-2" aria-hidden="true">
-              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
+              {aDecorrer && (
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
+              )}
               <span class="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
             </span>
             {CAMPANHA.etiqueta}
           </span>
           <span class="text-sm font-semibold text-creme-50 sm:text-base">
-            {CAMPANHA.slogan}
+            {slogan}
           </span>
         </div>
 
@@ -64,11 +73,11 @@ if (ativa) {
                 </li>
               ))}
             </ul>
-
-            <span class="hidden text-xs font-medium text-oceano-100/80 sm:inline">
-              Válido até {formatarData(CAMPANHA.fim)}
-            </span>
           )}
+
+          <span class="hidden text-xs font-medium text-oceano-100/80 sm:inline">
+            {nota}
+          </span>
 
           <span class="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-creme-50 px-4 py-2 text-sm font-bold text-marinho-900 shadow-sm transition-all group-hover:-translate-y-0.5 group-hover:bg-marca-50 group-hover:text-marca-700">
             Ver promoções

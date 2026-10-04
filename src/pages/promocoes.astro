@@ -2,13 +2,16 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
 import { getCollection } from 'astro:content';
-import { CAMPANHA, campanhaAtiva } from '@lib/promocoes';
+import { CAMPANHA, campanhaVisivel, faseCampanha } from '@lib/promocoes';
+import ContagemDecrescente from '@components/afiliados/ContagemDecrescente.astro';
 import { SITE } from '@lib/site';
 import { formatarPreco, formatarData } from '@lib/formatters';
 import { imagemParaAsin } from '@lib/asin-images';
 import { linksPorLojaDeAsin, urlAfiliado, MARKETPLACES, temTag } from '@lib/afiliados';
 
-const ativa = campanhaAtiva();
+const fase = faseCampanha();
+const ativa = campanhaVisivel();
+const aDecorrer = fase === 'ativa';
 
 const modelos = await getCollection('modelos', ({ data }) => !data.rascunho);
 
@@ -21,10 +24,17 @@ const itens = CAMPANHA.itens
 
 const paisesComTag = MARKETPLACES.filter((m) => temTag(m.id)).map((m) => m.etiqueta.replace('Amazon ', ''));
 
-const titulo = ativa ? 'Promoções Kindle, Prime Day 2026' : 'Promoções Kindle';
-const descricao = ativa
-  ? `Kindle com grandes promoções na Amazon durante o Prime Day 2026: Paperwhite, básico, Colorsoft e Scribe. Vê o desconto de cada modelo e onde comprar. Válido até ${formatarData(CAMPANHA.fim)}.`
-  : 'Quando houver promoções de Kindle a decorrer, ficam aqui. Vê entretanto todos os modelos e os preços de referência.';
+const titulo = aDecorrer
+  ? 'Promoções Kindle, Prime Big Deal Days 2026'
+  : fase === 'antecipacao'
+    ? 'Prime Big Deal Days 2026: promoções Kindle e contagem decrescente'
+    : 'Promoções Kindle';
+
+const descricao = aDecorrer
+  ? `Kindle com grandes promoções na Amazon durante o Prime Big Deal Days 2026: básico, Colorsoft, Paperwhite e Scribe. Vê o desconto de cada modelo e onde comprar. Válido até ${formatarData(CAMPANHA.fim)}.`
+  : fase === 'antecipacao'
+    ? `O Prime Big Deal Days é a 6 e 7 de outubro de 2026 e há Kindle já com desconto antes da abertura: básico a ${formatarPreco(91.39)} e Colorsoft a ${formatarPreco(166.71)}, preços confirmados a ${formatarData(CAMPANHA.verificado_em)}.`
+    : 'Quando houver promoções de Kindle a decorrer, ficam aqui. Vê entretanto todos os modelos e os preços de referência.';
 
 // Esquema ItemList → só anuncia `price` quando o preço promocional foi
 // confirmado (preco_promo != null). Caso contrário, não afirma um preço atual.
@@ -57,6 +67,14 @@ const jsonLd = ativa
     }
   : undefined;
 
+// "6 e 7 de outubro", construído a partir das datas da campanha.
+const janela = `${new Intl.DateTimeFormat('pt-PT', { day: 'numeric' }).format(CAMPANHA.inicio)} e ${new Intl.DateTimeFormat(
+  'pt-PT',
+  { day: 'numeric', month: 'long' }
+).format(CAMPANHA.fim)}`;
+
+const comDesconto = itens.filter((it) => it.preco_promo != null).length;
+
 const bandeiras: Record<string, string> = {
   es: '🇪🇸',
   com: '🇺🇸',
@@ -80,19 +98,42 @@ const bandeiras: Record<string, string> = {
         <>
           <span class="inline-flex items-center gap-1.5 rounded-full bg-marca-500 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-sm">
             <span class="relative flex h-2 w-2" aria-hidden="true">
-              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
+              {aDecorrer && (
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
+              )}
               <span class="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
             </span>
-            {CAMPANHA.etiqueta} · a decorrer
+            {CAMPANHA.etiqueta} · {aDecorrer ? 'a decorrer' : janela}
           </span>
           <h1 class="mt-5 text-[2rem] font-bold leading-[1.1] sm:text-5xl" style="letter-spacing: -0.035em;">
-            Kindle com grandes promoções
+            {aDecorrer ? 'Kindle com grandes promoções' : 'Prime Big Deal Days: o que já está em promoção'}
           </h1>
-          <p class="mt-5 max-w-2xl text-lg text-oceano-100/90">{CAMPANHA.slogan}</p>
-          <p class="mt-6 inline-flex items-center gap-2 rounded-lg border border-marca-400/40 bg-marca-500/15 px-4 py-2 text-sm font-semibold text-marca-200">
-            <span aria-hidden="true">⏳</span>
-            Válido até {formatarData(CAMPANHA.fim)}
+          <p class="mt-5 max-w-2xl text-lg text-oceano-100/90">
+            {aDecorrer ? CAMPANHA.slogan : CAMPANHA.slogan_antecipacao}
           </p>
+
+          {aDecorrer ? (
+            <p class="mt-6 inline-flex items-center gap-2 rounded-lg border border-marca-400/40 bg-marca-500/15 px-4 py-2 text-sm font-semibold text-marca-200">
+              <span aria-hidden="true">⏳</span>
+              Válido até {formatarData(CAMPANHA.fim)}
+            </p>
+          ) : (
+            <ContagemDecrescente
+              alvo={CAMPANHA.inicio}
+              etiqueta="O Prime Big Deal Days abre dentro de"
+              mensagem_fim="O Prime Big Deal Days já abriu. Vê os descontos abaixo."
+              tema="escuro"
+              classe="mt-7"
+            />
+          )}
+
+          {!aDecorrer && comDesconto > 0 && (
+            <p class="mt-6 max-w-2xl rounded-lg border border-marca-400/40 bg-marca-500/15 px-4 py-3 text-sm font-semibold text-marca-200">
+              Não é preciso esperar pelo dia 6: a Amazon costuma abrir parte das ofertas antes do
+              evento, e há já {comDesconto} modelos de Kindle com desconto confirmado a{' '}
+              {formatarData(CAMPANHA.verificado_em)}.
+            </p>
+          )}
         </>
       ) : (
         <>
@@ -115,6 +156,20 @@ const bandeiras: Record<string, string> = {
 
   {ativa && (
     <Container largura="normal" classe="py-12 sm:py-16">
+
+      <div class="caixa p-5">
+        <h2 class="text-lg font-bold text-marinho-900" style="font-family: var(--font-serif);">
+          Para comprar nestes dias é preciso ser membro Prime
+        </h2>
+        <p class="mt-2 text-sm text-marinho-700">
+          O Prime Big Deal Days é uma campanha reservada a subscritores. Quem não tem Prime pode
+          começar pelo período gratuito de 30 dias e cancelar antes de renovar, ou escolher o plano
+          mensal de 4,99 €. Explicamos as contas, os planos e as condições no{' '}
+          <a href="/guias/prime-big-deal-days-2026" class="font-semibold text-marca-700 underline decoration-marca-300 underline-offset-2 hover:text-marca-800">
+            guia do Prime Big Deal Days 2026
+          </a>.
+        </p>
+      </div>
 
       <p class="mt-6 rounded-xl border border-ambar-100 bg-ambar-50 p-4 text-sm text-ambar-800">
         <strong>Os preços na Amazon mudam ao minuto.</strong> Indicamos o preço de referência
@@ -196,7 +251,7 @@ const bandeiras: Record<string, string> = {
                       <div>
                         {it.nota ? (
                           <span class="inline-flex items-center gap-1.5 rounded-full bg-marinho-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-marinho-700">
-                            Sem desconto neste Prime Day
+                            Sem desconto nesta campanha
                           </span>
                         ) : (
                           <span class="inline-flex items-center gap-1.5 rounded-full bg-marca-50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-marca-700">

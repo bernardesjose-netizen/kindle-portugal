@@ -37,7 +37,7 @@ const porCategoria = CATEGORIAS.map((c) => ({
       </p>
       <p class="mt-5 inline-flex items-center gap-2 rounded-lg border border-creme-50/20 bg-creme-50/10 px-4 py-2 text-sm text-creme-50/90">
         <span aria-hidden="true">🗓️</span>
-        Preços verificados na Amazon.es a {formatarData(VERIFICADO_EM)}
+        Última verificação na Amazon.es a {formatarData(VERIFICADO_EM)}. Cada cartão indica a data do seu preço.
       </p>
     </Container>
   </section>
@@ -46,8 +46,8 @@ const porCategoria = CATEGORIAS.map((c) => ({
 
     <p class="mt-6 rounded-xl border border-ambar-100 bg-ambar-50 p-4 text-sm text-ambar-800">
       <strong>Os preços na Amazon mudam ao minuto.</strong> Indicamos o valor confirmado na data
-      acima; o que conta é sempre o que vês na Amazon ao abrir o link. Não garantimos preços nem
-      disponibilidade.
+      que acompanha cada preço; o que conta é sempre o que vês na Amazon ao abrir o link. Não
+      garantimos preços nem disponibilidade.
     </p>
 
     {porCategoria.map((grupo) => (
@@ -61,7 +61,7 @@ const porCategoria = CATEGORIAS.map((c) => ({
             loja="amazon"
             asin={a.asin}
             precoEur={a.preco_eur}
-            precoData={VERIFICADO_EM}
+            precoData={a.preco_data ?? VERIFICADO_EM}
             classificacao={a.classificacao}
             numAvaliacoes={a.num_avaliacoes}
             etiqueta={a.etiqueta}
