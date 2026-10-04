@@ -6,6 +6,7 @@ import GoogleAnalytics from '@components/seo/GoogleAnalytics.astro';
 import Header from '@components/ui/Header.astro';
 import Footer from '@components/ui/Footer.astro';
 import OrnamentoFundo from '@components/ui/OrnamentoFundo.astro';
+import PromoBanner from '@components/afiliados/PromoBanner.astro';
 import { SITE } from '@lib/site';
 
 type MotivoOrnamento =
@@ -54,6 +55,12 @@ function inferirMotivo(pathname: string): { principal: MotivoOrnamento; secundar
 const { principal, secundario } = inferirMotivo(Astro.url.pathname);
 const motivoFinal: MotivoOrnamento = motivoOrnamento ?? principal;
 
+// Barra fina da campanha, em todas as páginas menos duas: a entrada, que já tem
+// o destaque grande por cima do herói, e a própria página de promoções, para
+// onde a barra apontaria. O componente decide sozinho se há campanha a mostrar.
+const caminhoAtual = Astro.url.pathname.replace(/\.html$/, '').replace(/\/+$/, '');
+const mostrarBannerPromo = caminhoAtual !== '' && caminhoAtual !== '/promocoes';
+
 const websiteLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -91,6 +98,7 @@ const websiteLd = {
       Saltar para o conteúdo
     </a>
     <Header />
+    {mostrarBannerPromo && <PromoBanner />}
     <main id="conteudo" class="relative flex-1">
       {!semOrnamento && (
         <>
