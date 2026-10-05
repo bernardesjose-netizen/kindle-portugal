@@ -6,7 +6,7 @@ export const SITE = {
   url: import.meta.env.PUBLIC_SITE_URL ?? 'https://kindleportugal.com',
   idioma: 'pt-PT',
   email: import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'kindleportugal@gmail.com',
-  amazonTag: import.meta.env.PUBLIC_AMAZON_TAG ?? '',
+  amazonTag: import.meta.env.PUBLIC_AMAZON_TAG_SITE ?? 'portukcom_site-21',
   autorOrganizacao: {
     nome: 'Kindle Portugal',
     url: 'https://kindleportugal.com',
