@@ -61,8 +61,9 @@ export interface OfertaMomento {
 // Fim do Prime Big Deal Days (as ofertas "exclusivas Prime" acabam aqui):
 // meia-noite de Espanha, 23h em Portugal.
 const FIM_PBDD = new Date('2026-10-07T23:59:59+02:00');
-const VERIF_0612 = new Date('2026-10-06T12:15:00+01:00');
-const VERIF_1335 = new Date('2026-10-06T13:35:00+01:00');
+// Última reconfirmação, ficha a ficha, de todas as ofertas desta lista
+// (preço, desconto, stock e vendedor sem alterações face à anterior).
+const VERIF_ULTIMA = new Date('2026-10-06T15:34:00+01:00');
 
 export const OFERTAS_MOMENTO: OfertaMomento[] = [
   {
@@ -75,7 +76,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 45,
     classificacao: 4.5,
     num_avaliacoes: 1211,
-    verificado_em: VERIF_0612,
+    verificado_em: VERIF_ULTIMA,
     resumo:
       'Auscultadores de diadema com cancelamento de ruído e até 80 horas de bateria anunciadas. Quase metade do preço de lançamento, num modelo com pouco mais de um ano.',
   },
@@ -89,7 +90,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 41,
     classificacao: 4.5,
     num_avaliacoes: 4606,
-    verificado_em: VERIF_0612,
+    verificado_em: VERIF_ULTIMA,
     resumo:
       'Auriculares sem fios pequenos e leves, com o som equilibrado da Sony. Não têm cancelamento de ruído, mas a este preço e com mais de 4500 avaliações são aposta segura.',
   },
@@ -103,7 +104,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 52,
     classificacao: 4.2,
     num_avaliacoes: 289,
-    verificado_em: VERIF_0612,
+    verificado_em: VERIF_ULTIMA,
     // Única com selo "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
     so_prime: true,
@@ -120,7 +121,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 55,
     classificacao: 4.6,
     num_avaliacoes: 1043,
-    verificado_em: VERIF_0612,
+    verificado_em: VERIF_ULTIMA,
     resumo:
       'Carregador de parede com duas portas USB-C: telemóvel e Kindle ao mesmo tempo, ou um portátil leve. O maior desconto desta lista.',
   },
@@ -134,7 +135,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 49,
     classificacao: 4.6,
     num_avaliacoes: 667,
-    verificado_em: VERIF_0612,
+    verificado_em: VERIF_ULTIMA,
     resumo:
       'Três portas USB-C e potência para carregar um MacBook Air. Para quem quer deixar de andar com vários carregadores na mala.',
   },
@@ -148,7 +149,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 43,
     classificacao: 4.5,
     num_avaliacoes: 17674,
-    verificado_em: VERIF_0612,
+    verificado_em: VERIF_ULTIMA,
     resumo:
       'O rato simples que a Logitech vende há anos, com recetor USB e pilha que dura meses. Mais de dezassete mil avaliações por menos de 10 €.',
   },
@@ -162,7 +163,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 54,
     classificacao: 4.6,
     num_avaliacoes: 22015,
-    verificado_em: VERIF_0612,
+    verificado_em: VERIF_ULTIMA,
     resumo:
       'Espremedor elétrico pequeno, com polpa ajustável e peças que vão à máquina de lavar loiça. Um clássico da Braun com mais de vinte mil avaliações.',
   },
@@ -176,7 +177,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 47,
     classificacao: 4.3,
     num_avaliacoes: 3736,
-    verificado_em: VERIF_0612,
+    verificado_em: VERIF_ULTIMA,
     resumo:
       'Duas escovas elétricas topo de gama da Philips, com sensor de pressão e aplicação, quase a metade do preço. Faz sentido para um casal: cada escova sai a cerca de 135 €.',
   },
@@ -190,7 +191,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 41,
     classificacao: 4.6,
     num_avaliacoes: 3239,
-    verificado_em: VERIF_0612,
+    verificado_em: VERIF_ULTIMA,
     resumo:
       'Câmara de interior que roda 360°, com imagem 2K e deteção de pessoas. Para ver o cão, a casa de férias ou o bebé a partir do telemóvel, sem mensalidade obrigatória.',
   },
@@ -215,7 +216,7 @@ export function expiraEm(o: OfertaMomento): Date {
  * verificação: vendidos e enviados pela Amazon, em stock, preço com IVA PT.
  */
 export const TABLETS_TELEMOVEIS: OfertaMomento[] = [
-  // Verificados na ficha a 06/10/2026, 13:35: "Gran Oferta Prime", vendidos e
+  // Verificados na ficha a 06/10/2026, 13:35 (reconfirmados às 15:34): "Gran Oferta Prime", vendidos e
   // enviados pela Amazon, em stock, desconto face ao preço recomendado.
   // Ficaram de fora os tablets Galaxy Tab S11, Tab S10 Lite e Xiaomi Pad 8
   // Pro: o "−21 % a −26 %" da ficha compara com o preço mais baixo dos
@@ -230,7 +231,7 @@ export const TABLETS_TELEMOVEIS: OfertaMomento[] = [
     desconto_pct: 40,
     classificacao: 4.0,
     num_avaliacoes: 15,
-    verificado_em: VERIF_1335,
+    verificado_em: VERIF_ULTIMA,
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
@@ -246,7 +247,7 @@ export const TABLETS_TELEMOVEIS: OfertaMomento[] = [
     desconto_pct: 29,
     classificacao: 4.4,
     num_avaliacoes: 89,
-    verificado_em: VERIF_1335,
+    verificado_em: VERIF_ULTIMA,
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
@@ -262,7 +263,7 @@ export const TABLETS_TELEMOVEIS: OfertaMomento[] = [
     desconto_pct: 31,
     classificacao: 4.3,
     num_avaliacoes: 52,
-    verificado_em: VERIF_1335,
+    verificado_em: VERIF_ULTIMA,
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
