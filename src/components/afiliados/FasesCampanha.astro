@@ -19,44 +19,39 @@
  */
 ---
 
-<script is:inline>
-  (function () {
-    if (!window.__kpFasesCampanha) {
-      var fase = function (raiz, agora) {
-        var inicio = Date.parse(raiz.getAttribute('data-campanha-inicio'));
-        var fim = Date.parse(raiz.getAttribute('data-campanha-fim'));
-        var antecipacao = Date.parse(raiz.getAttribute('data-campanha-antecipacao') || '');
-        if (isNaN(inicio) || isNaN(fim)) return null;
-        if (agora >= inicio && agora <= fim) return 'ativa';
-        if (agora < inicio && (isNaN(antecipacao) || agora >= antecipacao)) return 'antecipacao';
-        return 'fora';
-      };
+<script>
+  // Script processado pelo Astro (ficheiro externo em /assets/): a CSP do site
+  // (public/_headers) bloqueia scripts escritos dentro da página.
+  type Fase = 'antecipacao' | 'ativa' | 'fora';
 
-      window.__kpFasesCampanha = function () {
-        var agora = Date.now();
-        var raizes = document.querySelectorAll('[data-campanha-inicio]');
-        for (var i = 0; i < raizes.length; i++) {
-          var raiz = raizes[i];
-          var f = fase(raiz, agora);
-          if (!f) continue;
-          raiz.setAttribute('data-fase', f);
-          if (raiz.hasAttribute('data-esconder-fora')) raiz.hidden = f === 'fora';
-          var partes = raiz.querySelectorAll('[data-so-fase]');
-          for (var j = 0; j < partes.length; j++) {
-            var fases = partes[j].getAttribute('data-so-fase').split(' ');
-            partes[j].hidden = fases.indexOf(f) === -1;
-          }
-        }
-      };
+  function fase(raiz: HTMLElement, agora: number): Fase | null {
+    const inicio = Date.parse(raiz.getAttribute('data-campanha-inicio') ?? '');
+    const fim = Date.parse(raiz.getAttribute('data-campanha-fim') ?? '');
+    const antecipacao = Date.parse(raiz.getAttribute('data-campanha-antecipacao') ?? '');
+    if (isNaN(inicio) || isNaN(fim)) return null;
+    if (agora >= inicio && agora <= fim) return 'ativa';
+    if (agora < inicio && (isNaN(antecipacao) || agora >= antecipacao)) return 'antecipacao';
+    return 'fora';
+  }
 
-      setInterval(window.__kpFasesCampanha, 30000);
-      document.addEventListener('kp:contagem-fim', window.__kpFasesCampanha);
-      document.addEventListener('visibilitychange', function () {
-        if (!document.hidden) window.__kpFasesCampanha();
+  function aplicar() {
+    const agora = Date.now();
+    document.querySelectorAll<HTMLElement>('[data-campanha-inicio]').forEach((raiz) => {
+      const f = fase(raiz, agora);
+      if (!f) return;
+      raiz.setAttribute('data-fase', f);
+      if (raiz.hasAttribute('data-esconder-fora')) raiz.hidden = f === 'fora';
+      raiz.querySelectorAll<HTMLElement>('[data-so-fase]').forEach((parte) => {
+        const fases = (parte.getAttribute('data-so-fase') ?? '').split(' ');
+        parte.hidden = !fases.includes(f);
       });
-      document.addEventListener('DOMContentLoaded', window.__kpFasesCampanha);
-    }
-    // Corre já, para os blocos que estão acima deste script.
-    window.__kpFasesCampanha();
-  })();
+    });
+  }
+
+  aplicar();
+  setInterval(aplicar, 30000);
+  document.addEventListener('kp:contagem-fim', aplicar);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) aplicar();
+  });
 </script>

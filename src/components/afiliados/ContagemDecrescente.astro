@@ -69,80 +69,64 @@ const unidadeClasse = tema === 'escuro' ? 'text-oceano-100/70' : 'text-marinho-5
   </p>
 </div>
 
-<script is:inline>
-  (function () {
-    if (window.__contagemDecrescenteKP) return;
-    window.__contagemDecrescenteKP = true;
+<script>
+  // Script processado pelo Astro (ficheiro externo em /assets/): a CSP do site
+  // (public/_headers) bloqueia scripts escritos dentro da página.
+  const ROTULOS: Record<string, [string, string]> = {
+    dias: ['dia', 'dias'],
+    horas: ['hora', 'horas'],
+    minutos: ['minuto', 'minutos'],
+    segundos: ['segundo', 'segundos'],
+  };
+  const doisDigitos = (n: number) => (n < 10 ? '0' + n : String(n));
 
-    var ROTULOS = {
-      dias: ['dia', 'dias'],
-      horas: ['hora', 'horas'],
-      minutos: ['minuto', 'minutos'],
-      segundos: ['segundo', 'segundos'],
-    };
+  function atualizar() {
+    const blocos = document.querySelectorAll<HTMLElement>('[data-contagem]');
+    blocos.forEach((bloco) => {
+      const alvo = Date.parse(bloco.getAttribute('data-alvo') ?? '');
+      if (isNaN(alvo)) return;
 
-    function atualizar() {
-      var blocos = document.querySelectorAll('[data-contagem]');
-      for (var i = 0; i < blocos.length; i++) {
-        var bloco = blocos[i];
-        var alvo = Date.parse(bloco.getAttribute('data-alvo'));
-        if (isNaN(alvo)) continue;
+      const ms = alvo - Date.now();
+      const numeros = bloco.querySelector('[data-contagem-numeros]');
+      const fim = bloco.querySelector('[data-contagem-fim]');
+      const rotulo = bloco.querySelector('[data-contagem-etiqueta]');
 
-        var ms = alvo - Date.now();
-        var numeros = bloco.querySelector('[data-contagem-numeros]');
-        var fim = bloco.querySelector('[data-contagem-fim]');
-        var rotulo = bloco.querySelector('[data-contagem-etiqueta]');
-
-        if (ms <= 0) {
-          if (numeros) numeros.classList.add('hidden');
-          if (rotulo) rotulo.classList.add('hidden');
-          if (fim) fim.classList.remove('hidden');
-          bloco.removeAttribute('aria-label');
-          // Avisa uma vez quem mostra ou esconde blocos por fase (FasesCampanha).
-          if (!bloco.hasAttribute('data-contagem-terminou')) {
-            bloco.setAttribute('data-contagem-terminou', '');
-            document.dispatchEvent(new CustomEvent('kp:contagem-fim'));
-          }
-          continue;
+      if (ms <= 0) {
+        numeros?.classList.add('hidden');
+        rotulo?.classList.add('hidden');
+        fim?.classList.remove('hidden');
+        bloco.removeAttribute('aria-label');
+        // Avisa uma vez quem mostra ou esconde blocos por fase (FasesCampanha).
+        if (!bloco.hasAttribute('data-contagem-terminou')) {
+          bloco.setAttribute('data-contagem-terminou', '');
+          document.dispatchEvent(new CustomEvent('kp:contagem-fim'));
         }
-
-        var total = Math.floor(ms / 1000);
-        var valores = {
-          dias: Math.floor(total / 86400),
-          horas: Math.floor((total % 86400) / 3600),
-          minutos: Math.floor((total % 3600) / 60),
-          segundos: total % 60,
-        };
-
-        for (var chave in valores) {
-          if (!Object.prototype.hasOwnProperty.call(valores, chave)) continue;
-          var alvoValor = bloco.querySelector('[data-contagem-valor="' + chave + '"]');
-          if (alvoValor) {
-            var texto = String(valores[chave]);
-            alvoValor.textContent = texto.length < 2 ? '0' + texto : texto;
-          }
-          var alvoRotulo = bloco.querySelector('[data-contagem-rotulo="' + chave + '"]');
-          if (alvoRotulo) {
-            alvoRotulo.textContent = ROTULOS[chave][valores[chave] === 1 ? 0 : 1];
-          }
-        }
-
-        // Rótulo acessível sem ler os segundos de dois em dois segundos.
-        bloco.setAttribute(
-          'aria-label',
-          'Faltam ' +
-            valores.dias +
-            ' ' +
-            ROTULOS.dias[valores.dias === 1 ? 0 : 1] +
-            ' e ' +
-            valores.horas +
-            ' ' +
-            ROTULOS.horas[valores.horas === 1 ? 0 : 1]
-        );
+        return;
       }
-    }
 
-    atualizar();
-    setInterval(atualizar, 1000);
-  })();
+      const total = Math.floor(ms / 1000);
+      const valores: Record<string, number> = {
+        dias: Math.floor(total / 86400),
+        horas: Math.floor((total % 86400) / 3600),
+        minutos: Math.floor((total % 3600) / 60),
+        segundos: total % 60,
+      };
+
+      for (const chave of Object.keys(valores)) {
+        const valor = bloco.querySelector(`[data-contagem-valor="${chave}"]`);
+        if (valor) valor.textContent = doisDigitos(valores[chave]);
+        const r = bloco.querySelector(`[data-contagem-rotulo="${chave}"]`);
+        if (r) r.textContent = ROTULOS[chave][valores[chave] === 1 ? 0 : 1];
+      }
+
+      // Rótulo acessível sem ler os segundos de dois em dois segundos.
+      bloco.setAttribute(
+        'aria-label',
+        `Faltam ${valores.dias} ${ROTULOS.dias[valores.dias === 1 ? 0 : 1]} e ${valores.horas} ${ROTULOS.horas[valores.horas === 1 ? 0 : 1]}`,
+      );
+    });
+  }
+
+  atualizar();
+  setInterval(atualizar, 1000);
 </script>
