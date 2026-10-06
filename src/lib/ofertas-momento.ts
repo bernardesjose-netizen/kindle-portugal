@@ -27,7 +27,7 @@ export interface OfertaMomento {
   marca: string;
   nome: string;
   asin: string;
-  categoria: 'Áudio' | 'Carregadores' | 'Informática' | 'Casa' | 'Casa inteligente' | 'Cuidado pessoal' | 'Tablets' | 'Telemóveis';
+  categoria: 'Áudio' | 'Carregadores' | 'Informática' | 'Casa' | 'Casa inteligente' | 'Cuidado pessoal' | 'Relógios' | 'Tablets' | 'Telemóveis';
   /** Preço com IVA PT, em euros. */
   preco_eur: number;
   /** Preço riscado na ficha, com IVA PT (ver `referencia`). */
@@ -154,20 +154,6 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
       'O rato simples que a Logitech vende há anos, com recetor USB e pilha que dura meses. Mais de dezassete mil avaliações por menos de 10 €.',
   },
   {
-    marca: 'Braun',
-    nome: 'Braun CJ3000 (espremedor de citrinos)',
-    asin: 'B00IYIETIE',
-    categoria: 'Casa',
-    preco_eur: 13.11,
-    preco_recomendado_eur: 28.46,
-    desconto_pct: 54,
-    classificacao: 4.6,
-    num_avaliacoes: 22015,
-    verificado_em: VERIF_ULTIMA,
-    resumo:
-      'Espremedor elétrico pequeno, com polpa ajustável e peças que vão à máquina de lavar loiça. Um clássico da Braun com mais de vinte mil avaliações.',
-  },
-  {
     marca: 'Philips',
     nome: 'Philips Sonicare DiamondClean 9000 (pack de 2)',
     asin: 'B0B722494K',
@@ -205,7 +191,7 @@ export function ofertasRecentes(): OfertaMomento[] {
 }
 
 /** Momento a partir do qual a oferta deixa de se mostrar. */
-export function expiraEm(o: OfertaMomento): Date {
+export function expiraEm(o: Pick<OfertaMomento, 'valida_ate' | 'verificado_em'>): Date {
   return o.valida_ate ?? new Date(o.verificado_em.valueOf() + 24 * 3_600_000);
 }
 
@@ -274,4 +260,51 @@ export const TABLETS_TELEMOVEIS: OfertaMomento[] = [
 /** Tablets e telemóveis ainda válidos, por desconto. */
 export function tabletsTelemoveisValidos(agora: Date = new Date()): OfertaMomento[] {
   return TABLETS_TELEMOVEIS.filter((o) => expiraEm(o) > agora).sort((a, b) => b.desconto_pct - a.desconto_pct);
+}
+
+/**
+ * Oferta em grande destaque, fora das regras de desconto mínimo: escolhida a
+ * dedo, mostrada no topo da entrada e de /promocoes. O desconto não é o
+ * riscado da ficha, é a diferença face a outra loja (`comparacao`), dita no
+ * cartão com todas as letras.
+ */
+export interface OfertaEstrela extends Omit<OfertaMomento, 'preco_recomendado_eur' | 'referencia'> {
+  /** Poupança anunciada, em euros, face à loja de `comparacao`. */
+  poupanca_eur: number;
+  /** Com o que se compara o preço, para o cartão. */
+  comparacao: string;
+  /** Selo curto no topo do cartão. */
+  etiqueta: string;
+}
+
+export const OFERTA_ESTRELA: OfertaEstrela | null = {
+  marca: 'Apple',
+  nome: 'Apple Watch Series 11 GPS, 46 mm (alumínio prateado)',
+  asin: 'B0FQGLL2HL',
+  categoria: 'Relógios',
+  // 379 € em Espanha (IVA de 21 %) → 385,26 € com o IVA de 23 % cobrado em Portugal.
+  preco_eur: 385.26,
+  poupanca_eur: 50,
+  desconto_pct: 12,
+  comparacao: 'face aos 429 € da MediaMarkt Espanha',
+  etiqueta: 'Mínimo histórico',
+  // Lidas por nós na ficha às 17:29; o preço a Amazon não o mostra a quem
+  // consulta de fora da UE, daí a `fonte`.
+  classificacao: 4.5,
+  num_avaliacoes: 767,
+  fonte: {
+    nome: 'Applesfera',
+    url: 'https://www.applesfera.com/seleccion/amazon-arranca-su-fiesta-ofertas-prime-todos-estos-descuentos-airpods-ipad',
+    preco_original: '379 € em Espanha',
+  },
+  verificado_em: new Date('2026-10-06T11:31:00+01:00'),
+  valida_ate: FIM_PBDD,
+  so_prime: true,
+  resumo:
+    'O Series 11 deu lugar ao Series 12 e baixou para o preço mais baixo de sempre na Amazon.es, segundo a Applesfera. Ecrã sempre ligado, qualidade do sono e monitorização de treino e saúde. Atenção: só funciona com iPhone.',
+};
+
+/** A oferta estrela, se ainda estiver válida. */
+export function ofertaEstrelaValida(agora: Date = new Date()): OfertaEstrela | null {
+  return OFERTA_ESTRELA && expiraEm(OFERTA_ESTRELA) > agora ? OFERTA_ESTRELA : null;
 }

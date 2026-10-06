@@ -17,6 +17,7 @@ import Container from '@components/ui/Container.astro';
 import ContagemDecrescente from '@components/afiliados/ContagemDecrescente.astro';
 import EstadoStock from '@components/afiliados/EstadoStock.astro';
 import FasesCampanha from '@components/afiliados/FasesCampanha.astro';
+import OfertaEstrela from '@components/afiliados/OfertaEstrela.astro';
 import { getCollection } from 'astro:content';
 import { CAMPANHA, campanhaVisivel, faseCampanha, horaFimPortugal } from '@lib/promocoes';
 import { formatarPreco, formatarData } from '@lib/formatters';
@@ -126,6 +127,9 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
     />
 
     <Container largura="normal" classe="relative z-10 py-8 sm:py-10">
+      {/* Oferta estrela, em largura total: a primeira coisa à vista. */}
+      <OfertaEstrela tema="escuro" classe="mb-8" />
+
       <div class="grid items-center gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
         {/* Lado esquerdo: mensagem e contagem */}
         <div>

@@ -1,0 +1,130 @@
+---
+/**
+ * Cartão grande da oferta estrela (`OFERTA_ESTRELA` em
+ * src/lib/ofertas-momento.ts), no topo da entrada e de /promocoes.
+ *
+ * Tem `data-oferta` e `data-expira`, por isso o script de OfertasMomento
+ * esconde-o no browser quando a oferta acaba, mesmo sem nova build.
+ */
+import { ofertaEstrelaValida, expiraEm } from '@lib/ofertas-momento';
+import { imagemParaAsin } from '@lib/asin-images';
+import { urlAfiliado } from '@lib/afiliados';
+import { formatarPreco, formatarData, formatarHora } from '@lib/formatters';
+
+interface Props {
+  /** `escuro` dentro do destaque da campanha; `claro` em fundo creme. */
+  tema?: 'escuro' | 'claro';
+  classe?: string;
+}
+
+const { tema = 'claro', classe = '' } = Astro.props;
+const o = ofertaEstrelaValida();
+const img = o ? imagemParaAsin(o.asin, 500) : null;
+const escuro = tema === 'escuro';
+const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const fim = o?.valida_ate
+  ? `${new Intl.DateTimeFormat('pt-PT', { day: 'numeric', month: 'long', timeZone: 'Europe/Lisbon' }).format(o.valida_ate)}, às ${formatarHora(new Date(o.valida_ate.valueOf() + 1000))}`
+  : null;
+---
+
+{o && (
+  <div
+    class:list={[
+      'relative overflow-hidden rounded-2xl p-5 sm:p-6',
+      escuro
+        ? 'border-2 border-dourado-400 bg-gradient-to-br from-dourado-400/30 via-marinho-900/50 to-marinho-900/70 text-creme-50 shadow-lg backdrop-blur-sm'
+        : 'border-2 border-dourado-400 bg-gradient-to-br from-marca-50 via-white to-creme-100 text-marinho-900 shadow-md',
+      classe,
+    ]}
+    data-oferta
+    data-expira={expiraEm(o).toISOString()}
+  >
+    <div class="grid items-center gap-5 sm:grid-cols-[9rem_minmax(0,1fr)] lg:grid-cols-[10rem_minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-7">
+      {img && (
+        <div class="flex h-36 items-center justify-center rounded-xl bg-white p-2 sm:h-40" aria-hidden="true">
+          <img
+            src={img}
+            alt=""
+            loading="eager"
+            decoding="async"
+            width="144"
+            height="144"
+            class="block max-h-full w-auto object-contain"
+            style="mix-blend-mode: multiply;"
+            referrerpolicy="no-referrer-when-downgrade"
+            data-fallback="hide"
+          />
+        </div>
+      )}
+
+      <div class="min-w-0">
+        <p class="flex flex-wrap items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-wider">
+          <span class="rounded bg-dourado-400 px-1.5 py-0.5 text-marinho-900">★ {o.etiqueta}</span>
+          <span class:list={['rounded px-1.5 py-0.5', escuro ? 'bg-creme-50 text-marinho-900' : 'bg-marinho-900 text-creme-50']}>
+            {o.marca}
+          </span>
+          <span class={escuro ? 'text-creme-50/75' : 'text-marinho-400'}>
+            {o.categoria}{o.so_prime ? ' · exclusiva Prime' : ''}
+          </span>
+        </p>
+
+        <h3
+          class:list={['mt-2 text-xl font-bold leading-snug sm:text-2xl', escuro ? 'text-creme-50' : 'text-marinho-900']}
+          style="font-family: var(--font-serif); letter-spacing: -0.02em;"
+        >
+          {o.nome}
+        </h3>
+
+        <p class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
+          <span class:list={['text-4xl font-bold', escuro ? 'text-creme-50' : 'text-marca-700']}>{formatarPreco(o.preco_eur)}</span>
+          <span class="rounded-full bg-marca-600 px-2.5 py-1 text-sm font-bold text-white shadow-sm">
+            −{o.poupanca_eur} € · −{o.desconto_pct}%
+          </span>
+        </p>
+        <p class:list={['mt-1 text-sm', escuro ? 'text-creme-50/85' : 'text-marinho-600']}>
+          Menos {o.poupanca_eur} € {o.comparacao}.
+        </p>
+
+        {o.classificacao != null && o.num_avaliacoes != null && (
+          <p class:list={['mt-1 text-xs', escuro ? 'text-creme-50/75' : 'text-marinho-500']}>
+            <span aria-hidden="true" class="text-dourado-400">★</span> {estrelas(o.classificacao)} · {o.num_avaliacoes.toLocaleString('pt-PT')} avaliações
+          </p>
+        )}
+      </div>
+
+      <div class="min-w-0 sm:col-span-2 lg:col-span-1">
+        <p class:list={['text-sm', escuro ? 'text-creme-50/90' : 'text-marinho-700']}>{o.resumo}</p>
+
+        {o.fonte && (
+          <p
+            class:list={[
+              'mt-3 rounded-lg px-2.5 py-1.5 text-[0.7rem] leading-snug',
+              escuro ? 'bg-marinho-900/40 text-creme-50/80' : 'bg-ambar-50 text-ambar-800',
+            ]}
+          >
+            Preço por confirmar na ficha: anunciado a {o.fonte.preco_original} pela{' '}
+            <a href={o.fonte.url} rel="noopener" target="_blank" class="underline underline-offset-2">{o.fonte.nome}</a>;
+            em Portugal a Amazon cobra IVA de 23 %, daí o valor acima.
+          </p>
+        )}
+
+        <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <a
+            href={urlAfiliado(`https://www.amazon.es/dp/${o.asin}`)}
+            rel="sponsored nofollow noopener"
+            target="_blank"
+            data-afiliado="amazon"
+            data-mercado="es"
+            class="inline-flex items-center justify-center gap-1.5 rounded-lg bg-dourado-400 px-5 py-2.5 text-sm font-bold text-marinho-900 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-marca-300"
+          >
+            Ver na Amazon.es
+            <span aria-hidden="true">↗</span>
+          </a>
+          <p class:list={['text-[0.7rem]', escuro ? 'text-creme-50/70' : 'text-marinho-400']}>
+            {o.fonte ? 'Anunciado' : 'Preço'} a {formatarData(o.verificado_em)}, às {formatarHora(o.verificado_em)}{fim ? ` · oferta até ${fim}` : ''}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
