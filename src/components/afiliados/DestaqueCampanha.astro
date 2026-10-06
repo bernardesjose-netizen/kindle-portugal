@@ -17,6 +17,7 @@ import Container from '@components/ui/Container.astro';
 import ContagemDecrescente from '@components/afiliados/ContagemDecrescente.astro';
 import EstadoStock from '@components/afiliados/EstadoStock.astro';
 import FasesCampanha from '@components/afiliados/FasesCampanha.astro';
+import AvisoAppAmazon from '@components/afiliados/AvisoAppAmazon.astro';
 import { getCollection } from 'astro:content';
 import { CAMPANHA, campanhaVisivel, faseCampanha, horaFimPortugal } from '@lib/promocoes';
 import { formatarPreco, formatarData } from '@lib/formatters';
@@ -196,6 +197,8 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
         </div>
 
         {/* Lado direito: Kindle com desconto confirmado + extra */}
+        <div>
+        <AvisoAppAmazon tema="escuro" classe="mb-3" />
         <ul class="grid gap-3 sm:grid-cols-2">
           {cartoesKindle.map((d) => {
             const img = d.asin ? imagemParaAsin(d.asin, 250) : null;
@@ -369,6 +372,7 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
             );
           })}
         </ul>
+        </div>
       </div>
 
       {estados.length > 0 && (

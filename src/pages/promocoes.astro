@@ -6,6 +6,7 @@ import { CAMPANHA, campanhaVisivel, faseCampanha, horaFimPortugal } from '@lib/p
 import ContagemDecrescente from '@components/afiliados/ContagemDecrescente.astro';
 import EstadoStock from '@components/afiliados/EstadoStock.astro';
 import FasesCampanha from '@components/afiliados/FasesCampanha.astro';
+import AvisoAppAmazon from '@components/afiliados/AvisoAppAmazon.astro';
 import OfertasMomento from '@components/afiliados/OfertasMomento.astro';
 import { tabletsTelemoveisValidos } from '@lib/ofertas-momento';
 import { SITE } from '@lib/site';
@@ -212,6 +213,8 @@ const bandeiras: Record<string, string> = {
         valor que conta é sempre o que vês na Amazon ao abrir o link. Não garantimos preços nem
         disponibilidade.
       </p>
+
+      <AvisoAppAmazon classe="mt-4" />
 
       <div class="mt-10 space-y-8">
         {itens.map((it) => {
