@@ -80,6 +80,9 @@ export const ASIN_IMAGES: Record<string, string> = {
   B00IYIETIE: 'https://m.media-amazon.com/images/I/61ZgMnLv0GL._AC_SL1500_.jpg', // Braun CJ3000
   B0B722494K: 'https://m.media-amazon.com/images/I/71QGE0reOSL._AC_SL1500_.jpg', // Philips Sonicare DiamondClean 9000 (2)
   B0CHFG8XBZ: 'https://m.media-amazon.com/images/I/71fjanBpbmL._AC_SL1500_.jpg', // TP-Link Tapo C211
+  B0FBGQYQLL: 'https://m.media-amazon.com/images/I/61Wd4f0QugL._AC_SL1500_.jpg', // Samsung Galaxy Z Flip7 FE
+  B0FLDLZ7MR: 'https://m.media-amazon.com/images/I/61bcBykvJWL._AC_SL1500_.jpg', // Samsung Galaxy S25 FE
+  B0H4H89QXV: 'https://m.media-amazon.com/images/I/615gMB9zOXL._AC_SL1500_.jpg', // Redmi Note 17 Pro 5G
 };
 
 /**
