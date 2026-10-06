@@ -38,7 +38,7 @@ const fimOferta = (d: Date | undefined) =>
   return (
     <div
       class:list={[
-        'relative overflow-hidden rounded-2xl p-5 sm:p-6',
+        'relative overflow-hidden rounded-2xl p-4 sm:p-6',
         escuro
           ? 'border-2 border-dourado-400 bg-gradient-to-br from-dourado-400/30 via-marinho-900/50 to-marinho-900/70 text-creme-50 shadow-lg backdrop-blur-sm'
           : 'border-2 border-dourado-400 bg-gradient-to-br from-marca-50 via-white to-creme-100 text-marinho-900 shadow-md',
@@ -49,9 +49,9 @@ const fimOferta = (d: Date | undefined) =>
       data-expira={fimDestaque(o).toISOString()}
       hidden={o.mostrar_desde ? o.mostrar_desde.valueOf() > agora : undefined}
     >
-      <div class="grid items-center gap-5 sm:grid-cols-[9rem_minmax(0,1fr)] lg:grid-cols-[10rem_minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-7">
+      <div class="grid grid-cols-[4.5rem_minmax(0,1fr)] items-center gap-3 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-5 lg:grid-cols-[10rem_minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-7">
         {img && (
-          <div class="flex h-36 items-center justify-center rounded-xl bg-white p-2 sm:h-40" aria-hidden="true">
+          <div class="flex h-[4.5rem] items-center justify-center rounded-lg bg-white p-1 sm:h-40 sm:rounded-xl sm:p-2" aria-hidden="true">
             <img
               src={img}
               alt=""
@@ -68,47 +68,53 @@ const fimOferta = (d: Date | undefined) =>
         )}
 
         <div class="min-w-0">
-          <p class="flex flex-wrap items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-wider">
+          <p class="flex flex-wrap items-center gap-1 text-[0.65rem] font-bold uppercase tracking-wider sm:gap-1.5 sm:text-[0.7rem]">
             <span class="rounded bg-dourado-400 px-1.5 py-0.5 text-marinho-900">★ {o.etiqueta}</span>
             <span class:list={['rounded px-1.5 py-0.5', escuro ? 'bg-creme-50 text-marinho-900' : 'bg-marinho-900 text-creme-50']}>
               {o.marca}
             </span>
             <span class={escuro ? 'text-creme-50/75' : 'text-marinho-400'}>
-              {o.categoria}{o.so_prime ? ' · exclusiva Prime' : ''}
+              <span class="hidden sm:inline">{o.categoria}{o.so_prime ? ' · ' : ''}</span>{o.so_prime ? 'exclusiva Prime' : ''}
             </span>
           </p>
 
           <h3
-            class:list={['mt-2 text-xl font-bold leading-snug sm:text-2xl', escuro ? 'text-creme-50' : 'text-marinho-900']}
+            class:list={['mt-1.5 text-base font-bold leading-snug sm:mt-2 sm:text-2xl', escuro ? 'text-creme-50' : 'text-marinho-900']}
             style="font-family: var(--font-serif); letter-spacing: -0.02em;"
           >
             {o.nome}
           </h3>
 
-          <p class="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1">
-            <span class:list={['text-4xl font-bold', escuro ? 'text-creme-50' : 'text-marca-700']}>{formatarPreco(o.preco_eur)}</span>
-            <span class="rounded-full bg-marca-600 px-2.5 py-1 text-sm font-bold text-white shadow-sm">
+          <p class="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 sm:mt-2 sm:gap-x-3">
+            <span class:list={['text-2xl font-bold sm:text-4xl', escuro ? 'text-creme-50' : 'text-marca-700']}>{formatarPreco(o.preco_eur)}</span>
+            <span class="rounded-full bg-marca-600 px-2 py-0.5 text-xs font-bold text-white shadow-sm sm:px-2.5 sm:py-1 sm:text-sm">
               −{euros(o.poupanca_eur)} · −{o.desconto_pct}%
             </span>
           </p>
-          <p class:list={['mt-1 text-sm', escuro ? 'text-creme-50/85' : 'text-marinho-600']}>
+          <p class:list={['mt-1 hidden text-sm sm:block', escuro ? 'text-creme-50/85' : 'text-marinho-600']}>
             Menos {euros(o.poupanca_eur)} {o.comparacao}.
           </p>
 
           {o.classificacao != null && o.num_avaliacoes != null && (
-            <p class:list={['mt-1 text-xs', escuro ? 'text-creme-50/75' : 'text-marinho-500']}>
+            <p class:list={['mt-1 hidden text-xs sm:block', escuro ? 'text-creme-50/75' : 'text-marinho-500']}>
               <span aria-hidden="true" class="text-dourado-400">★</span> {estrelas(o.classificacao)} · {o.num_avaliacoes.toLocaleString('pt-PT')} avaliações
             </p>
           )}
         </div>
 
-        <div class="min-w-0 sm:col-span-2 lg:col-span-1">
-          <p class:list={['text-sm', escuro ? 'text-creme-50/90' : 'text-marinho-700']}>{o.resumo}</p>
+        <div class="col-span-2 min-w-0 lg:col-span-1">
+          <p class:list={['text-xs sm:hidden', escuro ? 'text-creme-50/85' : 'text-marinho-600']}>
+            Menos {euros(o.poupanca_eur)} {o.comparacao}.
+            {o.classificacao != null && o.num_avaliacoes != null && (
+              <> <span aria-hidden="true" class="text-dourado-400">★</span> {estrelas(o.classificacao)} ({o.num_avaliacoes.toLocaleString('pt-PT')})</>
+            )}
+          </p>
+          <p class:list={['hidden text-sm sm:block', escuro ? 'text-creme-50/90' : 'text-marinho-700']}>{o.resumo}</p>
 
           {o.fonte && (
             <p
               class:list={[
-                'mt-3 rounded-lg px-2.5 py-1.5 text-[0.7rem] leading-snug',
+                'mt-2 rounded-lg px-2 py-1 text-[0.65rem] leading-snug sm:mt-3 sm:px-2.5 sm:py-1.5 sm:text-[0.7rem]',
                 escuro ? 'bg-marinho-900/40 text-creme-50/80' : 'bg-ambar-50 text-ambar-800',
               ]}
             >
@@ -118,19 +124,19 @@ const fimOferta = (d: Date | undefined) =>
             </p>
           )}
 
-          <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 sm:mt-4 sm:gap-y-2">
             <a
               href={urlAfiliado(`https://www.amazon.es/dp/${o.asin}`)}
               rel="sponsored nofollow noopener"
               target="_blank"
               data-afiliado="amazon"
               data-mercado="es"
-              class="inline-flex items-center justify-center gap-1.5 rounded-lg bg-dourado-400 px-5 py-2.5 text-sm font-bold text-marinho-900 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-marca-300"
+              class="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-dourado-400 px-5 py-2 text-sm font-bold text-marinho-900 shadow-sm transition-all hover:-translate-y-0.5 hover:bg-marca-300 sm:w-auto sm:py-2.5"
             >
               Ver na Amazon.es
               <span aria-hidden="true">↗</span>
             </a>
-            <p class:list={['text-[0.7rem]', escuro ? 'text-creme-50/70' : 'text-marinho-400']}>
+            <p class:list={['text-[0.65rem] sm:text-[0.7rem]', escuro ? 'text-creme-50/70' : 'text-marinho-400']}>
               {o.fonte ? 'Anunciado' : 'Preço'} a {formatarData(o.verificado_em)}, às {formatarHora(o.verificado_em)}{fim ? ` · oferta até ${fim}` : ''}
             </p>
           </div>
