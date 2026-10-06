@@ -23,6 +23,7 @@ import { formatarPreco, formatarData } from '@lib/formatters';
 import { imagemParaAsin } from '@lib/asin-images';
 import { urlAfiliado } from '@lib/afiliados';
 import type { Disponibilidade } from '@lib/disponibilidade';
+import { ofertasRecentes, expiraEm } from '@lib/ofertas-momento';
 
 const visivel = campanhaVisivel();
 const fase = faseCampanha();
@@ -75,9 +76,17 @@ if (visivel) {
 }
 
 const principal = destaques[0];
-// Dois cartões: o Kindle principal e o extra; sem extra, até dois Kindle.
-const extras = CAMPANHA.extras.slice(0, destaques.length > 0 ? 1 : 2);
-const cartoesKindle = destaques.slice(0, 2 - extras.length);
+// Quatro cartões, por esta ordem de prioridade: Kindle com desconto e stock,
+// o produto extra escolhido (CAMPANHA.extras) e, para completar, as ofertas de
+// grandes marcas com maior desconto (src/lib/ofertas-momento.ts).
+const TOTAL_CARTOES = 4;
+const cartoesKindle = destaques.slice(0, TOTAL_CARTOES);
+const extras = CAMPANHA.extras.slice(0, Math.max(0, TOTAL_CARTOES - cartoesKindle.length));
+const agoraMs = Date.now();
+const cartoesMarcas = ofertasRecentes()
+  .filter((o) => expiraEm(o).valueOf() > agoraMs)
+  .sort((a, b) => b.desconto_pct - a.desconto_pct)
+  .slice(0, Math.max(0, TOTAL_CARTOES - cartoesKindle.length - extras.length));
 const esgotados = estados.filter((e) => e.disponibilidade === 'esgotado');
 
 // "Kindle (básico)" → "básico", "Kindle Paperwhite" → "Paperwhite".
@@ -294,6 +303,57 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
                 )}
                 <a
                   href={urlAfiliado(`https://www.amazon.es/dp/${x.asin}`)}
+                  rel="sponsored nofollow noopener"
+                  target="_blank"
+                  data-afiliado="amazon"
+                  data-mercado="es"
+                  class="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-creme-50/15 px-3 py-2 text-xs font-bold text-creme-50 ring-1 ring-inset ring-creme-50/25 transition-all hover:bg-creme-50 hover:text-marinho-900"
+                >
+                  Ver na Amazon.es
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </li>
+            );
+          })}
+
+          {/* Grandes marcas: caducam no browser como na secção Ofertas do momento. */}
+          {cartoesMarcas.map((o) => {
+            const img = imagemParaAsin(o.asin, 250);
+            return (
+              <li class="rounded-2xl border border-creme-50/25 bg-marinho-900/35 p-4 backdrop-blur-sm" data-oferta data-expira={expiraEm(o).toISOString()}>
+                <p class="flex flex-wrap items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-wider">
+                  <span class="rounded bg-creme-50 px-1.5 py-0.5 text-marinho-900">{o.marca}</span>
+                  <span class="text-creme-50/70">{o.categoria}</span>
+                </p>
+                <div class="mt-2 flex items-center gap-3">
+                  {img && (
+                    <img
+                      src={img}
+                      alt=""
+                      loading="eager"
+                      decoding="async"
+                      width="56"
+                      height="56"
+                      class="h-14 w-14 shrink-0 rounded-lg bg-creme-50 object-contain p-1"
+                      style="mix-blend-mode: multiply;"
+                      referrerpolicy="no-referrer-when-downgrade"
+                      data-fallback="hide"
+                    />
+                  )}
+                  <div class="min-w-0">
+                    <p class="text-sm font-bold leading-snug text-creme-50">{o.nome}</p>
+                    <p class="mt-1 text-[0.7rem] text-creme-50/75">
+                      <span aria-hidden="true" class="text-dourado-300">★</span> {estrelas(o.classificacao)} · {o.num_avaliacoes.toLocaleString('pt-PT')} avaliações
+                    </p>
+                  </div>
+                </div>
+                <p class="mt-3 flex flex-wrap items-baseline gap-x-2">
+                  <span class="text-2xl font-bold text-creme-50">{formatarPreco(o.preco_eur)}</span>
+                  <span class="text-sm text-creme-50/60 line-through">{formatarPreco(o.preco_recomendado_eur)}</span>
+                  <span class="inline-block rounded bg-dourado-400 px-1.5 py-0.5 text-[0.7rem] font-bold text-marinho-900">−{o.desconto_pct}%</span>
+                </p>
+                <a
+                  href={urlAfiliado(`https://www.amazon.es/dp/${o.asin}`)}
                   rel="sponsored nofollow noopener"
                   target="_blank"
                   data-afiliado="amazon"
