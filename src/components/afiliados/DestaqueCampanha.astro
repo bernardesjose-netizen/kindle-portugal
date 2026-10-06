@@ -342,9 +342,11 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
                   )}
                   <div class="min-w-0">
                     <p class="text-sm font-bold leading-snug text-creme-50">{o.nome}</p>
-                    <p class="mt-1 text-[0.7rem] text-creme-50/75">
-                      <span aria-hidden="true" class="text-dourado-300">★</span> {estrelas(o.classificacao)} · {o.num_avaliacoes.toLocaleString('pt-PT')} avaliações
-                    </p>
+                    {o.classificacao != null && o.num_avaliacoes != null && (
+                      <p class="mt-1 text-[0.7rem] text-creme-50/75">
+                        <span aria-hidden="true" class="text-dourado-300">★</span> {estrelas(o.classificacao)} · {o.num_avaliacoes.toLocaleString('pt-PT')} avaliações
+                      </p>
+                    )}
                   </div>
                 </div>
                 <p class="mt-3 flex flex-wrap items-baseline gap-x-2">

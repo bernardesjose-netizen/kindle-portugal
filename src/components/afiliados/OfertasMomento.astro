@@ -46,7 +46,8 @@ const {
 const agora = Date.now();
 const todas = (lista ?? ofertasRecentes()).filter((o) => expiraEm(o).valueOf() > agora);
 const ofertas = limite ? todas.slice(0, limite) : todas;
-const ultima = todas[0]?.verificado_em;
+// Só conta como verificação o que foi lido por nós na ficha (sem `fonte`).
+const ultima = todas.find((o) => !o.fonte)?.verificado_em;
 const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 ---
 
@@ -129,9 +130,18 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
               {o.referencia === 'minimo-30-dias' && (
                 <p class="text-[0.7rem] text-marinho-400">riscado: preço mais baixo dos últimos 30 dias</p>
               )}
-              <p class="mt-1 text-xs text-marinho-500">
-                <span aria-hidden="true" class="text-dourado-500">★</span> {estrelas(o.classificacao)} · {o.num_avaliacoes.toLocaleString('pt-PT')} avaliações
-              </p>
+              {o.classificacao != null && o.num_avaliacoes != null && (
+                <p class="mt-1 text-xs text-marinho-500">
+                  <span aria-hidden="true" class="text-dourado-500">★</span> {estrelas(o.classificacao)} · {o.num_avaliacoes.toLocaleString('pt-PT')} avaliações
+                </p>
+              )}
+              {o.fonte && (
+                <p class="mt-2 rounded-lg bg-ambar-50 px-2 py-1.5 text-[0.7rem] leading-snug text-ambar-800">
+                  Preço por confirmar na ficha: anunciado a {o.fonte.preco_original} por{' '}
+                  <a href={o.fonte.url} rel="noopener" target="_blank" class="underline underline-offset-2">{o.fonte.nome}</a>;
+                  em Portugal a Amazon cobra IVA de 23 %, daí o valor acima.
+                </p>
+              )}
               <p class="mt-3 flex-1 text-sm text-marinho-600">{o.resumo}</p>
               <a
                 href={urlAfiliado(`https://www.amazon.es/dp/${o.asin}`)}
@@ -145,7 +155,7 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
                 <span aria-hidden="true">↗</span>
               </a>
               <p class="mt-2 text-center text-[0.7rem] text-marinho-400">
-                Preço a {formatarData(o.verificado_em)}, às {formatarHora(o.verificado_em)}
+                {o.fonte ? 'Anunciado' : 'Preço'} a {formatarData(o.verificado_em)}, às {formatarHora(o.verificado_em)}
               </p>
             </li>
           );
