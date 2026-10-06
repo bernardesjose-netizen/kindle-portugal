@@ -9,7 +9,6 @@
  * alterações, não ficam ofertas caducadas à vista.
  */
 import Container from '@components/ui/Container.astro';
-import AvisoAppAmazon from '@components/afiliados/AvisoAppAmazon.astro';
 import { ofertasRecentes, expiraEm, DESCONTO_MINIMO, type OfertaMomento } from '@lib/ofertas-momento';
 import { imagemParaAsin } from '@lib/asin-images';
 import { urlAfiliado } from '@lib/afiliados';
@@ -84,8 +83,6 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
           </a>
         )}
       </div>
-
-      <AvisoAppAmazon classe="mb-4" />
 
       <ul class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {ofertas.map((o) => {
