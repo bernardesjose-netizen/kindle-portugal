@@ -29,6 +29,12 @@ export default defineConfig({
   ],
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      // Nunca embutir scripts no HTML: a CSP (public/_headers) só aceita
+      // scripts servidos como ficheiro ('self'), e um script embutido é
+      // bloqueado em produção sem aviso (foi assim que a contagem parou).
+      assetsInlineLimit: (caminho) => (/\.(js|mjs|ts)$/.test(caminho) ? false : undefined),
+    },
   },
   build: {
     assets: 'assets',

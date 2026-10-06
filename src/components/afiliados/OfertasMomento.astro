@@ -140,27 +140,23 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
   </section>
 )}
 
-<script is:inline>
-  (function () {
-    function limpar() {
-      var agora = Date.now();
-      var raizes = document.querySelectorAll('[data-ofertas-raiz]');
-      for (var i = 0; i < raizes.length; i++) {
-        var cartoes = raizes[i].querySelectorAll('[data-oferta]');
-        var visiveis = 0;
-        for (var j = 0; j < cartoes.length; j++) {
-          var expira = Date.parse(cartoes[j].getAttribute('data-expira'));
-          var caducou = !isNaN(expira) && agora > expira;
-          cartoes[j].hidden = caducou;
-          if (!caducou) visiveis++;
-        }
-        raizes[i].hidden = visiveis === 0;
-      }
-    }
-    limpar();
-    if (!window.__kpOfertasMomento) {
-      window.__kpOfertasMomento = true;
-      setInterval(limpar, 60000);
-    }
-  })();
+<script>
+  // Script processado pelo Astro (ficheiro externo em /assets/): a CSP do site
+  // (public/_headers) bloqueia scripts escritos dentro da página.
+  function limpar() {
+    const agora = Date.now();
+    document.querySelectorAll<HTMLElement>('[data-ofertas-raiz]').forEach((raiz) => {
+      let visiveis = 0;
+      raiz.querySelectorAll<HTMLElement>('[data-oferta]').forEach((cartao) => {
+        const expira = Date.parse(cartao.getAttribute('data-expira') ?? '');
+        const caducou = !isNaN(expira) && agora > expira;
+        cartao.hidden = caducou;
+        if (!caducou) visiveis++;
+      });
+      raiz.hidden = visiveis === 0;
+    });
+  }
+
+  limpar();
+  setInterval(limpar, 60000);
 </script>
