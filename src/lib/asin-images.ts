@@ -79,6 +79,9 @@ export const ASIN_IMAGES: Record<string, string> = {
   B01A9GXEOI: 'https://m.media-amazon.com/images/I/41TszOgiDCL._AC_SL1200_.jpg', // Logitech M171
   B0B722494K: 'https://m.media-amazon.com/images/I/71QGE0reOSL._AC_SL1500_.jpg', // Philips Sonicare DiamondClean 9000 (2)
   B0CHFG8XBZ: 'https://m.media-amazon.com/images/I/71fjanBpbmL._AC_SL1500_.jpg', // TP-Link Tapo C211
+  B0B12TTTF2: 'https://m.media-amazon.com/images/I/71OMEq8cYbL._AC_SL1500_.jpg', // Philips Sonicare DiamondClean 9000 (edição especial)
+  B0D5D3WBN5: 'https://m.media-amazon.com/images/I/81SILJr9h2L._AC_SL1500_.jpg', // Oral-B iO 5
+  B0GQVG2D3Z: 'https://m.media-amazon.com/images/I/61kA6Ue9NPL._AC_SL1500_.jpg', // iRobot Roomba 115 Combo
   B0FBGQYQLL: 'https://m.media-amazon.com/images/I/61Wd4f0QugL._AC_SL1500_.jpg', // Samsung Galaxy Z Flip7 FE
   B0FLDLZ7MR: 'https://m.media-amazon.com/images/I/61bcBykvJWL._AC_SL1500_.jpg', // Samsung Galaxy S25 FE
   B0H4H89QXV: 'https://m.media-amazon.com/images/I/615gMB9zOXL._AC_SL1500_.jpg', // Redmi Note 17 Pro 5G
