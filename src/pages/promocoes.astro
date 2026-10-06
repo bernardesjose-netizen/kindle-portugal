@@ -8,7 +8,7 @@ import EstadoStock from '@components/afiliados/EstadoStock.astro';
 import FasesCampanha from '@components/afiliados/FasesCampanha.astro';
 import OfertasMomento from '@components/afiliados/OfertasMomento.astro';
 import OfertaEstrela from '@components/afiliados/OfertaEstrela.astro';
-import { tabletsTelemoveisValidos, ofertaEstrelaValida } from '@lib/ofertas-momento';
+import { tabletsTelemoveisValidos, ofertasEstrelaPorMostrar } from '@lib/ofertas-momento';
 import { SITE } from '@lib/site';
 import { formatarPreco, formatarData } from '@lib/formatters';
 import { imagemParaAsin } from '@lib/asin-images';
@@ -193,7 +193,7 @@ const bandeiras: Record<string, string> = {
   {ativa && (
     <Container largura="normal" classe="py-12 sm:py-16">
 
-      {ofertaEstrelaValida() && (
+      {ofertasEstrelaPorMostrar().length > 0 && (
         <section class="mb-10" aria-labelledby="oferta-estrela-titulo" data-ofertas-raiz>
           <h2 id="oferta-estrela-titulo" class="pill">Destaque do dia</h2>
           <OfertaEstrela tema="claro" classe="mt-4" />

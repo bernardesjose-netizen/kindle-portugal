@@ -63,7 +63,9 @@ export interface OfertaMomento {
 const FIM_PBDD = new Date('2026-10-07T23:59:59+02:00');
 // Última reconfirmação, ficha a ficha, de todas as ofertas desta lista
 // (preço, desconto, stock e vendedor sem alterações face à anterior).
-const VERIF_ULTIMA = new Date('2026-10-06T15:34:00+01:00');
+const VERIF_ULTIMA = new Date('2026-10-06T17:39:00+01:00');
+// Ofertas encontradas na verificação das 17h (lidas na ficha às 17:41).
+const VERIF_17H = new Date('2026-10-06T17:41:00+01:00');
 
 export const OFERTAS_MOMENTO: OfertaMomento[] = [
   {
@@ -75,7 +77,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_recomendado_eur: 303.95,
     desconto_pct: 45,
     classificacao: 4.5,
-    num_avaliacoes: 1211,
+    num_avaliacoes: 1212,
     verificado_em: VERIF_ULTIMA,
     resumo:
       'Auscultadores de diadema com cancelamento de ruído e até 80 horas de bateria anunciadas. Quase metade do preço de lançamento, num modelo com pouco mais de um ano.',
@@ -168,6 +170,54 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
       'Duas escovas elétricas topo de gama da Philips, com sensor de pressão e aplicação, quase a metade do preço. Faz sentido para um casal: cada escova sai a cerca de 135 €.',
   },
   {
+    marca: 'Philips',
+    nome: 'Philips Sonicare DiamondClean 9000 (edição especial)',
+    asin: 'B0B12TTTF2',
+    categoria: 'Cuidado pessoal',
+    preco_eur: 132.14,
+    preco_recomendado_eur: 284.62,
+    desconto_pct: 54,
+    classificacao: 4.4,
+    num_avaliacoes: 3711,
+    verificado_em: VERIF_17H,
+    // "Gran Oferta Prime" na ficha: acaba com a campanha.
+    valida_ate: FIM_PBDD,
+    so_prime: true,
+    resumo:
+      'A mesma escova topo de gama do pack de duas, vendida sozinha: sensor de pressão e aplicação. A menos de metade do preço recomendado.',
+  },
+  {
+    marca: 'Oral-B',
+    nome: 'Oral-B iO 5 (com 3 cabeças)',
+    asin: 'B0D5D3WBN5',
+    categoria: 'Cuidado pessoal',
+    preco_eur: 101.6,
+    preco_recomendado_eur: 193.09,
+    desconto_pct: 47,
+    classificacao: 4.6,
+    num_avaliacoes: 1268,
+    verificado_em: VERIF_17H,
+    // "Gran Oferta Prime" na ficha: acaba com a campanha.
+    valida_ate: FIM_PBDD,
+    so_prime: true,
+    resumo:
+      'Escova elétrica da gama iO, com sensor de pressão e três cabeças incluídas. Quase metade do preço, e com cabeças para os primeiros meses.',
+  },
+  {
+    marca: 'iRobot',
+    nome: 'iRobot Roomba 115 Combo com base AutoEmpty',
+    asin: 'B0GQVG2D3Z',
+    categoria: 'Casa',
+    preco_eur: 188.05,
+    preco_recomendado_eur: 354.77,
+    desconto_pct: 47,
+    classificacao: 4.3,
+    num_avaliacoes: 39754,
+    verificado_em: VERIF_17H,
+    resumo:
+      'Robot 2 em 1 que aspira e passa a mopa, com base que esvazia o depósito sozinha, por menos de 200 €. É um modelo de entrada da gama Roomba.',
+  },
+  {
     marca: 'TP-Link',
     nome: 'Tapo C211 (câmara Wi-Fi 2K, 360°)',
     asin: 'B0CHFG8XBZ',
@@ -176,7 +226,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_recomendado_eur: 40.57,
     desconto_pct: 41,
     classificacao: 4.6,
-    num_avaliacoes: 3239,
+    num_avaliacoes: 3238,
     verificado_em: VERIF_ULTIMA,
     resumo:
       'Câmara de interior que roda 360°, com imagem 2K e deteção de pessoas. Para ver o cão, a casa de férias ou o bebé a partir do telemóvel, sem mensalidade obrigatória.',
@@ -202,7 +252,7 @@ export function expiraEm(o: Pick<OfertaMomento, 'valida_ate' | 'verificado_em'>)
  * verificação: vendidos e enviados pela Amazon, em stock, preço com IVA PT.
  */
 export const TABLETS_TELEMOVEIS: OfertaMomento[] = [
-  // Verificados na ficha a 06/10/2026, 13:35 (reconfirmados às 15:34): "Gran Oferta Prime", vendidos e
+  // Verificados na ficha a 06/10/2026, 13:35 (reconfirmados às 17:39): "Gran Oferta Prime", vendidos e
   // enviados pela Amazon, em stock, desconto face ao preço recomendado.
   // Ficaram de fora os tablets Galaxy Tab S11, Tab S10 Lite e Xiaomi Pad 8
   // Pro: o "−21 % a −26 %" da ficha compara com o preço mais baixo dos
@@ -263,48 +313,93 @@ export function tabletsTelemoveisValidos(agora: Date = new Date()): OfertaMoment
 }
 
 /**
- * Oferta em grande destaque, fora das regras de desconto mínimo: escolhida a
- * dedo, mostrada no topo da entrada e de /promocoes. O desconto não é o
- * riscado da ficha, é a diferença face a outra loja (`comparacao`), dita no
- * cartão com todas as letras.
+ * Ofertas em grande destaque, fora das regras de desconto mínimo: escolhidas
+ * a dedo, mostradas no topo da entrada e de /promocoes. Cada uma tem uma
+ * janela de exibição (`mostrar_desde` até `mostrar_ate`, ou até ao fim da
+ * oferta): todas entram no HTML e o script de OfertasMomento mostra no
+ * browser só a que está na janela, por isso as trocas acontecem à hora certa
+ * sem nova build.
  */
 export interface OfertaEstrela extends Omit<OfertaMomento, 'preco_recomendado_eur' | 'referencia'> {
-  /** Poupança anunciada, em euros, face à loja de `comparacao`. */
+  /** Poupança anunciada, em euros, face a `comparacao`. */
   poupanca_eur: number;
   /** Com o que se compara o preço, para o cartão. */
   comparacao: string;
   /** Selo curto no topo do cartão. */
   etiqueta: string;
+  /** Só aparece a partir deste momento. */
+  mostrar_desde?: Date;
+  /** Sai do destaque neste momento, mesmo que a oferta continue. */
+  mostrar_ate?: Date;
 }
 
-export const OFERTA_ESTRELA: OfertaEstrela | null = {
-  marca: 'Apple',
-  nome: 'Apple Watch Series 11 GPS, 46 mm (alumínio prateado)',
-  asin: 'B0FQGLL2HL',
-  categoria: 'Relógios',
-  // 379 € em Espanha (IVA de 21 %) → 385,26 € com o IVA de 23 % cobrado em Portugal.
-  preco_eur: 385.26,
-  poupanca_eur: 50,
-  desconto_pct: 12,
-  comparacao: 'face aos 429 € da MediaMarkt Espanha',
-  etiqueta: 'Mínimo histórico',
-  // Lidas por nós na ficha às 17:29; o preço a Amazon não o mostra a quem
-  // consulta de fora da UE, daí a `fonte`.
-  classificacao: 4.5,
-  num_avaliacoes: 767,
-  fonte: {
-    nome: 'Applesfera',
-    url: 'https://www.applesfera.com/seleccion/amazon-arranca-su-fiesta-ofertas-prime-todos-estos-descuentos-airpods-ipad',
-    preco_original: '379 € em Espanha',
-  },
-  verificado_em: new Date('2026-10-06T11:31:00+01:00'),
-  valida_ate: FIM_PBDD,
-  so_prime: true,
-  resumo:
-    'O Series 11 deu lugar ao Series 12 e baixou para o preço mais baixo de sempre na Amazon.es, segundo a Applesfera. Ecrã sempre ligado, qualidade do sono e monitorização de treino e saúde. Atenção: só funciona com iPhone.',
-};
+// Troca do destaque pedida pelo utilizador a 06/10/2026, às 17:42 ("daqui a
+// 7 horas"): o Apple Watch dá lugar aos Galaxy Buds3 Pro.
+const TROCA_DESTAQUE = new Date('2026-10-07T00:45:00+01:00');
 
-/** A oferta estrela, se ainda estiver válida. */
-export function ofertaEstrelaValida(agora: Date = new Date()): OfertaEstrela | null {
-  return OFERTA_ESTRELA && expiraEm(OFERTA_ESTRELA) > agora ? OFERTA_ESTRELA : null;
+const BUDS3_PRO = OFERTAS_MOMENTO.find((o) => o.asin === 'B0D4QVV1WV');
+
+export const OFERTAS_ESTRELA: OfertaEstrela[] = [
+  {
+    marca: 'Apple',
+    nome: 'Apple Watch Series 11 GPS, 46 mm (alumínio prateado)',
+    asin: 'B0FQGLL2HL',
+    categoria: 'Relógios',
+    // 379 € em Espanha (IVA de 21 %) → 385,26 € com o IVA de 23 % cobrado em Portugal.
+    preco_eur: 385.26,
+    poupanca_eur: 50,
+    desconto_pct: 12,
+    comparacao: 'face aos 429 € da MediaMarkt Espanha',
+    etiqueta: 'Mínimo histórico',
+    // Lidas por nós na ficha às 17:29; o preço a Amazon não o mostra a quem
+    // consulta de fora da UE, daí a `fonte`.
+    classificacao: 4.5,
+    num_avaliacoes: 767,
+    fonte: {
+      nome: 'Applesfera',
+      url: 'https://www.applesfera.com/seleccion/amazon-arranca-su-fiesta-ofertas-prime-todos-estos-descuentos-airpods-ipad',
+      preco_original: '379 € em Espanha',
+    },
+    verificado_em: new Date('2026-10-06T11:31:00+01:00'),
+    valida_ate: FIM_PBDD,
+    mostrar_ate: TROCA_DESTAQUE,
+    so_prime: true,
+    resumo:
+      'O Series 11 deu lugar ao Series 12 e baixou para o preço mais baixo de sempre na Amazon.es, segundo a Applesfera. Ecrã sempre ligado, qualidade do sono e monitorização de treino e saúde. Atenção: só funciona com iPhone.',
+  },
+  // Os Galaxy Buds3 Pro vêm da lista acima: preço, desconto e hora da
+  // verificação ficam sempre iguais aos das ofertas do momento.
+  ...(BUDS3_PRO
+    ? [
+        {
+          marca: BUDS3_PRO.marca,
+          nome: BUDS3_PRO.nome,
+          asin: BUDS3_PRO.asin,
+          categoria: BUDS3_PRO.categoria,
+          preco_eur: BUDS3_PRO.preco_eur,
+          poupanca_eur: Math.round((BUDS3_PRO.preco_recomendado_eur - BUDS3_PRO.preco_eur) * 100) / 100,
+          desconto_pct: BUDS3_PRO.desconto_pct,
+          comparacao: `face ao preço recomendado na Amazon.es (${BUDS3_PRO.preco_recomendado_eur.toLocaleString('pt-PT', { minimumFractionDigits: 2 })} €)`,
+          etiqueta: 'Menos de metade do preço',
+          classificacao: BUDS3_PRO.classificacao,
+          num_avaliacoes: BUDS3_PRO.num_avaliacoes,
+          verificado_em: BUDS3_PRO.verificado_em,
+          valida_ate: BUDS3_PRO.valida_ate,
+          so_prime: BUDS3_PRO.so_prime,
+          mostrar_desde: TROCA_DESTAQUE,
+          resumo: BUDS3_PRO.resumo,
+        },
+      ]
+    : []),
+];
+
+/** Momento em que a oferta estrela sai do destaque. */
+export function fimDestaque(o: OfertaEstrela): Date {
+  const fim = expiraEm(o);
+  return o.mostrar_ate && o.mostrar_ate < fim ? o.mostrar_ate : fim;
+}
+
+/** Ofertas estrela que ainda vão aparecer (a de agora e as agendadas). */
+export function ofertasEstrelaPorMostrar(agora: Date = new Date()): OfertaEstrela[] {
+  return OFERTAS_ESTRELA.filter((o) => fimDestaque(o) > agora);
 }

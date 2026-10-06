@@ -173,13 +173,15 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
 <script>
   // Script processado pelo Astro (ficheiro externo em /assets/): a CSP do site
   // (public/_headers) bloqueia scripts escritos dentro da página.
-  // Caduca todos os cartões de oferta da página (esta secção e os do destaque
-  // da campanha) e esconde a secção quando não sobra nenhum.
+  // Caduca todos os cartões de oferta da página (esta secção, os do destaque
+  // da campanha e as ofertas estrela), mostra os agendados (`data-inicio`)
+  // quando chega a hora e esconde a secção quando não sobra nenhum.
   function limpar() {
     const agora = Date.now();
     document.querySelectorAll<HTMLElement>('[data-oferta]').forEach((cartao) => {
+      const inicio = Date.parse(cartao.getAttribute('data-inicio') ?? '');
       const expira = Date.parse(cartao.getAttribute('data-expira') ?? '');
-      cartao.hidden = !isNaN(expira) && agora > expira;
+      cartao.hidden = (!isNaN(inicio) && agora < inicio) || (!isNaN(expira) && agora > expira);
     });
     document.querySelectorAll<HTMLElement>('[data-ofertas-raiz]').forEach((raiz) => {
       raiz.hidden = raiz.querySelectorAll('[data-oferta]:not([hidden])').length === 0;
