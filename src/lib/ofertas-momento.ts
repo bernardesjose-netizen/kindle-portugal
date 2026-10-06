@@ -63,9 +63,11 @@ export interface OfertaMomento {
 const FIM_PBDD = new Date('2026-10-07T23:59:59+02:00');
 // Última reconfirmação, ficha a ficha, de todas as ofertas desta lista
 // (preço, desconto, stock e vendedor sem alterações face à anterior).
-const VERIF_ULTIMA = new Date('2026-10-06T17:39:00+01:00');
+const VERIF_ULTIMA = new Date('2026-10-06T20:33:00+01:00');
 // Ofertas encontradas na verificação das 17h (lidas na ficha às 17:41).
 const VERIF_17H = new Date('2026-10-06T17:41:00+01:00');
+// Ofertas encontradas na verificação das 20h (lidas na ficha às 20:34).
+const VERIF_20H = new Date('2026-10-06T20:34:00+01:00');
 
 export const OFERTAS_MOMENTO: OfertaMomento[] = [
   {
@@ -218,6 +220,91 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
       'Robot 2 em 1 que aspira e passa a mopa, com base que esvazia o depósito sozinha, por menos de 200 €. É um modelo de entrada da gama Roomba.',
   },
   {
+    marca: 'Samsung',
+    nome: 'Samsung Galaxy Buds3 (com carregador)',
+    asin: 'B0D4QVNFWV',
+    categoria: 'Áudio',
+    preco_eur: 80.31,
+    preco_recomendado_eur: 181.95,
+    desconto_pct: 56,
+    classificacao: 4.1,
+    num_avaliacoes: 153,
+    verificado_em: VERIF_20H,
+    // "Gran Oferta Prime" na ficha: acaba com a campanha.
+    valida_ate: FIM_PBDD,
+    so_prime: true,
+    resumo:
+      'A versão sem «Pro» dos auriculares da Samsung, com cancelamento de ruído e carregador incluído, a menos de metade do preço recomendado. Tal como os Pro, fazem mais sentido com um telemóvel Galaxy.',
+  },
+  {
+    marca: 'Technics',
+    nome: 'Technics EAH-AZ80 (auriculares com cancelamento de ruído)',
+    asin: 'B0C4LSRTYT',
+    categoria: 'Áudio',
+    preco_eur: 153.54,
+    preco_recomendado_eur: 263.28,
+    desconto_pct: 42,
+    classificacao: 4.1,
+    num_avaliacoes: 1028,
+    verificado_em: VERIF_20H,
+    // "Oferta Prime" na ficha: acaba com a campanha.
+    valida_ate: FIM_PBDD,
+    so_prime: true,
+    resumo:
+      'Os auriculares topo de gama da Technics, a marca de áudio da Panasonic, com cancelamento de ruído. Para quem dá prioridade à qualidade de som, estão 42 % abaixo do preço recomendado.',
+  },
+  {
+    marca: 'Philips',
+    nome: 'Philips i9000 Prestige (máquina de barbear)',
+    asin: 'B0DT6NDW4L',
+    categoria: 'Cuidado pessoal',
+    preco_eur: 203.29,
+    preco_recomendado_eur: 406.6,
+    desconto_pct: 50,
+    classificacao: 4.6,
+    num_avaliacoes: 361,
+    verificado_em: VERIF_20H,
+    // "Gran Oferta Prime" na ficha: acaba com a campanha.
+    valida_ate: FIM_PBDD,
+    so_prime: true,
+    resumo:
+      'A máquina de barbear rotativa topo de gama da Philips, a metade do preço recomendado. Faz sentido para quem faz a barba todos os dias e quer uma máquina para muitos anos.',
+  },
+  {
+    marca: 'Braun',
+    nome: 'Braun Series 5 (máquina de barbear)',
+    asin: 'B0F9X92FQH',
+    categoria: 'Cuidado pessoal',
+    preco_eur: 66.06,
+    preco_recomendado_eur: 132.14,
+    desconto_pct: 50,
+    classificacao: 4.0,
+    num_avaliacoes: 6379,
+    verificado_em: VERIF_20H,
+    // "Gran Oferta Prime" na ficha: acaba com a campanha.
+    valida_ate: FIM_PBDD,
+    so_prime: true,
+    resumo:
+      'Máquina de barbear de lâminas da Braun, a metade do preço recomendado e com mais de seis mil avaliações. Uma escolha simples para o dia a dia, sem pagar a gama alta.',
+  },
+  {
+    marca: 'Philips',
+    nome: 'Philips PowerPro Compact (aspirador sem saco)',
+    asin: 'B01MTF06KN',
+    categoria: 'Casa',
+    preco_eur: 81.3,
+    preco_recomendado_eur: 147.39,
+    desconto_pct: 45,
+    classificacao: 4.5,
+    num_avaliacoes: 32311,
+    verificado_em: VERIF_20H,
+    // "Gran Oferta Prime" na ficha: acaba com a campanha.
+    valida_ate: FIM_PBDD,
+    so_prime: true,
+    resumo:
+      'Aspirador de trenó sem saco, de 900 W e tamanho compacto, com mais de trinta mil avaliações. Um aspirador simples para casas pequenas, a pouco mais de metade do preço.',
+  },
+  {
     marca: 'TP-Link',
     nome: 'Tapo C211 (câmara Wi-Fi 2K, 360°)',
     asin: 'B0CHFG8XBZ',
@@ -252,7 +339,7 @@ export function expiraEm(o: Pick<OfertaMomento, 'valida_ate' | 'verificado_em'>)
  * verificação: vendidos e enviados pela Amazon, em stock, preço com IVA PT.
  */
 export const TABLETS_TELEMOVEIS: OfertaMomento[] = [
-  // Verificados na ficha a 06/10/2026, 13:35 (reconfirmados às 17:39): "Gran Oferta Prime", vendidos e
+  // Verificados na ficha a 06/10/2026, 13:35 (reconfirmados às 20:33): "Gran Oferta Prime", vendidos e
   // enviados pela Amazon, em stock, desconto face ao preço recomendado.
   // Ficaram de fora os tablets Galaxy Tab S11, Tab S10 Lite e Xiaomi Pad 8
   // Pro: o "−21 % a −26 %" da ficha compara com o preço mais baixo dos
