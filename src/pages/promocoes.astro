@@ -7,6 +7,7 @@ import ContagemDecrescente from '@components/afiliados/ContagemDecrescente.astro
 import EstadoStock from '@components/afiliados/EstadoStock.astro';
 import FasesCampanha from '@components/afiliados/FasesCampanha.astro';
 import OfertasMomento from '@components/afiliados/OfertasMomento.astro';
+import { tabletsTelemoveisValidos } from '@lib/ofertas-momento';
 import { SITE } from '@lib/site';
 import { formatarPreco, formatarData } from '@lib/formatters';
 import { imagemParaAsin } from '@lib/asin-images';
@@ -472,6 +473,15 @@ const bandeiras: Record<string, string> = {
   </div>
 
   <OfertasMomento />
+
+  <OfertasMomento
+    lista={tabletsTelemoveisValidos()}
+    pill="Tablets e telemóveis"
+    titulo="Samsung e Xiaomi em promoção"
+    texto="Tablets e telemóveis das duas marcas, vendidos e enviados pela Amazon, em stock e com boas avaliações. Os descontos nestas categorias são mais curtos, por isso não entram na lista de 35 % ou mais; indicamos sempre a que preço se compara."
+    idTitulo="tablets-telemoveis-titulo"
+    classe="border-t-0"
+  />
 
   <FasesCampanha />
 </BaseLayout>

@@ -27,11 +27,16 @@ export interface OfertaMomento {
   marca: string;
   nome: string;
   asin: string;
-  categoria: 'Áudio' | 'Carregadores' | 'Informática' | 'Casa' | 'Casa inteligente' | 'Cuidado pessoal';
+  categoria: 'Áudio' | 'Carregadores' | 'Informática' | 'Casa' | 'Casa inteligente' | 'Cuidado pessoal' | 'Tablets' | 'Telemóveis';
   /** Preço com IVA PT, em euros. */
   preco_eur: number;
-  /** Preço recomendado (riscado na ficha), com IVA PT. */
+  /** Preço riscado na ficha, com IVA PT (ver `referencia`). */
   preco_recomendado_eur: number;
+  /**
+   * O que é o preço riscado: o recomendado pelo fabricante (por omissão) ou o
+   * mais baixo dos últimos 30 dias ("Más bajo" na Amazon.es).
+   */
+  referencia?: 'recomendado' | 'minimo-30-dias';
   /** Desconto que a Amazon mostra na ficha. */
   desconto_pct: number;
   classificacao: number;
@@ -193,4 +198,17 @@ export function ofertasRecentes(): OfertaMomento[] {
 /** Momento a partir do qual a oferta deixa de se mostrar. */
 export function expiraEm(o: OfertaMomento): Date {
   return o.valida_ate ?? new Date(o.verificado_em.valueOf() + 24 * 3_600_000);
+}
+
+/**
+ * Tablets e telemóveis Samsung e Xiaomi em destaque em /promocoes. Os
+ * descontos nestas categorias raramente passam dos 30 %, por isso têm lista
+ * própria e não entram nas ofertas de 35 % ou mais. Mesmas regras de
+ * verificação: vendidos e enviados pela Amazon, em stock, preço com IVA PT.
+ */
+export const TABLETS_TELEMOVEIS: OfertaMomento[] = [];
+
+/** Tablets e telemóveis ainda válidos, por desconto. */
+export function tabletsTelemoveisValidos(agora: Date = new Date()): OfertaMomento[] {
+  return TABLETS_TELEMOVEIS.filter((o) => expiraEm(o) > agora).sort((a, b) => b.desconto_pct - a.desconto_pct);
 }
