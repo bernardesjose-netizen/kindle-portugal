@@ -27,15 +27,27 @@ export interface OfertaMomento {
   marca: string;
   nome: string;
   asin: string;
-  categoria: 'Áudio' | 'Carregadores' | 'Informática' | 'Casa' | 'Casa inteligente' | 'Cuidado pessoal';
+  categoria: 'Áudio' | 'Carregadores' | 'Informática' | 'Casa' | 'Casa inteligente' | 'Cuidado pessoal' | 'Tablets' | 'Telemóveis';
   /** Preço com IVA PT, em euros. */
   preco_eur: number;
-  /** Preço recomendado (riscado na ficha), com IVA PT. */
+  /** Preço riscado na ficha, com IVA PT (ver `referencia`). */
   preco_recomendado_eur: number;
+  /**
+   * O que é o preço riscado: o recomendado pelo fabricante (por omissão) ou o
+   * mais baixo dos últimos 30 dias ("Más bajo" na Amazon.es).
+   */
+  referencia?: 'recomendado' | 'minimo-30-dias';
   /** Desconto que a Amazon mostra na ficha. */
   desconto_pct: number;
-  classificacao: number;
-  num_avaliacoes: number;
+  /** Estrelas e número de avaliações; podem faltar enquanto `fonte` estiver definido. */
+  classificacao?: number;
+  num_avaliacoes?: number;
+  /**
+   * Preço ainda NÃO lido por nós na ficha (ex.: a Amazon estava a bloquear a
+   * leitura): vem desta fonte, citada no cartão, e o cartão diz que está por
+   * confirmar. Retirar quando o preço for confirmado na ficha.
+   */
+  fonte?: { nome: string; url: string; preco_original: string };
   /** Momento exato da verificação na Amazon.es (com hora). */
   verificado_em: Date;
   /** Fim anunciado da oferta (ex.: fim do Prime Big Deal Days). */
@@ -193,4 +205,41 @@ export function ofertasRecentes(): OfertaMomento[] {
 /** Momento a partir do qual a oferta deixa de se mostrar. */
 export function expiraEm(o: OfertaMomento): Date {
   return o.valida_ate ?? new Date(o.verificado_em.valueOf() + 24 * 3_600_000);
+}
+
+/**
+ * Tablets e telemóveis Samsung e Xiaomi em destaque em /promocoes. Os
+ * descontos nestas categorias raramente passam dos 30 %, por isso têm lista
+ * própria e não entram nas ofertas de 35 % ou mais. Mesmas regras de
+ * verificação: vendidos e enviados pela Amazon, em stock, preço com IVA PT.
+ */
+export const TABLETS_TELEMOVEIS: OfertaMomento[] = [
+  // TODO: confirmar na ficha (B0FBGQYQLL) assim que a Amazon.es deixar de
+  // bloquear a leitura; acrescentar então estrelas, avaliações e imagem, e
+  // retirar `fonte`. Preço PT estimado: 599 € / 1,21 × 1,23 = 608,90 €;
+  // recomendado 999 € → 1015,51 €. Oferta Prime: acaba com a campanha.
+  {
+    marca: 'Samsung',
+    nome: 'Samsung Galaxy Z Flip7 FE',
+    asin: 'B0FBGQYQLL',
+    categoria: 'Telemóveis',
+    preco_eur: 608.9,
+    preco_recomendado_eur: 1015.51,
+    desconto_pct: 40,
+    fonte: {
+      nome: 'El Confidencial Digital',
+      url: 'https://www.elconfidencialdigital.com/articulo/chollos-de-amazon/mejores-ofertas-prime-day-samsung-galaxy-watch8-s26-ultra-z-flip7-fe/202610061117081491006.html',
+      preco_original: '599 € em Espanha (antes 999 €)',
+    },
+    verificado_em: new Date('2026-10-06T13:20:00+01:00'),
+    valida_ate: FIM_PBDD,
+    so_prime: true,
+    resumo:
+      'O dobrável da Samsung com ecrã que fecha a meio e cabe em qualquer bolso. Com 40 % de desconto face ao preço de lançamento, é das maiores descidas de um Galaxy nesta campanha; é para quem quer o formato dobrável sem pagar o preço do Flip topo de gama.',
+  },
+];
+
+/** Tablets e telemóveis ainda válidos, por desconto. */
+export function tabletsTelemoveisValidos(agora: Date = new Date()): OfertaMomento[] {
+  return TABLETS_TELEMOVEIS.filter((o) => expiraEm(o) > agora).sort((a, b) => b.desconto_pct - a.desconto_pct);
 }
