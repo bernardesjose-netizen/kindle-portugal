@@ -2,23 +2,30 @@
 /**
  * Destaque grande da campanha em curso, para o topo da página de entrada.
  *
- * Aparece acima do herói, logo é a primeira coisa visível sem rolar. Só existe
- * enquanto a campanha estiver visível (antecipação ou a decorrer), por isso
- * desaparece sozinho quando a janela fecha e o site reconstrói.
+ * Aparece acima do herói, logo é a primeira coisa visível sem rolar. Só é
+ * gerado se a campanha estiver visível no build (antecipação ou a decorrer),
+ * e o script FasesCampanha troca os textos e as contagens no browser: antes da
+ * abertura conta até ao início, durante a campanha conta até ao fim, e depois
+ * do fim o bloco desaparece, mesmo que o site não volte a ser reconstruído.
  *
- * Mostra apenas modelos com `preco_promo` confirmado: nunca anuncia um desconto
- * que não tenha sido verificado na Amazon (regra do CLAUDE.md).
+ * Mostra apenas Kindle com `preco_promo` confirmado e que não estejam
+ * esgotados: nunca anuncia um desconto que não tenha sido verificado na
+ * Amazon (regra do CLAUDE.md). Os restantes aparecem numa linha com o estado
+ * do stock.
  */
 import Container from '@components/ui/Container.astro';
 import ContagemDecrescente from '@components/afiliados/ContagemDecrescente.astro';
+import EstadoStock from '@components/afiliados/EstadoStock.astro';
+import FasesCampanha from '@components/afiliados/FasesCampanha.astro';
 import { getCollection } from 'astro:content';
 import { CAMPANHA, campanhaVisivel, faseCampanha } from '@lib/promocoes';
 import { formatarPreco, formatarData } from '@lib/formatters';
 import { imagemParaAsin } from '@lib/asin-images';
 import { urlAfiliado } from '@lib/afiliados';
+import type { Disponibilidade } from '@lib/disponibilidade';
 
 const visivel = campanhaVisivel();
-const aDecorrer = faseCampanha() === 'ativa';
+const fase = faseCampanha();
 
 type Destaque = {
   slug: string;
@@ -27,37 +34,81 @@ type Destaque = {
   preco_promo: number;
   preco_normal: number | null;
   desconto_pct: number | null;
+  disponibilidade: Disponibilidade | undefined;
+};
+
+type EstadoModelo = {
+  slug: string;
+  nome: string;
+  disponibilidade: Disponibilidade;
+  data: Date | undefined;
 };
 
 let destaques: Destaque[] = [];
+let estados: EstadoModelo[] = [];
 
 if (visivel) {
   const modelos = await getCollection('modelos', ({ data }) => !data.rascunho);
-  destaques = CAMPANHA.itens
-    .filter((it) => it.preco_promo != null)
-    .map((it) => {
-      const m = modelos.find((x) => x.id === it.slug);
-      if (!m) return null;
-      return {
+  for (const it of CAMPANHA.itens) {
+    const m = modelos.find((x) => x.id === it.slug);
+    if (!m) continue;
+    if (m.data.disponibilidade) {
+      estados.push({
+        slug: it.slug,
+        nome: m.data.nome,
+        disponibilidade: m.data.disponibilidade,
+        data: m.data.disponibilidade_data,
+      });
+    }
+    if (it.preco_promo != null && m.data.disponibilidade !== 'esgotado') {
+      destaques.push({
         slug: it.slug,
         nome: m.data.nome,
         asin: m.data.asin,
-        preco_promo: it.preco_promo as number,
+        preco_promo: it.preco_promo,
         preco_normal: it.preco_normal ?? m.data.preco_referencia_eur ?? null,
         desconto_pct: it.desconto_pct,
-      };
-    })
-    .filter((x): x is Destaque => x !== null)
-    .slice(0, 2);
+        disponibilidade: m.data.disponibilidade,
+      });
+    }
+  }
 }
 
-const maiorCorte = destaques.reduce((max, d) => Math.max(max, d.desconto_pct ?? 0), 0);
+const principal = destaques[0];
+// Dois cartões: o Kindle principal e o extra; sem extra, até dois Kindle.
+const extras = CAMPANHA.extras.slice(0, destaques.length > 0 ? 1 : 2);
+const cartoesKindle = destaques.slice(0, 2 - extras.length);
+const esgotados = estados.filter((e) => e.disponibilidade === 'esgotado');
+
+// "Kindle (básico)" → "básico", "Kindle Paperwhite" → "Paperwhite".
+const nomeCurto = (nome: string) => nome.replace(/^Kindle\s*/, '').replace(/[()]/g, '').trim();
+const maiuscula = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+const listaEsgotados = esgotados
+  .map((e) => `o ${nomeCurto(e.nome)}`)
+  .join(', ')
+  .replace(/, ([^,]*)$/, ' e $1');
+
+// "6 e 7 de outubro", construído a partir das datas da campanha.
+const janela = `${new Intl.DateTimeFormat('pt-PT', { day: 'numeric' }).format(CAMPANHA.inicio)} e ${new Intl.DateTimeFormat(
+  'pt-PT',
+  { day: 'numeric', month: 'long' }
+).format(CAMPANHA.fim)}`;
+const diaFim = new Intl.DateTimeFormat('pt-PT', { day: 'numeric', month: 'long', timeZone: 'Europe/Lisbon' }).format(CAMPANHA.fim);
+
+const titulo = principal
+  ? `${principal.nome} a ${formatarPreco(principal.preco_promo)}${principal.desconto_pct ? `, −${principal.desconto_pct}%` : ''}`
+  : 'Kindle em promoção';
+const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 ---
 
-{visivel && destaques.length > 0 && (
+{visivel && (principal || extras.length > 0) && (
   <section
     class="relative overflow-hidden border-b-4 border-marca-600 bg-gradient-to-br from-marca-700 via-marca-600 to-marinho-900 text-creme-50"
     aria-labelledby="destaque-campanha-titulo"
+    data-campanha-antecipacao={CAMPANHA.antecipacao.toISOString()}
+    data-campanha-inicio={CAMPANHA.inicio.toISOString()}
+    data-campanha-fim={CAMPANHA.fim.toISOString()}
+    data-esconder-fora
   >
     <div
       aria-hidden="true"
@@ -71,12 +122,14 @@ const maiorCorte = destaques.reduce((max, d) => Math.max(max, d.desconto_pct ?? 
         <div>
           <span class="inline-flex items-center gap-1.5 rounded-full bg-creme-50/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-creme-50 ring-1 ring-inset ring-creme-50/30">
             <span class="relative flex h-2 w-2" aria-hidden="true">
-              {aDecorrer && (
-                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-creme-50 opacity-75"></span>
-              )}
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-creme-50 opacity-75" data-so-fase="ativa" hidden={fase !== 'ativa'}></span>
               <span class="relative inline-flex h-2 w-2 rounded-full bg-creme-50"></span>
             </span>
-            {CAMPANHA.etiqueta} · {aDecorrer ? 'a decorrer' : `${formatarData(CAMPANHA.inicio)}`}
+            <span>
+              {CAMPANHA.etiqueta} ·{' '}
+              <span data-so-fase="ativa" hidden={fase !== 'ativa'}>a decorrer até {diaFim}</span>
+              <span data-so-fase="antecipacao" hidden={fase !== 'antecipacao'}>{janela}</span>
+            </span>
           </span>
 
           <h2
@@ -84,18 +137,20 @@ const maiorCorte = destaques.reduce((max, d) => Math.max(max, d.desconto_pct ?? 
             class="mt-4 text-[1.75rem] font-bold leading-[1.1] sm:text-4xl"
             style="letter-spacing: -0.03em; font-family: var(--font-serif);"
           >
-            {aDecorrer
-              ? `Kindle até −${maiorCorte}% na Amazon.es`
-              : `Os descontos já abriram: Kindle até −${maiorCorte}%`}
+            {titulo}
           </h2>
 
-          <p class="mt-3 max-w-xl text-creme-50/90">
-            {aDecorrer
-              ? 'Campanha reservada a membros Prime. Preços confirmados por nós, com data.'
-              : 'Não é preciso esperar pelo dia 6. A Amazon já libertou parte das ofertas, e estas foram confirmadas por nós hoje.'}
+          <p class="mt-3 max-w-xl text-creme-50/90" data-so-fase="ativa" hidden={fase !== 'ativa'}>
+            {destaques.length === 1 && esgotados.length > 0
+              ? `É o único Kindle com stock e desconto na Amazon.es neste momento: ${listaEsgotados} ${esgotados.length === 1 ? 'esgotou' : 'esgotaram'}. Preços confirmados por nós, com data.`
+              : 'Campanha reservada a membros Prime. Preços confirmados por nós, com data.'}
+          </p>
+          <p class="mt-3 max-w-xl text-creme-50/90" data-so-fase="antecipacao" hidden={fase !== 'antecipacao'}>
+            Não é preciso esperar pela abertura. A Amazon já libertou parte das ofertas, e estas
+            foram confirmadas por nós.
           </p>
 
-          {!aDecorrer && (
+          <div data-so-fase="antecipacao" hidden={fase !== 'antecipacao'}>
             <ContagemDecrescente
               alvo={CAMPANHA.inicio}
               etiqueta="Abre dentro de"
@@ -103,7 +158,16 @@ const maiorCorte = destaques.reduce((max, d) => Math.max(max, d.desconto_pct ?? 
               tema="escuro"
               classe="mt-6"
             />
-          )}
+          </div>
+          <div data-so-fase="ativa" hidden={fase !== 'ativa'}>
+            <ContagemDecrescente
+              alvo={CAMPANHA.fim}
+              etiqueta="Termina dentro de"
+              mensagem_fim="A campanha terminou."
+              tema="escuro"
+              classe="mt-6"
+            />
+          </div>
 
           <div class="mt-6 flex flex-wrap gap-3">
             <a
@@ -122,10 +186,10 @@ const maiorCorte = destaques.reduce((max, d) => Math.max(max, d.desconto_pct ?? 
           </div>
         </div>
 
-        {/* Lado direito: os modelos com desconto confirmado */}
+        {/* Lado direito: Kindle com desconto confirmado + extra */}
         <ul class="grid gap-3 sm:grid-cols-2">
-          {destaques.map((d) => {
-            const img = d.asin ? imagemParaAsin(d.asin, 300) : null;
+          {cartoesKindle.map((d) => {
+            const img = d.asin ? imagemParaAsin(d.asin, 250) : null;
             return (
               <li class="rounded-2xl border border-creme-50/25 bg-marinho-900/35 p-4 backdrop-blur-sm">
                 <a href={`/modelos/${d.slug}`} class="group block">
@@ -148,11 +212,18 @@ const maiorCorte = destaques.reduce((max, d) => Math.max(max, d.desconto_pct ?? 
                       <p class="truncate text-sm font-bold text-creme-50 transition-colors group-hover:text-dourado-300">
                         {d.nome}
                       </p>
-                      {d.desconto_pct != null && (
-                        <span class="mt-1 inline-block rounded bg-dourado-400 px-1.5 py-0.5 text-[0.7rem] font-bold text-marinho-900">
-                          −{d.desconto_pct}%
-                        </span>
-                      )}
+                      <p class="mt-1 flex flex-wrap items-center gap-1.5">
+                        {d.desconto_pct != null && (
+                          <span class="inline-block rounded bg-dourado-400 px-1.5 py-0.5 text-[0.7rem] font-bold text-marinho-900">
+                            −{d.desconto_pct}%
+                          </span>
+                        )}
+                        {d.disponibilidade === 'ultimas-unidades' && (
+                          <span class="inline-block rounded bg-ambar-100 px-1.5 py-0.5 text-[0.7rem] font-bold text-ambar-800">
+                            Últimas unidades
+                          </span>
+                        )}
+                      </p>
                     </div>
                   </div>
 
@@ -180,16 +251,95 @@ const maiorCorte = destaques.reduce((max, d) => Math.max(max, d.desconto_pct ?? 
               </li>
             );
           })}
+
+          {extras.map((x) => {
+            const img = imagemParaAsin(x.asin, 250);
+            return (
+              <li class="rounded-2xl border border-dourado-300/50 bg-marinho-900/45 p-4 backdrop-blur-sm">
+                <p class="text-[0.7rem] font-bold uppercase tracking-wider text-dourado-300">{x.etiqueta}</p>
+                <div class="mt-2 flex items-center gap-3">
+                  {img && (
+                    <img
+                      src={img}
+                      alt=""
+                      loading="eager"
+                      decoding="async"
+                      width="56"
+                      height="56"
+                      class="h-14 w-14 shrink-0 rounded-lg bg-creme-50 object-contain p-1"
+                      style="mix-blend-mode: multiply;"
+                      referrerpolicy="no-referrer-when-downgrade"
+                      data-fallback="hide"
+                    />
+                  )}
+                  <div class="min-w-0">
+                    <p class="text-sm font-bold leading-snug text-creme-50">{x.nome}</p>
+                    <p class="mt-1 text-[0.7rem] text-creme-50/75">
+                      <span aria-hidden="true" class="text-dourado-300">★</span> {estrelas(x.classificacao)} · {x.num_avaliacoes.toLocaleString('pt-PT')} avaliações
+                    </p>
+                  </div>
+                </div>
+                <p class="mt-3 flex flex-wrap items-baseline gap-x-2">
+                  <span class="text-2xl font-bold text-creme-50">{formatarPreco(x.preco_eur)}</span>
+                  {x.desconto_pct != null && (
+                    <span class="inline-block rounded bg-dourado-400 px-1.5 py-0.5 text-[0.7rem] font-bold text-marinho-900">
+                      −{x.desconto_pct}%
+                    </span>
+                  )}
+                </p>
+                {x.preco_comparacao_eur != null && (
+                  <p class="mt-1 text-[0.7rem] text-creme-50/70">
+                    face a {formatarPreco(x.preco_comparacao_eur)}{x.origem_comparacao ? `, ${x.origem_comparacao}` : ''}
+                  </p>
+                )}
+                <a
+                  href={urlAfiliado(`https://www.amazon.es/dp/${x.asin}`)}
+                  rel="sponsored nofollow noopener"
+                  target="_blank"
+                  data-afiliado="amazon"
+                  data-mercado="es"
+                  class="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-creme-50/15 px-3 py-2 text-xs font-bold text-creme-50 ring-1 ring-inset ring-creme-50/25 transition-all hover:bg-creme-50 hover:text-marinho-900"
+                >
+                  Ver na Amazon.es
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </li>
+            );
+          })}
         </ul>
       </div>
 
+      {estados.length > 0 && (
+        <div class="mt-6 rounded-xl border border-creme-50/20 bg-marinho-900/30 p-3 text-sm">
+          <p class="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <span class="text-xs font-semibold uppercase tracking-wider text-creme-50/70">
+              Stock na Amazon.es{CAMPANHA.verificado_em ? ` a ${formatarData(CAMPANHA.verificado_em)}` : ''}
+            </span>
+            {estados.map((e) => (
+              <a href={`/modelos/${e.slug}`} class="inline-flex items-center gap-2 text-creme-50 hover:text-dourado-300">
+                <span class="font-semibold">{maiuscula(nomeCurto(e.nome))}</span>
+                <EstadoStock estado={e.disponibilidade} data={e.data} tema="escuro" />
+              </a>
+            ))}
+          </p>
+          {esgotados.length > 0 && (
+            <p class="mt-2 text-xs text-creme-50/75">
+              Para os esgotados, a nova geração de 2026 está em pré-reserva; detalhes e preços em{' '}
+              <a href="/promocoes" class="font-semibold underline decoration-creme-50/40 underline-offset-2 hover:text-dourado-300">promoções</a>.
+            </p>
+          )}
+        </div>
+      )}
+
       {CAMPANHA.verificado_em && (
-        <p class="mt-6 text-xs text-creme-50/70">
-          Preços confirmados na Amazon.es a {formatarData(CAMPANHA.verificado_em)}, com entrega para
-          Portugal. Mudam ao minuto e não garantimos disponibilidade: o valor que conta é o da ficha
-          ao abrir o link.
+        <p class="mt-4 text-xs text-creme-50/70">
+          Preços confirmados na Amazon.es a {formatarData(CAMPANHA.verificado_em)}, com IVA e entrega
+          para Portugal. Mudam ao minuto e não garantimos disponibilidade: o valor que conta é o da
+          ficha ao abrir o link.
         </p>
       )}
     </Container>
   </section>
 )}
+
+<FasesCampanha />

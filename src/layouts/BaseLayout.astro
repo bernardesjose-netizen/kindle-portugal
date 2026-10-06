@@ -58,7 +58,8 @@ const motivoFinal: MotivoOrnamento = motivoOrnamento ?? principal;
 // Barra fina da campanha, em todas as páginas menos duas: a entrada, que já tem
 // o destaque grande por cima do herói, e a própria página de promoções, para
 // onde a barra apontaria. O componente decide sozinho se há campanha a mostrar.
-const caminhoAtual = Astro.url.pathname.replace(/\.html$/, '').replace(/\/+$/, '');
+// Com `build.format: 'file'`, a entrada é gerada como /index, por isso conta também.
+const caminhoAtual = Astro.url.pathname.replace(/\.html$/, '').replace(/\/+$/, '').replace(/^\/index$/, '');
 const mostrarBannerPromo = caminhoAtual !== '' && caminhoAtual !== '/promocoes';
 
 const websiteLd = {

@@ -86,6 +86,19 @@ export const ACHADOS_TECH: AchadoTech[] = [
       'Os auscultadores Bluetooth mais recomendáveis abaixo dos 25 €: leves, dobráveis, com 40 horas de bateria anunciadas e o som equilibrado típico da JBL. Mais de cinquenta mil avaliações sustentam a fama. São também um par excelente para ouvir audiolivros no Kindle ou no telemóvel.',
   },
   {
+    nome: 'Xiaomi Redmi Buds 8',
+    asin: 'B0GQLY4D9F',
+    categoria: 'Áudio',
+    preco_eur: 43.7,
+    // Verificado a 06/10/2026: vendido e enviado pela Amazon, em stock.
+    preco_data: new Date('2026-10-06'),
+    classificacao: 4.5,
+    num_avaliacoes: 163,
+    etiqueta: '−28% face ao PVP',
+    comentario:
+      'Auriculares sem fios com cancelamento de ruído até 50 dB, 44 horas de autonomia com o estojo, ligação a dois aparelhos ao mesmo tempo e resistência a pó e salpicos (IP54). Na Amazon.es custam 42,99 €, 28 % abaixo do preço oficial de 59,99 €, e 43,70 € com o IVA português. Ainda têm poucas avaliações por serem recentes; quem quer gastar menos tem os Redmi Buds 8 Lite, mais simples, a cerca de 20 €.',
+  },
+  {
     nome: 'Apple AirTag (2.ª geração)',
     asin: 'B0GJTFY58R',
     categoria: 'Para levar no bolso',

@@ -9,7 +9,7 @@ export function formatarPreco(valor: number | undefined | null): string {
   }).format(valor);
 }
 
-export function formatarData(data: Date | string | undefined): string {
+export function formatarData(data: Date | string | null | undefined): string {
   if (!data) return '';
   const d = typeof data === 'string' ? new Date(data) : data;
   return new Intl.DateTimeFormat(LOCALE, {
@@ -38,4 +38,15 @@ export function formatarIso(data: Date | string | undefined): string {
 export function estimarTempoLeitura(texto: string): number {
   const palavras = texto.trim().split(/\s+/).length;
   return Math.max(1, Math.round(palavras / 220));
+}
+
+/** Hora em Portugal continental, ex.: "12:15". */
+export function formatarHora(data: Date | string | undefined): string {
+  if (!data) return '';
+  const d = typeof data === 'string' ? new Date(data) : data;
+  return new Intl.DateTimeFormat(LOCALE, {
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'Europe/Lisbon',
+  }).format(d);
 }
