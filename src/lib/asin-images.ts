@@ -87,6 +87,9 @@ export const ASIN_IMAGES: Record<string, string> = {
   B0DT6NDW4L: 'https://m.media-amazon.com/images/I/71ubb8eK+QL._AC_SL1500_.jpg', // Philips i9000 Prestige
   B0F9X92FQH: 'https://m.media-amazon.com/images/I/813dj98ThUL._AC_SL1500_.jpg', // Braun Series 5
   B01MTF06KN: 'https://m.media-amazon.com/images/I/51ykSRmE1nL._AC_SL1000_.jpg', // Philips PowerPro Compact
+  B0FCG4B4C7: 'https://m.media-amazon.com/images/I/51WGGhKn74L._AC_SL1200_.jpg', // Samsung Galaxy Watch8
+  B0BPYPJ3KN: 'https://m.media-amazon.com/images/I/71QgoRIuJ9L._AC_SL1500_.jpg', // AEG QX7
+  B0CHZ5WN26: 'https://m.media-amazon.com/images/I/715vVlrOSiL._AC_SL1500_.jpg', // Philips OneBlade 360
   B0FBGQYQLL: 'https://m.media-amazon.com/images/I/61Wd4f0QugL._AC_SL1500_.jpg', // Samsung Galaxy Z Flip7 FE
   B0FLDLZ7MR: 'https://m.media-amazon.com/images/I/61bcBykvJWL._AC_SL1500_.jpg', // Samsung Galaxy S25 FE
   B0H4H89QXV: 'https://m.media-amazon.com/images/I/615gMB9zOXL._AC_SL1500_.jpg', // Redmi Note 17 Pro 5G
