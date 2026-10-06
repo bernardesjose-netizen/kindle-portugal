@@ -90,7 +90,11 @@ export interface Campanha {
   slogan_antecipacao: string;
   /** A partir de quando mostrar a conta decrescente e as ofertas antecipadas. */
   antecipacao: Date;
-  /** Início e fim (inclusive) da janela, com fuso de Portugal (verão = +01:00). */
+  /**
+   * Início e fim (inclusive) da janela. A Amazon.es abre e fecha à meia-noite
+   * de Espanha (verão = +02:00), uma hora antes de Portugal: abre às 23h da
+   * véspera e fecha às 23h do último dia, hora de Lisboa.
+   */
   inicio: Date;
   fim: Date;
   /** Data em que os preços promocionais foram verificados na Amazon. */
@@ -111,8 +115,10 @@ export const CAMPANHA: Campanha = {
   slogan_antecipacao:
     'O Prime Big Deal Days é a 6 e 7 de outubro, mas há Kindle já com desconto antes da abertura.',
   antecipacao: new Date('2026-09-28T00:00:00+01:00'),
-  inicio: new Date('2026-10-06T00:00:00+01:00'),
-  fim: new Date('2026-10-07T23:59:59+01:00'),
+  // Meia-noite de 6 em Espanha = 23h de 5 em Portugal; fim à meia-noite de 7
+  // para 8 em Espanha = 23h de 7 em Portugal.
+  inicio: new Date('2026-10-06T00:00:00+02:00'),
+  fim: new Date('2026-10-07T23:59:59+02:00'),
   verificado_em: new Date('2026-10-06'),
   fonte_datas: 'Anúncio oficial da Amazon (aboutamazon.com), consultado a 04/10/2026.',
   itens: [
@@ -225,4 +231,12 @@ export function campanhaVisivel(agora: Date = new Date()): boolean {
 /** Itens com desconto confirmado, para destacar antes e durante o evento. */
 export function itensComDesconto(): ItemPromocao[] {
   return CAMPANHA.itens.filter((it) => it.preco_promo != null);
+}
+
+/** Hora de fecho em Portugal, ex.: "23h" (o fim é às 22:59:59 de Lisboa). */
+export function horaFimPortugal(): string {
+  const h = new Intl.DateTimeFormat('pt-PT', { hour: 'numeric', hour12: false, timeZone: 'Europe/Lisbon' }).format(
+    new Date(CAMPANHA.fim.valueOf() + 1000)
+  );
+  return `${Number(h)}h`;
 }
