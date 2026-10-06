@@ -46,8 +46,9 @@ export interface OfertaMomento {
   resumo: string;
 }
 
-// Fim do Prime Big Deal Days (as ofertas "exclusivas Prime" acabam aqui).
-const FIM_PBDD = new Date('2026-10-07T23:59:59+01:00');
+// Fim do Prime Big Deal Days (as ofertas "exclusivas Prime" acabam aqui):
+// meia-noite de Espanha, 23h em Portugal.
+const FIM_PBDD = new Date('2026-10-07T23:59:59+02:00');
 const VERIF_0612 = new Date('2026-10-06T12:15:00+01:00');
 
 export const OFERTAS_MOMENTO: OfertaMomento[] = [

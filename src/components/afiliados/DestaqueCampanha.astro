@@ -18,7 +18,7 @@ import ContagemDecrescente from '@components/afiliados/ContagemDecrescente.astro
 import EstadoStock from '@components/afiliados/EstadoStock.astro';
 import FasesCampanha from '@components/afiliados/FasesCampanha.astro';
 import { getCollection } from 'astro:content';
-import { CAMPANHA, campanhaVisivel, faseCampanha } from '@lib/promocoes';
+import { CAMPANHA, campanhaVisivel, faseCampanha, horaFimPortugal } from '@lib/promocoes';
 import { formatarPreco, formatarData } from '@lib/formatters';
 import { imagemParaAsin } from '@lib/asin-images';
 import { urlAfiliado } from '@lib/afiliados';
@@ -136,7 +136,7 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
             </span>
             <span>
               {CAMPANHA.etiqueta} ·{' '}
-              <span data-so-fase="ativa" hidden={fase !== 'ativa'}>a decorrer até {diaFim}</span>
+              <span data-so-fase="ativa" hidden={fase !== 'ativa'}>a decorrer até {diaFim}, às {horaFimPortugal()}</span>
               <span data-so-fase="antecipacao" hidden={fase !== 'antecipacao'}>{janela}</span>
             </span>
           </span>
