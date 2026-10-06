@@ -69,6 +69,17 @@ export const ASIN_IMAGES: Record<string, string> = {
   B08VDJYLS5: 'https://m.media-amazon.com/images/I/51KgWxg+Y6L._AC_SL1000_.jpg', // JBL Tune 510BT
   B0C9CJKCH3: 'https://m.media-amazon.com/images/I/614OfiBkyZL._AC_SL1500_.jpg', // Anker Nano Power Bank 10k
   B07Z5JD3T4: 'https://m.media-amazon.com/images/I/71aEoXvgIwL._SL1500_.jpg', // TP-Link Tapo P100
+  B0GQLY4D9F: 'https://m.media-amazon.com/images/I/51cJaSgKkHL._AC_SL1500_.jpg', // Xiaomi Redmi Buds 8
+  // Ofertas do momento (src/lib/ofertas-momento.ts)
+  B0F66XD5LF: 'https://m.media-amazon.com/images/I/51lEvBqF31L._AC_SL1100_.jpg', // Nothing Headphone (1)
+  B0DBLNFHLT: 'https://m.media-amazon.com/images/I/4186KwkKTuL._AC_SL1200_.jpg', // Sony WF-C510
+  B0D4QVV1WV: 'https://m.media-amazon.com/images/I/61TuiK8TEmL._AC_SL1500_.jpg', // Samsung Galaxy Buds3 Pro
+  B0C4FYH4YM: 'https://m.media-amazon.com/images/I/41ne-Y+I9FL._AC_SL1500_.jpg', // Belkin BoostCharge 60 W
+  B0CWH4ND6V: 'https://m.media-amazon.com/images/I/51QSAWZAcrL._AC_SL1500_.jpg', // Belkin BoostCharge Pro 67 W
+  B01A9GXEOI: 'https://m.media-amazon.com/images/I/41TszOgiDCL._AC_SL1200_.jpg', // Logitech M171
+  B00IYIETIE: 'https://m.media-amazon.com/images/I/61ZgMnLv0GL._AC_SL1500_.jpg', // Braun CJ3000
+  B0B722494K: 'https://m.media-amazon.com/images/I/71QGE0reOSL._AC_SL1500_.jpg', // Philips Sonicare DiamondClean 9000 (2)
+  B0CHFG8XBZ: 'https://m.media-amazon.com/images/I/71fjanBpbmL._AC_SL1500_.jpg', // TP-Link Tapo C211
 };
 
 /**

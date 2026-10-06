@@ -1,0 +1,62 @@
+---
+/**
+ * Muda a fase da campanha no browser, sem esperar por um novo build.
+ *
+ * O site só é reconstruído quando há conteúdo para publicar, por isso a fase
+ * calculada no build (antecipação, a decorrer, fora) pode ficar desatualizada
+ * durante dias: foi assim que a contagem decrescente ficou "pendurada" depois
+ * de a campanha abrir. Este script corrige o que se vê:
+ *
+ *   - cada bloco com `data-campanha-inicio` e `data-campanha-fim` recebe a fase
+ *     atual em `data-fase`;
+ *   - os elementos com `data-so-fase="ativa"` (ou "antecipacao", "fora", ou
+ *     várias separadas por espaço) só aparecem nessa fase;
+ *   - o bloco com `data-esconder-fora` desaparece quando a campanha acaba.
+ *
+ * Reavalia a cada 30 segundos, ao voltar ao separador e quando uma contagem
+ * decrescente chega a zero (evento `kp:contagem-fim`). Sem JavaScript, fica
+ * o estado calculado no build.
+ */
+---
+
+<script is:inline>
+  (function () {
+    if (!window.__kpFasesCampanha) {
+      var fase = function (raiz, agora) {
+        var inicio = Date.parse(raiz.getAttribute('data-campanha-inicio'));
+        var fim = Date.parse(raiz.getAttribute('data-campanha-fim'));
+        var antecipacao = Date.parse(raiz.getAttribute('data-campanha-antecipacao') || '');
+        if (isNaN(inicio) || isNaN(fim)) return null;
+        if (agora >= inicio && agora <= fim) return 'ativa';
+        if (agora < inicio && (isNaN(antecipacao) || agora >= antecipacao)) return 'antecipacao';
+        return 'fora';
+      };
+
+      window.__kpFasesCampanha = function () {
+        var agora = Date.now();
+        var raizes = document.querySelectorAll('[data-campanha-inicio]');
+        for (var i = 0; i < raizes.length; i++) {
+          var raiz = raizes[i];
+          var f = fase(raiz, agora);
+          if (!f) continue;
+          raiz.setAttribute('data-fase', f);
+          if (raiz.hasAttribute('data-esconder-fora')) raiz.hidden = f === 'fora';
+          var partes = raiz.querySelectorAll('[data-so-fase]');
+          for (var j = 0; j < partes.length; j++) {
+            var fases = partes[j].getAttribute('data-so-fase').split(' ');
+            partes[j].hidden = fases.indexOf(f) === -1;
+          }
+        }
+      };
+
+      setInterval(window.__kpFasesCampanha, 30000);
+      document.addEventListener('kp:contagem-fim', window.__kpFasesCampanha);
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden) window.__kpFasesCampanha();
+      });
+      document.addEventListener('DOMContentLoaded', window.__kpFasesCampanha);
+    }
+    // Corre já, para os blocos que estão acima deste script.
+    window.__kpFasesCampanha();
+  })();
+</script>

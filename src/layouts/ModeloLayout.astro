@@ -7,7 +7,9 @@ import LojasAmazon from '@components/afiliados/LojasAmazon.astro';
 import ImagemProduto from '@components/afiliados/ImagemProduto.astro';
 import OrnamentoFundo from '@components/ui/OrnamentoFundo.astro';
 import FotoFundoDecorativa from '@components/ui/FotoFundoDecorativa.astro';
+import EstadoStock from '@components/afiliados/EstadoStock.astro';
 import { formatarPreco, formatarData } from '@lib/formatters';
+import { SCHEMA_DISPONIBILIDADE, rotuloPreco } from '@lib/disponibilidade';
 
 interface Props {
   modelo: CollectionEntry<'modelos'>;
@@ -41,7 +43,7 @@ const productLd = {
           priceCurrency: 'EUR',
           price: d.preco_referencia_eur,
           url: d.url_amazon,
-          availability: 'https://schema.org/InStock',
+          availability: SCHEMA_DISPONIBILIDADE[d.disponibilidade ?? 'disponivel'],
         },
       }
     : {}),
@@ -83,8 +85,8 @@ const productLd = {
           <p class="mt-4 text-lg text-marinho-600 sm:text-xl">{d.descricao_curta}</p>
 
           {d.preco_referencia_eur && (
-            <p class="mt-6 flex items-baseline gap-2 text-sm">
-              <span class="text-marinho-400">a partir de</span>
+            <p class="mt-6 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-sm">
+              <span class="text-marinho-400">{rotuloPreco(d.disponibilidade)}</span>
               <strong
                 class="text-2xl text-marinho-900"
                 style="font-family: var(--font-serif);"
@@ -95,6 +97,16 @@ const productLd = {
                 <span class="text-marinho-400">· preço a {formatarData(d.preco_data)}</span>
               )}
             </p>
+          )}
+
+          {d.disponibilidade && (
+            <div class="mt-4 rounded-xl border border-marinho-100 bg-white/70 p-3 text-sm text-marinho-600">
+              <EstadoStock estado={d.disponibilidade} data={d.disponibilidade_data} />
+              {d.disponibilidade_data && (
+                <span class="ml-1 text-xs text-marinho-400">a {formatarData(d.disponibilidade_data)}</span>
+              )}
+              {d.disponibilidade_nota && <p class="mt-2">{d.disponibilidade_nota}</p>}
+            </div>
           )}
 
           {d.url_amazon && (

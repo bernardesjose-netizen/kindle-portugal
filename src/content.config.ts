@@ -38,6 +38,11 @@ const modelos = defineCollection({
       preco_data: z.coerce.date().optional(),
       url_amazon: z.string().url().optional(),
       asin: z.string().optional(),
+      // Stock na Amazon.es à data de `disponibilidade_data`. Sem este campo,
+      // o site não afirma nada sobre o stock.
+      disponibilidade: z.enum(['disponivel', 'ultimas-unidades', 'esgotado']).optional(),
+      disponibilidade_data: z.coerce.date().optional(),
+      disponibilidade_nota: z.string().max(280).optional(),
       especificacoes: z.object({
         ecra_polegadas: z.number().positive(),
         ecra_ppi: z.number().int().positive(),

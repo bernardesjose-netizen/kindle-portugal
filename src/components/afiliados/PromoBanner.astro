@@ -1,5 +1,6 @@
 ---
 import Container from '@components/ui/Container.astro';
+import FasesCampanha from '@components/afiliados/FasesCampanha.astro';
 import { getCollection } from 'astro:content';
 import { CAMPANHA, campanhaVisivel, faseCampanha } from '@lib/promocoes';
 import { formatarData } from '@lib/formatters';
@@ -9,10 +10,9 @@ const fase = faseCampanha();
 const ativa = campanhaVisivel();
 const aDecorrer = fase === 'ativa';
 
-const slogan = aDecorrer ? CAMPANHA.slogan : CAMPANHA.slogan_antecipacao;
-const nota = aDecorrer
-  ? `Válido até ${formatarData(CAMPANHA.fim)}`
-  : `Começa a ${formatarData(CAMPANHA.inicio)}`;
+// Os dois textos vão no HTML; FasesCampanha mostra o da fase atual no browser.
+const notaAtiva = `Válido até ${formatarData(CAMPANHA.fim)}`;
+const notaAntecipacao = `Começa a ${formatarData(CAMPANHA.inicio)}`;
 
 let thumbs: string[] = [];
 if (ativa) {
@@ -26,7 +26,13 @@ if (ativa) {
 ---
 
 {ativa && (
-  <aside class="relative overflow-hidden border-b-4 border-marca-500 bg-gradient-to-r from-marinho-900 via-marinho-800 to-oceano-900 text-creme-50">
+  <aside
+    class="relative overflow-hidden border-b-4 border-marca-500 bg-gradient-to-r from-marinho-900 via-marinho-800 to-oceano-900 text-creme-50"
+    data-campanha-antecipacao={CAMPANHA.antecipacao.toISOString()}
+    data-campanha-inicio={CAMPANHA.inicio.toISOString()}
+    data-campanha-fim={CAMPANHA.fim.toISOString()}
+    data-esconder-fora
+  >
     <div
       aria-hidden="true"
       class="pointer-events-none absolute inset-0"
@@ -41,15 +47,16 @@ if (ativa) {
         <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 sm:flex-nowrap">
           <span class="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-marca-500 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-sm">
             <span class="relative flex h-2 w-2" aria-hidden="true">
-              {aDecorrer && (
-                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
-              )}
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" data-so-fase="ativa" hidden={!aDecorrer}></span>
               <span class="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
             </span>
             {CAMPANHA.etiqueta}
           </span>
-          <span class="text-sm font-semibold text-creme-50 sm:text-base">
-            {slogan}
+          <span class="text-sm font-semibold text-creme-50 sm:text-base" data-so-fase="ativa" hidden={!aDecorrer}>
+            {CAMPANHA.slogan}
+          </span>
+          <span class="text-sm font-semibold text-creme-50 sm:text-base" data-so-fase="antecipacao" hidden={aDecorrer}>
+            {CAMPANHA.slogan_antecipacao}
           </span>
         </div>
 
@@ -75,8 +82,11 @@ if (ativa) {
             </ul>
           )}
 
-          <span class="hidden text-xs font-medium text-oceano-100/80 sm:inline">
-            {nota}
+          <span class="hidden sm:inline" data-so-fase="ativa" hidden={!aDecorrer}>
+            <span class="text-xs font-medium text-oceano-100/80">{notaAtiva}</span>
+          </span>
+          <span class="hidden sm:inline" data-so-fase="antecipacao" hidden={aDecorrer}>
+            <span class="text-xs font-medium text-oceano-100/80">{notaAntecipacao}</span>
           </span>
 
           <span class="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-creme-50 px-4 py-2 text-sm font-bold text-marinho-900 shadow-sm transition-all group-hover:-translate-y-0.5 group-hover:bg-marca-50 group-hover:text-marca-700">
@@ -88,3 +98,5 @@ if (ativa) {
     </Container>
   </aside>
 )}
+
+<FasesCampanha />

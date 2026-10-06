@@ -1,0 +1,48 @@
+---
+/**
+ * Pequeno selo com o estado do stock na Amazon.es (Em stock, Últimas
+ * unidades, Esgotado). A data vai no `title` e no texto acessível.
+ */
+import { ROTULO_DISPONIBILIDADE, type Disponibilidade } from '@lib/disponibilidade';
+import { formatarData } from '@lib/formatters';
+
+interface Props {
+  estado: Disponibilidade;
+  data?: Date;
+  /** `escuro` para fundos marinho/marca. */
+  tema?: 'claro' | 'escuro';
+  classe?: string;
+}
+
+const { estado, data, tema = 'claro', classe = '' } = Astro.props;
+
+const cores: Record<Disponibilidade, { claro: string; escuro: string; ponto: string }> = {
+  disponivel: {
+    claro: 'bg-salvia-100 text-salvia-700',
+    escuro: 'bg-salvia-100/90 text-salvia-700',
+    ponto: 'bg-salvia-600',
+  },
+  'ultimas-unidades': {
+    claro: 'bg-ambar-100 text-ambar-800',
+    escuro: 'bg-ambar-100 text-ambar-800',
+    ponto: 'bg-ambar-700',
+  },
+  esgotado: {
+    claro: 'bg-marinho-100 text-marinho-700',
+    escuro: 'bg-creme-50/15 text-creme-50 ring-1 ring-inset ring-creme-50/30',
+    ponto: tema === 'escuro' ? 'bg-creme-50/70' : 'bg-marinho-400',
+  },
+};
+
+const c = cores[estado];
+const quando = data ? `na Amazon.es a ${formatarData(data)}` : 'na Amazon.es';
+---
+
+<span
+  class={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[0.7rem] font-bold uppercase tracking-wider ${c[tema]} ${classe}`}
+  title={`${ROTULO_DISPONIBILIDADE[estado]} ${quando}`}
+>
+  <span class={`inline-block h-1.5 w-1.5 rounded-full ${c.ponto}`} aria-hidden="true"></span>
+  {ROTULO_DISPONIBILIDADE[estado]}
+  <span class="sr-only">{quando}</span>
+</span>

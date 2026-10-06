@@ -48,7 +48,7 @@ const unidadeClasse = tema === 'escuro' ? 'text-oceano-100/70' : 'text-marinho-5
 ---
 
 <div class={`${classe}`} data-contagem data-alvo={alvo.toISOString()}>
-  <p class={`text-xs font-semibold uppercase tracking-wider ${etiquetaClasse}`}>{etiqueta}</p>
+  <p class={`text-xs font-semibold uppercase tracking-wider ${etiquetaClasse}`} data-contagem-etiqueta>{etiqueta}</p>
 
   <div class="mt-2 flex flex-wrap items-stretch gap-2" data-contagem-numeros>
     {unidades.map((u) => (
@@ -91,11 +91,18 @@ const unidadeClasse = tema === 'escuro' ? 'text-oceano-100/70' : 'text-marinho-5
         var ms = alvo - Date.now();
         var numeros = bloco.querySelector('[data-contagem-numeros]');
         var fim = bloco.querySelector('[data-contagem-fim]');
+        var rotulo = bloco.querySelector('[data-contagem-etiqueta]');
 
         if (ms <= 0) {
           if (numeros) numeros.classList.add('hidden');
+          if (rotulo) rotulo.classList.add('hidden');
           if (fim) fim.classList.remove('hidden');
           bloco.removeAttribute('aria-label');
+          // Avisa uma vez quem mostra ou esconde blocos por fase (FasesCampanha).
+          if (!bloco.hasAttribute('data-contagem-terminou')) {
+            bloco.setAttribute('data-contagem-terminou', '');
+            document.dispatchEvent(new CustomEvent('kp:contagem-fim'));
+          }
           continue;
         }
 
