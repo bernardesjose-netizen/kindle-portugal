@@ -1,0 +1,25 @@
+---
+/**
+ * Aviso curto, só no telemóvel, para quem tem a app da Amazon instalada: a
+ * app apanha os links da amazon.es e abre o produto na loja do país
+ * configurado nela (muitas vezes o Reino Unido). O site não controla isso;
+ * o que se pode fazer é dizer como mudar.
+ */
+interface Props {
+  /** `escuro` para fundos marinho/marca. */
+  tema?: 'claro' | 'escuro';
+  classe?: string;
+}
+
+const { tema = 'claro', classe = '' } = Astro.props;
+const cores =
+  tema === 'escuro'
+    ? 'border-creme-50/25 bg-marinho-900/40 text-creme-50/85'
+    : 'border-ambar-100 bg-ambar-50 text-ambar-800';
+---
+
+<p class={`rounded-lg border px-3 py-2 text-xs leading-snug sm:hidden ${cores} ${classe}`} role="note">
+  <strong>No telemóvel:</strong> se o link abrir a Amazon do Reino Unido, é a app da Amazon a usar o
+  país dela. Nas definições da app, em País e idioma, escolhe Espanha (Amazon.es), ou mantém o dedo
+  no botão e abre no navegador.
+</p>
