@@ -63,11 +63,9 @@ export interface OfertaMomento {
 const FIM_PBDD = new Date('2026-10-07T23:59:59+02:00');
 // Última reconfirmação, ficha a ficha, de todas as ofertas desta lista
 // (preço, desconto, stock e vendedor sem alterações face à anterior).
-const VERIF_ULTIMA = new Date('2026-10-06T20:33:00+01:00');
-// Ofertas encontradas na verificação das 17h (lidas na ficha às 17:41).
-const VERIF_17H = new Date('2026-10-06T17:41:00+01:00');
-// Ofertas encontradas na verificação das 20h (lidas na ficha às 20:34).
-const VERIF_20H = new Date('2026-10-06T20:34:00+01:00');
+const VERIF_ULTIMA = new Date('2026-10-06T21:33:00+01:00');
+// Ofertas encontradas na verificação das 21h (lidas na ficha às 21:35).
+const VERIF_21H = new Date('2026-10-06T21:35:00+01:00');
 
 export const OFERTAS_MOMENTO: OfertaMomento[] = [
   {
@@ -181,7 +179,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 54,
     classificacao: 4.4,
     num_avaliacoes: 3711,
-    verificado_em: VERIF_17H,
+    verificado_em: VERIF_ULTIMA,
     // "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
     so_prime: true,
@@ -198,7 +196,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 47,
     classificacao: 4.6,
     num_avaliacoes: 1268,
-    verificado_em: VERIF_17H,
+    verificado_em: VERIF_ULTIMA,
     // "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
     so_prime: true,
@@ -210,12 +208,12 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     nome: 'iRobot Roomba 115 Combo com base AutoEmpty',
     asin: 'B0GQVG2D3Z',
     categoria: 'Casa',
-    preco_eur: 188.05,
+    preco_eur: 183.98,
     preco_recomendado_eur: 354.77,
-    desconto_pct: 47,
+    desconto_pct: 48,
     classificacao: 4.3,
     num_avaliacoes: 39754,
-    verificado_em: VERIF_17H,
+    verificado_em: VERIF_ULTIMA,
     resumo:
       'Robot 2 em 1 que aspira e passa a mopa, com base que esvazia o depósito sozinha, por menos de 200 €. É um modelo de entrada da gama Roomba.',
   },
@@ -229,7 +227,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 56,
     classificacao: 4.1,
     num_avaliacoes: 153,
-    verificado_em: VERIF_20H,
+    verificado_em: VERIF_ULTIMA,
     // "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
     so_prime: true,
@@ -246,7 +244,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 42,
     classificacao: 4.1,
     num_avaliacoes: 1028,
-    verificado_em: VERIF_20H,
+    verificado_em: VERIF_ULTIMA,
     // "Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
     so_prime: true,
@@ -263,7 +261,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 50,
     classificacao: 4.6,
     num_avaliacoes: 361,
-    verificado_em: VERIF_20H,
+    verificado_em: VERIF_ULTIMA,
     // "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
     so_prime: true,
@@ -280,7 +278,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 50,
     classificacao: 4.0,
     num_avaliacoes: 6379,
-    verificado_em: VERIF_20H,
+    verificado_em: VERIF_ULTIMA,
     // "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
     so_prime: true,
@@ -297,12 +295,63 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 45,
     classificacao: 4.5,
     num_avaliacoes: 32311,
-    verificado_em: VERIF_20H,
+    verificado_em: VERIF_ULTIMA,
     // "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
       'Aspirador de trenó sem saco, de 900 W e tamanho compacto, com mais de trinta mil avaliações. Um aspirador simples para casas pequenas, a pouco mais de metade do preço.',
+  },
+  {
+    marca: 'Samsung',
+    nome: 'Samsung Galaxy Watch8 (40 mm)',
+    asin: 'B0FCG4B4C7',
+    categoria: 'Relógios',
+    preco_eur: 222.62,
+    preco_recomendado_eur: 385.26,
+    desconto_pct: 42,
+    classificacao: 4.3,
+    num_avaliacoes: 134,
+    verificado_em: VERIF_21H,
+    // "Gran Oferta Prime" na ficha: acaba com a campanha.
+    valida_ate: FIM_PBDD,
+    so_prime: true,
+    resumo:
+      'O relógio inteligente da Samsung com Galaxy AI, na versão de 40 mm, 42 % abaixo do preço recomendado. Só funciona com telemóveis Android: para quem tem iPhone, não serve.',
+  },
+  {
+    marca: 'AEG',
+    nome: 'AEG QX7 (aspirador vertical sem fios 2 em 1)',
+    asin: 'B0BPYPJ3KN',
+    categoria: 'Casa',
+    preco_eur: 151.46,
+    preco_recomendado_eur: 303.95,
+    desconto_pct: 50,
+    classificacao: 4.2,
+    num_avaliacoes: 16705,
+    verificado_em: VERIF_21H,
+    // "Gran Oferta Prime" na ficha: acaba com a campanha.
+    valida_ate: FIM_PBDD,
+    so_prime: true,
+    resumo:
+      'Aspirador vertical sem fios que também se usa como aspirador de mão, com até 50 minutos de autonomia anunciados. A metade do preço recomendado e com mais de dezasseis mil avaliações.',
+  },
+  {
+    marca: 'Philips',
+    nome: 'Philips OneBlade 360 (com Bluetooth)',
+    asin: 'B0CHZ5WN26',
+    categoria: 'Cuidado pessoal',
+    preco_eur: 40.65,
+    preco_recomendado_eur: 69.11,
+    desconto_pct: 41,
+    classificacao: 4.5,
+    num_avaliacoes: 5489,
+    verificado_em: VERIF_21H,
+    // "Gran Oferta Prime" na ficha: acaba com a campanha.
+    valida_ate: FIM_PBDD,
+    so_prime: true,
+    resumo:
+      'A OneBlade da Philips para aparar e rapar a barba e o corpo, com ligação Bluetooth à aplicação. Uma das máquinas de barba mais populares, 41 % abaixo do preço recomendado.',
   },
   {
     marca: 'TP-Link',
@@ -339,7 +388,7 @@ export function expiraEm(o: Pick<OfertaMomento, 'valida_ate' | 'verificado_em'>)
  * verificação: vendidos e enviados pela Amazon, em stock, preço com IVA PT.
  */
 export const TABLETS_TELEMOVEIS: OfertaMomento[] = [
-  // Verificados na ficha a 06/10/2026, 13:35 (reconfirmados às 20:33): "Gran Oferta Prime", vendidos e
+  // Verificados na ficha a 06/10/2026, 13:35 (reconfirmados às 21:33): "Gran Oferta Prime", vendidos e
   // enviados pela Amazon, em stock, desconto face ao preço recomendado.
   // Ficaram de fora os tablets Galaxy Tab S11, Tab S10 Lite e Xiaomi Pad 8
   // Pro: o "−21 % a −26 %" da ficha compara com o preço mais baixo dos
