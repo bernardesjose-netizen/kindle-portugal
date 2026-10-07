@@ -82,12 +82,13 @@ const principal = destaques[0];
 // grandes marcas com maior desconto (src/lib/ofertas-momento.ts).
 const TOTAL_CARTOES = 4;
 const cartoesKindle = destaques.slice(0, TOTAL_CARTOES);
-const extras = CAMPANHA.extras.slice(0, Math.max(0, TOTAL_CARTOES - cartoesKindle.length));
+const novidades = CAMPANHA.novidades.slice(0, Math.max(0, TOTAL_CARTOES - cartoesKindle.length));
+const extras = CAMPANHA.extras.slice(0, Math.max(0, TOTAL_CARTOES - cartoesKindle.length - novidades.length));
 const agoraMs = Date.now();
 const cartoesMarcas = ofertasRecentes()
   .filter((o) => expiraEm(o).valueOf() > agoraMs)
   .sort((a, b) => b.desconto_pct - a.desconto_pct)
-  .slice(0, Math.max(0, TOTAL_CARTOES - cartoesKindle.length - extras.length));
+  .slice(0, Math.max(0, TOTAL_CARTOES - cartoesKindle.length - novidades.length - extras.length));
 const esgotados = estados.filter((e) => e.disponibilidade === 'esgotado');
 
 // "Kindle (básico)" → "básico", "Kindle Paperwhite" → "Paperwhite".
@@ -111,7 +112,7 @@ const titulo = principal
 const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 ---
 
-{visivel && (principal || extras.length > 0) && (
+{visivel && (principal || novidades.length > 0 || extras.length > 0) && (
   <section
     class="relative overflow-hidden border-b-4 border-marca-600 bg-gradient-to-br from-marca-700 via-marca-600 to-marinho-900 text-creme-50"
     aria-labelledby="destaque-campanha-titulo"
@@ -155,7 +156,7 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
 
           <p class="mt-3 max-w-xl text-creme-50/90" data-so-fase="ativa" hidden={fase !== 'ativa'}>
             {destaques.length === 1 && esgotados.length > 0
-              ? `É o único Kindle com stock e desconto na Amazon.es neste momento: ${listaEsgotados} ${esgotados.length === 1 ? 'esgotou' : 'esgotaram'}. Preços confirmados por nós, com data.`
+              ? `É o único Kindle com stock e desconto na Amazon.es neste momento: ${listaEsgotados} ${esgotados.length === 1 ? 'esgotou' : 'esgotaram'}.${novidades.length > 0 ? ' O novo Kindle básico de 2026 já está em stock, sem desconto.' : ''} Preços confirmados por nós, com data.`
               : 'Campanha reservada a membros Prime. Preços confirmados por nós, com data.'}
           </p>
           <p class="mt-3 max-w-xl text-creme-50/90" data-so-fase="antecipacao" hidden={fase !== 'antecipacao'}>
@@ -265,7 +266,8 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
             );
           })}
 
-          {extras.map((x) => {
+          {/* Novidades Kindle (sem desconto) e o produto extra, com o mesmo cartão. */}
+          {[...novidades, ...extras].map((x) => {
             const img = imagemParaAsin(x.asin, 250);
             return (
               <li class="rounded-2xl border border-dourado-300/50 bg-marinho-900/45 p-4 backdrop-blur-sm">
@@ -390,7 +392,7 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
           </p>
           {esgotados.length > 0 && (
             <p class="mt-2 text-xs text-creme-50/75">
-              Para os esgotados, a nova geração de 2026 está em pré-reserva; detalhes e preços em{' '}
+              O Kindle básico de 2026 já está em stock, sem publicidade, a 177,88 €; os restantes modelos de 2026 e os preços estão em{' '}
               <a href="/promocoes" class="font-semibold underline decoration-creme-50/40 underline-offset-2 hover:text-dourado-300">promoções</a>.
             </p>
           )}
