@@ -1,0 +1,93 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Container from '@components/ui/Container.astro';
+import CartaoMontra from '@components/afiliados/CartaoMontra.astro';
+import LinkPrecos from '@components/afiliados/LinkPrecos.astro';
+import { CATEGORIAS_MONTRA, MONTRA } from '@lib/montra';
+
+const grupos = CATEGORIAS_MONTRA.map((c) => ({
+  ...c,
+  itens: MONTRA.filter((i) => i.categoria === c.id),
+})).filter((g) => g.itens.length > 0);
+---
+
+<BaseLayout
+  titulo="Montra do leitor: Kindle, capas, cadernos e acessórios"
+  descricao="Tudo o que faz falta a quem lê e escreve, escolhido por nós: Kindle e outros e-readers, capas, cadernos Moleskine e Leuchtturm, canetas, luzes de leitura, carregadores e ebooks em português."
+  motivoOrnamento="e-reader"
+>
+  <section class="relative overflow-hidden border-b-4 border-dourado-400 bg-gradient-to-br from-marinho-900 via-marinho-800 to-oceano-800 text-creme-50">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute inset-0"
+      style="background-image: radial-gradient(ellipse at top right, rgb(249 126 7 / 0.28) 0%, transparent 55%), radial-gradient(ellipse at bottom left, rgb(20 110 180 / 0.35) 0%, transparent 50%);"
+    />
+    <Container largura="normal" classe="relative z-10 py-14">
+      <span class="inline-flex items-center gap-1 rounded-full border border-dourado-400/40 bg-dourado-400/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-dourado-300">
+        Escolhido por nós
+      </span>
+      <h1 class="mt-3 text-3xl font-bold text-creme-50 md:text-4xl" style="font-family: var(--font-serif);">
+        Montra do leitor
+      </h1>
+      <p class="mt-3 max-w-2xl text-creme-50/85">
+        O que recomendaríamos a quem lê e escreve: Kindle e outros leitores, capas, cadernos,
+        canetas, luzes de leitura, carregadores e ebooks em português. Cada produto foi aberto na
+        Amazon.es, com o preço e a data em que o vimos, e ao lado dizemos para quem serve.
+      </p>
+      <nav aria-label="Categorias da montra" class="mt-6 flex flex-wrap gap-2">
+        {grupos.map((g) => (
+          <a
+            href={`#${g.id}`}
+            class="rounded-full border border-creme-50/25 bg-creme-50/10 px-3 py-1.5 text-sm font-semibold text-creme-50 transition-colors hover:border-dourado-400 hover:bg-dourado-400/20"
+          >
+            {g.titulo}
+          </a>
+        ))}
+      </nav>
+    </Container>
+  </section>
+
+  <Container largura="normal" classe="py-12 sm:py-14">
+    <p class="rounded-xl border border-ambar-100 bg-ambar-50 p-4 text-sm text-ambar-800">
+      <strong>Os preços mudam a qualquer momento.</strong> Indicamos o valor da Amazon.es com IVA
+      português na data junto a cada preço (<LinkPrecos />). O que conta é sempre o que vês na
+      ficha ao abrir o link. Nos Kindle sem preço, o valor estava a mudar com as campanhas: a
+      nossa ficha de cada modelo diz o que esperar.
+    </p>
+
+    {grupos.map((g) => (
+      <section id={g.id} class="mt-14 scroll-mt-24">
+        <h2 class="text-2xl font-bold text-marinho-900 md:text-3xl" style="font-family: var(--font-serif); letter-spacing: -0.02em;">
+          {g.titulo}
+        </h2>
+        <p class="mt-2 max-w-2xl text-marinho-600">{g.descricao}</p>
+        <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {g.itens.map((i) => (
+            <CartaoMontra
+              nome={i.nome}
+              marca={i.marca}
+              asin={i.asin}
+              precoEur={i.preco_eur}
+              precoData={i.preco_data}
+              expira={i.expira}
+              porque={i.porque}
+              etiqueta={i.etiqueta}
+              fichaUrl={i.ficha_url}
+              livro={i.livro}
+            />
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <section class="mt-16 rounded-2xl border border-marinho-100 bg-white/70 p-6">
+      <h2 class="text-xl font-bold text-marinho-900" style="font-family: var(--font-serif);">Para escolher com calma</h2>
+      <ul class="mt-3 space-y-2 text-marinho-700">
+        <li>Ainda a decidir que Kindle comprar? O guia <a href="/guias/qual-kindle-comprar-2026" class="font-semibold text-marca-600 hover:text-marca-700">Qual Kindle comprar</a> compara a gama inteira.</li>
+        <li>Procuras uma prenda? Há ideias por orçamento em <a href="/guias/presentes-natal-2026-para-quem-le" class="font-semibold text-marca-600 hover:text-marca-700">Presentes de Natal para quem lê</a>.</li>
+        <li>Antes da Black Friday, vê o que contar em <a href="/guias/black-friday-2026-kindle" class="font-semibold text-marca-600 hover:text-marca-700">Black Friday 2026 para quem quer um Kindle</a>.</li>
+        <li>Fora do mundo da leitura, a tecnologia que recomendamos está nos <a href="/achados-tech" class="font-semibold text-marca-600 hover:text-marca-700">Achados Tech</a>.</li>
+      </ul>
+    </section>
+  </Container>
+</BaseLayout>

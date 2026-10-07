@@ -96,6 +96,32 @@ export const ASIN_IMAGES: Record<string, string> = {
   B0FLDLZ7MR: 'https://m.media-amazon.com/images/I/61bcBykvJWL._AC_SL1500_.jpg', // Samsung Galaxy S25 FE
   B0H4H89QXV: 'https://m.media-amazon.com/images/I/615gMB9zOXL._AC_SL1500_.jpg', // Redmi Note 17 Pro 5G
   B0FQGLL2HL: 'https://m.media-amazon.com/images/I/71iedrwf4LL._AC_SL1500_.jpg', // Apple Watch Series 11 GPS 46 mm (oferta estrela)
+
+  // Montra do leitor (/montra): cadernos, canetas, leitura, carregadores, capas Kobo, PocketBook
+  B07XW6SWC2: 'https://m.media-amazon.com/images/I/81fWpaxOCyL._SL1500_.jpg',
+  B07JVF89GB: 'https://m.media-amazon.com/images/I/81zRF9snovL._AC_SL1500_.jpg',
+  B002TSIMW4: 'https://m.media-amazon.com/images/I/517Oz-MQuZL._AC_SL1181_.jpg',
+  B000FA5DRK: 'https://m.media-amazon.com/images/I/61OCv1DIljL._AC_SL1500_.jpg',
+  B07RZGSQK8: 'https://m.media-amazon.com/images/I/51Fvl3D9jOL._AC_SL1500_.jpg',
+  B07S571HQV: 'https://m.media-amazon.com/images/I/81JYXtvUHZL._AC_SL1500_.jpg',
+  B01LXOQ1KJ: 'https://m.media-amazon.com/images/I/71hJq32b6aL._AC_SL1500_.jpg',
+  B08VRNBTVM: 'https://m.media-amazon.com/images/I/717vuRBkUdL._AC_SL1500_.jpg',
+  B0BKSR65D4: 'https://m.media-amazon.com/images/I/61rN+rz+MxL._AC_SL1500_.jpg',
+  B0BLS36X4P: 'https://m.media-amazon.com/images/I/61NFFwpXUPL._AC_SL1500_.jpg',
+  B09TPRBNLH: 'https://m.media-amazon.com/images/I/51Xh-RpP3XL._AC_SL1000_.jpg',
+  B07NJ4VY8L: 'https://m.media-amazon.com/images/I/71716Hct2yL._AC_SL1500_.jpg',
+  B0D1KS4HVH: 'https://m.media-amazon.com/images/I/418gsM0PPJL._AC_SL1080_.jpg',
+  B0H6KV2HMM: 'https://m.media-amazon.com/images/I/61yYEJ771UL._AC_SL1500_.jpg',
+  B01GGKZ0V6: 'https://m.media-amazon.com/images/I/51cr-GQotHL._AC_SL1282_.jpg',
+  B0BDXSHMHD: 'https://m.media-amazon.com/images/I/41Y4FiLBUYL._AC_SL1200_.jpg',
+  B0DBPR29MW: 'https://m.media-amazon.com/images/I/41DMnFr9RDL._AC_SL1500_.jpg',
+  B0CWH4ND6V: 'https://m.media-amazon.com/images/I/51QSAWZAcrL._AC_SL1500_.jpg',
+  B0DW3DBQ2S: 'https://m.media-amazon.com/images/I/51yxBLi2U2L._AC_SL1500_.jpg',
+  B0DYDZCBM3: 'https://m.media-amazon.com/images/I/614VdQKzEcL._AC_SL1500_.jpg',
+  B09MQ4KZ27: 'https://m.media-amazon.com/images/I/71aKKR1W7EL._SL1500_.jpg',
+  B0CGVXN52X: 'https://m.media-amazon.com/images/I/51XAWTOHLHL._AC_SL1024_.jpg',
+  B0CGVTJ47Z: 'https://m.media-amazon.com/images/I/614L8heg-2L._AC_SL1500_.jpg',
+  B0D1Y883G2: 'https://m.media-amazon.com/images/I/61zelwNI7PL._AC_SL1280_.jpg',
 };
 
 /**
