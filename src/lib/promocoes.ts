@@ -115,7 +115,7 @@ export const CAMPANHA: Campanha = {
   ativa: true,
   nome: 'Promoções Kindle · Prime Big Deal Days 2026',
   etiqueta: 'Prime Big Deal Days',
-  slogan: 'Kindle Colorsoft a 166,71 € (−45 %) na Amazon.es e o Paperwhite de volta ao stock, a 217,27 €. O básico de 2024 esgotou, mas o novo Kindle básico de 2026 já está em stock, a 177,88 €.',
+  slogan: 'Kindle Colorsoft a 166,71 € (−45 %) na Amazon.es e o Paperwhite de volta ao stock, a 213,74 €. O básico de 2024 esgotou, mas o novo Kindle básico de 2026 já está em stock, a 177,88 €.',
   slogan_antecipacao:
     'O Prime Big Deal Days é a 6 e 7 de outubro, mas há Kindle já com desconto antes da abertura.',
   antecipacao: new Date('2026-09-28T00:00:00+01:00'),
@@ -163,15 +163,15 @@ export const CAMPANHA: Campanha = {
     // Paperwhite 2024 (B0CFPWLGF2, sem publicidade, preto): de volta ao stock
     // a 07/10/2026, ~13h, vendido e enviado pela Amazon, entrega em Lisboa no
     // dia seguinte (ficha vista pelo utilizador com morada portuguesa; daqui,
-    // fora da UE, aparece esgotado). 176,64 € sem IVA (213,74 € em Espanha,
-    // −5 % face aos 224,99 € recomendados) = 217,27 € com IVA PT, face aos
-    // 228,71 € do preço recomendado com IVA PT.
+    // fora da UE, aparece esgotado). A pedido do utilizador, mostra-se o que a
+    // ficha lhe mostrou: 213,74 € IVA incluído (176,64 € sem IVA), −5 % face
+    // aos 224,99 € recomendados.
     // O de 2026 (B0GV5YVVCD, com publicidade) estava a 213,47 € com IVA PT a
     // 04/10; o estado atual para Portugal não está confirmado.
     {
       slug: 'paperwhite',
-      preco_promo: 217.27,
-      preco_normal: 228.71,
+      preco_promo: 213.74,
+      preco_normal: 224.99,
       desconto_pct: 5,
       alternativa: {
         etiqueta: 'Paperwhite de 2026',
