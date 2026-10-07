@@ -1,0 +1,91 @@
+---
+/**
+ * Cartão da Montra do leitor (/montra): imagem, marca, nome, preço com data,
+ * ligação às avaliações na Amazon.es, porque o escolhemos e botão para a ficha.
+ * Quando há ficha no site (`fichaUrl`, ex.: /modelos/paperwhite), aparece um
+ * segundo botão para ela.
+ */
+import LinkAvaliacoes from '@components/afiliados/LinkAvaliacoes.astro';
+import LinkPrecos from '@components/afiliados/LinkPrecos.astro';
+import { imagemParaAsin } from '@lib/asin-images';
+import { urlAfiliado } from '@lib/afiliados';
+import { formatarPreco, formatarData } from '@lib/formatters';
+
+interface Props {
+  nome: string;
+  marca: string;
+  asin: string;
+  /** Com IVA PT. Sem preço, o cartão remete para a Amazon.es. */
+  precoEur?: number;
+  precoData?: Date;
+  porque: string;
+  etiqueta?: string;
+  fichaUrl?: string;
+}
+
+const { nome, marca, asin, precoEur, precoData, porque, etiqueta, fichaUrl } = Astro.props;
+const img = imagemParaAsin(asin, 500);
+---
+
+<li class="caixa group relative flex flex-col overflow-hidden bg-white/90 p-5">
+  {etiqueta && (
+    <span class="absolute right-3 top-3 z-10 rounded-full bg-dourado-400 px-2.5 py-1 text-[0.7rem] font-bold text-marinho-900 shadow-sm">
+      {etiqueta}
+    </span>
+  )}
+  {img && (
+    <div class="flex h-32 items-center justify-center" aria-hidden="true">
+      <img
+        src={img}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        width="140"
+        height="140"
+        class="block max-h-32 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+        style="mix-blend-mode: multiply;"
+        referrerpolicy="no-referrer-when-downgrade"
+        data-fallback="hide"
+      />
+    </div>
+  )}
+  <p class="mt-3">
+    <span class="rounded-md bg-marinho-900 px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-creme-50">{marca}</span>
+  </p>
+  <h3 class="mt-2 text-base font-bold leading-snug text-marinho-900" style="font-family: var(--font-serif);">
+    {nome}
+  </h3>
+  {precoEur != null ? (
+    <p class="mt-2 text-2xl font-bold text-marca-700">{formatarPreco(precoEur)}</p>
+  ) : (
+    <p class="mt-2 text-sm font-semibold text-marinho-600">Preço na Amazon.es</p>
+  )}
+  <LinkAvaliacoes asin={asin} classe="mt-1" />
+  <p class="mt-3 flex-1 text-sm text-marinho-600">{porque}</p>
+  <div class="mt-4 flex flex-col gap-2">
+    <a
+      href={urlAfiliado(`https://www.amazon.es/dp/${asin}`)}
+      rel="sponsored nofollow noopener"
+      target="_blank"
+      data-afiliado="amazon"
+      data-mercado="es"
+      class="inline-flex items-center justify-center gap-1.5 rounded-lg bg-marinho-900 px-4 py-2 text-sm font-semibold text-creme-50 transition-all hover:-translate-y-0.5 hover:bg-marca-600"
+    >
+      Ver na Amazon.es
+      <span aria-hidden="true">↗</span>
+    </a>
+    {fichaUrl && (
+      <a
+        href={fichaUrl}
+        class="inline-flex items-center justify-center gap-1.5 rounded-lg border border-marinho-200 px-4 py-2 text-sm font-semibold text-marinho-800 transition-colors hover:border-marca-400 hover:text-marca-700"
+      >
+        Ler a nossa ficha
+      </a>
+    )}
+  </div>
+  {precoEur != null && precoData && (
+    <p class="mt-2 text-center text-[0.7rem] text-marinho-400">
+      Preço a {formatarData(precoData)} · <LinkPrecos />
+    </p>
+  )}
+</li>
