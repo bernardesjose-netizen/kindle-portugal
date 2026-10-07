@@ -226,6 +226,10 @@ const produtoEstrela = z.object({
   /** Selo curto no cartão, ex.: "Novidade" ou "−17% face à tabela". */
   etiqueta: z.string().max(40).optional(),
   comentario: z.string().min(50).max(1000),
+}).refine((p) => p.loja !== 'amazon' || (p.classificacao == null && p.num_avaliacoes == null), {
+  // Cláusula t do acordo operativo dos Afiliados: estrelas e avaliações da
+  // Amazon só se podem mostrar se vierem da PA-API.
+  message: 'Sem classificacao/num_avaliacoes nos produtos da Amazon (só via PA-API)',
 });
 
 const produtosEstrela = defineCollection({

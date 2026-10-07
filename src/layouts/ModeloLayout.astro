@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
+import LinkPrecos from '@components/afiliados/LinkPrecos.astro';
 import BaseLayout from './BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
 import BotaoAmazon from '@components/afiliados/BotaoAmazon.astro';
@@ -94,7 +95,7 @@ const productLd = {
                 {formatarPreco(d.preco_referencia_eur)}
               </strong>
               {d.preco_data && (
-                <span class="text-marinho-400">· preço a {formatarData(d.preco_data)}</span>
+                <span class="text-marinho-400">· preço a {formatarData(d.preco_data)} · <LinkPrecos /></span>
               )}
             </p>
           )}

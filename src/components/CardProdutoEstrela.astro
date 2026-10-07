@@ -1,5 +1,7 @@
 ---
 import { imagemParaAsin } from '@lib/asin-images';
+import LinkPrecos from '@components/afiliados/LinkPrecos.astro';
+import LinkAvaliacoes from '@components/afiliados/LinkAvaliacoes.astro';
 import { urlAfiliado } from '@lib/afiliados';
 import { linkWook } from '@lib/wook';
 import { formatarPreco, formatarData } from '@lib/formatters';
@@ -83,6 +85,10 @@ if (loja !== 'amazon' && asin) {
 botoes.sort((a, b) => Number(b.principal) - Number(a.principal));
 
 const numAvaliacoesFmt = numAvaliacoes?.toLocaleString('pt-PT');
+// As estrelas da Amazon só se podem mostrar se vierem da PA-API (cláusula t do
+// acordo operativo dos Afiliados); as das outras lojas aparecem.
+const mostrarEstrelas = classificacao != null && loja !== 'amazon';
+const linkAvaliacoes = loja === 'amazon' && asin;
 
 // Os parágrafos do comentário separam-se por linhas em branco no YAML.
 const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
@@ -129,7 +135,7 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
         {nome}
       </h2>
 
-      {(precoEur != null || classificacao != null) && (
+      {(precoEur != null || mostrarEstrelas || linkAvaliacoes) && (
         <div class="mt-3 rounded-xl border border-marinho-100 bg-white/70 p-4">
           {precoEur != null && (
             <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
@@ -139,17 +145,18 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
               )}
             </div>
           )}
-          {classificacao != null && (
+          {mostrarEstrelas && (
             <p class="mt-1.5 text-sm text-marinho-600">
-              <span aria-hidden="true">★</span> {classificacao.toLocaleString('pt-PT')} em 5
+              <span aria-hidden="true">★</span> {classificacao!.toLocaleString('pt-PT')} em 5
               {numAvaliacoesFmt && <> · {numAvaliacoesFmt} avaliações</>}
               {' '}na {NOME_LOJA[loja]}
             </p>
           )}
+          {linkAvaliacoes && <LinkAvaliacoes asin={asin!} classe="mt-1.5 text-sm" />}
           {precoData && (
             <p class="mt-1.5 text-xs text-marinho-400">
               Preço confirmado na {NOME_LOJA[loja]} a {formatarData(precoData)}. Pode ter mudado
-              entretanto, o valor que conta é o da loja ao abrir o link.
+              entretanto, o valor que conta é o da loja ao abrir o link (<LinkPrecos />).
             </p>
           )}
         </div>

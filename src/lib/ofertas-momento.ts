@@ -39,9 +39,8 @@ export interface OfertaMomento {
   referencia?: 'recomendado' | 'minimo-30-dias';
   /** Desconto que a Amazon mostra na ficha. */
   desconto_pct: number;
-  /** Estrelas e número de avaliações; podem faltar enquanto `fonte` estiver definido. */
-  classificacao?: number;
-  num_avaliacoes?: number;
+  // Sem estrelas nem número de avaliações da Amazon: o acordo operativo dos
+  // Afiliados (cláusula t) só deixa mostrá-los se vierem da PA-API.
   /**
    * Preço ainda NÃO lido por nós na ficha (ex.: a Amazon estava a bloquear a
    * leitura): vem desta fonte, citada no cartão, e o cartão diz que está por
@@ -76,8 +75,6 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 167.17,
     preco_recomendado_eur: 303.95,
     desconto_pct: 45,
-    classificacao: 4.5,
-    num_avaliacoes: 1212,
     verificado_em: VERIF_ULTIMA,
     resumo:
       'Auscultadores de diadema com cancelamento de ruído e até 80 horas de bateria anunciadas. Quase metade do preço de lançamento, num modelo com pouco mais de um ano.',
@@ -90,11 +87,9 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 36.09,
     preco_recomendado_eur: 60.98,
     desconto_pct: 41,
-    classificacao: 4.5,
-    num_avaliacoes: 4606,
     verificado_em: VERIF_ULTIMA,
     resumo:
-      'Auriculares sem fios pequenos e leves, com o som equilibrado da Sony. Não têm cancelamento de ruído, mas a este preço e com mais de 4500 avaliações são aposta segura.',
+      'Auriculares sem fios pequenos e leves, com o som equilibrado da Sony. Não têm cancelamento de ruído, mas a este preço e com milhares de avaliações são aposta segura.',
   },
   {
     marca: 'Samsung',
@@ -104,8 +99,6 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 120.97,
     preco_recomendado_eur: 253.12,
     desconto_pct: 52,
-    classificacao: 4.2,
-    num_avaliacoes: 289,
     verificado_em: VERIF_ULTIMA,
     // Única com selo "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
@@ -121,8 +114,6 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 18.19,
     preco_recomendado_eur: 40.65,
     desconto_pct: 55,
-    classificacao: 4.6,
-    num_avaliacoes: 1043,
     verificado_em: VERIF_ULTIMA,
     resumo:
       'Carregador de parede com duas portas USB-C: telemóvel e Kindle ao mesmo tempo, ou um portátil leve. O maior desconto desta lista.',
@@ -135,8 +126,6 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 23.37,
     preco_recomendado_eur: 45.73,
     desconto_pct: 49,
-    classificacao: 4.6,
-    num_avaliacoes: 667,
     verificado_em: VERIF_ULTIMA,
     resumo:
       'Três portas USB-C e potência para carregar um MacBook Air. Para quem quer deixar de andar com vários carregadores na mala.',
@@ -149,11 +138,9 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 8.08,
     preco_recomendado_eur: 14.22,
     desconto_pct: 43,
-    classificacao: 4.5,
-    num_avaliacoes: 17674,
     verificado_em: VERIF_ULTIMA,
     resumo:
-      'O rato simples que a Logitech vende há anos, com recetor USB e pilha que dura meses. Mais de dezassete mil avaliações por menos de 10 €.',
+      'O rato simples que a Logitech vende há anos, com recetor USB e pilha que dura meses. Milhares de avaliações, por menos de 10 €.',
   },
   {
     marca: 'Philips',
@@ -163,8 +150,6 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 270.39,
     preco_recomendado_eur: 508.25,
     desconto_pct: 47,
-    classificacao: 4.3,
-    num_avaliacoes: 3736,
     verificado_em: VERIF_ULTIMA,
     resumo:
       'Duas escovas elétricas topo de gama da Philips, com sensor de pressão e aplicação, quase a metade do preço. Faz sentido para um casal: cada escova sai a cerca de 135 €.',
@@ -177,8 +162,6 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 132.14,
     preco_recomendado_eur: 284.62,
     desconto_pct: 54,
-    classificacao: 4.4,
-    num_avaliacoes: 3711,
     verificado_em: VERIF_ULTIMA,
     // "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
@@ -194,8 +177,6 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 101.6,
     preco_recomendado_eur: 193.09,
     desconto_pct: 47,
-    classificacao: 4.6,
-    num_avaliacoes: 1268,
     verificado_em: VERIF_ULTIMA,
     // "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
@@ -211,8 +192,6 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 183.98,
     preco_recomendado_eur: 354.77,
     desconto_pct: 48,
-    classificacao: 4.3,
-    num_avaliacoes: 39754,
     verificado_em: VERIF_ULTIMA,
     resumo:
       'Robot 2 em 1 que aspira e passa a mopa, com base que esvazia o depósito sozinha, por menos de 200 €. É um modelo de entrada da gama Roomba.',
@@ -225,8 +204,6 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 80.31,
     preco_recomendado_eur: 181.95,
     desconto_pct: 56,
-    classificacao: 4.1,
-    num_avaliacoes: 153,
     verificado_em: VERIF_ULTIMA,
     // "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
@@ -242,8 +219,6 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 153.54,
     preco_recomendado_eur: 263.28,
     desconto_pct: 42,
-    classificacao: 4.1,
-    num_avaliacoes: 1028,
     verificado_em: VERIF_ULTIMA,
     // "Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
@@ -259,8 +234,6 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 203.29,
     preco_recomendado_eur: 406.6,
     desconto_pct: 50,
-    classificacao: 4.6,
-    num_avaliacoes: 361,
     verificado_em: VERIF_ULTIMA,
     // "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
@@ -276,14 +249,12 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 66.06,
     preco_recomendado_eur: 132.14,
     desconto_pct: 50,
-    classificacao: 4.0,
-    num_avaliacoes: 6379,
     verificado_em: VERIF_ULTIMA,
     // "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'Máquina de barbear de lâminas da Braun, a metade do preço recomendado e com mais de seis mil avaliações. Uma escolha simples para o dia a dia, sem pagar a gama alta.',
+      'Máquina de barbear de lâminas da Braun, a metade do preço recomendado e com milhares de avaliações. Uma escolha simples para o dia a dia, sem pagar a gama alta.',
   },
   {
     marca: 'Philips',
@@ -293,14 +264,12 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 81.3,
     preco_recomendado_eur: 147.39,
     desconto_pct: 45,
-    classificacao: 4.5,
-    num_avaliacoes: 32311,
     verificado_em: VERIF_ULTIMA,
     // "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'Aspirador de trenó sem saco, de 900 W e tamanho compacto, com mais de trinta mil avaliações. Um aspirador simples para casas pequenas, a pouco mais de metade do preço.',
+      'Aspirador de trenó sem saco, de 900 W e tamanho compacto, com dezenas de milhares de avaliações. Um aspirador simples para casas pequenas, a pouco mais de metade do preço.',
   },
   {
     marca: 'Samsung',
@@ -310,8 +279,6 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 222.62,
     preco_recomendado_eur: 385.26,
     desconto_pct: 42,
-    classificacao: 4.3,
-    num_avaliacoes: 134,
     verificado_em: VERIF_21H,
     // "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
@@ -327,14 +294,12 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 151.46,
     preco_recomendado_eur: 303.95,
     desconto_pct: 50,
-    classificacao: 4.2,
-    num_avaliacoes: 16705,
     verificado_em: VERIF_21H,
     // "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'Aspirador vertical sem fios que também se usa como aspirador de mão, com até 50 minutos de autonomia anunciados. A metade do preço recomendado e com mais de dezasseis mil avaliações.',
+      'Aspirador vertical sem fios que também se usa como aspirador de mão, com até 50 minutos de autonomia anunciados. A metade do preço recomendado e com milhares de avaliações.',
   },
   {
     marca: 'Philips',
@@ -344,8 +309,6 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 40.65,
     preco_recomendado_eur: 69.11,
     desconto_pct: 41,
-    classificacao: 4.5,
-    num_avaliacoes: 5489,
     verificado_em: VERIF_21H,
     // "Gran Oferta Prime" na ficha: acaba com a campanha.
     valida_ate: FIM_PBDD,
@@ -361,8 +324,6 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     preco_eur: 23.87,
     preco_recomendado_eur: 40.57,
     desconto_pct: 41,
-    classificacao: 4.6,
-    num_avaliacoes: 3238,
     verificado_em: VERIF_ULTIMA,
     resumo:
       'Câmara de interior que roda 360°, com imagem 2K e deteção de pessoas. Para ver o cão, a casa de férias ou o bebé a partir do telemóvel, sem mensalidade obrigatória.',
@@ -401,8 +362,6 @@ export const TABLETS_TELEMOVEIS: OfertaMomento[] = [
     preco_eur: 608.9,
     preco_recomendado_eur: 1015.51,
     desconto_pct: 40,
-    classificacao: 4.0,
-    num_avaliacoes: 15,
     verificado_em: VERIF_ULTIMA,
     valida_ate: FIM_PBDD,
     so_prime: true,
@@ -417,8 +376,6 @@ export const TABLETS_TELEMOVEIS: OfertaMomento[] = [
     preco_eur: 674.97,
     preco_recomendado_eur: 954.52,
     desconto_pct: 29,
-    classificacao: 4.4,
-    num_avaliacoes: 89,
     verificado_em: VERIF_ULTIMA,
     valida_ate: FIM_PBDD,
     so_prime: true,
@@ -433,8 +390,6 @@ export const TABLETS_TELEMOVEIS: OfertaMomento[] = [
     preco_eur: 386.18,
     preco_recomendado_eur: 558.99,
     desconto_pct: 31,
-    classificacao: 4.3,
-    num_avaliacoes: 52,
     verificado_em: VERIF_ULTIMA,
     valida_ate: FIM_PBDD,
     so_prime: true,
@@ -495,8 +450,6 @@ export const OFERTAS_ESTRELA: OfertaEstrela[] = [
     etiqueta: 'Mínimo histórico',
     // Lidas por nós na ficha às 17:29; o preço a Amazon não o mostra a quem
     // consulta de fora da UE, daí a `fonte`.
-    classificacao: 4.5,
-    num_avaliacoes: 767,
     fonte: {
       nome: 'Applesfera',
       url: 'https://www.applesfera.com/seleccion/amazon-arranca-su-fiesta-ofertas-prime-todos-estos-descuentos-airpods-ipad',
@@ -523,8 +476,6 @@ export const OFERTAS_ESTRELA: OfertaEstrela[] = [
     desconto_pct: 45,
     comparacao: 'face ao preço recomendado na Amazon.es (304,95 €)',
     etiqueta: 'O maior desconto Kindle',
-    classificacao: 4.5,
-    num_avaliacoes: 2824,
     verificado_em: new Date('2026-10-07T13:16:00+01:00'),
     valida_ate: FIM_PBDD,
     resumo:
