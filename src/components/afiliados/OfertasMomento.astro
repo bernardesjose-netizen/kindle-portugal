@@ -9,6 +9,8 @@
  * alterações, não ficam ofertas caducadas à vista.
  */
 import Container from '@components/ui/Container.astro';
+import LinkPrecos from '@components/afiliados/LinkPrecos.astro';
+import LinkAvaliacoes from '@components/afiliados/LinkAvaliacoes.astro';
 import { ofertasRecentes, expiraEm, DESCONTO_MINIMO, type OfertaMomento } from '@lib/ofertas-momento';
 import { imagemParaAsin } from '@lib/asin-images';
 import { urlAfiliado } from '@lib/afiliados';
@@ -48,7 +50,6 @@ const todas = (lista ?? ofertasRecentes()).filter((o) => expiraEm(o).valueOf() >
 const ofertas = limite ? todas.slice(0, limite) : todas;
 // Só conta como verificação o que foi lido por nós na ficha (sem `fonte`).
 const ultima = todas.find((o) => !o.fonte)?.verificado_em;
-const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 ---
 
 {ofertas.length > 0 && (
@@ -130,11 +131,7 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
               {o.referencia === 'minimo-30-dias' && (
                 <p class="text-[0.7rem] text-marinho-400">riscado: preço mais baixo dos últimos 30 dias</p>
               )}
-              {o.classificacao != null && o.num_avaliacoes != null && (
-                <p class="mt-1 text-xs text-marinho-500">
-                  <span aria-hidden="true" class="text-dourado-500">★</span> {estrelas(o.classificacao)} · {o.num_avaliacoes.toLocaleString('pt-PT')} avaliações
-                </p>
-              )}
+              <LinkAvaliacoes asin={o.asin} classe="mt-1" />
               {o.fonte && (
                 <p class="mt-2 rounded-lg bg-ambar-50 px-2 py-1.5 text-[0.7rem] leading-snug text-ambar-800">
                   Preço por confirmar na ficha: anunciado a {o.fonte.preco_original} por{' '}
@@ -155,7 +152,7 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
                 <span aria-hidden="true">↗</span>
               </a>
               <p class="mt-2 text-center text-[0.7rem] text-marinho-400">
-                {o.fonte ? 'Anunciado' : 'Preço'} a {formatarData(o.verificado_em)}, às {formatarHora(o.verificado_em)}
+                {o.fonte ? 'Anunciado' : 'Preço'} a {formatarData(o.verificado_em)}, às {formatarHora(o.verificado_em)} · <LinkPrecos />
               </p>
             </li>
           );

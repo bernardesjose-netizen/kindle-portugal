@@ -70,8 +70,8 @@ export interface ExtraPromocao {
   preco_comparacao_eur: number | null;
   origem_comparacao?: string;
   desconto_pct: number | null;
-  classificacao: number;
-  num_avaliacoes: number;
+  // Sem estrelas nem número de avaliações da Amazon: o acordo operativo dos
+  // Afiliados (cláusula t) só deixa mostrá-los se vierem da PA-API.
   verificado_em: Date;
   /** Frase curta: o que é e porque vale a pena. */
   resumo: string;
@@ -199,8 +199,7 @@ export const CAMPANHA: Campanha = {
   ],
   novidades: [
     // Visto pelo utilizador na ficha a 07/10, ~13h, com morada em Lisboa:
-    // em stock, 177,88 € com IVA, entrega grátis no dia seguinte. Estrelas
-    // lidas por nós na ficha (4,4, 56 avaliações).
+    // em stock, 177,88 € com IVA, entrega grátis no dia seguinte.
     {
       nome: 'Kindle de 2026 (16 GB, sem publicidade)',
       asin: 'B0G4SHH6YH',
@@ -208,8 +207,6 @@ export const CAMPANHA: Campanha = {
       preco_eur: 177.88,
       preco_comparacao_eur: null,
       desconto_pct: null,
-      classificacao: 4.4,
-      num_avaliacoes: 56,
       verificado_em: new Date('2026-10-07T13:05:00+01:00'),
       resumo: 'O Kindle básico de nova geração, mais fino, leve e rápido. Sem desconto: é o preço de lançamento.',
     },
@@ -223,8 +220,6 @@ export const CAMPANHA: Campanha = {
       preco_comparacao_eur: 259.99,
       origem_comparacao: 'o preço recomendado',
       desconto_pct: 5,
-      classificacao: 4.7,
-      num_avaliacoes: 8105,
       verificado_em: new Date('2026-10-07T13:20:00+01:00'),
       resumo: 'O Paperwhite com 32 GB, luz que se ajusta sozinha e carregamento sem fios.',
     },
@@ -243,8 +238,6 @@ export const CAMPANHA: Campanha = {
       preco_comparacao_eur: 60.98,
       origem_comparacao: 'o PVP oficial (59,99 € em Espanha) com IVA português',
       desconto_pct: 28,
-      classificacao: 4.5,
-      num_avaliacoes: 163,
       verificado_em: new Date('2026-10-06T12:15:00+01:00'),
       resumo:
         'Cancelamento de ruído até 50 dB, 44 horas com o estojo, ligação a dois aparelhos e IP54. Bons para ouvir audiolivros e podcasts sem gastar muito.',

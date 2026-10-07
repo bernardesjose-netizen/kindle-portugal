@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import LinkPrecos from '@components/afiliados/LinkPrecos.astro';
+import LinkAvaliacoes from '@components/afiliados/LinkAvaliacoes.astro';
 import Container from '@components/ui/Container.astro';
 import { getCollection } from 'astro:content';
 import { CAMPANHA, campanhaVisivel, faseCampanha, horaFimPortugal } from '@lib/promocoes';
@@ -85,7 +87,6 @@ const janela = `${new Intl.DateTimeFormat('pt-PT', { day: 'numeric' }).format(CA
 
 const comDesconto = comPromo.length;
 const diaFim = new Intl.DateTimeFormat('pt-PT', { day: 'numeric', month: 'long', timeZone: 'Europe/Lisbon' }).format(CAMPANHA.fim);
-const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
 const bandeiras: Record<string, string> = {
   es: '🇪🇸',
@@ -326,7 +327,7 @@ const bandeiras: Record<string, string> = {
                     )}
                     {temPromo && CAMPANHA.verificado_em && (
                       <p class="mt-2 text-xs text-marinho-400">
-                        Preço verificado a {formatarData(CAMPANHA.verificado_em)}.
+                        Preço verificado a {formatarData(CAMPANHA.verificado_em)} (<LinkPrecos />).
                         {m.data.disponibilidade_nota && ` ${m.data.disponibilidade_nota}`}
                       </p>
                     )}
@@ -438,7 +439,8 @@ const bandeiras: Record<string, string> = {
                       <p class="text-xs font-bold uppercase tracking-wider text-dourado-700">{x.etiqueta}</p>
                       <h3 class="mt-1 text-xl font-bold text-marinho-900" style="font-family: var(--font-serif);">{x.nome}</h3>
                       <p class="mt-1 text-sm text-marinho-500">
-                        <span aria-hidden="true" class="text-dourado-500">★</span> {estrelas(x.classificacao)} · {x.num_avaliacoes.toLocaleString('pt-PT')} avaliações · vendido e enviado pela Amazon
+                        Vendido e enviado pela Amazon ·{' '}
+                        <LinkAvaliacoes asin={x.asin} classe="text-sm" />
                       </p>
                       <p class="mt-3 text-marinho-600">{x.resumo}</p>
                       <p class="mt-3 flex flex-wrap items-baseline gap-x-3">
@@ -461,7 +463,7 @@ const bandeiras: Record<string, string> = {
                         <span aria-hidden="true">↗</span>
                       </a>
                       <p class="mt-2 text-xs text-marinho-400">
-                        Preço com IVA e entrega em Portugal, verificado a {formatarData(x.verificado_em)}.
+                        Preço com IVA e entrega em Portugal, verificado a {formatarData(x.verificado_em)} (<LinkPrecos />).
                       </p>
                     </div>
                   </div>

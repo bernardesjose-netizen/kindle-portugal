@@ -14,6 +14,8 @@
  * do stock.
  */
 import Container from '@components/ui/Container.astro';
+import LinkPrecos from '@components/afiliados/LinkPrecos.astro';
+import LinkAvaliacoes from '@components/afiliados/LinkAvaliacoes.astro';
 import ContagemDecrescente from '@components/afiliados/ContagemDecrescente.astro';
 import EstadoStock from '@components/afiliados/EstadoStock.astro';
 import FasesCampanha from '@components/afiliados/FasesCampanha.astro';
@@ -129,7 +131,6 @@ const titulo = principal && !principalNoDestaque
   : principalNoDestaque
     ? 'Paperwhite de volta e o novo Kindle já em stock'
     : 'Kindle em promoção';
-const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 ---
 
 {visivel && (principal || novidades.length > 0 || extras.length > 0) && (
@@ -309,9 +310,7 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
                   )}
                   <div class="min-w-0">
                     <p class="text-sm font-bold leading-snug text-creme-50">{x.nome}</p>
-                    <p class="mt-1 text-[0.7rem] text-creme-50/75">
-                      <span aria-hidden="true" class="text-dourado-300">★</span> {estrelas(x.classificacao)} · {x.num_avaliacoes.toLocaleString('pt-PT')} avaliações
-                    </p>
+                    <LinkAvaliacoes asin={x.asin} tema="escuro" classe="mt-1 text-[0.7rem]" />
                   </div>
                 </div>
                 <p class="mt-3 flex flex-wrap items-baseline gap-x-2">
@@ -368,11 +367,7 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
                   )}
                   <div class="min-w-0">
                     <p class="text-sm font-bold leading-snug text-creme-50">{o.nome}</p>
-                    {o.classificacao != null && o.num_avaliacoes != null && (
-                      <p class="mt-1 text-[0.7rem] text-creme-50/75">
-                        <span aria-hidden="true" class="text-dourado-300">★</span> {estrelas(o.classificacao)} · {o.num_avaliacoes.toLocaleString('pt-PT')} avaliações
-                      </p>
-                    )}
+                    <LinkAvaliacoes asin={o.asin} tema="escuro" classe="mt-1 text-[0.7rem]" />
                   </div>
                 </div>
                 <p class="mt-3 flex flex-wrap items-baseline gap-x-2">
@@ -423,7 +418,7 @@ const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigit
         <p class="mt-4 text-xs text-creme-50/70">
           Preços confirmados na Amazon.es a {formatarData(CAMPANHA.verificado_em)}, com IVA e entrega
           para Portugal. Mudam ao minuto e não garantimos disponibilidade: o valor que conta é o da
-          ficha ao abrir o link.
+          ficha ao abrir o link (<LinkPrecos />).
         </p>
       )}
     </Container>

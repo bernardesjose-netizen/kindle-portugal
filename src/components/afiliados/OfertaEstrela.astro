@@ -9,6 +9,8 @@
  * certa, mesmo sem nova build.
  */
 import { ofertasEstrelaPorMostrar, fimDestaque } from '@lib/ofertas-momento';
+import LinkPrecos from '@components/afiliados/LinkPrecos.astro';
+import LinkAvaliacoes from '@components/afiliados/LinkAvaliacoes.astro';
 import { imagemParaAsin } from '@lib/asin-images';
 import { urlAfiliado } from '@lib/afiliados';
 import { formatarPreco, formatarData, formatarHora } from '@lib/formatters';
@@ -23,7 +25,6 @@ const { tema = 'claro', classe = '' } = Astro.props;
 const agora = Date.now();
 const ofertas = ofertasEstrelaPorMostrar();
 const escuro = tema === 'escuro';
-const estrelas = (n: number) => n.toLocaleString('pt-PT', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 // "50 €" quando é redondo, "132,15 €" quando não é.
 const euros = (n: number) => (Number.isInteger(n) ? `${n} €` : formatarPreco(n));
 const fimOferta = (d: Date | undefined) =>
@@ -94,21 +95,14 @@ const fimOferta = (d: Date | undefined) =>
           <p class:list={['mt-1 hidden text-sm sm:block', escuro ? 'text-creme-50/85' : 'text-marinho-600']}>
             Menos {euros(o.poupanca_eur)} {o.comparacao}.
           </p>
-
-          {o.classificacao != null && o.num_avaliacoes != null && (
-            <p class:list={['mt-1 hidden text-xs sm:block', escuro ? 'text-creme-50/75' : 'text-marinho-500']}>
-              <span aria-hidden="true" class="text-dourado-400">★</span> {estrelas(o.classificacao)} · {o.num_avaliacoes.toLocaleString('pt-PT')} avaliações
-            </p>
-          )}
+          <LinkAvaliacoes asin={o.asin} tema={tema} classe="mt-1 hidden sm:inline-flex" />
         </div>
 
         <div class="col-span-2 min-w-0 lg:col-span-1">
           <p class:list={['text-xs sm:hidden', escuro ? 'text-creme-50/85' : 'text-marinho-600']}>
             Menos {euros(o.poupanca_eur)} {o.comparacao}.
-            {o.classificacao != null && o.num_avaliacoes != null && (
-              <> <span aria-hidden="true" class="text-dourado-400">★</span> {estrelas(o.classificacao)} ({o.num_avaliacoes.toLocaleString('pt-PT')})</>
-            )}
           </p>
+          <LinkAvaliacoes asin={o.asin} tema={tema} classe="mt-0.5 sm:hidden" />
           <p class:list={['hidden text-sm sm:block', escuro ? 'text-creme-50/90' : 'text-marinho-700']}>{o.resumo}</p>
 
           {o.fonte && (
@@ -137,7 +131,7 @@ const fimOferta = (d: Date | undefined) =>
               <span aria-hidden="true">↗</span>
             </a>
             <p class:list={['text-[0.65rem] sm:text-[0.7rem]', escuro ? 'text-creme-50/70' : 'text-marinho-400']}>
-              {o.fonte ? 'Anunciado' : 'Preço'} a {formatarData(o.verificado_em)}, às {formatarHora(o.verificado_em)}{fim ? ` · oferta até ${fim}` : ''}
+              {o.fonte ? 'Anunciado' : 'Preço'} a {formatarData(o.verificado_em)}, às {formatarHora(o.verificado_em)}{fim ? ` · oferta até ${fim}` : ''} · <LinkPrecos />
             </p>
           </div>
         </div>

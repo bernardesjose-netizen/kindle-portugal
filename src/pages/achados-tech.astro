@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import LinkPrecos from '@components/afiliados/LinkPrecos.astro';
 import Container from '@components/ui/Container.astro';
 import CardProdutoEstrela from '@components/CardProdutoEstrela.astro';
 import { ACHADOS_TECH, VERIFICADO_EM } from '@lib/achados-tech';
@@ -37,7 +38,7 @@ const porCategoria = CATEGORIAS.map((c) => ({
       </p>
       <p class="mt-5 inline-flex items-center gap-2 rounded-lg border border-creme-50/20 bg-creme-50/10 px-4 py-2 text-sm text-creme-50/90">
         <span aria-hidden="true">🗓️</span>
-        Última verificação na Amazon.es a {formatarData(VERIFICADO_EM)}. Cada cartão indica a data do seu preço.
+        Última verificação na Amazon.es a {formatarData(VERIFICADO_EM)}. Cada cartão indica a data do seu preço (<LinkPrecos />).
       </p>
     </Container>
   </section>
@@ -62,8 +63,6 @@ const porCategoria = CATEGORIAS.map((c) => ({
             asin={a.asin}
             precoEur={a.preco_eur}
             precoData={a.preco_data ?? VERIFICADO_EM}
-            classificacao={a.classificacao}
-            numAvaliacoes={a.num_avaliacoes}
             etiqueta={a.etiqueta}
             comentario={a.comentario}
             numero={1}
