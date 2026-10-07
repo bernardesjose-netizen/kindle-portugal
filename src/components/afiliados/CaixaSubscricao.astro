@@ -1,0 +1,107 @@
+---
+/**
+ * Caixa discreta com um botão para a página oficial de uma subscrição da
+ * Amazon (Kindle Unlimited ou Audible) na Amazon.es, com a tag do site.
+ *
+ * REGRAS (CLAUDE.md):
+ *   - nunca prometer preço nem duração do período de experiência: as
+ *     condições mudam com as campanhas, por isso a caixa remete sempre para
+ *     a página da Amazon.es;
+ *   - sem avisos de comissão no corpo das páginas (a divulgação de afiliados
+ *     vive só no rodapé);
+ *   - o destino do link fica visível (amazon.es), sem encurtadores.
+ *
+ * Uso no MDX:
+ *   import CaixaSubscricao from '@components/afiliados/CaixaSubscricao.astro';
+ *   <CaixaSubscricao servico="kindle-unlimited" />
+ *   <CaixaSubscricao servico="audible" mostrarAnalise={false} />
+ */
+import { urlAfiliado } from '@lib/afiliados';
+
+type Servico = 'kindle-unlimited' | 'audible';
+
+interface Props {
+  servico: Servico;
+  /** Substitui o título por omissão (o nome do serviço). */
+  titulo?: string;
+  /** Substitui a frase de apresentação por omissão. */
+  texto?: string;
+  /**
+   * Mostra a ligação para a nossa análise do serviço. Desligar no próprio
+   * artigo de análise, para não apontar para a página onde o leitor já está.
+   */
+  mostrarAnalise?: boolean;
+  classe?: string;
+}
+
+// URLs oficiais já usados no site (artigos do blog sobre cada serviço).
+const SERVICOS: Record<
+  Servico,
+  { nome: string; url: string; texto: string; analise: string; botao: string }
+> = {
+  'kindle-unlimited': {
+    nome: 'Kindle Unlimited',
+    url: 'https://www.amazon.es/kindle-dbs/hz/subscribe/ku/',
+    texto:
+      'A subscrição de leitura da Amazon: um catálogo de ebooks que se pedem emprestados e se leem no Kindle, na app do telemóvel ou no computador, sem fidelização. Rende mais a quem lê muito em inglês ou ficção de género; em português europeu o catálogo é curto.',
+    analise: '/blog/kindle-unlimited-portugal-vale-a-pena',
+    botao: 'Ver o Kindle Unlimited na Amazon.es',
+  },
+  audible: {
+    nome: 'Audible',
+    url: 'https://www.amazon.es/hz/audible/mlp',
+    texto:
+      'O serviço de audiolivros da Amazon, com a conta que já usas na Amazon.es. Ouve-se na app do telemóvel ou no próprio Kindle, com auscultadores Bluetooth. O catálogo é enorme em inglês e espanhol; em português europeu ainda é escasso.',
+    analise: '/blog/audiolivros-audible-no-kindle-portugal',
+    botao: 'Ver o Audible na Amazon.es',
+  },
+};
+
+const { servico, titulo, texto, mostrarAnalise = true, classe = '' } = Astro.props;
+const s = SERVICOS[servico];
+const href = urlAfiliado(s.url);
+---
+
+<aside
+  class:list={[
+    'not-prose my-8 rounded-2xl border border-marinho-100 bg-creme-50 px-5 py-5 sm:px-6',
+    classe,
+  ]}
+  aria-label={`Subscrição ${s.nome}`}
+>
+  <p class="text-xs font-semibold uppercase tracking-wider text-marinho-400">Subscrição</p>
+  <p
+    class="mt-1 text-lg font-bold text-marinho-900"
+    style="font-family: var(--font-serif); letter-spacing: -0.015em;"
+  >
+    {titulo ?? s.nome}
+  </p>
+  <p class="mt-2 text-sm leading-relaxed text-marinho-600">{texto ?? s.texto}</p>
+
+  <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+    <a
+      href={href}
+      rel="sponsored nofollow noopener"
+      target="_blank"
+      data-afiliado="amazon"
+      data-mercado="es"
+      class="inline-flex items-center gap-2 rounded-lg bg-marinho-900 px-4 py-2.5 text-sm font-semibold text-creme-50 no-underline transition-colors hover:bg-marca-700"
+    >
+      {s.botao}
+      <span aria-hidden="true">→</span>
+    </a>
+    {mostrarAnalise && (
+      <a
+        href={s.analise}
+        class="text-sm font-medium text-marinho-700 underline decoration-marca-300 underline-offset-2 hover:text-marca-700"
+      >
+        Ler a nossa análise
+      </a>
+    )}
+  </div>
+
+  <p class="mt-3 text-xs text-marinho-400">
+    Preço, período de experiência e catálogo mudam com as campanhas: vê as condições atuais na
+    Amazon.es antes de subscrever.
+  </p>
+</aside>
