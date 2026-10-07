@@ -106,7 +106,7 @@ export interface Campanha {
   /** Modelos em promoção, pela ordem em que aparecem. */
   itens: ItemPromocao[];
   /** Produtos extra, fora da gama Kindle. */
-  /** Novidades da gama Kindle (sem desconto), mostradas a seguir aos Kindle em promoção. */
+  /** Kindle fora das fichas de modelo (novidades e reposições), mostrados a seguir aos Kindle em promoção. */
   novidades: ExtraPromocao[];
   extras: ExtraPromocao[];
 }
@@ -115,7 +115,7 @@ export const CAMPANHA: Campanha = {
   ativa: true,
   nome: 'Promoções Kindle · Prime Big Deal Days 2026',
   etiqueta: 'Prime Big Deal Days',
-  slogan: 'Kindle Colorsoft a 166,71 € (−45 %) na Amazon.es e o Paperwhite de volta ao stock, a 217,27 €. O básico de 2024 esgotou, mas o novo Kindle básico de 2026 já está em stock, a 177,88 €.',
+  slogan: 'Kindle Colorsoft a 166,71 € (−45 %) na Amazon.es e o Paperwhite de volta ao stock, a 213,74 €. O básico de 2024 esgotou, mas o novo Kindle básico de 2026 já está em stock, a 177,88 €.',
   slogan_antecipacao:
     'O Prime Big Deal Days é a 6 e 7 de outubro, mas há Kindle já com desconto antes da abertura.',
   antecipacao: new Date('2026-09-28T00:00:00+01:00'),
@@ -163,24 +163,27 @@ export const CAMPANHA: Campanha = {
     // Paperwhite 2024 (B0CFPWLGF2, sem publicidade, preto): de volta ao stock
     // a 07/10/2026, ~13h, vendido e enviado pela Amazon, entrega em Lisboa no
     // dia seguinte (ficha vista pelo utilizador com morada portuguesa; daqui,
-    // fora da UE, aparece esgotado). 176,64 € sem IVA (213,74 € em Espanha,
-    // −5 % face aos 224,99 € recomendados) = 217,27 € com IVA PT, face aos
-    // 228,71 € do preço recomendado com IVA PT.
-    // O de 2026 (B0GV5YVVCD, com publicidade) estava a 213,47 € com IVA PT a
-    // 04/10; o estado atual para Portugal não está confirmado.
+    // fora da UE, aparece esgotado). A pedido do utilizador, mostra-se o que a
+    // ficha lhe mostrou: 213,74 € IVA incluído (176,64 € sem IVA), −5 % face
+    // aos 224,99 € recomendados.
+    // A versão com publicidade (B0CFPXBJ9Y, 199,49 €) aparece em stock mas a
+    // ficha diz que não pode ser enviada para a morada portuguesa: fica de fora.
+    // Signature Edition (B0CFPN47NY, 32 GB, 2024): captura do utilizador a
+    // 07/10, ~13h, morada portuguesa: 246,99 € IVA incluído (204,12 € sem
+    // IVA), riscado 259,99 €, −5 %, em stock nas três cores, vendida e
+    // enviada pela Amazon, entrega no dia seguinte.
     {
       slug: 'paperwhite',
-      preco_promo: 217.27,
-      preco_normal: 228.71,
+      preco_promo: 213.74,
+      preco_normal: 224.99,
       desconto_pct: 5,
       alternativa: {
-        etiqueta: 'Paperwhite de 2026',
-        asin: 'B0GV5YVVCD',
-        preco_promo: 213.47,
-        preco_normal: null,
-        desconto_pct: null,
-        desde: true,
-        nota: 'Mais fino e leve, com publicidade. A 4 de outubro estava em pré-reserva a este preço, com entrega a 11 de novembro; confirma na ficha se já há stock.',
+        etiqueta: 'Paperwhite Signature Edition também em stock',
+        asin: 'B0CFPN47NY',
+        preco_promo: 246.99,
+        preco_normal: 259.99,
+        desconto_pct: 5,
+        nota: '32 GB, luz frontal que se ajusta sozinha e carregamento sem fios. Em stock a 7 de outubro nas três cores, com entrega em Portugal no dia seguinte.',
       },
     },
     // Scribe: o da ficha (B0CZB5RHWX) "No disponible"; a geração mais recente
@@ -209,6 +212,21 @@ export const CAMPANHA: Campanha = {
       num_avaliacoes: 56,
       verificado_em: new Date('2026-10-07T13:05:00+01:00'),
       resumo: 'O Kindle básico de nova geração, mais fino, leve e rápido. Sem desconto: é o preço de lançamento.',
+    },
+    // Captura do utilizador a 07/10, ~13h, morada portuguesa: em stock,
+    // 246,99 € IVA incluído, riscado 259,99 € (−5 %), entrega no dia seguinte.
+    {
+      nome: 'Kindle Paperwhite Signature Edition (32 GB)',
+      asin: 'B0CFPN47NY',
+      etiqueta: 'De volta ao stock',
+      preco_eur: 246.99,
+      preco_comparacao_eur: 259.99,
+      origem_comparacao: 'o preço recomendado',
+      desconto_pct: 5,
+      classificacao: 4.7,
+      num_avaliacoes: 8105,
+      verificado_em: new Date('2026-10-07T13:20:00+01:00'),
+      resumo: 'O Paperwhite com 32 GB, luz que se ajusta sozinha e carregamento sem fios.',
     },
   ],
   extras: [
