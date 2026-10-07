@@ -115,7 +115,6 @@ export const ASIN_IMAGES: Record<string, string> = {
   B01GGKZ0V6: 'https://m.media-amazon.com/images/I/51cr-GQotHL._AC_SL1282_.jpg',
   B0BDXSHMHD: 'https://m.media-amazon.com/images/I/41Y4FiLBUYL._AC_SL1200_.jpg',
   B0DBPR29MW: 'https://m.media-amazon.com/images/I/41DMnFr9RDL._AC_SL1500_.jpg',
-  B0CWH4ND6V: 'https://m.media-amazon.com/images/I/51QSAWZAcrL._AC_SL1500_.jpg',
   B0DW3DBQ2S: 'https://m.media-amazon.com/images/I/51yxBLi2U2L._AC_SL1500_.jpg',
   B0DYDZCBM3: 'https://m.media-amazon.com/images/I/614VdQKzEcL._AC_SL1500_.jpg',
   B09MQ4KZ27: 'https://m.media-amazon.com/images/I/71aKKR1W7EL._SL1500_.jpg',
