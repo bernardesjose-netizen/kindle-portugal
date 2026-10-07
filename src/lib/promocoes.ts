@@ -49,6 +49,8 @@ export interface ItemPromocao {
     preco_promo: number;
     preco_normal: number | null;
     desconto_pct: number | null;
+    /** Mostra "desde" antes do preço (quando é o da variante mais barata). */
+    desde?: boolean;
     /** Frase curta por baixo do preço (estado do stock, data de entrega...). */
     nota?: string;
   } | null;
@@ -104,6 +106,8 @@ export interface Campanha {
   /** Modelos em promoção, pela ordem em que aparecem. */
   itens: ItemPromocao[];
   /** Produtos extra, fora da gama Kindle. */
+  /** Novidades da gama Kindle (sem desconto), mostradas a seguir aos Kindle em promoção. */
+  novidades: ExtraPromocao[];
   extras: ExtraPromocao[];
 }
 
@@ -111,7 +115,7 @@ export const CAMPANHA: Campanha = {
   ativa: true,
   nome: 'Promoções Kindle · Prime Big Deal Days 2026',
   etiqueta: 'Prime Big Deal Days',
-  slogan: 'Kindle Colorsoft a 166,71 € (−45 %) na Amazon.es. Os outros Kindle esgotaram.',
+  slogan: 'Kindle Colorsoft a 166,71 € (−45 %) na Amazon.es. Os outros Kindle de 2024 esgotaram, mas o novo Kindle básico de 2026 já está em stock, a 177,88 €.',
   slogan_antecipacao:
     'O Prime Big Deal Days é a 6 e 7 de outubro, mas há Kindle já com desconto antes da abertura.',
   antecipacao: new Date('2026-09-28T00:00:00+01:00'),
@@ -135,23 +139,25 @@ export const CAMPANHA: Campanha = {
       desconto_pct: 45,
       destaque: true,
     },
-    // Básico: "Não disponível, sem previsão" na Amazon.es, .fr, .it e .de.
-    // A nova geração (B0G4SHXZNZ, 16 GB, com publicidade) custa 154,99 € em
-    // Espanha, 157,55 € com IVA PT; a 06/10 as reservas estavam esgotadas.
+    // Básico de 2024: "Não disponível, sem previsão" na Amazon.es, .fr, .it e .de.
+    // A nova geração sem publicidade (B0G4SHH6YH, 16 GB, grafite) estava em
+    // stock a 07/10/2026, por volta das 13h, com entrega em Lisboa no dia
+    // seguinte: 144,62 € sem IVA, 177,88 € com IVA PT (ficha vista pelo
+    // utilizador com morada portuguesa; daqui, fora da UE, aparece esgotada).
     {
       slug: 'basico',
       preco_promo: null,
       preco_normal: null,
       desconto_pct: null,
       nota:
-        'Esgotou na Amazon.es e não há previsão de reposição; está igualmente esgotado nas Amazon de França, Itália e Alemanha. A 4 de outubro custava 91,39 €, 47 % abaixo da tabela.',
+        'O Kindle básico de 2024 esgotou na Amazon.es e não há previsão de reposição; está igualmente esgotado nas Amazon de França, Itália e Alemanha. A 4 de outubro custava 91,39 €, 47 % abaixo da tabela.',
       alternativa: {
-        etiqueta: 'Kindle de 2026 em pré-reserva',
-        asin: 'B0G4SHXZNZ',
-        preco_promo: 157.55,
+        etiqueta: 'Kindle de 2026 já em stock',
+        asin: 'B0G4SHH6YH',
+        preco_promo: 177.88,
         preco_normal: null,
         desconto_pct: null,
-        nota: 'Mais fino, leve e rápido, 16 GB, com publicidade. A 6 de outubro as reservas também estavam esgotadas: vale a pena voltar a espreitar.',
+        nota: 'O novo Kindle, mais fino, leve e rápido: 16 GB, sem publicidade, cor grafite. Em stock a 7 de outubro, com entrega em Portugal no dia seguinte. Não está em promoção: é o preço de lançamento.',
       },
     },
     // Paperwhite 2024: "No disponible" na Amazon.es, esgotado na .fr e .it.
@@ -170,6 +176,7 @@ export const CAMPANHA: Campanha = {
         preco_promo: 213.47,
         preco_normal: null,
         desconto_pct: null,
+        desde: true,
         nota: 'Mais fino e leve, com publicidade, entrega a 11 de novembro. A 6 de outubro as reservas estavam esgotadas temporariamente.',
       },
     },
@@ -182,6 +189,23 @@ export const CAMPANHA: Campanha = {
       desconto_pct: null,
       nota:
         'O Scribe desta ficha está indisponível e a geração mais recente, que a 4 de outubro estava a 370,02 € (−30 %), aparece esgotada temporariamente na Amazon.es.',
+    },
+  ],
+  novidades: [
+    // Visto pelo utilizador na ficha a 07/10, ~13h, com morada em Lisboa:
+    // em stock, 177,88 € com IVA, entrega grátis no dia seguinte. Estrelas
+    // lidas por nós na ficha (4,4, 56 avaliações).
+    {
+      nome: 'Kindle de 2026 (16 GB, sem publicidade)',
+      asin: 'B0G4SHH6YH',
+      etiqueta: 'Novo · já em stock',
+      preco_eur: 177.88,
+      preco_comparacao_eur: null,
+      desconto_pct: null,
+      classificacao: 4.4,
+      num_avaliacoes: 56,
+      verificado_em: new Date('2026-10-07T13:05:00+01:00'),
+      resumo: 'O Kindle básico de nova geração, mais fino, leve e rápido. Sem desconto: é o preço de lançamento.',
     },
   ],
   extras: [
