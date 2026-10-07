@@ -431,10 +431,11 @@ const TROCA_DESTAQUE = new Date('2026-10-07T00:45:00+01:00');
 
 /**
  * Ofertas de marcas que passam à frente das outras na grelha de cartões do
- * destaque da entrada (ex.: a que saiu do destaque principal). Galaxy Buds3
- * Pro: trocaram de lugar com o Kindle Colorsoft a 07/10, a pedido do utilizador.
+ * destaque da entrada (ex.: a que saiu do destaque principal). Os Galaxy Buds3
+ * Pro saíram a 07/10 às 18h, a pedido do utilizador: o lugar passou para o
+ * cartão das ofertas flash da Fiesta Prime (DestaqueCampanha).
  */
-export const MARCAS_PRIORITARIAS_GRELHA = ['B0D4QVV1WV'];
+export const MARCAS_PRIORITARIAS_GRELHA: string[] = [];
 
 export const OFERTAS_ESTRELA: OfertaEstrela[] = [
   {
