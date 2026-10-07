@@ -115,7 +115,7 @@ export const CAMPANHA: Campanha = {
   ativa: true,
   nome: 'Promoções Kindle · Prime Big Deal Days 2026',
   etiqueta: 'Prime Big Deal Days',
-  slogan: 'Kindle Colorsoft a 166,71 € (−45 %) na Amazon.es. Os outros Kindle de 2024 esgotaram, mas o novo Kindle básico de 2026 já está em stock, a 177,88 €.',
+  slogan: 'Kindle Colorsoft a 166,71 € (−45 %) na Amazon.es e o Paperwhite de volta ao stock, a 217,27 €. O básico de 2024 esgotou, mas o novo Kindle básico de 2026 já está em stock, a 177,88 €.',
   slogan_antecipacao:
     'O Prime Big Deal Days é a 6 e 7 de outubro, mas há Kindle já com desconto antes da abertura.',
   antecipacao: new Date('2026-09-28T00:00:00+01:00'),
@@ -123,7 +123,7 @@ export const CAMPANHA: Campanha = {
   // para 8 em Espanha = 23h de 7 em Portugal.
   inicio: new Date('2026-10-06T00:00:00+02:00'),
   fim: new Date('2026-10-07T23:59:59+02:00'),
-  verificado_em: new Date('2026-10-06'),
+  verificado_em: new Date('2026-10-07'),
   fonte_datas: 'Anúncio oficial da Amazon (aboutamazon.com), consultado a 04/10/2026.',
   itens: [
     // Verificação de 06/10/2026, na abertura do evento. A Amazon.es mostra o
@@ -160,24 +160,27 @@ export const CAMPANHA: Campanha = {
         nota: 'O novo Kindle, mais fino, leve e rápido: 16 GB, sem publicidade, cor grafite. Em stock a 7 de outubro, com entrega em Portugal no dia seguinte. Não está em promoção: é o preço de lançamento.',
       },
     },
-    // Paperwhite 2024: "No disponible" na Amazon.es, esgotado na .fr e .it.
+    // Paperwhite 2024 (B0CFPWLGF2, sem publicidade, preto): de volta ao stock
+    // a 07/10/2026, ~13h, vendido e enviado pela Amazon, entrega em Lisboa no
+    // dia seguinte (ficha vista pelo utilizador com morada portuguesa; daqui,
+    // fora da UE, aparece esgotado). 176,64 € sem IVA (213,74 € em Espanha,
+    // −5 % face aos 224,99 € recomendados) = 217,27 € com IVA PT, face aos
+    // 228,71 € do preço recomendado com IVA PT.
     // O de 2026 (B0GV5YVVCD, com publicidade) estava a 213,47 € com IVA PT a
-    // 04/10 e aparecia esgotado temporariamente a 06/10.
+    // 04/10; o estado atual para Portugal não está confirmado.
     {
       slug: 'paperwhite',
-      preco_promo: null,
-      preco_normal: null,
-      desconto_pct: null,
-      nota:
-        'O Paperwhite de 2024 aparece como não disponível na Amazon.es e esgotado na Amazon.fr e .it. A 4 de outubro custava 228,71 €, sem desconto.',
+      preco_promo: 217.27,
+      preco_normal: 228.71,
+      desconto_pct: 5,
       alternativa: {
-        etiqueta: 'Paperwhite de 2026 em pré-reserva',
+        etiqueta: 'Paperwhite de 2026',
         asin: 'B0GV5YVVCD',
         preco_promo: 213.47,
         preco_normal: null,
         desconto_pct: null,
         desde: true,
-        nota: 'Mais fino e leve, com publicidade, entrega a 11 de novembro. A 6 de outubro as reservas estavam esgotadas temporariamente.',
+        nota: 'Mais fino e leve, com publicidade. A 4 de outubro estava em pré-reserva a este preço, com entrega a 11 de novembro; confirma na ficha se já há stock.',
       },
     },
     // Scribe: o da ficha (B0CZB5RHWX) "No disponible"; a geração mais recente
