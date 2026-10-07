@@ -27,7 +27,7 @@ export interface OfertaMomento {
   marca: string;
   nome: string;
   asin: string;
-  categoria: 'Áudio' | 'Carregadores' | 'Informática' | 'Casa' | 'Casa inteligente' | 'Cuidado pessoal' | 'Relógios' | 'Tablets' | 'Telemóveis';
+  categoria: 'Áudio' | 'Carregadores' | 'Informática' | 'Casa' | 'Casa inteligente' | 'Cuidado pessoal' | 'Kindle' | 'Relógios' | 'Tablets' | 'Telemóveis';
   /** Preço com IVA PT, em euros. */
   preco_eur: number;
   /** Preço riscado na ficha, com IVA PT (ver `referencia`). */
@@ -470,10 +470,16 @@ export interface OfertaEstrela extends Omit<OfertaMomento, 'preco_recomendado_eu
 }
 
 // Troca do destaque pedida pelo utilizador a 06/10/2026, às 17:42 ("daqui a
-// 7 horas"): o Apple Watch dá lugar aos Galaxy Buds3 Pro.
+// 7 horas"): o Apple Watch saiu às 00:45 de 7/10 (entraram os Galaxy Buds3
+// Pro, que a 7/10 deram lugar ao Kindle Colorsoft).
 const TROCA_DESTAQUE = new Date('2026-10-07T00:45:00+01:00');
 
-const BUDS3_PRO = OFERTAS_MOMENTO.find((o) => o.asin === 'B0D4QVV1WV');
+/**
+ * Ofertas de marcas que passam à frente das outras na grelha de cartões do
+ * destaque da entrada (ex.: a que saiu do destaque principal). Galaxy Buds3
+ * Pro: trocaram de lugar com o Kindle Colorsoft a 07/10, a pedido do utilizador.
+ */
+export const MARCAS_PRIORITARIAS_GRELHA = ['B0D4QVV1WV'];
 
 export const OFERTAS_ESTRELA: OfertaEstrela[] = [
   {
@@ -503,30 +509,27 @@ export const OFERTAS_ESTRELA: OfertaEstrela[] = [
     resumo:
       'O Series 11 deu lugar ao Series 12 e baixou para o preço mais baixo de sempre na Amazon.es, segundo a Applesfera. Ecrã sempre ligado, qualidade do sono e monitorização de treino e saúde. Atenção: só funciona com iPhone.',
   },
-  // Os Galaxy Buds3 Pro vêm da lista acima: preço, desconto e hora da
-  // verificação ficam sempre iguais aos das ofertas do momento.
-  ...(BUDS3_PRO
-    ? [
-        {
-          marca: BUDS3_PRO.marca,
-          nome: BUDS3_PRO.nome,
-          asin: BUDS3_PRO.asin,
-          categoria: BUDS3_PRO.categoria,
-          preco_eur: BUDS3_PRO.preco_eur,
-          poupanca_eur: Math.round((BUDS3_PRO.preco_recomendado_eur - BUDS3_PRO.preco_eur) * 100) / 100,
-          desconto_pct: BUDS3_PRO.desconto_pct,
-          comparacao: `face ao preço recomendado na Amazon.es (${BUDS3_PRO.preco_recomendado_eur.toLocaleString('pt-PT', { minimumFractionDigits: 2 })} €)`,
-          etiqueta: 'Menos de metade do preço',
-          classificacao: BUDS3_PRO.classificacao,
-          num_avaliacoes: BUDS3_PRO.num_avaliacoes,
-          verificado_em: BUDS3_PRO.verificado_em,
-          valida_ate: BUDS3_PRO.valida_ate,
-          so_prime: BUDS3_PRO.so_prime,
-          mostrar_desde: TROCA_DESTAQUE,
-          resumo: BUDS3_PRO.resumo,
-        },
-      ]
-    : []),
+  // Destaque principal a partir de 07/10, ~13h30 (pedido do utilizador: "muda
+  // o destaque principal para Kindle", trocando com os Galaxy Buds3 Pro, que
+  // passam para a grelha de cartões). Colorsoft lido por nós na ficha às
+  // 13:16: 166,71 € com IVA PT, recomendado 304,95 €, −45 %, 3 unidades.
+  {
+    marca: 'Amazon',
+    nome: 'Kindle Colorsoft (16 GB)',
+    asin: 'B0CX8MQF7R',
+    categoria: 'Kindle',
+    preco_eur: 166.71,
+    poupanca_eur: 138.24,
+    desconto_pct: 45,
+    comparacao: 'face ao preço recomendado na Amazon.es (304,95 €)',
+    etiqueta: 'O maior desconto Kindle',
+    classificacao: 4.5,
+    num_avaliacoes: 2824,
+    verificado_em: new Date('2026-10-07T13:16:00+01:00'),
+    valida_ate: FIM_PBDD,
+    resumo:
+      'O primeiro Kindle a cores, quase a metade do preço: capas, banda desenhada e sublinhados a cores, com a autonomia de semanas de um Kindle. A ficha indicava só três unidades em stock.',
+  },
 ];
 
 /** Momento em que a oferta estrela sai do destaque. */
