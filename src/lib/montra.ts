@@ -74,19 +74,20 @@ export const CATEGORIAS_MONTRA: { id: CategoriaMontra; titulo: string; descricao
   },
 ];
 
-const DIA = new Date('2026-10-07');
+const DIA = new Date('2026-10-08');
 
 export const MONTRA: ItemMontra[] = [
   // Kindle. Só o Kindle de 2026 tem preço: é o de lançamento, sem desconto
-  // (visto pelo utilizador na ficha a 07/10 com morada em Portugal). Os outros
-  // estavam com preços da campanha, que acaba hoje; remetem para a ficha.
+  // (visto pelo utilizador na ficha a 07/10 com morada em Portugal). As fichas
+  // dos outros aparecem esgotadas vistas de fora de Portugal; remetem para a
+  // nossa ficha. Os restantes preços foram relidos a 08/10, já sem campanha.
   {
     nome: 'Kindle de 2026 (16 GB, sem publicidade)',
     marca: 'Amazon',
     asin: 'B0G4SHH6YH',
     categoria: 'kindle',
     preco_eur: 177.88,
-    preco_data: DIA,
+    preco_data: new Date('2026-10-07'),
     etiqueta: 'Novo',
     porque: 'A nova geração do Kindle básico, mais fino, leve e rápido, já com entrega em Portugal. É a porta de entrada na gama.',
   },
@@ -173,7 +174,7 @@ export const MONTRA: ItemMontra[] = [
     marca: 'Kobo',
     asin: 'B0CZXYV8GT',
     categoria: 'outros-leitores',
-    preco_eur: 171.78,
+    preco_eur: 171.79,
     preco_data: DIA,
     porque: 'A alternativa direta ao Kindle básico: 6 polegadas, resistência à água, luz com temperatura ajustável e EPUB sem conversões.',
   },
@@ -191,7 +192,7 @@ export const MONTRA: ItemMontra[] = [
     marca: 'Kobo',
     asin: 'B0CZXX465Z',
     categoria: 'outros-leitores',
-    preco_eur: 225.67,
+    preco_eur: 273.44,
     preco_data: DIA,
     porque: 'Sete polegadas a cores, botões físicos para virar a página e compatível com a caneta Kobo Stylus 2. O rival direto do Colorsoft.',
   },
@@ -218,7 +219,7 @@ export const MONTRA: ItemMontra[] = [
     marca: 'PocketBook',
     asin: 'B0D1Y883G2',
     categoria: 'outros-leitores',
-    preco_eur: 247.49,
+    preco_eur: 249.03,
     preco_data: DIA,
     porque: 'Ecrã a cores de 7 polegadas, 32 GB e botões físicos. A opção para BD e livros ilustrados em qualquer formato.',
   },
@@ -238,6 +239,8 @@ export const MONTRA: ItemMontra[] = [
     marca: 'Moleskine',
     asin: 'B07XW6SWC2',
     categoria: 'escrita',
+    preco_eur: 24.39,
+    preco_data: DIA,
     porque: 'O formato grande, 13 x 21 cm e 240 páginas, para quem escreve muito.',
   },
   {
@@ -272,7 +275,7 @@ export const MONTRA: ItemMontra[] = [
     marca: 'Pilot',
     asin: 'B07S571HQV',
     categoria: 'escrita',
-    preco_eur: 10.33,
+    preco_eur: 10.37,
     preco_data: DIA,
     porque: 'A tinta apaga-se por fricção, ótimo para anotar livros e agendas sem estragar. Cuidado com o calor, que também a faz desaparecer.',
   },
@@ -308,7 +311,7 @@ export const MONTRA: ItemMontra[] = [
     marca: 'MAGIC SELECT',
     asin: 'B09TPRBNLH',
     categoria: 'leitura',
-    preco_eur: 13.41,
+    preco_eur: 11.29,
     preco_data: DIA,
     porque: 'Mantém o livro aberto na mesa e liberta as mãos para tomar notas ou ler enquanto se come.',
   },
@@ -355,6 +358,8 @@ export const MONTRA: ItemMontra[] = [
     marca: 'Belkin',
     asin: 'B0CWH4ND6V',
     categoria: 'carregar',
+    preco_eur: 30.49,
+    preco_data: DIA,
     porque: 'Um só carregador para portátil, telemóvel e Kindle ao mesmo tempo. Ideal para viagens.',
   },
   {
@@ -362,6 +367,8 @@ export const MONTRA: ItemMontra[] = [
     marca: 'Amazon Basics',
     asin: 'B0DW3DBQ2S',
     categoria: 'carregar',
+    preco_eur: 15.44,
+    preco_data: DIA,
     porque: 'Duas tomadas, duas portas USB-C e uma USB-A num cabo de 1,57 m: resolve a mesa de cabeceira sem carregadores à parte.',
   },
   {
@@ -369,7 +376,7 @@ export const MONTRA: ItemMontra[] = [
     marca: 'Brennenstuhl',
     asin: 'B0DYDZCBM3',
     categoria: 'carregar',
-    preco_eur: 23.97,
+    preco_eur: 23.99,
     preco_data: DIA,
     porque: 'Quatro tomadas com interruptor e três portas USB (duas USB-C de 20 W), de uma marca alemã com tradição em material elétrico.',
   },
@@ -378,8 +385,8 @@ export const MONTRA: ItemMontra[] = [
     marca: 'TP-Link',
     asin: 'B07Z5JD3T4',
     categoria: 'carregar',
-    preco_eur: 8.4,
-    preco_data: new Date('2026-10-04'),
+    preco_eur: 9.14,
+    preco_data: DIA,
     porque: 'Programa horários e desliga carregadores à distância pelo telemóvel, para não ficarem ligados à corrente a noite toda.',
   },
   {
@@ -387,8 +394,6 @@ export const MONTRA: ItemMontra[] = [
     marca: 'Anker',
     asin: 'B0C9CJKCH3',
     categoria: 'carregar',
-    preco_eur: 27.5,
-    preco_data: new Date('2026-10-04'),
     porque: 'Bateria de bolso com o cabo integrado: carrega o telemóvel cerca de duas vezes e dá semanas extra ao Kindle em viagem.',
   },
   {
@@ -396,7 +401,7 @@ export const MONTRA: ItemMontra[] = [
     marca: 'Amazon Basics',
     asin: 'B01GGKZ0V6',
     categoria: 'carregar',
-    preco_eur: 7.76,
+    preco_eur: 7.47,
     preco_data: DIA,
     porque: 'Um cabo suplente para a mesa de cabeceira ou para a mala, que serve no Kindle, no telemóvel e no portátil.',
   },
@@ -405,6 +410,8 @@ export const MONTRA: ItemMontra[] = [
     marca: 'INIU',
     asin: 'B09MQ4KZ27',
     categoria: 'carregar',
+    preco_eur: 12.19,
+    preco_data: DIA,
     porque: 'Dois metros chegam da tomada à cama, para ler com o Kindle a carregar sem esticar o braço.',
   },
 
