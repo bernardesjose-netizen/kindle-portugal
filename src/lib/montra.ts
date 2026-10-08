@@ -75,8 +75,6 @@ export const CATEGORIAS_MONTRA: { id: CategoriaMontra; titulo: string; descricao
 ];
 
 const DIA = new Date('2026-10-07');
-/** Fim do Prime Big Deal Days (23h de Lisboa de 7/10/2026), igual a `FIM_PBDD`. */
-const FIM_CAMPANHA = new Date('2026-10-07T23:59:59+02:00');
 
 export const MONTRA: ItemMontra[] = [
   // Kindle. Só o Kindle de 2026 tem preço: é o de lançamento, sem desconto
@@ -240,10 +238,7 @@ export const MONTRA: ItemMontra[] = [
     marca: 'Moleskine',
     asin: 'B07XW6SWC2',
     categoria: 'escrita',
-    preco_eur: 16.36,
-    preco_data: DIA,
-    expira: FIM_CAMPANHA,
-    porque: 'O formato grande, 13 x 21 cm e 240 páginas, para quem escreve muito. Nesta cor estava em oferta com prazo.',
+    porque: 'O formato grande, 13 x 21 cm e 240 páginas, para quem escreve muito.',
   },
   {
     nome: 'Leuchtturm1917 A5, capa dura, pontilhado',
@@ -286,9 +281,6 @@ export const MONTRA: ItemMontra[] = [
     marca: 'Stabilo',
     asin: 'B01LXOQ1KJ',
     categoria: 'escrita',
-    preco_eur: 6.21,
-    preco_data: DIA,
-    expira: FIM_CAMPANHA,
     porque: 'Marcadores em tons pastel, mais suaves do que os fluorescentes para sublinhar livros e apontamentos.',
   },
 
@@ -363,9 +355,6 @@ export const MONTRA: ItemMontra[] = [
     marca: 'Belkin',
     asin: 'B0CWH4ND6V',
     categoria: 'carregar',
-    preco_eur: 23.37,
-    preco_data: DIA,
-    expira: FIM_CAMPANHA,
     porque: 'Um só carregador para portátil, telemóvel e Kindle ao mesmo tempo. Ideal para viagens.',
   },
   {
@@ -373,9 +362,6 @@ export const MONTRA: ItemMontra[] = [
     marca: 'Amazon Basics',
     asin: 'B0DW3DBQ2S',
     categoria: 'carregar',
-    preco_eur: 12.35,
-    preco_data: DIA,
-    expira: FIM_CAMPANHA,
     porque: 'Duas tomadas, duas portas USB-C e uma USB-A num cabo de 1,57 m: resolve a mesa de cabeceira sem carregadores à parte.',
   },
   {
@@ -419,9 +405,6 @@ export const MONTRA: ItemMontra[] = [
     marca: 'INIU',
     asin: 'B09MQ4KZ27',
     categoria: 'carregar',
-    preco_eur: 7.71,
-    preco_data: DIA,
-    expira: FIM_CAMPANHA,
     porque: 'Dois metros chegam da tomada à cama, para ler com o Kindle a carregar sem esticar o braço.',
   },
 
