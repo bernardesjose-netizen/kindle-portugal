@@ -8,7 +8,7 @@
  * e remete para a Amazon para o valor do momento.
  */
 
-export const VERIFICADO_EM = new Date('2026-10-04');
+export const VERIFICADO_EM = new Date('2026-10-12');
 
 export interface AchadoTech {
   nome: string;
@@ -51,7 +51,7 @@ export const ACHADOS_TECH: AchadoTech[] = [
     nome: 'TP-Link Tapo P100 (tomada inteligente)',
     asin: 'B07Z5JD3T4',
     categoria: 'Casa inteligente',
-    preco_eur: 8.4,
+    preco_eur: 9.14,
     comentario:
       'O produto com melhor relação preço-utilidade desta lista: uma tomada Wi-Fi que se comanda pelo telemóvel ou por voz (Alexa e Google Home), programa horários e desliga aparelhos à distância. Dezenas de milhares de avaliações por menos de 10 €, difícil errar. Há pack de 4 por cerca de 29 €.',
   },
@@ -59,7 +59,7 @@ export const ACHADOS_TECH: AchadoTech[] = [
     nome: 'Fire TV Stick 4K Plus',
     asin: 'B0F7ZFWVTC',
     categoria: 'Streaming',
-    preco_eur: 38.62,
+    preco_eur: 36.88,
     etiqueta: 'Wi-Fi 6',
     comentario:
       'Transforma qualquer televisão com HDMI numa smart TV rápida: Netflix, Prime Video, Disney+, RTP Play e companhia, com 4K, Dolby Vision e Dolby Atmos. A versão atual traz Wi-Fi 6 e comando com controlo da televisão. Para televisões mais antigas ou secundárias, é a forma mais barata de as modernizar.',
@@ -69,8 +69,8 @@ export const ACHADOS_TECH: AchadoTech[] = [
     asin: 'B08VDJYLS5',
     categoria: 'Áudio',
     preco_eur: 24.79,
-    // A 04/10/2026 este ASIN não tinha oferta de artigo novo na Amazon.es (só
-    // usado), por isso o preço mantém-se com a data da última confirmação.
+    // A 04/10 e a 12/10/2026 este ASIN não tinha oferta de artigo novo na Amazon.es,
+    // por isso o preço mantém-se com a data da última confirmação.
     preco_data: new Date('2026-08-01'),
     comentario:
       'Os auscultadores Bluetooth mais recomendáveis abaixo dos 25 €: leves, dobráveis, com 40 horas de bateria anunciadas e o som equilibrado típico da JBL. Dezenas de milhares de avaliações sustentam a fama. São também um par excelente para ouvir audiolivros no Kindle ou no telemóvel.',
@@ -79,12 +79,10 @@ export const ACHADOS_TECH: AchadoTech[] = [
     nome: 'Xiaomi Redmi Buds 8',
     asin: 'B0GQLY4D9F',
     categoria: 'Áudio',
-    preco_eur: 43.7,
-    // Verificado a 06/10/2026: vendido e enviado pela Amazon, em stock.
-    preco_data: new Date('2026-10-06'),
-    etiqueta: '−28% face ao PVP',
+    preco_eur: 40.15,
+    etiqueta: 'Abaixo do PVP',
     comentario:
-      'Auriculares sem fios com cancelamento de ruído até 50 dB, 44 horas de autonomia com o estojo, ligação a dois aparelhos ao mesmo tempo e resistência a pó e salpicos (IP54). Na Amazon.es custam 42,99 €, 28 % abaixo do preço oficial de 59,99 €, e 43,70 € com o IVA português. Ainda têm poucas avaliações por serem recentes; quem quer gastar menos tem os Redmi Buds 8 Lite, mais simples, a cerca de 20 €.',
+      'Auriculares sem fios com cancelamento de ruído até 50 dB, 44 horas de autonomia com o estojo, ligação a dois aparelhos ao mesmo tempo e resistência a pó e salpicos (IP54). Na Amazon.es estão bem abaixo do preço oficial de 59,99 €. Ainda têm poucas avaliações por serem recentes; quem quer gastar menos tem os Redmi Buds 8 Lite, mais simples, a cerca de 20 €.',
   },
   {
     nome: 'Apple AirTag (2.ª geração)',
@@ -99,7 +97,7 @@ export const ACHADOS_TECH: AchadoTech[] = [
     nome: 'Anker Nano Power Bank (10 000 mAh, USB-C)',
     asin: 'B0C9CJKCH3',
     categoria: 'Para levar no bolso',
-    preco_eur: 27.5,
+    preco_eur: 30.49,
     comentario:
       'Powerbank compacta com o cabo USB-C integrado, o detalhe que acaba com o "trouxe a bateria mas esqueci-me do cabo". Carrega um telemóvel cerca de duas vezes, a 30 W, e serve igualmente para dar semanas extra a um Kindle em viagem. A Anker é das marcas mais fiáveis da categoria.',
   },
