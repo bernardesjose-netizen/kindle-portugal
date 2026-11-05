@@ -20,13 +20,15 @@
 export const ASIN_IMAGES: Record<string, string> = {
   // Kindle: modelos atuais nas fichas Amazon.es.
   B0FZD6VSDY: 'https://m.media-amazon.com/images/I/71RJkBmay+L._AC_SL1500_.jpg',
-  B0GV5TP9KW: 'https://m.media-amazon.com/images/I/71lSpQmEARL._AC_SL1500_.jpg',
+  B0GV5TP9KW: 'https://m.media-amazon.com/images/I/51BDjufo+0L._AC_SL1500_.jpg',
   B0GV674LSF: 'https://m.media-amazon.com/images/I/718TywzghrL._AC_SL1500_.jpg',
   B0GV642G9D: 'https://m.media-amazon.com/images/I/71JSuuB0DKL._AC_SL1500_.jpg',
   B0GV5ZZN91: 'https://m.media-amazon.com/images/I/81mWR8AFjHL._AC_SL1500_.jpg',
   B0FC1XB22K: 'https://m.media-amazon.com/images/I/71vORZ6gSfL._AC_SL1500_.jpg',
+  B0FC254WQH: 'https://m.media-amazon.com/images/I/71vORZ6gSfL._AC_SL1500_.jpg',
   B0FBSBHLT9: 'https://m.media-amazon.com/images/I/71onGwhnCWL._AC_SL1500_.jpg',
   B0FC1RMLVN: 'https://m.media-amazon.com/images/I/71hhOSJPjfL._AC_SL1500_.jpg',
+  B0FC1K5QZ9: 'https://m.media-amazon.com/images/I/71hhOSJPjfL._AC_SL1500_.jpg',
 
   // Capas para Kindle básico
   B0CPXQ7YZN: 'https://m.media-amazon.com/images/I/717q6mlbGCL._AC_SL1500_.jpg',

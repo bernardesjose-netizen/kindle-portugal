@@ -38,51 +38,56 @@ const grupos = CATEGORIAS_MONTRA.map((c) => ({
   descricao="Tudo o que faz falta a quem lê e escreve, escolhido por nós: Kindle e outros e-readers, capas, cadernos Moleskine e Leuchtturm, canetas, luzes de leitura, carregadores e ebooks em português."
   motivoOrnamento="e-reader"
 >
-  <section class="relative overflow-hidden border-b-4 border-dourado-400 bg-gradient-to-br from-marinho-900 via-marinho-800 to-oceano-800 text-creme-50">
-    <div
-      aria-hidden="true"
-      class="pointer-events-none absolute inset-0"
-      style="background-image: radial-gradient(ellipse at top right, rgb(249 126 7 / 0.28) 0%, transparent 55%), radial-gradient(ellipse at bottom left, rgb(20 110 180 / 0.35) 0%, transparent 50%);"
-    />
-    <Container largura="normal" classe="relative z-10 py-14">
-      <span class="inline-flex items-center gap-1 rounded-full border border-dourado-400/40 bg-dourado-400/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-dourado-300">
-        Escolhido por nós
-      </span>
-      <h1 class="mt-3 text-3xl font-bold text-creme-50 md:text-4xl" style="font-family: var(--font-serif);">
-        Montra do leitor
-      </h1>
-      <p class="mt-3 max-w-2xl text-creme-50/85">
-        O que recomendaríamos a quem lê e escreve: Kindle e outros leitores, capas, cadernos,
-        canetas, luzes de leitura, carregadores e ebooks em português. Cada cartão indica para quem
-        serve o produto e liga à sua ficha na Amazon.es.
-      </p>
-      <nav aria-label="Categorias da montra" class="mt-6 flex flex-wrap gap-2">
-        {grupos.map((g) => (
-          <a
-            href={`#${g.id}`}
-            class="rounded-full border border-creme-50/25 bg-creme-50/10 px-3 py-1.5 text-sm font-semibold text-creme-50 transition-colors hover:border-dourado-400 hover:bg-dourado-400/20"
-          >
-            {g.titulo}
-          </a>
-        ))}
-      </nav>
+  <section aria-labelledby="titulo-montra" class="border-b border-creme-200 bg-creme-100">
+    <Container largura="largo" classe="py-7 sm:py-10 lg:py-12">
+      <div class="grid items-start gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
+        <div>
+          <p class="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-marca-800">
+            <span class="h-px w-7 bg-marca-700" aria-hidden="true"></span>
+            Seleção Kindle Portugal
+          </p>
+          <h1 id="titulo-montra" class="mt-4 text-balance text-[clamp(2.25rem,5.4vw,4rem)] font-bold leading-[1.05] text-marinho-900">
+            Montra do leitor
+          </h1>
+          <p class="mt-4 max-w-[50ch] text-base leading-relaxed text-marinho-600 sm:text-lg">
+            Leitores, capas, cadernos, luzes e ebooks para ler e escrever. Cada cartão indica para que serve o produto e liga à ficha da Amazon.es.
+          </p>
+        </div>
+        <nav aria-label="Categorias da montra" class="rounded-2xl border border-creme-200 bg-creme-50 p-4 sm:p-5">
+          <p class="mb-3 text-sm font-semibold text-marinho-900">Ir para uma categoria</p>
+          <ul class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+            {grupos.map((g) => (
+              <li>
+                <a href={`#${g.id}`} class="flex h-full min-h-10 items-center gap-1.5 rounded-lg border border-creme-200 bg-white px-2.5 py-2 text-sm font-semibold leading-tight text-marinho-900 transition-colors hover:border-marca-500 hover:text-marca-800">
+                  {g.titulo} <span aria-hidden="true" class="ml-auto text-marca-800">↓</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
     </Container>
   </section>
 
-  <Container largura="normal" classe="py-12 sm:py-14">
-    <p class="rounded-xl border border-ambar-100 bg-ambar-50 p-4 text-sm text-ambar-800">
-      <strong>Os preços mudam a qualquer momento.</strong> Indicamos o valor da Amazon.es com IVA
-      português na data junto a cada preço (<LinkPrecos />). Para os Kindle, confirma o preço
-      atual e a entrega para a tua morada na ficha da Amazon.es.
-    </p>
+  <Container largura="largo" classe="py-7 sm:py-12">
+    <aside class="flex items-start gap-3 rounded-xl border border-marinho-200 bg-white px-4 py-3 text-sm leading-relaxed text-marinho-700 sm:px-5">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="mt-0.5 shrink-0 text-marca-800" aria-hidden="true">
+        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.75" />
+        <path d="M12 10.5v5M12 8h.01" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" />
+      </svg>
+      <p><strong>Preços e entrega.</strong> Os valores da Amazon.es indicam a data em que foram consultados (<LinkPrecos />). Confirma o preço de hoje e a entrega para a tua morada na ficha da loja.</p>
+    </aside>
 
     {grupos.map((g) => (
-      <section id={g.id} class="mt-14 scroll-mt-24">
-        <h2 class="text-2xl font-bold text-marinho-900 md:text-3xl" style="font-family: var(--font-serif); letter-spacing: -0.02em;">
-          {g.titulo}
-        </h2>
-        <p class="mt-2 max-w-2xl text-marinho-600">{g.descricao}</p>
-        <ul class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <section id={g.id} aria-labelledby={`montra-${g.id}`} class="mt-10 scroll-mt-24 sm:mt-14">
+        <div class="border-b border-creme-200 pb-4">
+          <div class="flex flex-wrap items-center gap-3">
+            <h2 id={`montra-${g.id}`} class="text-2xl font-bold text-marinho-900 sm:text-3xl">{g.titulo}</h2>
+            <span class="rounded-full bg-creme-100 px-2.5 py-1 text-xs font-semibold text-marinho-600">{g.itens.length} opções</span>
+          </div>
+          <p class="mt-1.5 max-w-2xl text-marinho-600">{g.descricao}</p>
+        </div>
+        <ul class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {g.itens.map((i) => (
             <CartaoMontra
               nome={i.nome}
@@ -101,7 +106,7 @@ const grupos = CATEGORIAS_MONTRA.map((c) => ({
       </section>
     ))}
 
-    <section class="mt-16 rounded-2xl border border-marinho-100 bg-white/70 p-6">
+    <section class="mt-12 rounded-2xl border border-creme-200 bg-creme-100 p-5 sm:mt-16 sm:p-7">
       <h2 class="text-xl font-bold text-marinho-900" style="font-family: var(--font-serif);">Para escolher com calma</h2>
       <ul class="mt-3 space-y-2 text-marinho-700">
         <li>Ainda a decidir que Kindle comprar? O guia <a href="/guias/qual-kindle-comprar-2026" class="font-semibold text-marca-600 hover:text-marca-700">Qual Kindle comprar</a> compara a gama inteira.</li>

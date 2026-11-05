@@ -3,20 +3,28 @@ import Container from './Container.astro';
 import { SITE, NAVEGACAO_RODAPE } from '@lib/site';
 
 const ano = new Date().getFullYear();
+const atalhos = [
+  { href: '/modelos', label: 'Modelos Kindle' },
+  { href: '/guias', label: 'Guias' },
+  { href: '/tres-livros', label: 'Três Ebooks' },
+  { href: '/modelos-boox', label: 'Modelos BOOX' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/faq', label: 'FAQ' },
+];
 ---
 
-<footer class="relative mt-24 overflow-hidden border-t border-marinho-100 bg-marinho-900 text-creme-100">
+<footer class="relative mt-16 overflow-hidden border-t-4 border-marca-500 bg-marinho-900 text-creme-100 sm:mt-24">
   <div
     aria-hidden="true"
     class="pointer-events-none absolute inset-0 opacity-[0.12]"
     style="background-image: radial-gradient(circle at 20% 0%, #f97e07 0%, transparent 55%), radial-gradient(circle at 95% 120%, #d4a84b 0%, transparent 45%);"
   />
 
-  <Container largura="largo" classe="relative z-10 py-12 text-sm">
-    <div class="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr] md:items-start">
-      <div>
-        <div class="flex items-center gap-2.5 text-creme-50">
-          <svg class="h-8 w-8" viewBox="0 0 32 32" aria-hidden="true">
+  <Container largura="largo" classe="relative z-10 py-10 text-sm sm:py-12">
+    <div class="grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr]">
+      <div class="sm:col-span-2 lg:col-span-1">
+        <a href="/" class="inline-flex min-h-11 items-center gap-2.5 rounded-md text-creme-50 hover:text-marca-300">
+          <svg class="h-9 w-9" viewBox="0 0 32 32" aria-hidden="true">
             <rect width="32" height="32" rx="7" fill="#f97e07" />
             <rect x="7" y="5" width="18" height="22" rx="2" fill="#fefbf5" />
             <rect x="10" y="9" width="12" height="1.4" fill="#4a5568" />
@@ -24,55 +32,53 @@ const ano = new Date().getFullYear();
             <rect x="10" y="15" width="9" height="1.4" fill="#4a5568" />
             <circle cx="16" cy="23" r="1.6" fill="#131a24" />
           </svg>
-          <span class="text-lg font-bold" style="font-family: var(--font-serif);">
+          <span class="text-xl font-bold" style="font-family: var(--font-serif);">
             {SITE.nome}
           </span>
-        </div>
-        <p class="mt-3 max-w-md text-creme-100/80">{SITE.descricao}</p>
+        </a>
+        <p class="mt-3 max-w-sm leading-relaxed text-creme-100/90">{SITE.descricao}</p>
+        <a href="/guias/qual-kindle-comprar-2026" class="mt-4 inline-flex min-h-11 items-center gap-2 rounded-lg border border-marca-300/50 px-3 font-semibold text-marca-300 hover:border-marca-300 hover:bg-marca-500/10">
+          Comparar modelos Kindle <span aria-hidden="true">→</span>
+        </a>
       </div>
 
-      <div>
-        <h3 class="text-xs font-semibold uppercase tracking-wider text-marca-300">Navegar</h3>
-        <ul class="mt-3 space-y-2 text-creme-100/90">
-          <li><a href="/modelos" class="hover:text-marca-300">Modelos</a></li>
-          <li><a href="/guias" class="hover:text-marca-300">Guias</a></li>
-          <li><a href="/tres-livros" class="hover:text-marca-300">Três Ebooks</a></li>
-          <li><a href="/modelos-boox" class="hover:text-marca-300">Modelos BOOX</a></li>
-          <li><a href="/blog" class="hover:text-marca-300">Blog</a></li>
-          <li><a href="/faq" class="hover:text-marca-300">FAQ</a></li>
+      <nav aria-labelledby="rodape-conteudo">
+        <h2 id="rodape-conteudo" class="text-sm font-semibold text-marca-300">Explorar o site</h2>
+        <ul class="mt-2 grid grid-cols-2 gap-x-4 text-creme-100/90 sm:grid-cols-1 xl:grid-cols-2">
+          {atalhos.map((item) => (
+            <li>
+              <a href={item.href} class="inline-flex min-h-11 items-center rounded-sm hover:text-marca-300 hover:underline hover:underline-offset-4">
+                {item.label}
+              </a>
+            </li>
+          ))}
         </ul>
-      </div>
+      </nav>
 
-      <div>
-        <h3 class="text-xs font-semibold uppercase tracking-wider text-marca-300">Legal</h3>
-        <ul class="mt-3 space-y-2 text-creme-100/90">
-          {
-            NAVEGACAO_RODAPE.map((item) => (
-              <li>
-                <a href={item.href} class="hover:text-marca-300">
-                  {item.label}
-                </a>
-              </li>
-            ))
-          }
+      <nav aria-labelledby="rodape-informacoes">
+        <h2 id="rodape-informacoes" class="text-sm font-semibold text-marca-300">Informações do site</h2>
+        <ul class="mt-2 grid grid-cols-2 gap-x-4 text-creme-100/90 sm:grid-cols-1 xl:grid-cols-2">
+          {NAVEGACAO_RODAPE.map((item) => (
+            <li>
+              <a href={item.href} class="inline-flex min-h-11 items-center rounded-sm hover:text-marca-300 hover:underline hover:underline-offset-4">
+                {item.label}
+              </a>
+            </li>
+          ))}
         </ul>
-      </div>
+      </nav>
     </div>
 
-    <div class="mt-10 border-t border-marinho-700/60 pt-6">
-      <p class="text-xs text-creme-100/60">
-        © {ano} {SITE.nome}. Feito com cuidado em Portugal.
-      </p>
-      <p class="mt-2 text-xs text-creme-100/50">
-        Não somos parceiros nem representantes oficiais da Amazon.com, Inc.; participamos no
-        programa de afiliados Amazon Associates. Na qualidade de afiliados, recebemos comissões
-        por compras elegíveis. «Kindle» e o logótipo Amazon são marcas registadas dos
-        respetivos titulares.
-      </p>
-      <p class="mt-2 text-xs text-creme-100/50">
-        Alguns links são de afiliado e podem render-nos uma pequena comissão, sem custo para ti.
-        <a href="/divulgacao-afiliados" class="underline underline-offset-2 hover:text-marca-300">Como funciona</a>.
-      </p>
+    <div class="mt-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t border-creme-100/20 pt-4">
+      <p class="text-xs text-creme-100/80">© {ano} {SITE.nome}. Feito em Portugal.</p>
+      <a href="#topo" class="inline-flex min-h-11 items-center gap-2 rounded-sm font-semibold text-marca-300 hover:underline hover:underline-offset-4">
+        Voltar ao topo <span aria-hidden="true">↑</span>
+      </a>
     </div>
+    <p class="mt-2 max-w-3xl text-xs leading-relaxed text-creme-100/75">
+      Kindle Portugal é um site independente. Na qualidade de afiliados da Amazon, recebemos comissões por compras elegíveis, sem custo adicional para ti.
+      <a href="/divulgacao-afiliados" class="underline underline-offset-2 hover:text-marca-300">Como funciona</a>.
+      «Kindle» e o logótipo Amazon são marcas registadas dos respetivos titulares.
+    </p>
   </Container>
 </footer>

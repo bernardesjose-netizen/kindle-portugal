@@ -43,6 +43,7 @@ const modelos = defineCollection({
       disponibilidade: z.enum(['disponivel', 'ultimas-unidades', 'esgotado']).optional(),
       disponibilidade_data: z.coerce.date().optional(),
       disponibilidade_nota: z.string().max(280).optional(),
+      verificacao_amazon: z.coerce.date().optional(),
       variantes: z.array(z.object({
         nome: z.string(),
         asin: z.string().regex(/^B0[A-Z0-9]{8}$/),

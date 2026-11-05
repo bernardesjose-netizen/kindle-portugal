@@ -84,6 +84,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
   font-family: var(--font-sans);
   color: var(--color-marinho-800);
   background: var(--color-creme-50);
@@ -101,9 +102,14 @@ body {
 
 /* Foco visível acessível */
 :focus-visible {
-  outline: 2px solid var(--color-marca-500);
+  outline: 3px solid var(--color-marca-400);
   outline-offset: 3px;
-  border-radius: 4px;
+  box-shadow: 0 0 0 3px var(--color-marinho-900);
+}
+
+#conteudo:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 /* Headings — tipografia editorial elegante */
@@ -129,6 +135,11 @@ h1, h2, h3, h4 {
   border-color: var(--color-marca-300);
 }
 
+.caixa:focus-within {
+  border-color: var(--color-marca-700);
+  box-shadow: 0 0 0 2px var(--color-marca-700), var(--shadow-media);
+}
+
 /* Botão marca (CTA principal) */
 .btn-marca {
   display: inline-flex;
@@ -136,8 +147,9 @@ h1, h2, h3, h4 {
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   border-radius: 0.625rem;
-  background-image: linear-gradient(180deg, var(--color-marca-400) 0%, var(--color-marca-600) 100%);
-  color: white;
+  min-block-size: 2.75rem;
+  background-image: linear-gradient(180deg, var(--color-marca-300) 0%, var(--color-marca-500) 100%);
+  color: var(--color-marinho-900);
   font-weight: 600;
   letter-spacing: 0.01em;
   box-shadow: var(--shadow-marca);
@@ -245,15 +257,16 @@ h1, h2, h3, h4 {
   border-top: 3px solid var(--color-coral-500);
 }
 
-/* Link de menu com indicador animado e hover claro */
+/* Ligações da navegação principal */
 .nav-link {
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 0.45rem 0.9rem;
+  min-block-size: 2.75rem;
+  padding: 0.45rem 0.75rem;
   border-radius: 999px;
-  font-weight: 500;
-  color: var(--color-marinho-600);
+  font-weight: 600;
+  color: var(--color-marinho-700);
   transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
 }
 .nav-link::after {
@@ -305,21 +318,58 @@ h1, h2, h3, h4 {
 /* Typography refinements para o conteúdo longo */
 .prose-pt {
   font-family: var(--font-serif);
-  font-size: 1.0625rem;
-  line-height: 1.72;
+  font-size: clamp(1.0625rem, 1.02rem + 0.19vw, 1.1875rem);
+  line-height: 1.75;
+}
+
+.prose-pt > :where(p, ul:not([class]), ol:not([class]), blockquote) {
+  max-inline-size: 68ch;
+  margin-block: 0 1em;
+}
+
+.prose-pt > :where(ul:not([class]), ol:not([class])) {
+  padding-inline-start: 1.4em;
+}
+
+.prose-pt > :where(ul:not([class])) {
+  list-style: disc;
+}
+
+.prose-pt > :where(ol:not([class])) {
+  list-style: decimal;
+}
+
+.prose-pt > :where(ul:not([class]), ol:not([class])) > li + li {
+  margin-block-start: 0.35em;
+}
+
+.prose-pt :where(p, li) a {
+  overflow-wrap: anywhere;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
 }
 
 .prose-pt :where(p, li) {
   letter-spacing: -0.003em;
 }
 
-.prose-pt :where(h2) {
-  margin-top: 2.5em;
-  font-size: 1.65rem;
+.prose-pt :where(h2, h3) {
+  line-height: 1.25;
+  text-wrap: balance;
 }
+
+.prose-pt :where(h2) {
+  margin-block: 1.9em 0.6em;
+  font-size: clamp(1.45rem, 1.33rem + 0.48vw, 1.8rem);
+}
+
 .prose-pt :where(h3) {
-  margin-top: 2em;
+  margin-block: 1.55em 0.45em;
   font-size: 1.25rem;
+}
+
+.prose-pt > :where(:first-child) {
+  margin-block-start: 0;
 }
 
 .prose-pt :where(blockquote) {
@@ -330,6 +380,7 @@ h1, h2, h3, h4 {
 }
 
 .prose-pt :where(table) {
+  margin-block: 1.4em;
   border-collapse: collapse;
   overflow: hidden;
   border-radius: 0.5rem;
@@ -345,6 +396,7 @@ h1, h2, h3, h4 {
 .prose-pt :where(th, td) {
   padding: 0.6rem 0.9rem;
   border: 1px solid var(--color-marinho-100);
+  vertical-align: top;
 }
 .prose-pt :where(tbody tr:nth-child(odd)) {
   background: var(--color-creme-50);
@@ -364,17 +416,6 @@ h1, h2, h3, h4 {
   border-radius: 0.5rem;
 }
 
-/* Mobile: paragraph spacing mais generoso, heading scaling */
-@media (max-width: 640px) {
-  .prose-pt {
-    font-size: 1rem;
-  }
-  .prose-pt :where(h2) {
-    font-size: 1.4rem;
-    margin-top: 2em;
-  }
-}
-
 /* Tabelas em ecrãs estreitos: passam a scroll horizontal próprio,
    em vez de empurrarem a página inteira para fora do viewport. */
 @media (max-width: 640px) {
@@ -386,15 +427,6 @@ h1, h2, h3, h4 {
   }
 }
 
-/* Esconder scrollbar no nav (mantém scroll funcional em mobile) */
-.nav-scroll {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.nav-scroll::-webkit-scrollbar {
-  display: none;
-}
-
 /* Utilitário: efeito "lift" aplicável a qualquer elemento */
 .lift {
   transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -403,6 +435,12 @@ h1, h2, h3, h4 {
 .lift:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .caixa, .lift, .btn-marca, .btn-secundario, .nav-link, .nav-link::after { transition: none; }
+  .caixa:hover, .lift:hover, .btn-marca:hover, .btn-secundario:hover, .nav-link:hover { transform: none; }
 }
 
 /* ---------- Tipografia do Blog ----------

@@ -4,23 +4,20 @@ import { SITE, NAVEGACAO_PRINCIPAL } from '@lib/site';
 import { caminhoPublico } from '@lib/urls';
 
 const caminhoAtual = caminhoPublico(Astro.url.pathname);
-function ativo(href: string) {
-  if (href === '/') return caminhoAtual === '/';
-  // Correspondência exata ou por segmento, para que /modelos não acione
-  // em /modelos-boox (e vice-versa).
-  return caminhoAtual === href || caminhoAtual.startsWith(href + '/');
-}
+const principais = ['/modelos', '/guias', '/blog', '/tres-livros', '/montra'];
+const atalhos = NAVEGACAO_PRINCIPAL.filter(({ href }) => principais.includes(href))
+  .sort((a, b) => principais.indexOf(a.href) - principais.indexOf(b.href));
+const caminhoAtivo = NAVEGACAO_PRINCIPAL
+  .filter(({ href }) => caminhoAtual === href || (href !== '/' && caminhoAtual.startsWith(href + '/')))
+  .sort((a, b) => b.href.length - a.href.length)[0]?.href;
 ---
 
-<header class="sticky top-0 z-40 border-b border-marinho-100/80 bg-creme-50/85 backdrop-blur-md">
-  <Container largura="largo" classe="flex items-center justify-between gap-6 py-4">
-    <a
-      href="/"
-      class="group flex items-center gap-2.5 text-marinho-900"
-      aria-label={SITE.nome}
-    >
+<header class="sticky top-0 z-40 border-b border-marinho-200/70 bg-creme-50/95 shadow-suave backdrop-blur-md">
+  <div class="h-0.5 bg-gradient-to-r from-marca-600 via-marca-300 to-oceano-600" aria-hidden="true"></div>
+  <Container largura="largo" classe="flex min-h-16 items-center justify-between gap-4 py-2 lg:gap-8">
+    <a href="/" class="group flex min-h-11 shrink-0 items-center gap-2.5 rounded-md text-marinho-900" aria-label={SITE.nome}>
       <svg
-        class="h-8 w-8 shrink-0 transition-transform duration-300 group-hover:rotate-[-6deg]"
+        class="h-9 w-9 shrink-0"
         viewBox="0 0 32 32"
         aria-hidden="true"
       >
@@ -31,27 +28,93 @@ function ativo(href: string) {
         <rect x="10" y="15" width="9" height="1.4" fill="#4a5568" />
         <circle cx="16" cy="23" r="1.6" fill="#f97e07" />
       </svg>
-      <span class="hidden text-[1.05rem] font-bold tracking-tight sm:inline" style="font-family: var(--font-serif);">
-        Kindle <span class="text-marca-600">Portugal</span>
+      <span class="text-[1.05rem] font-bold tracking-tight" style="font-family: var(--font-serif);">
+        Kindle <span class="text-marca-700">Portugal</span>
       </span>
     </a>
 
-    <nav aria-label="Navegação principal" class="nav-scroll -mx-2 overflow-x-auto">
-      <ul class="flex min-w-max items-center gap-1 px-2 text-sm">
-        {
-          NAVEGACAO_PRINCIPAL.map((item) => (
-            <li>
+    <nav aria-label="Navegação principal" class="flex min-w-0 items-center gap-2 lg:gap-3">
+      <ul class="hidden items-center gap-1.5 text-sm lg:flex">
+        {atalhos.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={['nav-link', caminhoAtivo === item.href && 'ativo']}
+              aria-current={caminhoAtivo === item.href ? (caminhoAtual === item.href ? 'page' : 'location') : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <details data-menu-principal class="relative">
+        <summary class="menu-toggle flex min-h-11 cursor-pointer items-center gap-2 rounded-lg border border-marinho-200 bg-white px-3 text-sm font-semibold text-marinho-900 transition-colors hover:border-marca-700 hover:bg-marca-50">
+          <svg viewBox="0 0 24 24" class="size-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          Menu
+        </summary>
+        <ul class="menu-painel absolute right-0 top-[calc(100%+0.75rem)] grid gap-1.5 rounded-2xl border border-marinho-200 bg-creme-50 p-3 text-sm shadow-forte min-[360px]:grid-cols-2">
+          {NAVEGACAO_PRINCIPAL.map((item) => (
+            <li class:list={[principais.includes(item.href) && 'lg:hidden']}>
               <a
                 href={item.href}
-                class={`nav-link ${ativo(item.href) ? 'ativo' : ''}`}
-                aria-current={ativo(item.href) ? 'page' : undefined}
+                class:list={['nav-link w-full rounded-lg', caminhoAtivo === item.href && 'ativo']}
+                aria-current={caminhoAtivo === item.href ? (caminhoAtual === item.href ? 'page' : 'location') : undefined}
               >
                 {item.label}
               </a>
             </li>
-          ))
-        }
-      </ul>
+          ))}
+        </ul>
+      </details>
     </nav>
   </Container>
 </header>
+
+<style>
+  .menu-toggle {
+    list-style: none;
+  }
+
+  .menu-toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  details[open] > .menu-toggle {
+    border-color: var(--color-marca-700);
+    background: var(--color-marca-50);
+  }
+
+  details:not([open]) > .menu-painel {
+    display: none;
+  }
+
+  .menu-painel {
+    inline-size: min(26rem, calc(100vw - 2rem));
+    max-block-size: calc(100dvh - 5.5rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+</style>
+
+<script>
+  const menu = document.querySelector<HTMLDetailsElement>('[data-menu-principal]');
+  const botao = menu?.querySelector('summary');
+
+  if (menu && botao) {
+    menu.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape' || !menu.open) return;
+      event.preventDefault();
+      menu.open = false;
+      botao.focus();
+    });
+
+    document.addEventListener('click', (event) => {
+      if (menu.open && event.target instanceof Node && !menu.contains(event.target)) {
+        menu.open = false;
+      }
+    });
+  }
+</script>
