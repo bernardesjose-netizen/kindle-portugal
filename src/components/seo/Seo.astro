@@ -1,5 +1,6 @@
 ---
 import { SITE } from '@lib/site';
+import { caminhoPublico } from '@lib/urls';
 
 interface Props {
   titulo: string;
@@ -25,7 +26,7 @@ const {
   autor,
 } = Astro.props;
 
-const url = canonical ?? new URL(Astro.url.pathname, SITE.url).toString();
+const url = canonical ?? new URL(caminhoPublico(Astro.url.pathname), SITE.url).toString();
 const imagemAbsoluta = new URL(imagem, SITE.url).toString();
 const tituloCompleto = titulo === SITE.nome ? titulo : `${titulo} · ${SITE.nome}`;
 ---
@@ -33,6 +34,7 @@ const tituloCompleto = titulo === SITE.nome ? titulo : `${titulo} · ${SITE.nome
 <title>{tituloCompleto}</title>
 <meta name="description" content={descricao} />
 <link rel="canonical" href={url} />
+<link rel="alternate" hreflang="pt-PT" href={url} />
 
 {noindex && <meta name="robots" content="noindex, nofollow" />}
 

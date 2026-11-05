@@ -1,8 +1,9 @@
 ---
 import Container from './Container.astro';
 import { SITE, NAVEGACAO_PRINCIPAL } from '@lib/site';
+import { caminhoPublico } from '@lib/urls';
 
-const caminhoAtual = Astro.url.pathname;
+const caminhoAtual = caminhoPublico(Astro.url.pathname);
 function ativo(href: string) {
   if (href === '/') return caminhoAtual === '/';
   // Correspondência exata ou por segmento, para que /modelos não acione

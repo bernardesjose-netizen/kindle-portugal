@@ -4,6 +4,8 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { remarkAmazonTag } from './src/lib/remark-amazon-tag.ts';
+import { campanhaVisivel } from './src/lib/promocoes.ts';
+import { caminhoPublico } from './src/lib/urls.ts';
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,6 +23,9 @@ export default defineConfig({
       remarkPlugins: [remarkAmazonTag],
     }),
     sitemap({
+      // Fora da campanha, /promocoes mostra apenas um aviso e tem noindex.
+      // Usar a mesma condição da página para a incluir apenas quando indexável.
+      filter: (page) => caminhoPublico(new URL(page).pathname) !== '/promocoes' || campanhaVisivel(),
       i18n: {
         defaultLocale: 'pt',
         locales: { pt: 'pt-PT' },
