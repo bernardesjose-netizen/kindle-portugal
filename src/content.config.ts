@@ -202,6 +202,7 @@ const tresLivros = defineCollection({
       livros: z
         .array(livroDestaque)
         .length(3, 'A rubrica chama-se Três Ebooks — exatamente três'),
+      convidado_ingles: livroDestaque.optional(),
       tags: z.array(z.string()).default([]),
       imagem_hero: image().optional(),
       imagem_hero_alt: z.string().optional(),

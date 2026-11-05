@@ -20,7 +20,7 @@ const d = post.data;
 // Construímos o URL aqui em vez de usar `heroAsin` (que o ArtigoLayout
 // resolve via imagemParaAsin, função que só conhece dispositivos Kindle).
 const heroSrc = urlCapaLivro(d.livros[0].asin, 'grande', d.livros[0].capa_amazon);
-const heroAlt = `Capa de ${d.livros[0].titulo}, de ${d.livros[0].autor}`;
+const convidado = d.convidado_ingles;
 ---
 
 <ArtigoLayout
@@ -53,4 +53,22 @@ const heroAlt = `Capa de ${d.livros[0].titulo}, de ${d.livros[0].autor}`;
       />
     ))}
   </section>
+
+  {convidado && (
+    <section aria-labelledby="titulo-convidado-ingles" class="not-prose mt-12 rounded-2xl border border-oceano-100 bg-oceano-50/70 px-4 py-6 sm:px-7">
+      <h2 id="titulo-convidado-ingles" class="text-2xl font-bold text-marinho-900">Uma leitura em inglês</h2>
+      <p class="mt-2 max-w-prose text-marinho-700">De seis em seis dias, juntamos um bestseller em inglês às três escolhas portuguesas.</p>
+      <CardLivro
+        asin={convidado.asin}
+        titulo={convidado.titulo}
+        autor={convidado.autor}
+        editora={convidado.editora}
+        ano={convidado.ano}
+        marketplace={convidado.marketplace}
+        comentario={convidado.comentario}
+        fonteEdicao={convidado.fonte_edicao}
+        capaAmazon={convidado.capa_amazon}
+      />
+    </section>
+  )}
 </ArtigoLayout>

@@ -146,7 +146,7 @@ const pillPorCategoria: Record<string, string> = {
               Três Ebooks
             </h2>
             <p class="mt-2 max-w-xl text-marinho-600">
-              Três ebooks de dois em dois dias, escritos de origem em português de Portugal e publicados por editoras portuguesas.
+              Três ebooks de dois em dois dias, escritos originalmente em português de Portugal e publicados por editoras portuguesas.
             </p>
           </div>
           <a
@@ -208,6 +208,10 @@ const pillPorCategoria: Record<string, string> = {
                   </li>
                 ))}
               </ul>
+
+              {ultimoTresLivros.data.convidado_ingles && (
+                <p class="mt-4 text-sm text-oceano-800">Em inglês · <em>{ultimoTresLivros.data.convidado_ingles.titulo}</em></p>
+              )}
 
               <p class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-marca-600 group-hover:text-marca-700">
                 Ler edição completa

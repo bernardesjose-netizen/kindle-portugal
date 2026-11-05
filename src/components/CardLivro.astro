@@ -11,7 +11,7 @@ interface Props {
   ano?: number;
   marketplace?: 'es' | 'com' | 'uk' | 'de' | 'fr' | 'it';
   comentario: string;
-  numero: number;
+  numero?: number;
   urlWook?: string;
   fonteEdicao?: string;
   capaAmazon?: string;
@@ -61,7 +61,7 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
 
     <div class="flex flex-col">
       <span class="text-xs font-semibold uppercase tracking-wider text-marca-600">
-        Livro {numero} de 3
+        {numero ? `Livro ${numero} de 3` : 'Convidado em inglês'}
       </span>
       <h2 class="mt-2 text-2xl font-bold leading-tight text-marinho-900" style="font-family: var(--font-serif); letter-spacing: -0.02em;">
         {titulo}
