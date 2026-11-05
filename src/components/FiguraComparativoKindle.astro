@@ -1,0 +1,20 @@
+---
+import ImagemProduto from '@components/afiliados/ImagemProduto.astro';
+
+interface Props {
+  asin: string;
+  alt: string;
+  legenda: string;
+}
+
+const { asin, alt, legenda } = Astro.props;
+---
+
+<figure class="my-8 overflow-hidden rounded-2xl border border-marinho-200 bg-creme-50 shadow-[var(--shadow-suave)]">
+  <div class="grid min-h-64 place-items-center bg-gradient-to-br from-creme-50 to-creme-200 px-5 py-4">
+    <ImagemProduto asin={asin} alt={alt} linkar={false} classe="!my-0 max-w-full" />
+  </div>
+  <figcaption class="border-t border-marinho-100 px-5 py-3 text-sm text-marinho-600">
+    {legenda} <span class="whitespace-nowrap text-marinho-500">· Imagem da Amazon</span>
+  </figcaption>
+</figure>

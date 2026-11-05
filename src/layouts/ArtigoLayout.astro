@@ -2,7 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
 import OrnamentoFundo from '@components/ui/OrnamentoFundo.astro';
-import { SITE } from '@lib/site';
+import { ROTULOS_CATEGORIA_GUIA, SITE } from '@lib/site';
 import { caminhoPublico } from '@lib/urls';
 import { formatarData } from '@lib/formatters';
 import { imagemParaAsin } from '@lib/asin-images';
@@ -124,7 +124,7 @@ const pillCategoriaClass = categoria ? PILL_POR_CATEGORIA[categoria] ?? '' : '';
       <header class="mb-10">
         <div class={heroSrc ? 'grid gap-8 sm:grid-cols-[1fr_auto] sm:items-start' : ''}>
           <div>
-            {categoria && <span class={`pill ${pillCategoriaClass}`}>{categoria}</span>}
+            {categoria && <span class={`pill ${pillCategoriaClass}`}>{ROTULOS_CATEGORIA_GUIA[categoria] ?? categoria}</span>}
             <h1
               class="mt-4 text-[1.875rem] font-bold leading-[1.15] text-marinho-900 sm:text-4xl lg:text-[2.75rem]"
               style={`font-family: var(--font-${categoria === 'Blog' ? 'blog' : 'serif'}); letter-spacing: ${categoria === 'Blog' ? '-0.035em' : '-0.025em'};`}
