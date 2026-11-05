@@ -3,11 +3,33 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
 import CartaoMontra from '@components/afiliados/CartaoMontra.astro';
 import LinkPrecos from '@components/afiliados/LinkPrecos.astro';
-import { CATEGORIAS_MONTRA, MONTRA } from '@lib/montra';
+import { getCollection } from 'astro:content';
+import { CATEGORIAS_MONTRA, MONTRA, type ItemMontra } from '@lib/montra';
+
+const modelos = await getCollection('modelos', ({ data }) => !data.rascunho);
+const kindles = modelos.flatMap<ItemMontra>(({ id, data }) => {
+  const fichaUrl = '/modelos/' + id;
+  const comum = { marca: data.fabricante, categoria: 'kindle' as const };
+  const itens: ItemMontra[] = data.asin ? [{
+    ...comum,
+    nome: data.nome,
+    asin: data.asin,
+    ficha_url: fichaUrl,
+    porque: data.descricao_curta,
+  }] : [];
+
+  return itens.concat(data.variantes.map((v) => ({
+    ...comum,
+    nome: v.nome,
+    asin: v.asin,
+    ficha_url: fichaUrl + '#variantes',
+    porque: v.descricao,
+  })));
+});
 
 const grupos = CATEGORIAS_MONTRA.map((c) => ({
   ...c,
-  itens: MONTRA.filter((i) => i.categoria === c.id),
+  itens: c.id === 'kindle' ? kindles : MONTRA.filter((i) => i.categoria === c.id),
 })).filter((g) => g.itens.length > 0);
 ---
 
@@ -31,8 +53,8 @@ const grupos = CATEGORIAS_MONTRA.map((c) => ({
       </h1>
       <p class="mt-3 max-w-2xl text-creme-50/85">
         O que recomendaríamos a quem lê e escreve: Kindle e outros leitores, capas, cadernos,
-        canetas, luzes de leitura, carregadores e ebooks em português. Cada produto foi aberto na
-        Amazon.es, com o preço e a data em que o vimos, e ao lado dizemos para quem serve.
+        canetas, luzes de leitura, carregadores e ebooks em português. Cada cartão indica para quem
+        serve o produto e liga à sua ficha na Amazon.es.
       </p>
       <nav aria-label="Categorias da montra" class="mt-6 flex flex-wrap gap-2">
         {grupos.map((g) => (
@@ -50,9 +72,8 @@ const grupos = CATEGORIAS_MONTRA.map((c) => ({
   <Container largura="normal" classe="py-12 sm:py-14">
     <p class="rounded-xl border border-ambar-100 bg-ambar-50 p-4 text-sm text-ambar-800">
       <strong>Os preços mudam a qualquer momento.</strong> Indicamos o valor da Amazon.es com IVA
-      português na data junto a cada preço (<LinkPrecos />). O que conta é sempre o que vês na
-      ficha ao abrir o link. Nos Kindle sem preço, o valor estava a mudar com as campanhas: a
-      nossa ficha de cada modelo diz o que esperar.
+      português na data junto a cada preço (<LinkPrecos />). Para os Kindle, confirma o preço
+      atual e a entrega para a tua morada na ficha da Amazon.es.
     </p>
 
     {grupos.map((g) => (

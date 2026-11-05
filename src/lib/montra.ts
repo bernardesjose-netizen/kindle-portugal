@@ -40,7 +40,7 @@ export const CATEGORIAS_MONTRA: { id: CategoriaMontra; titulo: string; descricao
   {
     id: 'kindle',
     titulo: 'Kindle',
-    descricao: 'A gama atual, com ligação para a nossa ficha de cada modelo. Só versões sem publicidade, as que a Amazon.es envia para Portugal.',
+    descricao: 'A gama atual, com links para as fichas e para cada versão na Amazon.es. Confirma as opções de entrega para a tua morada.',
   },
   {
     id: 'capas',
@@ -77,53 +77,6 @@ export const CATEGORIAS_MONTRA: { id: CategoriaMontra; titulo: string; descricao
 const DIA = new Date('2026-10-08');
 
 export const MONTRA: ItemMontra[] = [
-  // Kindle. Só o Kindle de 2026 tem preço: é o de lançamento, sem desconto
-  // (visto pelo utilizador na ficha a 07/10 com morada em Portugal). As fichas
-  // dos outros aparecem esgotadas vistas de fora de Portugal; remetem para a
-  // nossa ficha. Os restantes preços foram relidos a 08/10, já sem campanha.
-  {
-    nome: 'Kindle de 2026 (16 GB, sem publicidade)',
-    marca: 'Amazon',
-    asin: 'B0G4SHH6YH',
-    categoria: 'kindle',
-    preco_eur: 177.88,
-    preco_data: new Date('2026-10-07'),
-    etiqueta: 'Novo',
-    porque: 'A nova geração do Kindle básico, mais fino, leve e rápido, já com entrega em Portugal. É a porta de entrada na gama.',
-  },
-  {
-    nome: 'Kindle Paperwhite (16 GB, sem publicidade)',
-    marca: 'Amazon',
-    asin: 'B0CFPWLGF2',
-    categoria: 'kindle',
-    ficha_url: '/modelos/paperwhite',
-    porque: 'O que recomendamos à maioria: ecrã de 7 polegadas a 300 ppi, resistência à água IPX8 e luz com temperatura de cor ajustável.',
-  },
-  {
-    nome: 'Kindle Paperwhite Signature Edition (32 GB)',
-    marca: 'Amazon',
-    asin: 'B0CFPN47NY',
-    categoria: 'kindle',
-    ficha_url: '/modelos/paperwhite',
-    porque: 'O Paperwhite com o dobro da memória, luz que se ajusta sozinha e carregamento sem fios. Compensa a quem guarda muitos audiolivros.',
-  },
-  {
-    nome: 'Kindle Colorsoft (16 GB)',
-    marca: 'Amazon',
-    asin: 'B0CX8MQF7R',
-    categoria: 'kindle',
-    ficha_url: '/modelos/colorsoft',
-    porque: 'O Kindle a cores: capas, banda desenhada e sublinhados ganham cor suave, estilo papel. Para quem lê muita BD ou livros ilustrados.',
-  },
-  {
-    nome: 'Kindle Scribe',
-    marca: 'Amazon',
-    asin: 'B0CZB5RHWX',
-    categoria: 'kindle',
-    ficha_url: '/modelos/scribe',
-    porque: 'Leitor e caderno digital num só, com caneta incluída. Para quem anota livros, revê PDF de trabalho ou estuda no ecrã.',
-  },
-
   // Capas e acessórios. As capas oficiais e a MoKo apareciam esgotadas vistas
   // de fora de Portugal (como os próprios Kindle): sem preço, ligam ao guia.
   {

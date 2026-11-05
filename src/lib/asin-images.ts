@@ -18,6 +18,16 @@
  */
 
 export const ASIN_IMAGES: Record<string, string> = {
+  // Kindle: modelos atuais nas fichas Amazon.es.
+  B0FZD6VSDY: 'https://m.media-amazon.com/images/I/71RJkBmay+L._AC_SL1500_.jpg',
+  B0GV5TP9KW: 'https://m.media-amazon.com/images/I/71lSpQmEARL._AC_SL1500_.jpg',
+  B0GV674LSF: 'https://m.media-amazon.com/images/I/718TywzghrL._AC_SL1500_.jpg',
+  B0GV642G9D: 'https://m.media-amazon.com/images/I/71JSuuB0DKL._AC_SL1500_.jpg',
+  B0GV5ZZN91: 'https://m.media-amazon.com/images/I/81mWR8AFjHL._AC_SL1500_.jpg',
+  B0FC1XB22K: 'https://m.media-amazon.com/images/I/71vORZ6gSfL._AC_SL1500_.jpg',
+  B0FBSBHLT9: 'https://m.media-amazon.com/images/I/71onGwhnCWL._AC_SL1500_.jpg',
+  B0FC1RMLVN: 'https://m.media-amazon.com/images/I/71hhOSJPjfL._AC_SL1500_.jpg',
+
   // Capas para Kindle básico
   B0CPXQ7YZN: 'https://m.media-amazon.com/images/I/717q6mlbGCL._AC_SL1500_.jpg',
   B0BGHLJPMQ: 'https://m.media-amazon.com/images/I/81pUB8LRgaL._AC_SL1500_.jpg',
@@ -47,7 +57,7 @@ export const ASIN_IMAGES: Record<string, string> = {
   B0CFPWLGF2: 'https://m.media-amazon.com/images/I/61RI4fvXHqL._AC_SL1000_.jpg', // Kindle Paperwhite 12.ª gen
   B0CP32JG8B: 'https://m.media-amazon.com/images/I/61toPUX7aDL._AC_SL1000_.jpg', // Kindle básico 2024
   B0CX8MQF7R: 'https://m.media-amazon.com/images/I/61RzHzSgEAL._AC_SL1000_.jpg', // Kindle Colorsoft
-  B0CZB5RHWX: 'https://m.media-amazon.com/images/I/71XyttQ0hNL._AC_SL1000_.jpg', // Kindle Scribe 3.ª gen
+  B0CZB5RHWX: 'https://m.media-amazon.com/images/I/71XyttQ0hNL._AC_SL1000_.jpg', // Kindle Scribe 10,2″ (2024)
   B0C8RR4WN3: 'https://m.media-amazon.com/images/I/71l4ubAJ0BL._AC_SL1500_.jpg',
 
   // Kobo

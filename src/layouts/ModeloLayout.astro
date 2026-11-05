@@ -4,7 +4,6 @@ import LinkPrecos from '@components/afiliados/LinkPrecos.astro';
 import BaseLayout from './BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
 import BotaoAmazon from '@components/afiliados/BotaoAmazon.astro';
-import LojasAmazon from '@components/afiliados/LojasAmazon.astro';
 import ImagemProduto from '@components/afiliados/ImagemProduto.astro';
 import OrnamentoFundo from '@components/ui/OrnamentoFundo.astro';
 import FotoFundoDecorativa from '@components/ui/FotoFundoDecorativa.astro';
@@ -113,8 +112,11 @@ const productLd = {
           {d.url_amazon && (
             <div class="mt-6">
               <BotaoAmazon url={d.url_amazon} tamanho="grande">
-                Ver {d.nome} na Amazon
+                Ver {d.nome} na Amazon.es
               </BotaoAmazon>
+              {!d.preco_referencia_eur && (
+                <p class="mt-2 text-sm text-marinho-600">Confirma o preço e a entrega para a tua morada na ficha do produto.</p>
+              )}
             </div>
           )}
         </div>
@@ -168,6 +170,25 @@ const productLd = {
           </div>
         )}
       </header>
+
+      {d.variantes.length > 0 && (
+        <section id="variantes" class="mb-12 scroll-mt-24" aria-labelledby="titulo-variantes">
+          <h2 id="titulo-variantes" class="text-2xl font-bold text-marinho-900" style="font-family: var(--font-serif);">
+            Outras versões
+          </h2>
+          <ul class="mt-4 grid gap-4 sm:grid-cols-2">
+            {d.variantes.map((variante) => (
+              <li class="flex flex-col items-start rounded-xl border border-marinho-100 bg-white/90 p-5">
+                <h3 class="font-semibold text-marinho-900">{variante.nome}</h3>
+                <p class="mb-4 mt-2 flex-1 text-sm text-marinho-600">{variante.descricao}</p>
+                <BotaoAmazon url={'https://www.amazon.es/dp/' + variante.asin}>
+                  Ver {variante.nome} na Amazon.es
+                </BotaoAmazon>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section class="mt-10 grid gap-8 md:grid-cols-3">
         <div class="md:col-span-2 space-y-6">
@@ -286,16 +307,6 @@ const productLd = {
           )}
         </aside>
       </section>
-
-      {d.asin && (
-        <LojasAmazon
-          asin={d.asin}
-          pesquisaAlternativa={d.nome}
-          titulo={`Onde comprar o ${d.nome}`}
-          legenda={`Escolhe a loja Amazon do teu país. Envios para Portugal sem taxas adicionais a partir da Amazon.es (IVA já incluído).`}
-        />
-      )}
-
     </Container>
   </article>
 </BaseLayout>

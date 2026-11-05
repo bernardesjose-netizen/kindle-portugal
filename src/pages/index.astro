@@ -12,14 +12,16 @@ import { imagemParaAsin } from '@lib/asin-images';
 import { urlCapaLivro } from '@lib/capa-livro';
 import { rotuloPreco } from '@lib/disponibilidade';
 
-const modelosTodos = (await getCollection('modelos', ({ data }) => !data.rascunho))
-  .sort((a, b) => b.data.ano_lancamento - a.data.ano_lancamento);
-const totalModelos = modelosTodos.length;
-const modelos = modelosTodos.slice(0, 4);
+const ordemModelos: Record<string, number> = { basico: 0, paperwhite: 1, colorsoft: 2, scribe: 3 };
+const modelos = (await getCollection('modelos', ({ data }) => !data.rascunho))
+  .sort((a, b) => (ordemModelos[a.id] ?? 4) - (ordemModelos[b.id] ?? 4))
+  .slice(0, 4);
+const totalVersoes = modelos.reduce((total, { data }) => total + 1 + data.variantes.length, 0);
+const paperwhite = modelos.find(({ id }) => id === 'paperwhite')?.data;
+const imagemHero = paperwhite?.asin ? imagemParaAsin(paperwhite.asin, 500) : null;
 
 const guiasTodos = (await getCollection('guias', ({ data }) => !data.rascunho))
   .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf());
-const totalGuias = guiasTodos.length;
 const guias = guiasTodos.slice(0, 4);
 
 const blogTodos = (await getCollection('blog', ({ data }) => !data.rascunho))
@@ -59,28 +61,24 @@ const pillPorCategoria: Record<string, string> = {
 ---
 
 <BaseLayout titulo={SITE.nome} descricao={SITE.descricao}>
-  {/* Destaque da campanha, acima do herói para ser a primeira coisa visível.
-      Só aparece dentro da janela da campanha (ver src/lib/promocoes.ts). */}
-  <DestaqueCampanha />
-
-  <!-- HERO, fundo escuro Amazon-style com acentos laranja + azul -->
-  <section class="relative overflow-hidden border-b-4 border-marca-500 bg-gradient-to-br from-marinho-900 via-marinho-800 to-oceano-900 text-creme-50">
+  <section aria-labelledby="titulo-gama-kindle" class="relative overflow-hidden border-b-4 border-marca-500 bg-gradient-to-br from-marinho-900 via-marinho-800 to-oceano-900 text-creme-50">
     <div
       aria-hidden="true"
       class="pointer-events-none absolute inset-0"
       style="background-image: radial-gradient(ellipse at top right, rgb(249 126 7 / 0.22) 0%, transparent 55%), radial-gradient(ellipse at bottom left, rgb(20 110 180 / 0.35) 0%, transparent 50%);"
     />
-    <Container largura="normal" classe="relative z-10 py-16 sm:py-20 md:py-24">
-      <div class="grid items-center gap-12 lg:grid-cols-[1.6fr_1fr] lg:gap-16">
+    <Container largura="normal" classe="relative z-10 py-10 sm:py-14 lg:py-16">
+      <div class="grid items-center gap-8 lg:grid-cols-[1.65fr_1fr] lg:gap-14">
         <div>
           <span class="inline-flex items-center gap-1 rounded-full border border-marca-400/40 bg-marca-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-marca-300">
-            Em português europeu
+            Grande atualização do site · novembro de 2026
           </span>
           <h1
+            id="titulo-gama-kindle"
             class="mt-5 text-[2rem] font-bold leading-[1.1] text-creme-50 sm:text-5xl lg:text-[3.5rem]"
             style="letter-spacing: -0.035em;"
           >
-            Tudo sobre <span class="relative inline-block text-marca-400">
+            Conhece os novos modelos <span class="relative inline-block text-marca-400">
               Kindle
               <svg
                 aria-hidden="true"
@@ -97,106 +95,92 @@ const pillPorCategoria: Record<string, string> = {
                   opacity="0.9"
                 />
               </svg>
-            </span> e ebooks em Portugal.
+            </span>
           </h1>
-          <p class="mt-6 text-lg text-oceano-100/90 sm:text-xl">
-            Guias passo a passo, comparações e dicas práticas, desde a escolha do modelo até
-            enviar os teus ebooks, converter formatos e encontrar livros em <strong class="font-semibold text-creme-50">português europeu</strong>.
+          <p class="mt-6 max-w-xl text-lg text-oceano-100/90 sm:text-xl">
+            <strong class="font-semibold text-creme-50">{totalVersoes} versões no catálogo de 2026.</strong>
+            Compara os leitores, as edições Signature e os Scribe de 11 polegadas. O guia reúne as
+            diferenças que interessam, com fichas da Amazon e testes independentes.
           </p>
-          <div class="mt-8 flex flex-wrap gap-3">
+          <div class="mt-7 flex flex-wrap gap-3">
             <a href="/modelos" class="btn-marca">
-              Ver modelos de Kindle
+              Ver os modelos Kindle
               <span aria-hidden="true">→</span>
             </a>
             <a
-              href="/guias/ebooks-em-portugues-amazon-kindle"
+              href="/guias/qual-kindle-comprar-2026"
               class="inline-flex items-center gap-2 rounded-[0.625rem] border border-oceano-300/40 bg-oceano-500/20 px-6 py-3 font-semibold text-creme-50 backdrop-blur transition hover:-translate-y-0.5 hover:border-oceano-200/70 hover:bg-oceano-500/30"
             >
-              Guia: Ebooks em PT-PT
+              Comparar modelos
             </a>
           </div>
 
-          <dl class="mt-14 grid max-w-2xl grid-cols-3 gap-6 border-t border-oceano-400/30 pt-8">
-            <div>
-              <dt class="text-xs font-semibold uppercase tracking-wider text-marca-300">Modelos</dt>
-              <dd class="mt-1 text-2xl font-bold text-creme-50" style="font-family: var(--font-serif);">
-                {totalModelos}
-              </dd>
-            </div>
-            <div>
-              <dt class="text-xs font-semibold uppercase tracking-wider text-oceano-300">Guias</dt>
-              <dd class="mt-1 text-2xl font-bold text-creme-50" style="font-family: var(--font-serif);">
-                {totalGuias}
-              </dd>
-            </div>
-            <div>
-              <dt class="text-xs font-semibold uppercase tracking-wider text-dourado-400">PT-PT</dt>
-              <dd class="mt-1 text-2xl font-bold text-creme-50" style="font-family: var(--font-serif);">100%</dd>
-            </div>
-          </dl>
+          <nav aria-label="Famílias Kindle" class="mt-8 max-w-xl border-t border-oceano-400/30 pt-5">
+            <ul class="grid grid-cols-2 gap-2 sm:grid-cols-4">
+              {modelos.map(({ id, data }) => (
+                <li>
+                  <a
+                    href={'/modelos/' + id}
+                    class="flex min-h-10 items-center gap-1.5 rounded-lg border border-creme-50/20 px-3 py-2 text-sm font-semibold text-creme-50 transition-colors hover:border-marca-300 hover:bg-marca-500/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-marca-300"
+                  >
+                    {data.nome}
+                    <span aria-hidden="true" class="ml-auto text-marca-300">→</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
 
-        <figure class="kindle-perspective relative mx-auto mt-12 w-full max-w-xs sm:max-w-sm lg:mt-0 lg:max-w-none">
-          {/* Halo radial: cor + serve de "fundo claro" para o multiply funcionar sem moldura visível */}
-          <div
-            aria-hidden="true"
-            class="absolute -inset-8 rounded-full opacity-90 blur-3xl sm:-inset-12"
-            style="background: radial-gradient(ellipse at 50% 50%, rgba(255, 247, 235, 0.55) 0%, rgba(249, 126, 7, 0.40) 30%, rgba(20, 110, 180, 0.25) 60%, transparent 80%);"
-          />
-
-          {/* Pedestal: sombra elíptica suave por baixo do aparelho */}
-          <div
-            aria-hidden="true"
-            class="absolute bottom-2 left-1/2 h-6 w-3/5 -translate-x-1/2 rounded-full opacity-50 blur-xl"
-            style="background: radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, transparent 70%);"
-          />
-
-          {/* Pill flutuante: chama a atenção para a rubrica semanal Três Ebooks */}
-          {ultimoTresLivros && (
-            <a
-              href="/tres-livros"
-              class="group/nov absolute -top-[62px] left-1/2 z-20 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full border border-dourado-400/50 bg-marinho-900/85 px-3 py-1.5 text-xs font-semibold text-creme-50 shadow-lg backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-dourado-400 hover:bg-marinho-900 sm:-top-[74px]"
-              aria-label="Três Ebooks: novos livros todas as semanas, ver novidades"
-            >
-              <span class="relative flex h-2 w-2" aria-hidden="true">
-                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-dourado-400 opacity-75"></span>
-                <span class="relative inline-flex h-2 w-2 rounded-full bg-dourado-400"></span>
-              </span>
-              Novos livros todas as semanas
-              <span aria-hidden="true" class="text-dourado-400 transition-transform group-hover/nov:translate-x-0.5">→</span>
-            </a>
-          )}
-
-          <a
-            href="/modelos/paperwhite"
-            class="kindle-tilt relative block"
-            aria-label="Ver Kindle Paperwhite"
-          >
-            <img
-              src="https://m.media-amazon.com/images/I/61RI4fvXHqL._AC_SL1000_.jpg"
-              alt="Kindle Paperwhite, o modelo recomendado para a maioria dos leitores"
-              loading="eager"
-              decoding="async"
-              width="500"
-              height="500"
-              class="kindle-img mx-auto block h-auto max-h-72 w-auto object-contain sm:max-h-80 lg:max-h-[26rem]"
-              referrerpolicy="no-referrer-when-downgrade"
-              data-fallback="/placeholder-amazon.svg"
+        {imagemHero && paperwhite && (
+          <figure class="kindle-perspective relative mx-auto w-full max-w-[15rem] sm:max-w-xs lg:max-w-none">
+            {/* Halo radial: cor + serve de "fundo claro" para o multiply funcionar sem moldura visível */}
+            <div
+              aria-hidden="true"
+              class="absolute -inset-8 rounded-full opacity-90 blur-3xl sm:-inset-12"
+              style="background: radial-gradient(ellipse at 50% 50%, rgba(255, 247, 235, 0.55) 0%, rgba(249, 126, 7, 0.40) 30%, rgba(20, 110, 180, 0.25) 60%, transparent 80%);"
             />
-          </a>
 
-          <figcaption class="relative mt-5 text-center">
-            <span class="inline-flex items-center gap-1 rounded-full border border-marca-400/40 bg-marca-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-marca-300">
-              Recomendado
-            </span>
-            <p class="mt-2 text-xs font-semibold text-creme-100/70" style="font-family: var(--font-serif);">
-              Kindle Paperwhite
-            </p>
-          </figcaption>
-        </figure>
+            {/* Pedestal: sombra elíptica suave por baixo do aparelho */}
+            <div
+              aria-hidden="true"
+              class="absolute bottom-2 left-1/2 h-6 w-3/5 -translate-x-1/2 rounded-full opacity-50 blur-xl"
+              style="background: radial-gradient(ellipse at center, rgba(0,0,0,0.55) 0%, transparent 70%);"
+            />
+
+            <a
+              href="/modelos/paperwhite"
+              class="kindle-tilt relative block"
+              aria-label="Ver Kindle Paperwhite"
+            >
+              <img
+                src={imagemHero}
+                alt={paperwhite.imagem_hero_alt ?? paperwhite.nome}
+                loading="eager"
+                decoding="async"
+                width="500"
+                height="500"
+                class="kindle-img mx-auto block h-auto max-h-72 w-auto object-contain sm:max-h-80 lg:max-h-96"
+                referrerpolicy="no-referrer-when-downgrade"
+                data-fallback="/placeholder-amazon.svg"
+              />
+            </a>
+
+            <figcaption class="relative mt-5 text-center">
+              <span class="inline-flex items-center gap-1 rounded-full border border-marca-400/40 bg-marca-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-marca-300">
+                Em destaque
+              </span>
+              <p class="mt-2 text-xs font-semibold text-creme-100/70" style="font-family: var(--font-serif);">
+                {paperwhite.nome} · {paperwhite.ano_lancamento}
+              </p>
+            </figcaption>
+          </figure>
+        )}
       </div>
     </Container>
   </section>
+
+  <DestaqueCampanha />
 
   {/* Grandes marcas com desconto de 35 % ou mais (src/lib/ofertas-momento.ts).
       Cada oferta caduca sozinha no browser. */}
@@ -247,7 +231,7 @@ const pillPorCategoria: Record<string, string> = {
               Modelos em destaque
             </h2>
             <p class="mt-2 text-marinho-600">
-              Os Kindles atualmente à venda para Portugal, com o preço e o stock que vimos na Amazon.es.
+              Compara o Kindle básico, Paperwhite, Colorsoft e Scribe. As fichas ajudam a escolher a versão e levam-te ao produto na Amazon.es.
             </p>
           </div>
           <a
