@@ -8,6 +8,7 @@ import Footer from '@components/ui/Footer.astro';
 import OrnamentoFundo from '@components/ui/OrnamentoFundo.astro';
 import PromoBanner from '@components/afiliados/PromoBanner.astro';
 import { SITE } from '@lib/site';
+import { caminhoPublico } from '@lib/urls';
 
 type MotivoOrnamento =
   | 'livro-aberto'
@@ -52,7 +53,7 @@ function inferirMotivo(pathname: string): { principal: MotivoOrnamento; secundar
   return { principal: 'livro-aberto', secundario: 'pagina-marcada' };
 }
 
-const { principal, secundario } = inferirMotivo(Astro.url.pathname);
+const { principal, secundario } = inferirMotivo(caminhoPublico(Astro.url.pathname));
 const motivoFinal: MotivoOrnamento = motivoOrnamento ?? principal;
 
 // Barra fina da campanha, em todas as páginas menos duas: a entrada, que já tem
