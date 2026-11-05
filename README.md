@@ -13,7 +13,7 @@ Ler [CLAUDE.md](./CLAUDE.md) para convenções de conteúdo, stack e regras de a
 
 ```bash
 npm install
-cp .env.example .env     # preencher PUBLIC_AMAZON_TAG, etc.
+cp .env.example .env     # a tag da amazon.es já vem no código; preencher o resto
 npm run dev
 ```
 

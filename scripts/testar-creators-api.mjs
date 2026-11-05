@@ -13,7 +13,7 @@
 // Credenciais: lê de .env na raiz do projeto (gitignored) ou do ambiente.
 //   CREATORS_CLIENT_ID     — ID da credencial (amzn1.application-oa2-client....)
 //   CREATORS_CLIENT_SECRET — segredo correspondente
-//   PAAPI_PARTNER_TAG      — tag de associado (default: compleitdee04-21)
+//   PAAPI_PARTNER_TAG      — tag de associado (default: portukcom_site-21)
 //
 // Uso: node scripts/testar-creators-api.mjs
 
@@ -29,7 +29,7 @@ if (existsSync('.env')) {
 
 const CLIENT_ID = process.env.CREATORS_CLIENT_ID;
 const CLIENT_SECRET = process.env.CREATORS_CLIENT_SECRET;
-const PARTNER_TAG = process.env.PAAPI_PARTNER_TAG ?? 'compleitdee04-21';
+const PARTNER_TAG = process.env.PAAPI_PARTNER_TAG ?? 'portukcom_site-21';
 
 if (!CLIENT_ID || !CLIENT_SECRET) {
   console.error('Faltam credenciais. Define no .env (raiz do projeto) ou no ambiente:');

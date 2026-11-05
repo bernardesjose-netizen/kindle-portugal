@@ -6,7 +6,7 @@ export const SITE = {
   url: import.meta.env.PUBLIC_SITE_URL ?? 'https://kindleportugal.com',
   idioma: 'pt-PT',
   email: import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'kindleportugal@gmail.com',
-  amazonTag: import.meta.env.PUBLIC_AMAZON_TAG ?? '',
+  amazonTag: import.meta.env.PUBLIC_AMAZON_TAG_SITE ?? 'portukcom_site-21',
   autorOrganizacao: {
     nome: 'Kindle Portugal',
     url: 'https://kindleportugal.com',
@@ -36,6 +36,7 @@ export const NAVEGACAO_PRINCIPAL = [
   { label: 'Guias', href: '/guias' },
   { label: 'Três Ebooks', href: '/tres-livros' },
   { label: 'Produtos Estrela', href: '/produtos-estrela' },
+  { label: 'Montra', href: '/montra' },
   { label: 'Achados Tech', href: '/achados-tech' },
   { label: 'Amazon Prime', href: '/blog/amazon-prime-portugal-vale-a-pena' },
   { label: 'FAQ', href: '/faq' },

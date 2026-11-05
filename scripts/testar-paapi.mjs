@@ -8,7 +8,7 @@
 // Credenciais: lê do ambiente (nunca ficam no repositório).
 //   PAAPI_ACCESS_KEY  — chave de acesso gerada na consola de afiliados
 //   PAAPI_SECRET_KEY  — chave secreta correspondente
-//   PAAPI_PARTNER_TAG — tag de associado (por omissão: compleitdee04-21)
+//   PAAPI_PARTNER_TAG — tag de associado (por omissão: portukcom_site-21)
 //
 // Uso (PowerShell):
 //   $env:PAAPI_ACCESS_KEY='...'; $env:PAAPI_SECRET_KEY='...'; node scripts/testar-paapi.mjs
@@ -21,7 +21,7 @@ import { createHash, createHmac } from 'node:crypto';
 
 const ACCESS_KEY = process.env.PAAPI_ACCESS_KEY;
 const SECRET_KEY = process.env.PAAPI_SECRET_KEY;
-const PARTNER_TAG = process.env.PAAPI_PARTNER_TAG ?? 'compleitdee04-21';
+const PARTNER_TAG = process.env.PAAPI_PARTNER_TAG ?? 'portukcom_site-21';
 
 if (!ACCESS_KEY || !SECRET_KEY) {
   console.error('Faltam credenciais: define PAAPI_ACCESS_KEY e PAAPI_SECRET_KEY no ambiente.');

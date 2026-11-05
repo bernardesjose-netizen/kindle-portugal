@@ -1,0 +1,57 @@
+---
+/**
+ * Muda a fase da campanha no browser, sem esperar por um novo build.
+ *
+ * O site só é reconstruído quando há conteúdo para publicar, por isso a fase
+ * calculada no build (antecipação, a decorrer, fora) pode ficar desatualizada
+ * durante dias: foi assim que a contagem decrescente ficou "pendurada" depois
+ * de a campanha abrir. Este script corrige o que se vê:
+ *
+ *   - cada bloco com `data-campanha-inicio` e `data-campanha-fim` recebe a fase
+ *     atual em `data-fase`;
+ *   - os elementos com `data-so-fase="ativa"` (ou "antecipacao", "fora", ou
+ *     várias separadas por espaço) só aparecem nessa fase;
+ *   - o bloco com `data-esconder-fora` desaparece quando a campanha acaba.
+ *
+ * Reavalia a cada 30 segundos, ao voltar ao separador e quando uma contagem
+ * decrescente chega a zero (evento `kp:contagem-fim`). Sem JavaScript, fica
+ * o estado calculado no build.
+ */
+---
+
+<script>
+  // Script processado pelo Astro (ficheiro externo em /assets/): a CSP do site
+  // (public/_headers) bloqueia scripts escritos dentro da página.
+  type Fase = 'antecipacao' | 'ativa' | 'fora';
+
+  function fase(raiz: HTMLElement, agora: number): Fase | null {
+    const inicio = Date.parse(raiz.getAttribute('data-campanha-inicio') ?? '');
+    const fim = Date.parse(raiz.getAttribute('data-campanha-fim') ?? '');
+    const antecipacao = Date.parse(raiz.getAttribute('data-campanha-antecipacao') ?? '');
+    if (isNaN(inicio) || isNaN(fim)) return null;
+    if (agora >= inicio && agora <= fim) return 'ativa';
+    if (agora < inicio && (isNaN(antecipacao) || agora >= antecipacao)) return 'antecipacao';
+    return 'fora';
+  }
+
+  function aplicar() {
+    const agora = Date.now();
+    document.querySelectorAll<HTMLElement>('[data-campanha-inicio]').forEach((raiz) => {
+      const f = fase(raiz, agora);
+      if (!f) return;
+      raiz.setAttribute('data-fase', f);
+      if (raiz.hasAttribute('data-esconder-fora')) raiz.hidden = f === 'fora';
+      raiz.querySelectorAll<HTMLElement>('[data-so-fase]').forEach((parte) => {
+        const fases = (parte.getAttribute('data-so-fase') ?? '').split(' ');
+        parte.hidden = !fases.includes(f);
+      });
+    });
+  }
+
+  aplicar();
+  setInterval(aplicar, 30000);
+  document.addEventListener('kp:contagem-fim', aplicar);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) aplicar();
+  });
+</script>

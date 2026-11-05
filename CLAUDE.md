@@ -51,7 +51,7 @@ Informativo, próximo e honesto. Nada de hype. Admitir limitações dos produtos
 
 1. **Disclosure discreta**: uma única linha em letra pequena no rodapé global (Footer) com link para `/divulgacao-afiliados`. **Nunca** banners ou avisos de comissão no corpo das páginas ou no topo dos artigos. Não exagerar nas menções a comissões.
 2. Página dedicada `/divulgacao-afiliados` com explicação completa.
-3. Usar **tag Amazon Associates ES** (a definir em variável de ambiente `PUBLIC_AMAZON_TAG`).
+3. Usar a **tag Amazon Associates ES** deste site, `portukcom_site-21`, em todos os links para a amazon.es. Já está no código (`src/lib/afiliados.ts` e `src/lib/remark-amazon-tag.ts`); a variável `PUBLIC_AMAZON_TAG_SITE` só serve para a mudar sem tocar no código.
 4. Nunca mascarar ou encurtar links de afiliado de forma que esconda o destino.
 5. Nunca prometer preços — indicar "preço à data de X" e remeter para a Amazon para o valor atual.
 6. Cumprir [Operating Agreement Amazon Associates ES](https://afiliados.amazon.es) — não publicar em email/PDF, não usar em ambientes fechados, etc.

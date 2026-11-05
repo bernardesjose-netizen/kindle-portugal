@@ -38,6 +38,11 @@ const modelos = defineCollection({
       preco_data: z.coerce.date().optional(),
       url_amazon: z.string().url().optional(),
       asin: z.string().optional(),
+      // Stock na Amazon.es à data de `disponibilidade_data`. Sem este campo,
+      // o site não afirma nada sobre o stock.
+      disponibilidade: z.enum(['disponivel', 'ultimas-unidades', 'esgotado']).optional(),
+      disponibilidade_data: z.coerce.date().optional(),
+      disponibilidade_nota: z.string().max(280).optional(),
       especificacoes: z.object({
         ecra_polegadas: z.number().positive(),
         ecra_ppi: z.number().int().positive(),
@@ -221,6 +226,10 @@ const produtoEstrela = z.object({
   /** Selo curto no cartão, ex.: "Novidade" ou "−17% face à tabela". */
   etiqueta: z.string().max(40).optional(),
   comentario: z.string().min(50).max(1000),
+}).refine((p) => p.loja !== 'amazon' || (p.classificacao == null && p.num_avaliacoes == null), {
+  // Cláusula t do acordo operativo dos Afiliados: estrelas e avaliações da
+  // Amazon só se podem mostrar se vierem da PA-API.
+  message: 'Sem classificacao/num_avaliacoes nos produtos da Amazon (só via PA-API)',
 });
 
 const produtosEstrela = defineCollection({

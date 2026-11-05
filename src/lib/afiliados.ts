@@ -4,14 +4,14 @@ export type Marketplace = 'es' | 'com' | 'uk' | 'de' | 'fr' | 'it';
 
 const FALLBACK = env.PUBLIC_AMAZON_TAG ?? '';
 
-// Tag do programa Amazon Associates ES do site. Tal como em wook.ts,
-// serve de reserva quando as variáveis de ambiente não estão definidas
-// (dev e builds locais) — sem ela, os links saem sem tag e as imagens
-// de produto degradam para placeholder.
-const TAG_ES_FALLBACK = 'compleitdee04-21';
+// Tag do programa Amazon Associates ES deste site, usada em todos os links
+// para a amazon.es. Tem variável própria: as antigas PUBLIC_AMAZON_TAG_ES e
+// PUBLIC_AMAZON_TAG traziam uma tag partilhada com outro site e, se ainda
+// estiverem definidas no alojamento, não se podem sobrepor a esta.
+const TAG_ES = env.PUBLIC_AMAZON_TAG_SITE ?? 'portukcom_site-21';
 
 const TAGS: Record<Marketplace, string> = {
-  es: env.PUBLIC_AMAZON_TAG_ES ?? env.PUBLIC_AMAZON_TAG ?? TAG_ES_FALLBACK,
+  es: TAG_ES,
   com: env.PUBLIC_AMAZON_TAG_COM ?? FALLBACK,
   uk: env.PUBLIC_AMAZON_TAG_UK ?? FALLBACK,
   de: env.PUBLIC_AMAZON_TAG_DE ?? FALLBACK,

@@ -2,7 +2,9 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
 import { getCollection } from 'astro:content';
+import EstadoStock from '@components/afiliados/EstadoStock.astro';
 import { formatarPreco } from '@lib/formatters';
+import { rotuloPreco } from '@lib/disponibilidade';
 
 const modelos = (await getCollection('modelos', ({ data }) => !data.rascunho)).sort((a, b) => {
   const pa = a.data.preco_referencia_eur ?? Number.POSITIVE_INFINITY;
@@ -166,14 +168,17 @@ const destaques = [
                 </h2>
                 <p class="mt-3 text-marinho-600">{m.data.descricao_curta}</p>
                 {m.data.preco_referencia_eur && (
-                  <p class="mt-5 flex items-baseline gap-2 border-t border-marinho-100 pt-4 text-sm">
-                    <span class="text-marinho-400">a partir de</span>
+                  <p class="mt-5 flex flex-wrap items-baseline gap-x-2 gap-y-1 border-t border-marinho-100 pt-4 text-sm">
+                    <span class="text-marinho-400">{rotuloPreco(m.data.disponibilidade)}</span>
                     <strong
                       class="text-lg text-marinho-900"
                       style="font-family: var(--font-serif);"
                     >
                       {formatarPreco(m.data.preco_referencia_eur)}
                     </strong>
+                    {m.data.disponibilidade && (
+                      <EstadoStock estado={m.data.disponibilidade} data={m.data.disponibilidade_data} classe="ml-auto" />
+                    )}
                   </p>
                 )}
               </a>

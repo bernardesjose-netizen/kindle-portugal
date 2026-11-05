@@ -1,6 +1,7 @@
 // Fallbacks de imagens sem handlers inline (a CSP bloqueia onerror inline).
-// Imagens com data-fallback="hide" são ocultadas em caso de erro;
-// com data-fallback="/caminho.svg" trocam o src uma única vez.
+// data-fallback="hide" oculta a imagem; "hide-pai" oculta o elemento pai;
+// "hide-li" oculta o <li> mais próximo; qualquer outro valor troca o src
+// uma única vez.
 document.addEventListener(
   'error',
   function (e) {
@@ -10,6 +11,11 @@ document.addEventListener(
     if (!fb) return;
     if (fb === 'hide') {
       el.style.display = 'none';
+    } else if (fb === 'hide-pai') {
+      if (el.parentElement) el.parentElement.style.display = 'none';
+    } else if (fb === 'hide-li') {
+      var li = el.closest('li');
+      if (li) li.style.display = 'none';
     } else if (!el.dataset.fallbackAplicado) {
       el.dataset.fallbackAplicado = '1';
       el.src = fb;

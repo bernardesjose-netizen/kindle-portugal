@@ -1,0 +1,31 @@
+---
+/**
+ * «★ Ver avaliações na Amazon.es»: leva às avaliações na ficha do produto.
+ * Não copiamos as estrelas nem o número de avaliações (o acordo operativo dos
+ * Afiliados, cláusula t, só os deixa mostrar se vierem da PA-API); ligar para
+ * elas é permitido.
+ */
+import { urlAfiliado } from '@lib/afiliados';
+
+interface Props {
+  asin: string;
+  /** `escuro` em fundos escuros (destaque da campanha). */
+  tema?: 'claro' | 'escuro';
+  classe?: string;
+}
+
+const { asin, tema = 'claro', classe = '' } = Astro.props;
+---
+
+<a
+  href={urlAfiliado(`https://www.amazon.es/dp/${asin}#customerReviews`)}
+  rel="sponsored nofollow noopener"
+  target="_blank"
+  data-afiliado="amazon"
+  data-mercado="es"
+  class:list={[
+    'inline-flex items-center gap-1 text-xs underline-offset-2 hover:underline',
+    tema === 'escuro' ? 'text-creme-50/80' : 'text-marinho-500',
+    classe,
+  ]}
+><span aria-hidden="true" class={tema === 'escuro' ? 'text-dourado-300' : 'text-dourado-500'}>★</span> Ver avaliações na Amazon.es</a>
