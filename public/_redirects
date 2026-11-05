@@ -1,9 +1,10 @@
-# Cloudflare Pages — redirects
-# Canónico: kindleportugal.com (apex)
+# Cloudflare Pages: redirecionamentos de caminhos
+# O domínio canónico é https://kindleportugal.com.
+# Configurar www -> domínio principal e HTTP -> HTTPS na Cloudflare:
+# este ficheiro não suporta regras de domínio nem o sufixo "!" nos códigos.
 
-# www -> apex (permanente)
-https://www.kindleportugal.com/*  https://kindleportugal.com/:splat  301!
-http://www.kindleportugal.com/*   https://kindleportugal.com/:splat  301!
-
-# Forçar HTTPS no apex (belt-and-suspenders; CF também faz isto a nível de zona)
-http://kindleportugal.com/*  https://kindleportugal.com/:splat  301!
+# Endereços antigos com conteúdo equivalente
+/tres-livros/src/content/tres-livros/2026-05-07-lidia-jorge-lobo-antunes-peixoto /tres-livros/2026-05-07-lidia-jorge-lobo-antunes-peixoto 301
+/tres-livros/src/content/tres-livros/2026-05-07-lidia-jorge-lobo-antunes-peixoto/ /tres-livros/2026-05-07-lidia-jorge-lobo-antunes-peixoto 301
+/guias/enviar-ebooks-para-kindle /guias/send-to-kindle-enviar-ebooks-2026 301
+/guias/bibliotecas-publicas-ebooks-pt /guias/biblioled-ebooks-gratis-biblioteca-2026 301
