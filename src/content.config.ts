@@ -23,6 +23,8 @@ const livroDestaque = z.object({
   marketplace: z.enum(['es', 'com', 'uk', 'de', 'fr', 'it']).default('es'),
   comentario: z.string().min(50).max(800),
   url_wook: z.string().url().optional(),
+  fonte_edicao: z.string().url().optional(),
+  capa_amazon: z.string().url().optional(),
 });
 
 const modelos = defineCollection({

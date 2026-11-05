@@ -32,6 +32,7 @@
  */
 export type TamanhoCapa = 'pequeno' | 'medio' | 'grande';
 
-export function urlCapaLivro(asin: string, _tamanho: TamanhoCapa = 'medio'): string {
+export function urlCapaLivro(asin: string, _tamanho: TamanhoCapa = 'medio', capaAmazon?: string): string {
+  if (capaAmazon) return capaAmazon;
   return `https://m.media-amazon.com/images/P/${asin}.01._SCLZZZZZZZ_.jpg`;
 }

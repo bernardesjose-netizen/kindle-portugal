@@ -9,11 +9,15 @@ import { urlCapaLivro } from '@lib/capa-livro';
 const posts = (await getCollection('tresLivros', ({ data }) => !data.rascunho)).sort(
   (a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf(),
 );
+const grupos = [
+  { titulo: 'Novas edições', posts: posts.filter((p) => p.data.tags.includes('originais-pt-pt')) },
+  { titulo: 'Arquivo da rubrica', posts: posts.filter((p) => !p.data.tags.includes('originais-pt-pt')) },
+].filter((grupo) => grupo.posts.length);
 ---
 
 <BaseLayout
   titulo="Três Ebooks"
-  descricao="Sugestões semanais de três ebooks em português europeu para qualquer leitor. Editoras portuguesas, autores nacionais, traduções PT-PT."
+  descricao="Três ebooks de dois em dois dias, escritos originalmente em português de Portugal e publicados por editoras portuguesas."
 >
   <section class="relative overflow-hidden border-b-4 border-dourado-500 bg-gradient-to-br from-marinho-900 via-oceano-800 to-marinho-800 text-creme-50">
     <div
@@ -25,13 +29,13 @@ const posts = (await getCollection('tresLivros', ({ data }) => !data.rascunho)).
       <div class="grid items-center gap-10 lg:grid-cols-[1.8fr_1fr] lg:gap-12">
         <div>
           <span class="inline-flex items-center gap-1 rounded-full border border-dourado-400/40 bg-dourado-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-dourado-400">
-            Rubrica semanal
+            Edições de dois em dois dias
           </span>
           <h1 class="mt-3 text-3xl font-bold text-creme-50 md:text-4xl" style="font-family: var(--font-serif);">
             Três Ebooks
           </h1>
           <p class="mt-3 max-w-2xl text-oceano-100/90">
-            Todas as semanas, três ebooks em português europeu para qualquer leitor. Editoras portuguesas, autores nacionais, traduções feitas em Portugal. Tudo o que as livrarias digitais tendem a misturar, e que aqui separamos para ti.
+            Três ebooks de dois em dois dias, escritos de origem em português de Portugal e publicados por editoras portuguesas. Em cada edição, dizemos o que há de particular em cada livro e indicamos a edição Kindle.
           </p>
         </div>
         <div class="lg:justify-self-end">
@@ -45,33 +49,38 @@ const posts = (await getCollection('tresLivros', ({ data }) => !data.rascunho)).
     {posts.length === 0 ? (
       <p class="text-marinho-600">Ainda não há posts publicados nesta rubrica.</p>
     ) : (
-      <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {posts.map((p) => {
-          const capa1 = urlCapaLivro(p.data.livros[0].asin, 'pequeno');
-          const capa2 = urlCapaLivro(p.data.livros[1].asin, 'pequeno');
-          const capa3 = urlCapaLivro(p.data.livros[2].asin, 'pequeno');
-          return (
-            <li class="group">
-              <a href={`/tres-livros/${p.id}`} class="block">
-                <div class="relative mb-4 grid grid-cols-3 gap-2 rounded-xl bg-gradient-to-br from-marinho-50 to-creme-100 p-4 transition-transform group-hover:-translate-y-1">
-                  <img src={capa1} alt={`Capa de ${p.data.livros[0].titulo}`} loading="lazy" decoding="async" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="no-referrer-when-downgrade" data-fallback="hide" />
-                  <img src={capa2} alt={`Capa de ${p.data.livros[1].titulo}`} loading="lazy" decoding="async" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="no-referrer-when-downgrade" data-fallback="hide" />
-                  <img src={capa3} alt={`Capa de ${p.data.livros[2].titulo}`} loading="lazy" decoding="async" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="no-referrer-when-downgrade" data-fallback="hide" />
-                </div>
-                <h2 class="text-lg font-semibold leading-snug text-marinho-900 group-hover:text-marca-600">
-                  {p.data.titulo}
-                </h2>
-                <p class="mt-2 text-sm text-marinho-600">{p.data.descricao}</p>
-                <p class="mt-2 text-xs text-marinho-400">
-                  <time datetime={p.data.data_publicacao.toISOString()}>
-                    {formatarData(p.data.data_publicacao)}
-                  </time>
-                </p>
-              </a>
-            </li>
-          );
-        })}
-      </ul>
+      grupos.map((grupo) => (
+        <section class="mb-12 last:mb-0">
+          <h2 class="mb-6 text-2xl font-bold text-marinho-900" style="font-family: var(--font-serif);">{grupo.titulo}</h2>
+          <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {grupo.posts.map((p) => {
+              const capa1 = urlCapaLivro(p.data.livros[0].asin, 'pequeno', p.data.livros[0].capa_amazon);
+              const capa2 = urlCapaLivro(p.data.livros[1].asin, 'pequeno', p.data.livros[1].capa_amazon);
+              const capa3 = urlCapaLivro(p.data.livros[2].asin, 'pequeno', p.data.livros[2].capa_amazon);
+              return (
+                <li class="group">
+                  <a href={`/tres-livros/${p.id}`} class="block">
+                    <div class="relative mb-4 grid grid-cols-3 gap-2 rounded-xl bg-gradient-to-br from-marinho-50 to-creme-100 p-4 transition-transform group-hover:-translate-y-1">
+                      <img src={capa1} alt={`Capa de ${p.data.livros[0].titulo}`} loading="lazy" decoding="async" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="no-referrer-when-downgrade" data-fallback="hide" />
+                      <img src={capa2} alt={`Capa de ${p.data.livros[1].titulo}`} loading="lazy" decoding="async" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="no-referrer-when-downgrade" data-fallback="hide" />
+                      <img src={capa3} alt={`Capa de ${p.data.livros[2].titulo}`} loading="lazy" decoding="async" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="no-referrer-when-downgrade" data-fallback="hide" />
+                    </div>
+                    <h3 class="text-lg font-semibold leading-snug text-marinho-900 group-hover:text-marca-600">
+                      {p.data.titulo}
+                    </h3>
+                    <p class="mt-2 text-sm text-marinho-600">{p.data.descricao}</p>
+                    <p class="mt-2 text-xs text-marinho-400">
+                      <time datetime={p.data.data_publicacao.toISOString()}>
+                        {formatarData(p.data.data_publicacao)}
+                      </time>
+                    </p>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))
     )}
   </Container>
 </BaseLayout>

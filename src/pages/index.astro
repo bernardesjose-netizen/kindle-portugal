@@ -81,6 +81,11 @@ const pillPorCategoria: Record<string, string> = {
             <a href="/guias/qual-kindle-comprar-2026" class="inline-flex min-h-11 items-center rounded-lg border border-marinho-200 bg-creme-50 px-4 py-2.5 text-sm font-semibold text-marinho-900 transition-colors hover:border-marca-700 sm:px-5">
               Comparar modelos
             </a>
+            {ultimoTresLivros && (
+              <a href="#tres-ebooks-na-entrada" class="inline-flex min-h-11 items-center gap-2 px-2 text-sm font-semibold text-marca-800 underline decoration-dourado-400 underline-offset-4 hover:text-marinho-900">
+                Três Ebooks <span aria-hidden="true">↓</span>
+              </a>
+            )}
           </div>
           <nav aria-label="Famílias Kindle" class="mt-6 max-w-2xl border-t border-creme-200 pt-4">
             <ul class="grid grid-cols-2 gap-2 sm:grid-cols-4">
@@ -125,6 +130,101 @@ const pillPorCategoria: Record<string, string> = {
       </div>
     </Container>
   </section>
+
+  {ultimoTresLivros && (
+    <section id="tres-ebooks-na-entrada" aria-labelledby="titulo-tres-ebooks-entrada" class="relative scroll-mt-24 overflow-hidden border-y border-dourado-200/70 bg-gradient-to-br from-dourado-50 via-creme-50 to-dourado-100/50">
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 opacity-60"
+        style="background-image: radial-gradient(ellipse at 15% 25%, rgb(212 168 75 / 0.18) 0%, transparent 50%), radial-gradient(ellipse at 85% 80%, rgb(249 126 7 / 0.10) 0%, transparent 50%);"
+      />
+      <Container largura="normal" classe="relative z-10 py-16">
+        <div class="mb-8 flex items-end justify-between">
+          <div>
+            <span class="pill pill-dourado">De dois em dois dias</span>
+            <h2 id="titulo-tres-ebooks-entrada" class="mt-3 text-3xl font-bold text-marinho-900 md:text-4xl" style="font-family: var(--font-serif); letter-spacing: -0.025em;">
+              Três Ebooks
+            </h2>
+            <p class="mt-2 max-w-xl text-marinho-600">
+              Três ebooks de dois em dois dias, escritos de origem em português de Portugal e publicados por editoras portuguesas.
+            </p>
+          </div>
+          <a
+            href="/tres-livros"
+            class="hidden shrink-0 text-sm font-semibold text-marca-600 hover:text-marca-700 sm:inline-flex"
+          >
+            Ver rubrica →
+          </a>
+        </div>
+
+        <article class="group overflow-hidden rounded-2xl border border-dourado-200/60 bg-creme-50/90 shadow-sm backdrop-blur-sm transition-all hover:shadow-md">
+          <a href={`/tres-livros/${ultimoTresLivros.id}`} class="grid gap-8 p-8 md:grid-cols-[auto_1fr] md:items-center md:gap-10 md:p-10">
+            <div class="relative mx-auto w-full max-w-sm md:mx-0 md:w-80 lg:w-96">
+              <div
+                class="absolute -inset-4 rounded-full opacity-40 blur-2xl"
+                aria-hidden="true"
+                style="background: radial-gradient(ellipse at center, rgba(212, 168, 75, 0.45) 0%, rgba(20, 110, 180, 0.20) 60%, transparent 80%);"
+              />
+              <div class="relative grid grid-cols-3 gap-3">
+                {ultimoTresLivros.data.livros.map((livro, i) => (
+                  <img
+                    src={urlCapaLivro(livro.asin, 'medio', livro.capa_amazon)}
+                    alt={`Capa de ${livro.titulo}`}
+                    loading="lazy"
+                    decoding="async"
+                    width="200"
+                    height="300"
+                    class="block h-auto w-full rounded object-contain transition-transform duration-500"
+                    style={`filter: drop-shadow(0 8px 14px rgba(15,26,36,0.20)); transform: rotate(${i === 0 ? '-2deg' : i === 1 ? '0deg' : '2deg'}); transform-origin: bottom;`}
+                    referrerpolicy="no-referrer-when-downgrade"
+                    data-fallback="hide"
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-wider text-marca-600">
+                <time datetime={ultimoTresLivros.data.data_publicacao.toISOString()}>
+                  {formatarData(ultimoTresLivros.data.data_publicacao)}
+                </time>
+              </p>
+              <h3
+                class="mt-2 text-2xl font-bold leading-tight text-marinho-900 transition-colors group-hover:text-marca-700 md:text-3xl"
+                style="font-family: var(--font-serif); letter-spacing: -0.02em;"
+              >
+                {ultimoTresLivros.data.titulo}
+              </h3>
+              <p class="mt-4 text-marinho-600">{ultimoTresLivros.data.descricao}</p>
+
+              <ul class="mt-5 space-y-1.5 text-sm text-marinho-700">
+                {ultimoTresLivros.data.livros.map((livro) => (
+                  <li class="flex items-start gap-2">
+                    <span class="mt-2 inline-block h-1 w-1 shrink-0 rounded-full bg-dourado-500" aria-hidden="true" />
+                    <span>
+                      <strong class="font-semibold text-marinho-900">{livro.titulo}</strong>
+                      <span class="text-marinho-500">, {livro.autor} · {livro.editora}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <p class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-marca-600 group-hover:text-marca-700">
+                Ler edição completa
+                <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+              </p>
+            </div>
+          </a>
+        </article>
+
+        <div class="mt-6 text-center sm:hidden">
+          <a href="/tres-livros" class="text-sm font-semibold text-marca-600 hover:text-marca-700">
+            Ver rubrica completa →
+          </a>
+        </div>
+      </Container>
+    </section>
+  )}
 
   <DestaqueCampanha />
 
@@ -187,102 +287,6 @@ const pillPorCategoria: Record<string, string> = {
         <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {modelos.map((modelo) => <CartaoFamiliaKindle modelo={modelo} />)}
         </ul>
-      </Container>
-    </section>
-  )}
-
-  {ultimoTresLivros && (
-    <section class="relative overflow-hidden border-y border-dourado-200/70 bg-gradient-to-br from-dourado-50 via-creme-50 to-dourado-100/50">
-      <div
-        aria-hidden="true"
-        class="pointer-events-none absolute inset-0 opacity-60"
-        style="background-image: radial-gradient(ellipse at 15% 25%, rgb(212 168 75 / 0.18) 0%, transparent 50%), radial-gradient(ellipse at 85% 80%, rgb(249 126 7 / 0.10) 0%, transparent 50%);"
-      />
-      <Container largura="normal" classe="relative z-10 py-16">
-        <div class="mb-8 flex items-end justify-between">
-          <div>
-            <span class="pill pill-dourado">Rubrica semanal</span>
-            <h2 class="mt-3 text-3xl font-bold text-marinho-900 md:text-4xl" style="font-family: var(--font-serif); letter-spacing: -0.025em;">
-              Três Ebooks
-            </h2>
-            <p class="mt-2 max-w-xl text-marinho-600">
-              Sugestões semanais em português europeu. Editoras portuguesas, autores nacionais,
-              traduções PT-PT.
-            </p>
-          </div>
-          <a
-            href="/tres-livros"
-            class="hidden shrink-0 text-sm font-semibold text-marca-600 hover:text-marca-700 sm:inline-flex"
-          >
-            Ver rubrica →
-          </a>
-        </div>
-
-        <article class="group overflow-hidden rounded-2xl border border-dourado-200/60 bg-creme-50/90 shadow-sm backdrop-blur-sm transition-all hover:shadow-md">
-          <a href={`/tres-livros/${ultimoTresLivros.id}`} class="grid gap-8 p-8 md:grid-cols-[auto_1fr] md:items-center md:gap-10 md:p-10">
-            <div class="relative mx-auto w-full max-w-sm md:mx-0 md:w-80 lg:w-96">
-              <div
-                class="absolute -inset-4 rounded-full opacity-40 blur-2xl"
-                aria-hidden="true"
-                style="background: radial-gradient(ellipse at center, rgba(212, 168, 75, 0.45) 0%, rgba(20, 110, 180, 0.20) 60%, transparent 80%);"
-              />
-              <div class="relative grid grid-cols-3 gap-3">
-                {ultimoTresLivros.data.livros.map((livro, i) => (
-                  <img
-                    src={urlCapaLivro(livro.asin, 'medio')}
-                    alt={`Capa de ${livro.titulo}`}
-                    loading="lazy"
-                    decoding="async"
-                    width="200"
-                    height="300"
-                    class="block h-auto w-full rounded object-contain transition-transform duration-500"
-                    style={`filter: drop-shadow(0 8px 14px rgba(15,26,36,0.20)); transform: rotate(${i === 0 ? '-2deg' : i === 1 ? '0deg' : '2deg'}); transform-origin: bottom;`}
-                    referrerpolicy="no-referrer-when-downgrade"
-                    data-fallback="hide"
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-wider text-marca-600">
-                <time datetime={ultimoTresLivros.data.data_publicacao.toISOString()}>
-                  {formatarData(ultimoTresLivros.data.data_publicacao)}
-                </time>
-              </p>
-              <h3
-                class="mt-2 text-2xl font-bold leading-tight text-marinho-900 transition-colors group-hover:text-marca-700 md:text-3xl"
-                style="font-family: var(--font-serif); letter-spacing: -0.02em;"
-              >
-                {ultimoTresLivros.data.titulo}
-              </h3>
-              <p class="mt-4 text-marinho-600">{ultimoTresLivros.data.descricao}</p>
-
-              <ul class="mt-5 space-y-1.5 text-sm text-marinho-700">
-                {ultimoTresLivros.data.livros.map((livro) => (
-                  <li class="flex items-start gap-2">
-                    <span class="mt-2 inline-block h-1 w-1 shrink-0 rounded-full bg-dourado-500" aria-hidden="true" />
-                    <span>
-                      <strong class="font-semibold text-marinho-900">{livro.titulo}</strong>
-                      <span class="text-marinho-500">, {livro.autor} · {livro.editora}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              <p class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-marca-600 group-hover:text-marca-700">
-                Ler edição completa
-                <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
-              </p>
-            </div>
-          </a>
-        </article>
-
-        <div class="mt-6 text-center sm:hidden">
-          <a href="/tres-livros" class="text-sm font-semibold text-marca-600 hover:text-marca-700">
-            Ver rubrica completa →
-          </a>
-        </div>
       </Container>
     </section>
   )}

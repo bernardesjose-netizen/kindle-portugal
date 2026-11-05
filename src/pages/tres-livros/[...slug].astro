@@ -19,7 +19,7 @@ const d = post.data;
 // Hero: capa do primeiro livro do post.
 // Construímos o URL aqui em vez de usar `heroAsin` (que o ArtigoLayout
 // resolve via imagemParaAsin, função que só conhece dispositivos Kindle).
-const heroSrc = urlCapaLivro(d.livros[0].asin, 'grande');
+const heroSrc = urlCapaLivro(d.livros[0].asin, 'grande', d.livros[0].capa_amazon);
 const heroAlt = `Capa de ${d.livros[0].titulo}, de ${d.livros[0].autor}`;
 ---
 
@@ -47,6 +47,8 @@ const heroAlt = `Capa de ${d.livros[0].titulo}, de ${d.livros[0].autor}`;
         marketplace={livro.marketplace}
         comentario={livro.comentario}
         urlWook={livro.url_wook}
+        fonteEdicao={livro.fonte_edicao}
+        capaAmazon={livro.capa_amazon}
         numero={i + 1}
       />
     ))}

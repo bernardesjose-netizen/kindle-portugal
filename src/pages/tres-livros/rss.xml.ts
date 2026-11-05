@@ -11,7 +11,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: `${SITE.nome} · Três Ebooks`,
     description:
-      'Sugestões semanais de três ebooks em português europeu para qualquer leitor. Editoras portuguesas, autores nacionais, traduções PT-PT.',
+      'Três ebooks de dois em dois dias, escritos originalmente em português de Portugal e publicados por editoras portuguesas.',
     site: context.site ?? SITE.url,
     items: posts.map((p) => ({
       title: p.data.titulo,
