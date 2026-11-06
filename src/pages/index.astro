@@ -17,7 +17,9 @@ const modelos = (await getCollection('modelos', ({ data }) => !data.rascunho))
   .slice(0, 4);
 const totalVersoes = modelos.reduce((total, { data }) => total + 1 + data.variantes.length, 0);
 const paperwhite = modelos.find(({ id }) => id === 'paperwhite')?.data;
-const imagemHero = paperwhite?.asin ? imagemParaAsin(paperwhite.asin, 500) : null;
+const imagemHero = paperwhite?.asin === 'B0GV5TP9KW'
+  ? 'https://m.media-amazon.com/images/I/71lSpQmEARL._AC_SL500_.jpg'
+  : imagemParaAsin(paperwhite?.asin ?? '', 500);
 
 const guiasTodos = (await getCollection('guias', ({ data }) => !data.rascunho))
   .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf());
@@ -91,14 +93,14 @@ const pillPorCategoria: Record<string, string> = {
             <strong class="font-semibold text-creme-50">{totalVersoes} versões no catálogo de 2026.</strong>{' '}Compara os leitores, as edições Signature e os Scribe de 11 polegadas. O guia reúne as
             diferenças que interessam, com fichas da Amazon e testes independentes.
           </p>
-          <div class="mt-7 flex flex-wrap gap-3">
+          <div class="mt-7 flex flex-wrap gap-x-2 gap-y-3">
             <a href="/modelos" class="btn-marca">
               Ver os modelos Kindle
               <span aria-hidden="true">→</span>
             </a>
             <a
               href="/guias/qual-kindle-comprar-2026"
-              class="inline-flex items-center gap-2 rounded-[0.625rem] border border-oceano-300/40 bg-oceano-500/20 px-6 py-3 font-semibold text-creme-50 backdrop-blur transition hover:-translate-y-0.5 hover:border-oceano-200/70 hover:bg-oceano-500/30"
+              class="inline-flex items-center gap-2 rounded-[0.625rem] border border-oceano-300/40 bg-oceano-500/20 px-5 py-3 font-semibold text-creme-50 backdrop-blur transition hover:-translate-y-0.5 hover:border-oceano-200/70 hover:bg-oceano-500/30"
             >
               Comparar modelos
             </a>
