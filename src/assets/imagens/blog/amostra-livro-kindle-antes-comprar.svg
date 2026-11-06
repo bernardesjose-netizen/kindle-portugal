@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <title>Amostras antes da compra</title>
+  <defs>
+    <linearGradient id="fundo" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#0b111a"/><stop offset="1" stop-color="#142b49"/>
+    </linearGradient>
+    <radialGradient id="luz">
+      <stop stop-color="#99d7ea" stop-opacity=".23"/><stop offset="1" stop-color="#99d7ea" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#fundo)"/>
+  <ellipse cx="952" cy="288" rx="420" ry="390" fill="url(#luz)"/>
+  <path d="M104 501h1000" stroke="#fefbf5" opacity=".25"/>
+  <path d="M104 149h57" stroke="#99d7ea" stroke-width="3"/>
+  <text x="175" y="156" fill="#99d7ea" font-family="Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="3">BLOG</text>
+  <text x="104" y="282" fill="#fefbf5" font-family="Georgia,serif" font-size="72" font-weight="bold">Amostras</text>
+  <text x="104" y="376" fill="#99d7ea" font-family="Georgia,serif" font-size="68" font-weight="bold">antes da compra</text>
+  <g transform="translate(788 172) scale(.96)" fill="none" stroke="#99d7ea" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="48" y="34" width="125" height="185" rx="10"/><path d="M70 69h80m-80 23h80m-80 23h57m-57 23h42m-42 23h52m-52 23h80"/><circle cx="192" cy="145" r="48" fill="#102239"/><path d="m225 181 43 43m-101-79 16 17 31-34"/></g>
+  <text x="104" y="555" fill="#cfe1f3" font-family="Arial,sans-serif" font-size="21" letter-spacing="2">KINDLE PORTUGAL</text>
+  <path d="M0 626h1200v4H0z" fill="#99d7ea"/>
+</svg>

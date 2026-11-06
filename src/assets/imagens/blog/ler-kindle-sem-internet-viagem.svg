@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <title>Kindle em viagem sem Wi-Fi</title>
+  <defs>
+    <linearGradient id="fundo" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#0b111a"/><stop offset="1" stop-color="#142b49"/>
+    </linearGradient>
+    <radialGradient id="luz">
+      <stop stop-color="#ffb94b" stop-opacity=".23"/><stop offset="1" stop-color="#ffb94b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#fundo)"/>
+  <ellipse cx="952" cy="288" rx="420" ry="390" fill="url(#luz)"/>
+  <path d="M104 501h1000" stroke="#fefbf5" opacity=".25"/>
+  <path d="M104 149h57" stroke="#ffb94b" stroke-width="3"/>
+  <text x="175" y="156" fill="#ffb94b" font-family="Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="3">BLOG</text>
+  <text x="104" y="282" fill="#fefbf5" font-family="Georgia,serif" font-size="72" font-weight="bold">Kindle em viagem</text>
+  <text x="104" y="376" fill="#ffb94b" font-family="Georgia,serif" font-size="68" font-weight="bold">sem Wi-Fi</text>
+  <g transform="translate(788 172) scale(.96)" fill="none" stroke="#ffb94b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="52" y="35" width="190" height="154" rx="26"/><path d="M59 146 106 106l44 38 33-24 52 38M57 174h178M135 37v70"/><path d="M41 197h216M87 200v20m120-20v20"/><rect x="108" y="161" width="77" height="104" rx="10" fill="#111c2e"/><path d="M124 184h44m-44 16h44m-44 16h32"/></g>
+  <text x="104" y="555" fill="#cfe1f3" font-family="Arial,sans-serif" font-size="21" letter-spacing="2">KINDLE PORTUGAL</text>
+  <path d="M0 626h1200v4H0z" fill="#ffb94b"/>
+</svg>

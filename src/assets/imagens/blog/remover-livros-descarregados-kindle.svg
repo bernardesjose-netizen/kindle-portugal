@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <title>Libertar espaço no Kindle</title>
+  <defs>
+    <linearGradient id="fundo" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#0b111a"/><stop offset="1" stop-color="#142b49"/>
+    </linearGradient>
+    <radialGradient id="luz">
+      <stop stop-color="#a8e0c4" stop-opacity=".23"/><stop offset="1" stop-color="#a8e0c4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#fundo)"/>
+  <ellipse cx="952" cy="288" rx="420" ry="390" fill="url(#luz)"/>
+  <path d="M104 501h1000" stroke="#fefbf5" opacity=".25"/>
+  <path d="M104 149h57" stroke="#a8e0c4" stroke-width="3"/>
+  <text x="175" y="156" fill="#a8e0c4" font-family="Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="3">BLOG</text>
+  <text x="104" y="282" fill="#fefbf5" font-family="Georgia,serif" font-size="72" font-weight="bold">Libertar espaço</text>
+  <text x="104" y="376" fill="#a8e0c4" font-family="Georgia,serif" font-size="68" font-weight="bold">no Kindle</text>
+  <g transform="translate(788 172) scale(.96)" fill="none" stroke="#a8e0c4" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="44" y="39" width="118" height="181" rx="12"/><path d="M62 75h81m-81 21h81m-81 21h81m-81 21h45"/><rect x="118" y="161" width="127" height="64" rx="8" fill="#102239"/><path d="M111 152h140v21H111zM160 191h44M184 90v48m-16-15 16 15 16-15"/></g>
+  <text x="104" y="555" fill="#cfe1f3" font-family="Arial,sans-serif" font-size="21" letter-spacing="2">KINDLE PORTUGAL</text>
+  <path d="M0 626h1200v4H0z" fill="#a8e0c4"/>
+</svg>

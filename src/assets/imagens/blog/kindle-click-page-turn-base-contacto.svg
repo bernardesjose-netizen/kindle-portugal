@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <title>Acessórios para Kindle</title>
+  <defs>
+    <linearGradient id="fundo" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#0b111a"/><stop offset="1" stop-color="#142b49"/>
+    </linearGradient>
+    <radialGradient id="luz">
+      <stop stop-color="#ffb94b" stop-opacity=".23"/><stop offset="1" stop-color="#ffb94b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#fundo)"/>
+  <ellipse cx="952" cy="288" rx="420" ry="390" fill="url(#luz)"/>
+  <path d="M104 501h1000" stroke="#fefbf5" opacity=".25"/>
+  <path d="M104 149h57" stroke="#ffb94b" stroke-width="3"/>
+  <text x="175" y="156" fill="#ffb94b" font-family="Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="3">BLOG</text>
+  <text x="104" y="282" fill="#fefbf5" font-family="Georgia,serif" font-size="72" font-weight="bold">Acessórios</text>
+  <text x="104" y="376" fill="#ffb94b" font-family="Georgia,serif" font-size="68" font-weight="bold">para Kindle</text>
+  <g transform="translate(788 172) scale(.96)" fill="none" stroke="#ffb94b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M39 210h228M50 196h167l17 14H36z"/><rect x="74" y="35" width="117" height="157" rx="12"/><path d="M96 68h73m-73 20h73m-73 20h57M172 144h4m-4 18h4"/><rect x="218" y="68" width="43" height="83" rx="18"/><path d="m230 96 7 7 10-12m-17 32h17"/></g>
+  <text x="104" y="555" fill="#cfe1f3" font-family="Arial,sans-serif" font-size="21" letter-spacing="2">KINDLE PORTUGAL</text>
+  <path d="M0 626h1200v4H0z" fill="#ffb94b"/>
+</svg>

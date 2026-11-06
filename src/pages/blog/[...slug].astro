@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import ArtigoLayout from '@layouts/ArtigoLayout.astro';
 
 export async function getStaticPaths() {
@@ -70,7 +71,8 @@ const heroPorPost: Record<string, { asin: string; alt: string }> = {
 const { artigo } = Astro.props;
 const { Content } = await render(artigo);
 const d = artigo.data;
-const hero = heroPorPost[artigo.id];
+const capa = d.imagem_hero;
+const hero = capa ? undefined : heroPorPost[artigo.id];
 ---
 
 <ArtigoLayout
@@ -82,9 +84,21 @@ const hero = heroPorPost[artigo.id];
   autor={d.autor}
   dataPublicacao={d.data_publicacao}
   categoria="Blog"
+  imagem={capa?.src}
   heroAsin={hero?.asin}
   heroAlt={hero?.alt}
   mostrarDisclosure={d.mostrar_disclosure}
 >
+  {capa && (
+    <figure class="not-prose mb-10 overflow-hidden rounded-2xl border border-marinho-100">
+      <Image
+        src={capa}
+        alt={d.imagem_hero_alt ?? d.titulo}
+        class="block h-auto w-full"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </figure>
+  )}
   <Content />
 </ArtigoLayout>

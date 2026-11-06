@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <title>Clube de leitura em várias edições</title>
+  <defs>
+    <linearGradient id="fundo" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#0b111a"/><stop offset="1" stop-color="#142b49"/>
+    </linearGradient>
+    <radialGradient id="luz">
+      <stop stop-color="#ffd484" stop-opacity=".23"/><stop offset="1" stop-color="#ffd484" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#fundo)"/>
+  <ellipse cx="952" cy="288" rx="420" ry="390" fill="url(#luz)"/>
+  <path d="M104 501h1000" stroke="#fefbf5" opacity=".25"/>
+  <path d="M104 149h57" stroke="#ffd484" stroke-width="3"/>
+  <text x="175" y="156" fill="#ffd484" font-family="Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="3">BLOG</text>
+  <text x="104" y="282" fill="#fefbf5" font-family="Georgia,serif" font-size="72" font-weight="bold">Clube de leitura</text>
+  <text x="104" y="376" fill="#ffd484" font-family="Georgia,serif" font-size="68" font-weight="bold">em várias edições</text>
+  <g transform="translate(788 172) scale(.96)" fill="none" stroke="#ffd484" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="45" y="91" width="79" height="128" rx="9"/><rect x="144" y="108" width="87" height="111" rx="9"/><path d="M62 122h46m-46 19h46m-46 19h35m-35 19h46m99-44h48m-48 19h48m-48 19h37"/><path d="M103 42c0-8 8-15 16-15h96c8 0 16 7 16 15v22c0 8-8 15-16 15h-59l-24 17 6-17h-19c-8 0-16-7-16-15zM127 52h79"/></g>
+  <text x="104" y="555" fill="#cfe1f3" font-family="Arial,sans-serif" font-size="21" letter-spacing="2">KINDLE PORTUGAL</text>
+  <path d="M0 626h1200v4H0z" fill="#ffd484"/>
+</svg>
