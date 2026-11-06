@@ -1,4 +1,5 @@
 ---
+import LojasAmazonSecundarias from '@components/afiliados/LojasAmazonSecundarias.astro';
 import { linksPorLojaDeAsin, linksPorLojaDePesquisa, MARKETPLACES, temTag } from '@lib/afiliados';
 
 interface Props {
@@ -20,15 +21,15 @@ const {
   pesquisa,
   categoria,
   titulo = 'Onde comprar',
-  legenda = 'Escolhe a loja Amazon do teu país. Compras na Amazon.es são as mais comuns em Portugal (envia para PT sem taxas).',
+  legenda = 'Na Amazon.es, confirma o preço total e a entrega para a tua morada.',
   pesquisaAlternativa,
 } = Astro.props;
 
-const lojas = asin
+const lojas = (asin
   ? linksPorLojaDeAsin(asin, { pesquisaAlternativa, categoriaPesquisa: categoria })
   : pesquisa
     ? linksPorLojaDePesquisa(pesquisa, { categoria })
-    : [];
+    : []).filter((loja) => loja.id === 'es');
 
 const marketplacesDisponiveis = MARKETPLACES.filter((m) => temTag(m.id)).map((m) => m.id);
 ---
@@ -87,6 +88,7 @@ const marketplacesDisponiveis = MARKETPLACES.filter((m) => temTag(m.id)).map((m)
         </li>
       ))}
     </ul>
+    <LojasAmazonSecundarias nome={pesquisaAlternativa ?? pesquisa ?? asin ?? titulo} asin={asin} categoria={categoria} />
 
     <p class="relative mt-5 text-xs text-marinho-400">
       Links com identificador de afiliado. Se comprares através deles, podemos receber uma pequena

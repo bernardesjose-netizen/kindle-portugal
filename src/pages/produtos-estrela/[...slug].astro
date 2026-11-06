@@ -29,6 +29,12 @@ const heroSrc = primeiroComAsin?.asin ? (imagemParaAsin(primeiroComAsin.asin, 10
   categoria="Produtos Estrela"
   imagem={heroSrc}
 >
+  {!d.selecao_atual && (
+    <aside class="not-prose mb-8 rounded-xl border border-marinho-100 bg-creme-100 p-4 text-sm text-marinho-700">
+      <strong>Arquivo de Produtos Estrela.</strong> Os preços e as campanhas correspondem à data desta edição.
+      <a href="/produtos-estrela" class="ml-1 underline underline-offset-2">Ver a seleção atual</a>.
+    </aside>
+  )}
   <Content />
 
   <section aria-label="Os produtos desta edição" class="not-prose">

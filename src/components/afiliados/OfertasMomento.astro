@@ -1,4 +1,5 @@
 ---
+import LojasAmazonSecundarias from '@components/afiliados/LojasAmazonSecundarias.astro';
 /**
  * Grelha com as ofertas do momento (desconto de 35 % ou mais, qualquer
  * categoria), lidas de `src/lib/ofertas-momento.ts`.
@@ -151,6 +152,7 @@ const ultima = todas.find((o) => !o.fonte)?.verificado_em;
                 Ver na Amazon.es
                 <span aria-hidden="true">↗</span>
               </a>
+              <LojasAmazonSecundarias nome={o.nome} asin={o.asin} />
               <p class="mt-2 text-center text-[0.7rem] text-marinho-400">
                 {o.fonte ? 'Anunciado' : 'Preço'} a {formatarData(o.verificado_em)}, às {formatarHora(o.verificado_em)} · <LinkPrecos />
               </p>

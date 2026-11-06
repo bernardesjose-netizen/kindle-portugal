@@ -8,11 +8,15 @@ import { imagemParaAsin } from '@lib/asin-images';
 const posts = (await getCollection('produtosEstrela', ({ data }) => !data.rascunho)).sort(
   (a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf(),
 );
+const grupos = [
+  { titulo: 'Seleção atual', posts: posts.filter((p) => p.data.selecao_atual) },
+  { titulo: 'Arquivo', posts: posts.filter((p) => !p.data.selecao_atual) },
+];
 ---
 
 <BaseLayout
   titulo="Produtos Estrela"
-  descricao="Oportunidades verificadas em leitores e acessórios: Kindle na Amazon, Kobo e BOOX na Worten e na Wook. Preços confirmados com data, qualidade avaliada sem hype."
+  descricao="Seleção de leitores Kindle e acessórios, com as fichas da Amazon.es. Consulta também o arquivo de produtos Kindle, Kobo e BOOX."
 >
   <section class="relative overflow-hidden border-b-4 border-marca-500 bg-gradient-to-br from-marinho-900 via-oceano-800 to-marinho-800 text-creme-50">
     <div
@@ -22,15 +26,14 @@ const posts = (await getCollection('produtosEstrela', ({ data }) => !data.rascun
     />
     <Container largura="normal" classe="relative z-10 py-14">
       <span class="inline-flex items-center gap-1 rounded-full border border-marca-400/40 bg-marca-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-marca-300">
-        Rubrica regular
+        Leitores e acessórios
       </span>
       <h1 class="mt-3 text-3xl font-bold text-creme-50 md:text-4xl" style="font-family: var(--font-serif);">
         Produtos Estrela
       </h1>
       <p class="mt-3 max-w-2xl text-oceano-100/90">
-        De poucos em poucos dias, destacamos leitores e acessórios que valem mesmo a pena:
-        Kindle na Amazon, Kobo e BOOX na Worten e na Wook. Cada preço traz a data em que o
-        confirmámos na loja, e quando um produto tem limitações, dizemo-lo.
+        Compara os leitores e abre a ficha da loja para veres o preço e a entrega.
+        As promoções de edições anteriores estão no arquivo.
       </p>
     </Container>
   </section>
@@ -39,8 +42,12 @@ const posts = (await getCollection('produtosEstrela', ({ data }) => !data.rascun
     {posts.length === 0 ? (
       <p class="text-marinho-600">Ainda não há artigos publicados nesta rubrica.</p>
     ) : (
-      <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-        {posts.map((p) => {
+      <div class="space-y-14">
+        {grupos.filter((g) => g.posts.length).map((g) => (
+        <section>
+          <h2 class="mb-5 font-serif text-2xl font-bold text-marinho-900">{g.titulo}</h2>
+          <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {g.posts.map((p) => {
           const primeiroComAsin = p.data.produtos.find((pr) => pr.asin);
           const imgSrc = primeiroComAsin?.asin ? imagemParaAsin(primeiroComAsin.asin, 500) : null;
           return (
@@ -62,9 +69,9 @@ const posts = (await getCollection('produtosEstrela', ({ data }) => !data.rascun
                     <span class="text-4xl" aria-hidden="true">⭐</span>
                   )}
                 </div>
-                <h2 class="text-lg font-semibold leading-snug text-marinho-900 group-hover:text-marca-600">
+                <h3 class="text-lg font-semibold leading-snug text-marinho-900 group-hover:text-marca-600">
                   {p.data.titulo}
-                </h2>
+                </h3>
                 <p class="mt-2 text-sm text-marinho-600">{p.data.descricao}</p>
                 <p class="mt-2 text-xs text-marinho-400">
                   <time datetime={p.data.data_publicacao.toISOString()}>
@@ -75,12 +82,14 @@ const posts = (await getCollection('produtosEstrela', ({ data }) => !data.rascun
             </li>
           );
         })}
-      </ul>
+          </ul>
+        </section>
+        ))}
+      </div>
     )}
 
     <p class="mt-12 text-xs text-marinho-400">
-      Os preços indicados foram confirmados na loja respetiva na data que acompanha cada produto
-      e podem mudar a qualquer momento.
+      Os preços no arquivo são os registados na data da publicação. Vê na loja o preço atual.
     </p>
   </Container>
 </BaseLayout>

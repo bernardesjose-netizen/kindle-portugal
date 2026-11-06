@@ -206,3 +206,65 @@ export function linksPorLojaDePesquisa(
     return { id: m.id, url: u.toString(), etiqueta: m.etiqueta, bandeira: m.bandeira };
   });
 }
+
+type LojaAlternativa = {
+  id: Marketplace;
+  url: string;
+  etiqueta: string;
+  codigo: string;
+  pesquisa: boolean;
+  afiliado: boolean;
+};
+
+const ORDEM_LOJAS: Marketplace[] = ['es', 'fr', 'it', 'uk', 'com', 'de'];
+
+const TAG_POR_LOJA: Record<Marketplace, string | undefined> = {
+  es: TAG_ES,
+  fr: env.PUBLIC_AMAZON_TAG_FR,
+  it: env.PUBLIC_AMAZON_TAG_IT,
+  uk: env.PUBLIC_AMAZON_TAG_UK,
+  com: env.PUBLIC_AMAZON_TAG_COM,
+  de: env.PUBLIC_AMAZON_TAG_DE,
+};
+
+// Correspondências verificadas na própria loja. O ASIN espanhol pode variar
+// entre países, mesmo quando o nome da família é o mesmo.
+const FICHAS_CONFIRMADAS: Record<string, Partial<Record<Marketplace, string>>> = {
+  B0G4SHH6YH: { fr: 'B0G4SHH6YH', it: 'B0G4SHH6YH', uk: 'B0G4SHH6YH', com: 'B0H964GJMD' },
+  B0GV5TP9KW: { fr: 'B0GV5TP9KW', it: 'B0GV5TP9KW', uk: 'B0GV5TP9KW', com: 'B0H961CQ8T', de: 'B0GV5TP9KW' },
+  B0GV642G9D: { fr: 'B0GV642G9D', it: 'B0GV642G9D', uk: 'B0GV642G9D', com: 'B0GHT5P56N', de: 'B0GV642G9D' },
+  B0FC1XB22K: { fr: 'B0FC1XB22K', it: 'B0FC1XB22K', uk: 'B0FC1XB22K', com: 'B0DVQQGMCZ', de: 'B0FC1XB22K' },
+};
+
+export function lojasAlternativasAmazon({
+  nome,
+  asin,
+  principal = 'es',
+  categoria,
+}: {
+  nome: string;
+  asin?: string;
+  principal?: Marketplace | null;
+  categoria?: string;
+}): LojaAlternativa[] {
+  return ORDEM_LOJAS.flatMap((id) => {
+    if (id === principal) return [];
+    const loja = MARKETPLACES.find((m) => m.id === id)!;
+    const ficha = asin ? FICHAS_CONFIRMADAS[asin]?.[id] : undefined;
+    const url = new URL(ficha ? `https://${loja.host}/dp/${ficha}` : `https://${loja.host}/s`);
+    if (!ficha) {
+      url.searchParams.set('k', nome);
+      if (categoria) url.searchParams.set('i', categoria);
+    }
+    const tag = TAG_POR_LOJA[id];
+    if (tag) url.searchParams.set('tag', tag);
+    return [{
+      id,
+      url: url.toString(),
+      etiqueta: loja.etiqueta,
+      codigo: id === 'com' ? 'EUA' : id.toUpperCase(),
+      pesquisa: !ficha,
+      afiliado: Boolean(tag),
+    }];
+  });
+}

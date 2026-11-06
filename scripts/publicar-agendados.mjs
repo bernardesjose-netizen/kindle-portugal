@@ -20,7 +20,9 @@ import { join } from 'node:path';
 const DIRS = ['blog', 'tres-livros', 'guias', 'produtos-estrela'];
 // YYYY-MM-DD na hora local de Portugal (en-CA da formato ISO).
 // Assim, a corrida da meia-noite de Lisboa ja conta o dia novo.
-const hoje = new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/Lisbon' });
+const agora = new Date();
+const hoje = agora.toLocaleDateString('en-CA', { timeZone: 'Europe/Lisbon' });
+const domingo = agora.toLocaleDateString('en-US', { timeZone: 'Europe/Lisbon', weekday: 'long' }) === 'Sunday';
 
 const publicados = [];
 
@@ -38,6 +40,7 @@ for (const nome of readdirSync(join('src/content', colecao))) {
 
   // So nos interessam os que estao mesmo em rascunho
   if (!/^rascunho:\s*true\s*$/m.test(bloco)) continue;
+  if (domingo && colecao === 'blog' && /^evitar_domingo:\s*true\s*$/m.test(bloco)) continue;
 
   // Le a data de publicacao (YYYY-MM-DD)
   const md = bloco.match(/^\s*data_publicacao:\s*['"]?(\d{4}-\d{2}-\d{2})/m);

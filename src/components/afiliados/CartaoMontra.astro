@@ -1,4 +1,5 @@
 ---
+import LojasAmazonSecundarias from '@components/afiliados/LojasAmazonSecundarias.astro';
 /**
  * Cartão da Montra do leitor (/montra): imagem, marca, nome, preço com data,
  * ligação às avaliações na Amazon.es, porque o escolhemos e botão para a ficha.
@@ -112,6 +113,7 @@ const rotuloFicha = fichaUrl?.startsWith('/guias/')
       </a>
     )}
   </div>
+  <LojasAmazonSecundarias nome={`${marca} ${nome}`} asin={asin} categoria={livro ? 'digital-text' : undefined} />
   {precoEur != null && precoData && (
     <p class="mt-2 text-center text-[0.7rem] text-marinho-600" data-oferta data-expira={expira?.toISOString()}>
       Preço a {formatarData(precoData)} · <LinkPrecos />

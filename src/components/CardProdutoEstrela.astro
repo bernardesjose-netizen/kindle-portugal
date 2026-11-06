@@ -1,4 +1,5 @@
 ---
+import LojasAmazonSecundarias from '@components/afiliados/LojasAmazonSecundarias.astro';
 import { imagemParaAsin } from '@lib/asin-images';
 import LinkPrecos from '@components/afiliados/LinkPrecos.astro';
 import LinkAvaliacoes from '@components/afiliados/LinkAvaliacoes.astro';
@@ -186,6 +187,7 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
           ))}
         </div>
       )}
+      <LojasAmazonSecundarias nome={nome} asin={asin} principal={asin ? 'es' : null} />
     </div>
   </div>
 </article>

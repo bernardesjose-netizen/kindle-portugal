@@ -1,0 +1,44 @@
+---
+import { lojasAlternativasAmazon, type Marketplace } from '@lib/afiliados';
+
+interface Props {
+  nome: string;
+  asin?: string;
+  principal?: Marketplace | null;
+  categoria?: string;
+  tema?: 'claro' | 'escuro';
+  classe?: string;
+}
+
+const { nome, asin, principal, categoria, tema = 'claro', classe = 'mt-2' } = Astro.props;
+const lojas = lojasAlternativasAmazon({ nome, asin, principal, categoria });
+const escuro = tema === 'escuro';
+---
+
+<div
+  class:list={['not-prose flex flex-wrap items-center gap-x-2 text-xs', escuro ? 'text-creme-50/85' : 'text-marinho-600', classe]}
+  role="group"
+  aria-label={`Outras lojas Amazon para ${nome}`}
+  data-outras-lojas
+>
+  <span>Outras lojas Amazon</span>
+  <ul class="m-0 flex list-none flex-wrap gap-x-2 p-0">
+    {lojas.map((loja) => (
+      <li>
+        <a
+          href={loja.url}
+          target="_blank"
+          rel={loja.afiliado ? 'sponsored nofollow noopener' : 'nofollow noopener'}
+          aria-label={`${loja.pesquisa ? 'Pesquisar' : 'Ver'} ${nome} na ${loja.etiqueta}`}
+          title={loja.pesquisa ? `Pesquisar na ${loja.etiqueta}` : `Ver ficha na ${loja.etiqueta}`}
+          data-afiliado={loja.afiliado ? 'amazon' : undefined}
+          data-mercado={loja.id}
+          data-tipo={loja.pesquisa ? 'pesquisa' : 'ficha'}
+          class:list={['inline-flex min-h-8 items-center px-1 font-semibold underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2', escuro ? 'decoration-creme-50/40 hover:text-creme-50' : 'decoration-marinho-300 hover:text-marca-800']}
+        >
+          {loja.codigo}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>

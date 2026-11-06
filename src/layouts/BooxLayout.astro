@@ -1,4 +1,5 @@
 ---
+import LojasAmazonSecundarias from '@components/afiliados/LojasAmazonSecundarias.astro';
 import type { CollectionEntry } from 'astro:content';
 import BaseLayout from './BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
@@ -115,6 +116,7 @@ const productLd = {
               )}
             </div>
           )}
+          <LojasAmazonSecundarias nome={d.nome} asin={d.asin} principal={d.url_amazon ? 'es' : null} />
         </div>
 
         {d.imagem_hero ? (
