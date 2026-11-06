@@ -50,6 +50,8 @@ const descricao = aDecorrer
 
 // Esquema ItemList → só anuncia `price` quando o preço promocional foi
 // confirmado (preco_promo != null). Caso contrário, não afirma um preço atual.
+// Sem preço, o item fica um ListItem simples (nome + URL): um Product sem
+// `offers` seria marcado como inválido nos Fragmentos do produto do Google.
 const jsonLd = ativa
   ? {
       '@context': 'https://schema.org',
@@ -57,23 +59,24 @@ const jsonLd = ativa
       name: CAMPANHA.nome,
       itemListElement: itens.map((it, i) => {
         const url = new URL(`/modelos/${it.modelo.id}`, SITE.url).toString();
+        if (it.preco_promo == null) {
+          return { '@type': 'ListItem', position: i + 1, name: it.modelo.data.nome, url };
+        }
         const imagem = it.modelo.data.asin ? imagemParaAsin(it.modelo.data.asin, 1000) : null;
-        const product: Record<string, unknown> = {
+        const product = {
           '@type': 'Product',
           name: it.modelo.data.nome,
           url,
           ...(imagem ? { image: imagem } : {}),
-        };
-        if (it.preco_promo != null) {
-          product.offers = {
+          offers: {
             '@type': 'Offer',
             priceCurrency: 'EUR',
             price: it.preco_promo,
             priceValidUntil: CAMPANHA.fim.toISOString().slice(0, 10),
             availability: SCHEMA_DISPONIBILIDADE[it.modelo.data.disponibilidade ?? 'disponivel'],
             url,
-          };
-        }
+          },
+        };
         return { '@type': 'ListItem', position: i + 1, item: product };
       }),
     }
