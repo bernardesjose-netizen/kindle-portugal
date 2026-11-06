@@ -9,6 +9,9 @@ import ImagemProduto from '@components/afiliados/ImagemProduto.astro';
 import OrnamentoFundo from '@components/ui/OrnamentoFundo.astro';
 import FotoFundoDecorativa from '@components/ui/FotoFundoDecorativa.astro';
 import { formatarPreco, formatarData } from '@lib/formatters';
+import { fichaJsonLd } from '@lib/schema-ficha';
+import { SITE } from '@lib/site';
+import { caminhoPublico } from '@lib/urls';
 
 interface Props {
   modelo: CollectionEntry<'boox'>;
@@ -33,26 +36,20 @@ const fotoMono =
   'https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1600&q=80&auto=format';
 const fotoFundoSrc = e.ecra_cor ? fotoCor : fotoMono;
 
-const ofertaUrl = d.url_wook ?? d.url_amazon;
-const productLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Product',
-  name: d.nome,
-  brand: { '@type': 'Brand', name: d.fabricante },
-  description: d.descricao_curta,
-  ...(d.asin ? { sku: d.asin } : {}),
-  ...(ofertaUrl && d.preco_referencia_eur
-    ? {
-        offers: {
-          '@type': 'Offer',
-          priceCurrency: 'EUR',
-          price: d.preco_referencia_eur,
-          url: ofertaUrl,
-          availability: 'https://schema.org/InStock',
-        },
-      }
-    : {}),
-};
+// Product só quando há preço confirmado; sem preço, Article (ver fichaJsonLd).
+const productLd = fichaJsonLd({
+  nome: d.nome,
+  fabricante: d.fabricante,
+  descricao: d.descricao_curta,
+  asin: d.asin,
+  preco: d.preco_referencia_eur,
+  urlOferta: d.url_wook ?? d.url_amazon,
+  disponibilidade: 'https://schema.org/InStock',
+  dataPublicacao: d.data_publicacao,
+  dataRevisao: d.data_revisao,
+  urlPagina: new URL(caminhoPublico(Astro.url.pathname), SITE.url).toString(),
+  imagem: d.imagem_hero ? new URL(d.imagem_hero.src, SITE.url).toString() : undefined,
+});
 ---
 
 <BaseLayout
