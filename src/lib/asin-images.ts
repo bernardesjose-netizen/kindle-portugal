@@ -133,6 +133,15 @@ export const ASIN_IMAGES: Record<string, string> = {
   B0CGVXN52X: 'https://m.media-amazon.com/images/I/51XAWTOHLHL._AC_SL1024_.jpg',
   B0CGVTJ47Z: 'https://m.media-amazon.com/images/I/614L8heg-2L._AC_SL1500_.jpg',
   B0D1Y883G2: 'https://m.media-amazon.com/images/I/61zelwNI7PL._AC_SL1280_.jpg',
+
+  // Achados Tech, fichas Amazon.es de 06/11/2026.
+  B0H431P5WZ: "https://m.media-amazon.com/images/I/81IFxhvHouL._AC_SL1500_.jpg",
+  B0H4WRLQW9: "https://m.media-amazon.com/images/I/51BRdYJsF9L._AC_SL1500_.jpg",
+  B0FW6TPV2D: "https://m.media-amazon.com/images/I/61sCd4Re5iL._AC_SL1500_.jpg",
+  B0C1JPMMWT: "https://m.media-amazon.com/images/I/41xcf0Ebm6L._AC_SL1500_.jpg",
+  B0D1GQ25NW: "https://m.media-amazon.com/images/I/410oMzAo2pL._AC_SL1080_.jpg",
+  B0FNRQ5B8K: "https://m.media-amazon.com/images/I/61HNZlRXFXL._AC_SL1500_.jpg",
+  B087QZVQJX: "https://m.media-amazon.com/images/I/71zuiK5poRL._AC_SL1500_.jpg",
 };
 
 /**
