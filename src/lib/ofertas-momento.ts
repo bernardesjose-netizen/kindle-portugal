@@ -152,7 +152,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 47,
     verificado_em: VERIF_ULTIMA,
     resumo:
-      'Duas escovas elétricas topo de gama da Philips, com sensor de pressão e aplicação, quase a metade do preço. Faz sentido para um casal: cada escova sai a cerca de 135 €.',
+      'Duas escovas elétricas topo de gama da Philips, com sensor de pressão e aplicação, quase metade do preço. Faz sentido para um casal: cada escova sai a cerca de 135 €.',
   },
   {
     marca: 'Philips',
@@ -194,7 +194,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 48,
     verificado_em: VERIF_ULTIMA,
     resumo:
-      'Robot 2 em 1 que aspira e passa a mopa, com base que esvazia o depósito sozinha, por menos de 200 €. É um modelo de entrada da gama Roomba.',
+      'Robô 2 em 1 que aspira e passa a mopa, com base que esvazia o depósito sozinha, por menos de 200 €. É um modelo de entrada da gama Roomba.',
   },
   {
     marca: 'Samsung',
@@ -314,7 +314,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'A OneBlade da Philips para aparar e rapar a barba e o corpo, com ligação Bluetooth à aplicação. Uma das máquinas de barba mais populares, 41 % abaixo do preço recomendado.',
+      'A OneBlade da Philips para aparar e rapar a barba e o corpo, com ligação Bluetooth à aplicação. Uma das máquinas de barbear mais populares, 41 % abaixo do preço recomendado.',
   },
   {
     marca: 'TP-Link',

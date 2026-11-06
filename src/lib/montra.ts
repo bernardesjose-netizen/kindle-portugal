@@ -185,7 +185,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'escrita',
     preco_eur: 23.38,
     preco_data: DIA,
-    porque: 'O caderno de sempre: capa rígida, elástico, fita marcadora e bolsa interior, em 11,5 x 18 cm, que cabe em qualquer mala.',
+    porque: 'O caderno de sempre: capa rígida, elástico, fita marcadora e bolsa interior, em 11,5 × 18 cm, que cabe em qualquer mala.',
   },
   {
     nome: 'Moleskine Clássico, capa dura, pautado, grande (azul hortênsia)',
@@ -194,7 +194,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'escrita',
     preco_eur: 24.39,
     preco_data: DIA,
-    porque: 'O formato grande, 13 x 21 cm e 240 páginas, para quem escreve muito.',
+    porque: 'O formato grande, 13 × 21 cm e 240 páginas, para quem escreve muito.',
   },
   {
     nome: 'Leuchtturm1917 A5, capa dura, pontilhado',
@@ -269,13 +269,13 @@ export const MONTRA: ItemMontra[] = [
     porque: 'Mantém o livro aberto na mesa e liberta as mãos para tomar notas ou ler enquanto se come.',
   },
   {
-    nome: 'Suporte ajustável em bambu (39 x 28 cm)',
+    nome: 'Suporte ajustável em bambu (39 × 28 cm)',
     marca: 'Theodore',
     asin: 'B07NJ4VY8L',
     categoria: 'leitura',
     preco_eur: 26.42,
     preco_data: DIA,
-    porque: 'Maior e com inclinação ajustável e molas para segurar as páginas. Aguenta livros grossos, partituras e tablets.',
+    porque: 'Maior, com inclinação ajustável e molas para segurar as páginas. Aguenta livros grossos, partituras e tablets.',
   },
   {
     nome: 'Marcador com elástico «Read to Live»',

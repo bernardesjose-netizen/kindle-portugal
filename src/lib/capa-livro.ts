@@ -1,3 +1,5 @@
+import { redimensionarImagemAmazon } from './asin-images';
+
 /**
  * Constrói o URL da capa de um livro a partir do seu ASIN, usando o CDN
  * público de imagens de produto da Amazon (m.media-amazon.com/images/P/).
@@ -14,16 +16,11 @@
  *   (tipicamente 600 a 1800px de altura, dependendo da idade e categoria
  *   do livro). É a melhor qualidade disponível sem widget.
  *
- *   O navegador redimensiona via CSS conforme o tamanho de visualização.
- *   Para 6 imagens por post (3 cards + 3 mosaico) o peso total ronda os
- *   400-600 KB, perfeitamente aceitável com `loading="lazy"`.
- *
  * Sobre o parâmetro `tamanho`:
- *   Mantido na assinatura para compatibilidade com chamadas existentes,
- *   mas atualmente ignorado — todos os tamanhos servem a versão máxima.
- *   Pode ser usado no futuro se for necessário otimizar peso (ex.: usando
- *   `_SL400_` para mosaicos), mas a Amazon não documenta o comportamento
- *   destes tokens de forma fiável e o ganho é marginal face a `_SCLZZZZZZZ_`.
+ *   Quando há `capaAmazon` (URL `images/I/`), pede ao CDN a capa já reduzida
+ *   (`_SL400_`, `_SL500_` ou `_SL1000_`, ver PX_CAPA). Medido em 06/11/2026:
+ *   uma capa de 1000×1500 com 216 KB passa a 333×500 com 43 KB. As capas
+ *   `images/P/` continuam na resolução nativa.
  *
  * Limitações:
  *   - É específico para LIVROS. Para Kindles/Kobos use `imagemParaAsin`.
@@ -32,7 +29,11 @@
  */
 export type TamanhoCapa = 'pequeno' | 'medio' | 'grande';
 
-export function urlCapaLivro(asin: string, _tamanho: TamanhoCapa = 'medio', capaAmazon?: string): string {
-  if (capaAmazon) return capaAmazon;
+// Lado maior pedido ao CDN para cada tamanho (o dobro do tamanho mostrado,
+// para ecrãs de alta densidade). Só se aplica às capas `images/I/`.
+const PX_CAPA: Record<TamanhoCapa, number> = { pequeno: 400, medio: 500, grande: 1000 };
+
+export function urlCapaLivro(asin: string, tamanho: TamanhoCapa = 'medio', capaAmazon?: string): string {
+  if (capaAmazon) return redimensionarImagemAmazon(capaAmazon, PX_CAPA[tamanho]);
   return `https://m.media-amazon.com/images/P/${asin}.01._SCLZZZZZZZ_.jpg`;
 }

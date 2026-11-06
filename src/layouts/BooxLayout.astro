@@ -224,7 +224,7 @@ const productLd = fichaJsonLd({
           </div>
         </div>
 
-        <aside class="md:col-span-1">
+        <div class="md:col-span-1">
           <h2
             class="text-xl font-bold text-marinho-900"
             style="font-family: var(--font-serif); letter-spacing: -0.02em;"
@@ -235,7 +235,7 @@ const productLd = fichaJsonLd({
             <div class="flex justify-between gap-3 px-4 py-2">
               <dt class="text-marinho-400">Ecrã</dt>
               <dd class="text-right text-marinho-800">
-                {e.ecra_polegadas}" · {e.ecra_tecnologia}
+                {new Intl.NumberFormat('pt-PT').format(e.ecra_polegadas)}″ · {e.ecra_tecnologia}
               </dd>
             </div>
             <div class="flex justify-between gap-3 px-4 py-2">
@@ -324,7 +324,7 @@ const productLd = fichaJsonLd({
               </ul>
             </div>
           )}
-        </aside>
+        </div>
       </section>
 
       {(d.url_wook || d.url_amazon) && (
@@ -343,7 +343,7 @@ const productLd = fichaJsonLd({
             <svg class="mt-0.5 h-4 w-4 shrink-0 text-dourado-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path d="M10 3a2 2 0 0 1 3.4-1.4 2 2 0 0 1 .5 1.9H17a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-6V6.5H9V8H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.1A2 2 0 0 1 10 3Zm-1 7v7H4a1 1 0 0 1-1-1v-6h6Zm2 0h6v6a1 1 0 0 1-1 1h-5v-7Z" />
             </svg>
-            <span><strong class="font-semibold text-marinho-900">Oferta WOOK:</strong> na compra de um eReader BOOX, recebes 2 eBooks de oferta. Vê as condições em vigor na WOOK.</span>
+            <span><strong class="font-semibold text-marinho-900">Oferta WOOK:</strong> na compra de um leitor BOOX, recebes dois ebooks de oferta. Vê as condições em vigor na WOOK.</span>
           </p>
           <div class="mt-4 flex flex-wrap items-center gap-3">
             {d.url_wook && (

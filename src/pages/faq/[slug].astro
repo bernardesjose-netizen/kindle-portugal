@@ -83,11 +83,11 @@ const breadcrumbLd = {
   jsonLd={[qaPageLd, breadcrumbLd]}
 >
   <Container largura="texto" classe="py-10 lg:py-14">
-    <nav aria-label="Trilho" class="mb-6 text-xs text-marinho-400">
+    <nav aria-label="Trilho de navegação" class="mb-6 text-xs text-marinho-400">
       <ol class="flex flex-wrap items-center gap-1.5">
-        <li><a href="/" class="hover:text-marca-600">Início</a></li>
+        <li><a href="/" class="hover:text-marca-700">Início</a></li>
         <li aria-hidden="true">›</li>
-        <li><a href="/faq" class="hover:text-marca-600">FAQ</a></li>
+        <li><a href="/faq" class="hover:text-marca-700">FAQ</a></li>
         <li aria-hidden="true">›</li>
         <li class="truncate text-marinho-700" aria-current="page">{categoriasNomes[d.categoria] ?? d.categoria}</li>
       </ol>
@@ -112,7 +112,7 @@ const breadcrumbLd = {
       )}
     </header>
 
-    <article class="prose prose-pt max-w-none text-marinho-700 prose-headings:text-marinho-900 prose-strong:text-marinho-900 prose-a:text-marca-700 prose-a:underline prose-a:decoration-marca-300 prose-a:underline-offset-2 hover:prose-a:text-marca-600">
+    <article class="prose prose-pt max-w-none text-marinho-700 prose-headings:text-marinho-900 prose-strong:text-marinho-900 prose-a:text-marca-700 prose-a:underline prose-a:decoration-marca-300 prose-a:underline-offset-2 hover:prose-a:text-marca-800">
       <Content />
     </article>
 

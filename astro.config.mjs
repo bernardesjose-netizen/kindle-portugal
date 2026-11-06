@@ -6,6 +6,10 @@ import tailwindcss from '@tailwindcss/vite';
 import { remarkAmazonTag } from './src/lib/remark-amazon-tag.ts';
 import { campanhaVisivel } from './src/lib/promocoes.ts';
 import { caminhoPublico } from './src/lib/urls.ts';
+import { rehypeCaixasDecorativas } from './src/lib/rehype-caixas-decorativas.ts';
+import { datasDeRevisao } from './src/lib/datas-sitemap.ts';
+
+const datasPaginas = datasDeRevisao();
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,15 +21,22 @@ export default defineConfig({
   },
   markdown: {
     remarkPlugins: [remarkAmazonTag],
+    rehypePlugins: [rehypeCaixasDecorativas],
   },
   integrations: [
     mdx({
       remarkPlugins: [remarkAmazonTag],
+      rehypePlugins: [rehypeCaixasDecorativas],
     }),
     sitemap({
       // Fora da campanha, /promocoes mostra apenas um aviso e tem noindex.
       // Usar a mesma condição da página para a incluir apenas quando indexável.
       filter: (page) => caminhoPublico(new URL(page).pathname) !== '/promocoes' || campanhaVisivel(),
+      // <lastmod> com a data de revisão de cada artigo (sem data, fica sem).
+      serialize: (item) => {
+        const data = datasPaginas.get(caminhoPublico(new URL(item.url).pathname));
+        return data ? { ...item, lastmod: new Date(data).toISOString() } : item;
+      },
       i18n: {
         defaultLocale: 'pt',
         locales: { pt: 'pt-PT' },

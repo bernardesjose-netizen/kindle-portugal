@@ -52,7 +52,7 @@ const pillPorCategoria: Record<string, string> = {
 };
 ---
 
-<BaseLayout titulo={SITE.nome} descricao={SITE.descricao}>
+<BaseLayout titulo={`${SITE.nome} · Guias de Kindle e ebooks em português`} descricao={SITE.descricao}>
   <section aria-labelledby="titulo-gama-kindle" class="relative overflow-hidden border-b-4 border-marca-500 bg-gradient-to-br from-marinho-900 via-marinho-800 to-oceano-900 text-creme-50">
     <div
       aria-hidden="true"
@@ -193,7 +193,7 @@ const pillPorCategoria: Record<string, string> = {
           </div>
           <a
             href="/tres-livros"
-            class="hidden shrink-0 text-sm font-semibold text-marca-600 hover:text-marca-700 sm:inline-flex"
+            class="hidden shrink-0 text-sm font-semibold text-marca-700 hover:text-marca-800 sm:inline-flex"
           >
             Ver rubrica →
           </a>
@@ -226,7 +226,7 @@ const pillPorCategoria: Record<string, string> = {
             </div>
 
             <div>
-              <p class="text-xs font-semibold uppercase tracking-wider text-marca-600">
+              <p class="text-xs font-semibold uppercase tracking-wider text-marca-700">
                 <time datetime={ultimoTresLivros.data.data_publicacao.toISOString()}>
                   {formatarData(ultimoTresLivros.data.data_publicacao)}
                 </time>
@@ -255,7 +255,7 @@ const pillPorCategoria: Record<string, string> = {
                 <p class="mt-4 text-sm text-oceano-800">Em inglês · <em>{ultimoTresLivros.data.convidado_ingles.titulo}</em></p>
               )}
 
-              <p class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-marca-600 group-hover:text-marca-700">
+              <p class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-marca-700 group-hover:text-marca-800">
                 Ler edição completa
                 <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
               </p>
@@ -264,7 +264,7 @@ const pillPorCategoria: Record<string, string> = {
         </article>
 
         <div class="mt-6 text-center sm:hidden">
-          <a href="/tres-livros" class="text-sm font-semibold text-marca-600 hover:text-marca-700">
+          <a href="/tres-livros" class="text-sm font-semibold text-marca-700 hover:text-marca-800">
             Ver rubrica completa →
           </a>
         </div>
@@ -285,15 +285,15 @@ const pillPorCategoria: Record<string, string> = {
         class="group flex flex-col gap-3 rounded-2xl border border-marca-200 bg-gradient-to-r from-marca-50 via-creme-50 to-oceano-50 p-5 transition-all hover:-translate-y-0.5 hover:border-marca-300 hover:shadow-md sm:flex-row sm:items-center sm:gap-5 sm:p-6"
         aria-label={`Novo no blog: ${ultimoPost.data.titulo}`}
       >
-        <span class="inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-marca-500 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-sm sm:self-center">
+        <span class="inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-marca-500 px-3 py-1 text-xs font-bold uppercase tracking-wider text-marinho-900 shadow-sm sm:self-center">
           <span class="relative flex h-2 w-2" aria-hidden="true">
-            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
-            <span class="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-marinho-900 opacity-75"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-marinho-900"></span>
           </span>
           Novidade
         </span>
         <div class="min-w-0 flex-1">
-          <p class="text-xs font-semibold uppercase tracking-wider text-marca-600">Novo no blog</p>
+          <p class="text-xs font-semibold uppercase tracking-wider text-marca-700">Novo no blog</p>
           <p
             class="mt-0.5 text-lg font-bold leading-snug text-marinho-900 transition-colors group-hover:text-marca-700"
             style="font-family: var(--font-serif);"
@@ -301,7 +301,7 @@ const pillPorCategoria: Record<string, string> = {
             {ultimoPost.data.titulo}
           </p>
         </div>
-        <span class="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-marca-600 group-hover:text-marca-700">
+        <span class="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-marca-700 group-hover:text-marca-800">
           Ler agora
           <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
         </span>

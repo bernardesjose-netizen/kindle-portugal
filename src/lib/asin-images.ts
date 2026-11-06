@@ -152,6 +152,19 @@ export const ASIN_IMAGES: Record<string, string> = {
  * o token de tamanho no URL do CDN Amazon. O CDN aceita vários formatos
  * (_SL500_, _SL1000_, _SL1500_), portanto é seguro reescrever.
  */
+/**
+ * Pede ao CDN da Amazon a imagem já reduzida (lado maior = `px`), em vez do
+ * original de 1500 px. Uma capa de 1000×1500 (≈215 KB) passa a 333×500
+ * (≈43 KB). Só mexe em URLs m.media-amazon.com/images/I/; os outros ficam.
+ */
+export function redimensionarImagemAmazon(url: string, px: number): string {
+  if (!/^https:\/\/m\.media-amazon\.com\/images\/I\//.test(url)) return url;
+  const token = /\._[A-Z0-9_,]+_\.(jpe?g|png)$/i;
+  return token.test(url)
+    ? url.replace(token, `._SL${px}_.$1`)
+    : url.replace(/\.(jpe?g|png)$/i, `._SL${px}_.$1`);
+}
+
 export function imagemParaAsin(asin: string, size?: 250 | 500 | 1000): string | null {
   const url = ASIN_IMAGES[asin];
   if (!url) return null;

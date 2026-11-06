@@ -187,7 +187,7 @@ const productLd = fichaJsonLd({
             Outras versões
           </h2>
           <p class="mt-2 max-w-2xl text-sm leading-relaxed text-marinho-600">
-            Cada botão abre a capacidade e a edição indicadas. Se a loja apresentar uma pré-venda, compara a data de lançamento com a previsão de entrega.
+            Cada botão abre a ficha da versão indicada, com a capacidade e a edição certas. Se a loja apresentar uma pré-venda, compara a data de lançamento com a previsão de entrega.
           </p>
           <ul class="mt-5 grid gap-4 sm:grid-cols-2">
             {d.variantes.map((variante) => (
@@ -271,7 +271,7 @@ const productLd = fichaJsonLd({
           </div>
         </div>
 
-        <aside class="md:col-span-1">
+        <div class="md:col-span-1">
           <h2
             class="text-xl font-bold text-marinho-900"
             style="font-family: var(--font-serif); letter-spacing: -0.02em;"
@@ -281,7 +281,7 @@ const productLd = fichaJsonLd({
           <dl class="mt-4 divide-y divide-marinho-100 overflow-hidden rounded-xl border border-marinho-100 bg-white text-sm" style="box-shadow: var(--shadow-suave);">
             <div class="flex justify-between px-4 py-2">
               <dt class="text-marinho-400">Ecrã</dt>
-              <dd class="text-marinho-800">{e.ecra_polegadas}" · {e.ecra_ppi} ppi{e.ecra_cor ? ' · cor' : ''}</dd>
+              <dd class="text-marinho-800">{new Intl.NumberFormat('pt-PT').format(e.ecra_polegadas)}″ · {e.ecra_ppi} ppi{e.ecra_cor ? ' · cor' : ''}</dd>
             </div>
             <div class="flex justify-between px-4 py-2">
               <dt class="text-marinho-400">Memória</dt>
@@ -314,8 +314,8 @@ const productLd = fichaJsonLd({
             )}
             {e.stylus_incluido && (
               <div class="flex justify-between px-4 py-2">
-                <dt class="text-marinho-400">Stylus</dt>
-                <dd class="text-marinho-800">Incluído</dd>
+                <dt class="text-marinho-400">Caneta</dt>
+                <dd class="text-marinho-800">Incluída</dd>
               </div>
             )}
           </dl>
@@ -328,7 +328,7 @@ const productLd = fichaJsonLd({
               </ul>
             </div>
           )}
-        </aside>
+        </div>
       </section>
     </Container>
   </article>

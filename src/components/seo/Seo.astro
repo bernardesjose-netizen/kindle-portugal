@@ -7,6 +7,8 @@ interface Props {
   descricao: string;
   canonical?: string;
   imagem?: string;
+  /** Texto alternativo da imagem de partilha (og:image:alt). */
+  imagemAlt?: string;
   tipo?: 'website' | 'article';
   noindex?: boolean;
   dataPublicacao?: Date;
@@ -19,6 +21,7 @@ const {
   descricao,
   canonical,
   imagem = '/og/default.png',
+  imagemAlt,
   tipo = 'website',
   noindex = false,
   dataPublicacao,
@@ -28,7 +31,17 @@ const {
 
 const url = canonical ?? new URL(caminhoPublico(Astro.url.pathname), SITE.url).toString();
 const imagemAbsoluta = new URL(imagem, SITE.url).toString();
-const tituloCompleto = titulo === SITE.nome ? titulo : `${titulo} · ${SITE.nome}`;
+// As imagens de /og/ têm 1200×630; as outras (heros, capas) têm medidas próprias.
+const imagemOg = imagem.startsWith('/og/');
+const textoImagem =
+  imagemAlt ?? (imagem === '/og/default.png' ? `${SITE.nome}: ${SITE.tagline}` : titulo);
+
+// O Google corta os títulos a partir de ~60 caracteres. A marca só entra
+// no fim quando cabe; os títulos longos ficam sem ela para não serem cortados.
+const LIMITE_TITULO = 60;
+const comMarca = `${titulo} · ${SITE.nome}`;
+const tituloCompleto =
+  titulo.startsWith(SITE.nome) || comMarca.length > LIMITE_TITULO ? titulo : comMarca;
 ---
 
 <title>{tituloCompleto}</title>
@@ -45,13 +58,15 @@ const tituloCompleto = titulo === SITE.nome ? titulo : `${titulo} · ${SITE.nome
 <meta property="og:url" content={url} />
 <meta property="og:locale" content="pt_PT" />
 <meta property="og:image" content={imagemAbsoluta} />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+{imagemOg && <meta property="og:image:width" content="1200" />}
+{imagemOg && <meta property="og:image:height" content="630" />}
+<meta property="og:image:alt" content={textoImagem} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={tituloCompleto} />
 <meta name="twitter:description" content={descricao} />
 <meta name="twitter:image" content={imagemAbsoluta} />
+<meta name="twitter:image:alt" content={textoImagem} />
 
 {tipo === 'article' && dataPublicacao && (
   <meta property="article:published_time" content={dataPublicacao.toISOString()} />
