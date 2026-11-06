@@ -134,14 +134,16 @@ const pillCategoriaClass = categoria ? PILL_POR_CATEGORIA[categoria] ?? '' : '';
             <p class="mt-5 text-lg text-marinho-600 sm:text-xl">{descricao}</p>
             <div class="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-marinho-400">
               {autor && (
-                <span class="flex items-center gap-2">
-                  <span class="flex h-6 w-6 items-center justify-center rounded-full bg-marinho-900 text-[10px] font-bold text-creme-50">
-                    {autor.nome.split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase()}
+                <>
+                  <span class="flex items-center gap-2">
+                    <span class="flex h-6 w-6 items-center justify-center rounded-full bg-marinho-900 text-[10px] font-bold text-creme-50" aria-hidden="true">
+                      {autor.nome.split(' ').map((w) => w[0]).slice(0, 2).join('').toUpperCase()}
+                    </span>
+                    Por <strong class="font-semibold text-marinho-700">{autor.nome}</strong>
                   </span>
-                  Por <strong class="font-semibold text-marinho-700">{autor.nome}</strong>
-                </span>
+                  <span class="text-marinho-200" aria-hidden="true">·</span>
+                </>
               )}
-              <span class="text-marinho-200">·</span>
               <time datetime={dataPublicacao.toISOString()}>
                 {formatarData(dataPublicacao)}
               </time>
@@ -186,7 +188,7 @@ const pillCategoriaClass = categoria ? PILL_POR_CATEGORIA[categoria] ?? '' : '';
         <div class="separador-dourado !mx-0 !mt-7 !mb-0" />
       </header>
 
-      <div class="prose-pt max-w-none prose-headings:text-marinho-900 prose-a:text-marca-700 prose-a:underline prose-a:decoration-marca-300 prose-a:underline-offset-2 hover:prose-a:text-marca-600 prose-strong:text-marinho-900">
+      <div class="prose-pt max-w-none prose-headings:text-marinho-900 prose-a:text-marca-700 prose-a:underline prose-a:decoration-marca-300 prose-a:underline-offset-2 hover:prose-a:text-marca-800 prose-strong:text-marinho-900">
         <slot />
       </div>
 

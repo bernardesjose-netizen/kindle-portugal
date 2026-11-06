@@ -16,7 +16,7 @@ const personLd = {
   url: `${SITE.url}/sobre`,
   knowsAbout: [
     'Amazon Kindle',
-    'E-readers',
+    'Leitores de ebooks',
     'Ebooks em português',
     'Calibre (software)',
     'Kindle Direct Publishing',
@@ -42,13 +42,13 @@ const aboutPageLd = {
 ---
 
 <BaseLayout
-  titulo="Sobre"
+  titulo="Quem somos e como trabalhamos"
   descricao={`Quem está por trás do ${SITE.nome}, como recomendamos produtos e como o site se financia. Editor: ${AUTOR.nome}.`}
   jsonLd={[personLd, aboutPageLd]}
 >
   <Container largura="texto" classe="py-14">
     <header class="mb-10 border-b border-marinho-100 pb-8">
-      <span class="text-xs font-semibold uppercase tracking-wider text-marca-600">
+      <span class="text-xs font-semibold uppercase tracking-wider text-marca-700">
         Sobre o site
       </span>
       <h1 class="mt-3 text-3xl font-bold text-marinho-900 md:text-4xl" style="letter-spacing: -0.02em;">
@@ -70,8 +70,8 @@ const aboutPageLd = {
         dos leitores portugueses.
       </p>
       <p>
-        Não somos jornalistas profissionais nem trabalhamos para a Amazon. Somos um leitor que
-        decidiu reunir num só sítio a informação que andava espalhada em fóruns, threads do
+        Não somos jornalistas profissionais nem trabalhamos para a Amazon. Por trás do site está um leitor que
+        decidiu reunir num só sítio a informação que andava espalhada em fóruns, tópicos do
         Reddit e blogs PT-BR cheios de imprecisões para quem está em Portugal.
       </p>
 
@@ -79,7 +79,7 @@ const aboutPageLd = {
         Ao longo dos anos, o trabalho em torno do {SITE.nome} chegou a ser referido em meios
         como o jornal <em>Público</em> e a motivar convites para apresentações de livros e
         participação na Feira do Livro. Mencionamo-lo aqui apenas para que percebas que há
-        trabalho real por trás do site. Não substitui leitura crítica do que escrevemos.
+        trabalho real por trás do site. Não substitui a leitura crítica do que escrevemos.
       </p>
 
       <h2>Como recomendamos produtos</h2>
@@ -94,7 +94,7 @@ const aboutPageLd = {
         <li>
           <strong>Testar antes de recomendar.</strong> Os modelos que ocupam posições de
           destaque nos guias são modelos que tivemos efetivamente nas mãos, durante semanas ou
-          meses. Quando isso não foi possível, por o produto ser muito recente ou nicho,
+          meses. Quando isso não foi possível, por o produto ser muito recente ou de nicho,
           dizemo-lo no artigo em vez de fingir que o testámos.
         </li>
         <li>
@@ -105,7 +105,7 @@ const aboutPageLd = {
         <li>
           <strong>Datar os preços.</strong> Os valores que aparecem nos artigos são preços de
           referência à data indicada. Para o preço atual remetemos sempre para a Amazon, que é
-          a fonte autoritativa.
+          a fonte de referência.
         </li>
         <li>
           <strong>Atualizar o conteúdo.</strong> Os guias têm campo de <code>data_revisao</code>.
@@ -136,17 +136,17 @@ const aboutPageLd = {
         <li>Análises de produtos que não testámos.</li>
         <li>Tutoriais para remover DRM ou descarregar livros pirateados.</li>
         <li>Publicidade paga disfarçada de conteúdo editorial.</li>
-        <li>Cookies de tracking. Escolhemos analytics sem cookies, RGPD-friendly.</li>
+        <li>Cookies publicitários ou de remarketing. Usamos apenas os cookies de medição do Google Analytics, descritos na <a href="/politica-privacidade">política de privacidade</a>.</li>
         <li>
-          Brasileirismos. Se vires um, é erro nosso, escreve-nos e corrigimos. (É de propósito
-          que não dizemos &ldquo;tela&rdquo;, &ldquo;arquivo&rdquo; ou &ldquo;mouse&rdquo;.)
+          Brasileirismos. Se vires um, é erro nosso: escreve-nos e corrigimos. (É de propósito
+          que não dizemos «tela», «arquivo» ou «mouse».)
         </li>
       </ul>
 
       <h2>Como nos podes ajudar</h2>
       <ul>
         <li>
-          <strong>Aponta erros.</strong> Email para <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
+          <strong>Aponta erros.</strong> Envia um e-mail para <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
         </li>
         <li>
           <strong>Sugere temas.</strong> Se há uma pergunta sobre Kindle que continuas a fazer

@@ -65,14 +65,20 @@ interface MdastNode {
   type: string;
   url?: string;
   children?: MdastNode[];
+  data?: { hProperties?: Record<string, unknown> };
 }
+
+// Links de afiliado: o Google pede rel="sponsored" nos links pagos.
+const REL_AFILIADO = 'sponsored nofollow noopener';
 
 function reescreverLinks(node: MdastNode): void {
   if (node.type === 'link' && node.url) {
     try {
-      const host = new URL(node.url).hostname;
-      if (detetarMarketplace(host)) {
+      if (detetarMarketplace(new URL(node.url).hostname)) {
         node.url = aplicarTag(node.url);
+        if (new URL(node.url).searchParams.has('tag')) {
+          node.data = { ...node.data, hProperties: { ...node.data?.hProperties, rel: REL_AFILIADO } };
+        }
       }
     } catch {
       // URL inválido — ignorar

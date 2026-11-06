@@ -23,6 +23,7 @@ interface Props {
   descricao: string;
   canonical?: string;
   imagem?: string;
+  imagemAlt?: string;
   tipo?: 'website' | 'article';
   noindex?: boolean;
   dataPublicacao?: Date;
@@ -70,6 +71,42 @@ const websiteLd = {
   url: SITE.url,
   inLanguage: 'pt-PT',
 };
+
+// Trilho (BreadcrumbList) para as páginas dentro de uma secção:
+// Início › Secção › Página.
+const SECCOES: Record<string, string> = {
+  blog: 'Blog',
+  guias: 'Guias',
+  faq: 'Perguntas frequentes',
+  modelos: 'Modelos de Kindle',
+  'modelos-boox': 'Leitores BOOX',
+  'tres-livros': 'Três Ebooks',
+  'produtos-estrela': 'Produtos Estrela',
+};
+const partesCaminho = caminhoPublico(Astro.url.pathname).split('/').filter(Boolean);
+const seccao = partesCaminho.length === 2 ? SECCOES[partesCaminho[0]] : undefined;
+const trilhoLd = seccao
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Início', item: SITE.url },
+        { '@type': 'ListItem', position: 2, name: seccao, item: new URL(`/${partesCaminho[0]}`, SITE.url).toString() },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: seoProps.titulo,
+          item: new URL(`/${partesCaminho.join('/')}`, SITE.url).toString(),
+        },
+      ],
+    }
+  : null;
+
+// Tipos de letra do Google Fonts. A folha de estilos carrega sem bloquear a
+// primeira pintura (media="print", trocado para "all" por /js/fontes.js);
+// o texto aparece logo com a letra do sistema e troca quando a fonte chega.
+const FONTES_URL =
+  'https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap';
 ---
 
 <!doctype html>
@@ -84,12 +121,14 @@ const websiteLd = {
     <link rel="alternate" type="application/rss+xml" title={`${SITE.nome} · Três Ebooks`} href="/tres-livros/rss.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400&family=Inter:wght@400;500;600;700&display=swap"
-    />
+    <link rel="preconnect" href="https://m.media-amazon.com" />
+    <link rel="preload" as="style" href={FONTES_URL} />
+    <link id="fontes-web" rel="stylesheet" href={FONTES_URL} media="print" />
+    <noscript><link rel="stylesheet" href={FONTES_URL} /></noscript>
+    <script is:inline defer src="/js/fontes.js"></script>
     <Seo {...seoProps} />
     <JsonLd data={websiteLd} />
+    {trilhoLd && <JsonLd data={trilhoLd} />}
     <script is:inline defer src="/js/fallbacks.js"></script>
     {jsonLd && <JsonLd data={jsonLd} />}
     <GoogleAnalytics />

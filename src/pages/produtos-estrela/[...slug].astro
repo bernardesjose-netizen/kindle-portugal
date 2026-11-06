@@ -24,6 +24,8 @@ const heroSrc = primeiroComAsin?.asin ? (imagemParaAsin(primeiroComAsin.asin, 10
 <ArtigoLayout
   titulo={d.titulo}
   descricao={d.descricao}
+  tituloSeo={d.seo?.titulo_seo}
+  descricaoSeo={d.seo?.descricao_seo}
   autor={d.autor}
   dataPublicacao={d.data_publicacao}
   categoria="Produtos Estrela"
