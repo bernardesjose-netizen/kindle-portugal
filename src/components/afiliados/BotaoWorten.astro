@@ -1,0 +1,27 @@
+---
+// Botão de compra na Worten. Desde 27/10/2026 a Worten vende o Kindle
+// em Portugal; quando o produto existe na Worten, este botão aparece
+// antes do da Amazon. O URL passa pelo helper linkWorten (Awin).
+import { linkWorten } from '@lib/worten';
+
+interface Props {
+  url: string;
+  etiqueta?: string;
+  tamanho?: 'normal' | 'grande';
+}
+
+const { url, etiqueta = 'Ver na Worten', tamanho = 'normal' } = Astro.props;
+const href = linkWorten(url);
+const extra = tamanho === 'grande' ? 'px-7 py-3.5 text-base' : 'px-5 py-2.5 text-sm';
+---
+
+<a
+  href={href}
+  rel="sponsored nofollow noopener"
+  target="_blank"
+  class={`inline-flex items-center gap-2 rounded-lg bg-[#e3001b] font-semibold text-white no-underline shadow-sm transition-colors hover:bg-[#b80016] ${extra}`}
+  data-afiliado="worten"
+>
+  <slot>{etiqueta}</slot>
+  <span aria-hidden="true">→</span>
+</a>
