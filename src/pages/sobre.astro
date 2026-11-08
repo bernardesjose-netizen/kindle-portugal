@@ -16,7 +16,7 @@ const personLd = {
   url: `${SITE.url}/sobre`,
   knowsAbout: [
     'Amazon Kindle',
-    'E-readers',
+    'Leitores de ebooks',
     'Ebooks em português',
     'Calibre (software)',
     'Kindle Direct Publishing',
@@ -42,13 +42,13 @@ const aboutPageLd = {
 ---
 
 <BaseLayout
-  titulo="Sobre"
+  titulo="Quem somos e como trabalhamos"
   descricao={`Quem está por trás do ${SITE.nome}, como recomendamos produtos e como o site se financia. Editor: ${AUTOR.nome}.`}
   jsonLd={[personLd, aboutPageLd]}
 >
   <Container largura="texto" classe="py-14">
     <header class="mb-10 border-b border-marinho-100 pb-8">
-      <span class="text-xs font-semibold uppercase tracking-wider text-marca-600">
+      <span class="text-xs font-semibold uppercase tracking-wider text-marca-700">
         Sobre o site
       </span>
       <h1 class="mt-3 text-3xl font-bold text-marinho-900 md:text-4xl" style="letter-spacing: -0.02em;">

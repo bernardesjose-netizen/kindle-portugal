@@ -269,7 +269,7 @@ export const MONTRA: ItemMontra[] = [
     porque: 'Mantém o livro aberto na mesa, para poderes consultar as páginas enquanto tomas notas.',
   },
   {
-    nome: 'Suporte ajustável em bambu (39 x 28 cm)',
+    nome: 'Suporte ajustável em bambu (39 × 28 cm)',
     marca: 'Theodore',
     asin: 'B07NJ4VY8L',
     categoria: 'leitura',

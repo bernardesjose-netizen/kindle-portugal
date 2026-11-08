@@ -18,6 +18,6 @@ const ativar = import.meta.env.PROD;
 {ativar && (
   <>
     <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
-    <script is:inline src="/gtag-init.js"></script>
+    <script is:inline defer src="/gtag-init.js"></script>
   </>
 )}

@@ -11,6 +11,9 @@ import FotoFundoDecorativa from '@components/ui/FotoFundoDecorativa.astro';
 import EstadoStock from '@components/afiliados/EstadoStock.astro';
 import { formatarPreco, formatarData } from '@lib/formatters';
 import { SCHEMA_DISPONIBILIDADE, rotuloPreco } from '@lib/disponibilidade';
+import { fichaJsonLd } from '@lib/schema-ficha';
+import { SITE } from '@lib/site';
+import { caminhoPublico } from '@lib/urls';
 
 interface Props {
   modelo: CollectionEntry<'modelos'>;
@@ -31,25 +34,20 @@ const fotosPorModelo: Record<string, string> = {
 };
 const fotoFundoSrc = fotosPorModelo[modelo.id] ?? fotosPorModelo.paperwhite;
 
-const productLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Product',
-  name: d.nome,
-  brand: { '@type': 'Brand', name: d.fabricante },
-  description: d.descricao_curta,
-  ...(d.asin ? { sku: d.asin } : {}),
-  ...(d.url_amazon && d.preco_referencia_eur
-    ? {
-        offers: {
-          '@type': 'Offer',
-          priceCurrency: 'EUR',
-          price: d.preco_referencia_eur,
-          url: d.url_amazon,
-          ...(d.disponibilidade ? { availability: SCHEMA_DISPONIBILIDADE[d.disponibilidade] } : {}),
-        },
-      }
-    : {}),
-};
+// Product só quando há preço confirmado; sem preço, Article (ver fichaJsonLd).
+const productLd = fichaJsonLd({
+  nome: d.nome,
+  fabricante: d.fabricante,
+  descricao: d.descricao_curta,
+  asin: d.asin,
+  preco: d.preco_referencia_eur,
+  urlOferta: d.url_amazon,
+  disponibilidade: d.disponibilidade ? SCHEMA_DISPONIBILIDADE[d.disponibilidade] : undefined,
+  dataPublicacao: d.data_publicacao,
+  dataRevisao: d.data_revisao,
+  urlPagina: new URL(caminhoPublico(Astro.url.pathname), SITE.url).toString(),
+  imagem: d.imagem_hero ? new URL(d.imagem_hero.src, SITE.url).toString() : undefined,
+});
 ---
 
 <BaseLayout
@@ -189,7 +187,7 @@ const productLd = {
             Outras versões
           </h2>
           <p class="mt-2 max-w-2xl text-sm leading-relaxed text-marinho-600">
-            Cada botão abre a capacidade e a edição indicadas. Se a loja apresentar uma pré-venda, compara a data de lançamento com a previsão de entrega.
+            Cada botão abre a ficha da versão indicada, com a capacidade e a edição certas. Se a loja apresentar uma pré-venda, compara a data de lançamento com a previsão de entrega.
           </p>
           <ul class="mt-5 grid gap-4 sm:grid-cols-2">
             {d.variantes.map((variante) => (
@@ -273,7 +271,7 @@ const productLd = {
           </div>
         </div>
 
-        <aside class="md:col-span-1">
+        <div class="md:col-span-1">
           <h2
             class="text-xl font-bold text-marinho-900"
             style="font-family: var(--font-serif); letter-spacing: -0.02em;"
@@ -283,7 +281,7 @@ const productLd = {
           <dl class="mt-4 divide-y divide-marinho-100 overflow-hidden rounded-xl border border-marinho-100 bg-white text-sm" style="box-shadow: var(--shadow-suave);">
             <div class="flex justify-between px-4 py-2">
               <dt class="text-marinho-400">Ecrã</dt>
-              <dd class="text-marinho-800">{e.ecra_polegadas}" · {e.ecra_ppi} ppi{e.ecra_cor ? ' · cor' : ''}</dd>
+              <dd class="text-marinho-800">{new Intl.NumberFormat('pt-PT').format(e.ecra_polegadas)}″ · {e.ecra_ppi} ppi{e.ecra_cor ? ' · cor' : ''}</dd>
             </div>
             <div class="flex justify-between px-4 py-2">
               <dt class="text-marinho-400">Memória</dt>
@@ -330,7 +328,7 @@ const productLd = {
               </ul>
             </div>
           )}
-        </aside>
+        </div>
       </section>
     </Container>
   </article>

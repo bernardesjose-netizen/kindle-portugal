@@ -122,7 +122,7 @@ Voltar a **Agendar obtenção de notícias** → selecionar a receita → marcar
 
 **Três modos de agendamento:**
 
-- **Dias da semana**: escolhes os dias (seg-sex / fim-de-semana / todos) e a hora.
+- **Dias da semana**: escolhes os dias (seg-sex / fim de semana / todos) e a hora.
 - **Dias do mês**: para semanários ou mensários (ex.: 1.º sábado de cada mês).
 - **Todos os X dias**: periodicidade fixa (ex.: de 3 em 3 dias).
 
@@ -137,13 +137,13 @@ Aqui entra o **[Send to Kindle](/guias/send-to-kindle-enviar-ebooks-2026)** que 
 ### Configurar uma vez
 
 1. No Calibre, **Preferências → Partilha → Partilha de livros por email**.
-2. Adicionar uma nova conta de email:
-   - **Email do destinatário:** o teu endereço `algo@kindle.com` (ver [como descobrir](/guias/send-to-kindle-enviar-ebooks-2026#preparação-única-2-minutos-faz-uma-vez)).
+2. Adicionar uma nova conta de e-mail:
+   - **Email do destinatário:** o teu endereço `algo@kindle.com` (ver [como descobrir o teu endereço @kindle.com](/guias/send-to-kindle-enviar-ebooks-2026#preparação-única-2-minutos-faz-uma-vez)).
    - **Formato:** EPUB (o Kindle aceita desde 2022).
-   - **Servidor SMTP:** os dados do teu provedor de email (Gmail, Outlook, etc.).
+   - **Servidor SMTP:** os dados do teu fornecedor de e-mail (Gmail, Outlook, etc.).
 3. Marcar **"Enviar automaticamente notícias agendadas para este destinatário"**.
 
-A partir daqui, sempre que uma receita corre, o Calibre **envia o resultado por email para o teu Kindle**. O Kindle apanha o anexo quando ligar à rede e o jornal aparece na biblioteca.
+A partir daqui, sempre que uma receita corre, o Calibre **envia o resultado por e-mail para o teu Kindle**. O Kindle apanha o anexo quando ligar à rede e o jornal aparece na biblioteca.
 
 > **Dica de SMTP do Gmail:** desde 2024 o Google obriga a uma **password de aplicação** (não a tua password normal). Cria uma em [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords), seleciona "Email", e usa essa string de 16 caracteres como password SMTP no Calibre.
 
@@ -153,7 +153,7 @@ A lista PT-PT do Calibre tem buracos enormes: **Expresso, Observador, DN, Record
 
 ### Opção A: Modo básico (sem código)
 
-O Calibre tem um editor visual de receitas que não exige Python. Basta saberes a URL do feed RSS.
+O Calibre tem um editor visual de receitas que não exige Python. Basta saberes o URL do feed RSS.
 
 **Exemplo passo a passo: criar receita para o Expresso**
 
@@ -245,7 +245,7 @@ Em 2026 estes três **não disponibilizam RSS oficial** (o feed antigo da A Bola
 ## Resolução de problemas comuns
 
 **"A receita corre mas o livro está vazio."**
-O feed RSS pode ter ficado inacessível. Abre o URL do feed num browser: vês XML? Se não, o site mudou ou cortou o feed. Atualiza a URL na receita.
+O feed RSS pode ter ficado inacessível. Abre o URL do feed num browser: vês XML? Se não, o site mudou ou cortou o feed. Atualiza o URL na receita.
 
 **"Os artigos chegam truncados (só o lead e três linhas)."**
 O site só publica resumos no RSS, o conteúdo completo só carrega no site (paywall ou política editorial). O Calibre pode tentar ir buscar o resto: na receita avançada, define `use_embedded_content = False` e o motor faz fetch do artigo completo. Se ainda assim ficar truncado, o artigo está mesmo atrás de paywall.
@@ -254,7 +254,7 @@ O site só publica resumos no RSS, o conteúdo completo só carrega no site (pay
 O Calibre por defeito descarrega as imagens; se as falhas forem comuns, o site bloqueia a obtenção fora do browser. Pouco a fazer sem mexer no motor de fetch. As palavras chegam intactas.
 
 **"O ebook chega ao Kindle mas demora muito tempo a aparecer."**
-O Send to Kindle por email leva **1 a 5 minutos** entre envio e disponibilidade. Se passou de 10 minutos, verifica em [amazon.es/mycd](https://www.amazon.es/mycd) → **Conteúdo → Documentos** se o ficheiro chegou à cloud. Se sim, sincroniza o Kindle manualmente (deslizar de cima, ícone de definições, **Sincronizar**).
+O Send to Kindle por e-mail leva **1 a 5 minutos** entre envio e disponibilidade. Se passou de 10 minutos, verifica em [amazon.es/mycd](https://www.amazon.es/mycd) → **Conteúdo → Documentos** se o ficheiro chegou à cloud. Se sim, sincroniza o Kindle manualmente (deslizar de cima, ícone de definições, **Sincronizar**).
 
 **"O Calibre não está a correr à hora agendada."**
 O agendamento exige o Calibre **aberto**. Soluções: (a) abrir o Calibre logo que ligas o PC, (b) configurar o Calibre para arrancar com o sistema (Preferências → Diversos → **Lançar Calibre no arranque**), (c) deixar o Calibre minimizado sempre.
@@ -294,7 +294,7 @@ Existem todos no catálogo oficial Calibre, são mantidos ativamente e funcionam
 
 - O **Calibre News Downloader** transforma feeds RSS em ebooks formatados e entrega-os no Kindle automaticamente.
 - Em PT, vêm 3 receitas úteis built-in (**Correio da Manhã**, **DW**, **Público** com subscrição).
-- Para os jornais que faltam, ou usas o **modo básico** com a URL do feed, ou descarregas as nossas **7 receitas prontas**.
+- Para os jornais que faltam, ou usas o **modo básico** com o URL do feed, ou descarregas as nossas **7 receitas prontas**.
 - O agendamento é simples mas precisa do Calibre **aberto** à hora marcada.
 - A entrega ao Kindle faz-se pelo **Send to Kindle** via email, testa o primeiro envio e confirma os resultados depois de uma alteração da receita.
 - **A Bola, O Jogo, JN**: sem RSS oficial, alternativas no Record + Notícias ao Minuto + RTP Desporto.

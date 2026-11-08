@@ -48,7 +48,7 @@ const Titulo = compacto ? "h3" : "h2";
 const NOME_LOJA: Record<Props['loja'], string> = {
   amazon: 'Amazon.es',
   worten: 'Worten',
-  wook: 'Wook',
+  wook: 'WOOK',
 };
 
 const imgSrc = asin ? imagemParaAsin(asin, 500) : null;
@@ -73,7 +73,7 @@ if (urlWorten) {
 }
 if (urlWook) {
   botoes.push({
-    rotulo: 'Ver na Wook',
+    rotulo: 'Ver na WOOK',
     url: linkWook(urlWook),
     rel: 'nofollow sponsored',
     principal: loja === 'wook',
@@ -126,7 +126,7 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
     <div class="flex flex-col">
       <div class="flex flex-wrap items-center gap-2">
         {total > 1 && (
-          <span class="text-xs font-semibold uppercase tracking-wider text-marca-600">
+          <span class="text-xs font-semibold uppercase tracking-wider text-marca-700">
             Produto {numero} de {total}
           </span>
         )}
@@ -161,7 +161,7 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
           {precoData && (
             <p class="mt-1.5 text-xs text-marinho-400">
               Preço confirmado na {NOME_LOJA[loja]} a {formatarData(precoData)}. Pode ter mudado
-              entretanto, o valor que conta é o da loja ao abrir o link (<LinkPrecos />).
+              entretanto: o valor que conta é o da loja ao abrir o link (<LinkPrecos />).
             </p>
           )}
         </div>

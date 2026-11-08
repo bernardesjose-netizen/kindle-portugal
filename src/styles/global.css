@@ -19,7 +19,7 @@
   --color-marinho-100: #e4e8ef;
   --color-marinho-200: #c9d2de;
   --color-marinho-300: #9daabd;
-  --color-marinho-400: #6b7a92;
+  --color-marinho-400: #5f6e86; /* escurecido para contraste ≥ 4,5:1 sobre branco e creme (WCAG AA) */
   --color-marinho-500: #4a5568;
   --color-marinho-600: #334155;
   --color-marinho-700: #1e293b;

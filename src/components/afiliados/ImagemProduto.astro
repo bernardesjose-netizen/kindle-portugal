@@ -82,6 +82,11 @@ const srcFallback = '/placeholder-amazon.svg';
 const hrefProduto = urlAfiliado(`https://${cfg.produtoHost}/dp/${asin}`);
 
 const imgClasses = `object-contain ${classesFormato[formato]} ${classe}`.trim();
+
+// Dimensões declaradas para o browser reservar o espaço antes de a imagem
+// chegar (evita saltos de layout, CLS). A Amazon serve o lado maior com
+// `tamanhoEfetivo` px; a altura fica fixa pelo max-h da classe.
+const lado = tamanhoEfetivo;
 ---
 
 {
@@ -91,6 +96,8 @@ const imgClasses = `object-contain ${classesFormato[formato]} ${classe}`.trim();
       alt={alt}
       loading={loading}
       decoding="async"
+      width={lado}
+      height={lado}
       class={imgClasses}
       style={imgStyle}
       referrerpolicy="no-referrer-when-downgrade"
@@ -109,6 +116,8 @@ const imgClasses = `object-contain ${classesFormato[formato]} ${classe}`.trim();
         alt={alt}
         loading={loading}
         decoding="async"
+        width={lado}
+        height={lado}
         class={imgClasses}
         style={imgStyle}
         referrerpolicy="no-referrer-when-downgrade"
@@ -121,6 +130,8 @@ const imgClasses = `object-contain ${classesFormato[formato]} ${classe}`.trim();
       alt={alt}
       loading={loading}
       decoding="async"
+      width={lado}
+      height={lado}
       class={imgClasses}
       style={imgStyle}
       referrerpolicy="no-referrer-when-downgrade"

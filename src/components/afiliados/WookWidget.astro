@@ -2,7 +2,7 @@
 import { WOOK_AID, WOOK_BID_BANNER } from '@lib/wook';
 
 /**
- * Cartão de parceria Wook.
+ * Cartão de parceria WOOK.
  *
  * Usa o logotipo oficial alojado em `public/banners/wook-logo.png`
  * (alojamos localmente porque o `afiliados.wook.pt` tem hotlink
@@ -43,7 +43,7 @@ const fundoCartao =
     : 'border-marinho-200 bg-white text-marinho-900';
 ---
 
-<aside class:list={['relative', classe]} aria-label="Afiliado Wook" data-afiliado="wook">
+<aside class:list={['relative', classe]} aria-label="Livraria WOOK (ligação de afiliado)" data-afiliado="wook">
   <a
     href={linkUrl}
     rel="sponsored nofollow noopener"
@@ -60,7 +60,7 @@ const fundoCartao =
 
     <img
       src="/banners/wook-logo.png"
-      alt="wook"
+      alt="WOOK"
       width="600"
       height="226"
       loading={prioridade ? 'eager' : 'lazy'}
@@ -74,7 +74,7 @@ const fundoCartao =
       Livros, Puzzles, Bilhetes, Música e muito mais
     </p>
 
-    <p class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-marca-600 transition-colors group-hover:text-marca-700">
+    <p class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-marca-700 transition-colors group-hover:text-marca-800">
       Ver na livraria
       <span aria-hidden="true" class="transition-transform group-hover:translate-x-0.5">→</span>
     </p>
@@ -90,13 +90,13 @@ const fundoCartao =
     <a
       href="/divulgacao-afiliados"
       class:list={[
-        'underline decoration-marca-400 underline-offset-2 hover:text-marca-600',
+        'underline decoration-marca-400 underline-offset-2 hover:text-marca-700',
         variante === 'escuro' ? 'text-creme-100/80' : 'text-marinho-500',
       ]}
     >divulgação</a>
   </p>
 
-  {/* Pixel 1×1, Wook tracking; fora do viewport para não causar layout-shift.
+  {/* Pixel 1×1, WOOK tracking; fora do viewport para não causar layout-shift.
       Sempre eager: com lazy, um elemento fora do viewport pode nunca carregar. */}
   <img
     src={pixelUrl}

@@ -1,5 +1,5 @@
 /**
- * Helpers para links de afiliado Wook (afiliados.wook.pt).
+ * Helpers para links de afiliado WOOK (afiliados.wook.pt).
  *
  * Programa: afiliados.wook.pt — afiliado externo da Porto Editora.
  * ID configurável via `PUBLIC_WOOK_AID`; cai para o ID conhecido do
@@ -12,16 +12,16 @@ const WOOK_AID_FALLBACK = '69f36f37be1b4';
 
 export const WOOK_AID: string = env.PUBLIC_WOOK_AID ?? WOOK_AID_FALLBACK;
 
-/** Widget módulo iframe (pesquisa Wook) — `a_bid=3032b7ad`. */
+/** Widget módulo iframe (pesquisa WOOK) — `a_bid=3032b7ad`. */
 export const WOOK_BID_MODULO: string = env.PUBLIC_WOOK_BID_MODULO ?? '3032b7ad';
 
-/** Banner gráfico Wook 600×226 — imagem estática, sem iframe. */
+/** Banner gráfico WOOK 600×226 — imagem estática, sem iframe. */
 export const WOOK_BID_BANNER: string = env.PUBLIC_WOOK_BID_BANNER ?? '581bfdfb';
 
 /**
- * Acrescenta o parâmetro de afiliado a um URL Wook arbitrário.
+ * Acrescenta o parâmetro de afiliado a um URL WOOK arbitrário.
  *
- * Aceita URLs com ou sem query string. Se o URL não for da Wook,
+ * Aceita URLs com ou sem query string. Se o URL não for da WOOK,
  * é devolvido tal qual.
  *
  * @example
@@ -43,7 +43,7 @@ export function linkWook(urlWook: string, aid: string = WOOK_AID): string {
   }
 }
 
-/** URL de raiz da Wook já com o afiliado aplicado. */
+/** URL de raiz da WOOK já com o afiliado aplicado. */
 export function linkWookHome(aid: string = WOOK_AID): string {
   return `https://www.wook.pt/?a_aid=${aid}`;
 }
