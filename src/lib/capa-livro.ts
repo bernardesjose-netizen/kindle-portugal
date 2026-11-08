@@ -29,6 +29,7 @@ import { redimensionarImagemAmazon } from './asin-images';
  */
 export type TamanhoCapa = 'pequeno' | 'medio' | 'grande';
 
+// O lado maior corresponde ao dobro do tamanho mostrado em cada contexto.
 const PX_CAPA: Record<TamanhoCapa, number> = { pequeno: 400, medio: 500, grande: 1000 };
 
 export function urlCapaLivro(asin: string | undefined, tamanho: TamanhoCapa = 'medio', capaAmazon?: string): string {
