@@ -31,7 +31,7 @@
   <text x="120" y="220" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="40" font-weight="500" fill="#cfe1f3" opacity="0.7">Blog</text>
   <text x="120" y="335" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="96" font-weight="800" fill="#4cc3e8" letter-spacing="-3">Kindle na praia</text>
   <text x="120" y="420" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="78" font-weight="700" fill="#fefbf5" letter-spacing="-3">e na piscina</text>
-  <text x="120" y="490" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="26" font-weight="400" fill="#cfe1f3">Água, areia e sol: o que aguenta cada modelo, sem sustos.</text>
+  <text x="120" y="490" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="26" font-weight="400" fill="#cfe1f3">Cuidados com a água, a areia e o calor.</text>
   <g transform="translate(120, 555)">
     <rect width="280" height="40" rx="20" fill="rgba(76,195,232,0.16)" stroke="rgba(76,195,232,0.45)" stroke-width="1"/>
     <text x="140" y="26" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="600" fill="#93dcf2" letter-spacing="2">KINDLEPORTUGAL.COM</text>

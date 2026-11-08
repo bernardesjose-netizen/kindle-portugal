@@ -20,7 +20,7 @@
   <text x="120" y="220" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="40" font-weight="500" fill="#cfe1f3" opacity="0.7">Blog</text>
   <text x="120" y="330" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="82" font-weight="800" fill="#fefbf5" letter-spacing="-3">Kindle em promoção</text>
   <text x="120" y="420" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="82" font-weight="700" fill="#f97e07" letter-spacing="-3">antes do Prime Day</text>
-  <text x="120" y="490" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="26" font-weight="400" fill="#cfe1f3">O ponto da situação na Amazon.es, com envio para Portugal.</text>
+  <text x="120" y="490" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="26" font-weight="400" fill="#cfe1f3">Preços registados na Amazon.es antes da campanha.</text>
   <g transform="translate(120, 555)">
     <rect width="280" height="40" rx="20" fill="rgba(249,126,7,0.18)" stroke="rgba(249,126,7,0.45)" stroke-width="1"/>
     <text x="140" y="26" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="600" fill="#ffbc4a" letter-spacing="2">KINDLEPORTUGAL.COM</text>

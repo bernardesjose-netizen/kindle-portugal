@@ -45,12 +45,12 @@ export const CATEGORIAS_MONTRA: { id: CategoriaMontra; titulo: string; descricao
   {
     id: 'capas',
     titulo: 'Capas e acessórios para e-readers',
-    descricao: 'Capas feitas à medida de cada modelo (confirma sempre a geração do teu) e a nova base de carregamento da Amazon.',
+    descricao: 'Capas feitas à medida de cada modelo (confirma sempre a geração do teu leitor) e a nova base de carregamento da Amazon.',
   },
   {
     id: 'outros-leitores',
     titulo: 'Outros leitores: Kobo e PocketBook',
-    descricao: 'Para quem lê EPUB sem conversões, quer botões físicos ou prefere ficar fora do ecossistema Amazon.',
+    descricao: 'Leitores que abrem ficheiros EPUB e PDF, com opções de cor, iluminação e botões de página.',
   },
   {
     id: 'escrita',
@@ -65,12 +65,12 @@ export const CATEGORIAS_MONTRA: { id: CategoriaMontra; titulo: string; descricao
   {
     id: 'carregar',
     titulo: 'Carregadores, cabos e tomadas',
-    descricao: 'O Kindle vem só com o cabo USB-C, sem carregador. Estes resolvem a mesa de cabeceira e a mala de viagem.',
+    descricao: 'O Kindle vem só com o cabo USB-C, sem carregador. Vê as portas e a potência de cada carregador para escolheres o que te serve.',
   },
   {
     id: 'ebooks',
     titulo: 'Ebooks em português',
-    descricao: 'Seis escolhas da nossa rubrica Três Ebooks, para começar a encher o Kindle.',
+    descricao: 'Seis livros apresentados na rubrica Três Ebooks, com ligação para a edição Kindle.',
   },
 ];
 
@@ -85,7 +85,7 @@ export const MONTRA: ItemMontra[] = [
     asin: 'B0CM7ZXQWC',
     categoria: 'capas',
     ficha_url: '/guias/capas-para-kindle-paperwhite',
-    porque: 'Fina, leve e feita de material de origem vegetal, com o ecrã a acordar ao abrir. Serve no Paperwhite de 2024 e no Colorsoft.',
+    porque: 'Fina, leve e feita de material de origem vegetal, com o ecrã a acordar ao abrir. Confirma no guia a compatibilidade com o Paperwhite de 2024 e o Colorsoft da mesma geração.',
   },
   {
     nome: 'Capa MoKo para Kindle básico (2022 e 2024)',
@@ -93,7 +93,7 @@ export const MONTRA: ItemMontra[] = [
     asin: 'B0CPXQ7YZN',
     categoria: 'capas',
     ficha_url: '/guias/capas-para-kindle-basico',
-    porque: 'Folio clássico com fecho magnético que adormece o ecrã. A escolha segura e barata para o Kindle básico de 6 polegadas.',
+    porque: 'Capa com fecho magnético que põe o leitor em repouso quando a fechas. Serve no Kindle básico de 2022 e de 2024.',
   },
   {
     nome: 'Capa oficial para Kindle Scribe (2022 e 2024)',
@@ -104,12 +104,12 @@ export const MONTRA: ItemMontra[] = [
     porque: 'Capa em pele com tampa dobrável e fixação magnética ao leitor, para os Scribe de 2022 e de 2024.',
   },
   {
-    nome: 'Base de carregamento magnética (Paperwhite e Colorsoft Signature de 2026)',
+    nome: 'Base de carregamento (Paperwhite Signature Edition e Colorsoft Signature Edition de 2026)',
     marca: 'Amazon',
     asin: 'B0H6KV2HMM',
     categoria: 'capas',
     etiqueta: 'Em breve',
-    porque: 'A base oficial para carregar sem fios as Signature Edition de 2026, com adaptador USB-C incluído. A Amazon.es ainda a dá como «Próximamente».',
+    porque: 'Base com contactos de carregamento para o Paperwhite Signature Edition e o Colorsoft Signature Edition de 2026. Inclui adaptador USB-C. Confirma a disponibilidade na ficha.',
   },
   {
     nome: 'Capa oficial Kobo para Clara BW e Clara Colour',
@@ -118,7 +118,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'capas',
     preco_eur: 20.32,
     preco_data: DIA,
-    porque: 'Capa em pele vegana com suporte de duas posições, que liga e desliga o leitor ao abrir e fechar.',
+    porque: 'Capa Basic SleepCover para Clara BW e Clara Colour. O leitor acorda quando a abres e entra em repouso quando a fechas.',
   },
 
   // Outros leitores, todos vendidos e enviados pela Amazon.
@@ -129,7 +129,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'outros-leitores',
     preco_eur: 171.79,
     preco_data: DIA,
-    porque: 'A alternativa direta ao Kindle básico: 6 polegadas, resistência à água, luz com temperatura ajustável e EPUB sem conversões.',
+    porque: 'Leitor de 6 polegadas com resistência à água e luz de temperatura ajustável. Podes abrir ficheiros EPUB diretamente.',
   },
   {
     nome: 'Kobo Clara Colour',
@@ -138,7 +138,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'outros-leitores',
     preco_eur: 188.04,
     preco_data: DIA,
-    porque: 'O mesmo corpo compacto com ecrã a cores Kaleido 3: texto nítido a preto e branco e cor suave nas capas e na BD.',
+    porque: 'Leitor compacto com ecrã Kaleido 3. Mostra o texto a preto e branco e as capas, ilustrações e banda desenhada a cores.',
   },
   {
     nome: 'Kobo Libra Colour',
@@ -147,7 +147,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'outros-leitores',
     preco_eur: 273.44,
     preco_data: DIA,
-    porque: 'Sete polegadas a cores, botões físicos para virar a página e compatível com a caneta Kobo Stylus 2. O rival direto do Colorsoft.',
+    porque: 'Ecrã a cores de 7 polegadas e botões físicos para virar a página. Se queres tomar notas à mão, é compatível com a Kobo Stylus 2, vendida à parte.',
   },
   {
     nome: 'PocketBook Verse (8 GB)',
@@ -156,7 +156,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'outros-leitores',
     preco_eur: 120.97,
     preco_data: DIA,
-    porque: 'Um e-reader simples e honesto de 6 polegadas, com botões físicos e leitura direta de EPUB e PDF, para fugir ao ecossistema Amazon.',
+    porque: 'Leitor de 6 polegadas com botões físicos e leitura de EPUB e PDF. Podes transferir os teus ficheiros por cabo USB.',
   },
   {
     nome: 'PocketBook Verse Pro (16 GB)',
@@ -165,7 +165,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'outros-leitores',
     preco_eur: 171.79,
     preco_data: DIA,
-    porque: 'O Verse com o dobro da memória e resistência à água: lê quase todos os formatos sem conversões e mantém os botões físicos.',
+    porque: 'Tem 16 GB, resistência à água e botões físicos. Abre EPUB e PDF diretamente e permite ouvir audiolivros por Bluetooth.',
   },
   {
     nome: 'PocketBook Era Color (32 GB)',
@@ -174,7 +174,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'outros-leitores',
     preco_eur: 249.03,
     preco_data: DIA,
-    porque: 'Ecrã a cores de 7 polegadas, 32 GB e botões físicos. A opção para BD e livros ilustrados em qualquer formato.',
+    porque: 'Ecrã a cores de 7 polegadas, 32 GB e botões físicos. Para leres banda desenhada e livros ilustrados em formatos compatíveis, incluindo EPUB e PDF.',
   },
 
   // Cadernos e canetas.
@@ -185,7 +185,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'escrita',
     preco_eur: 23.38,
     preco_data: DIA,
-    porque: 'O caderno de sempre: capa rígida, elástico, fita marcadora e bolsa interior, em 11,5 x 18 cm, que cabe em qualquer mala.',
+    porque: 'Caderno de 11,5 × 18 cm com capa rígida, elástico, fita marcadora e bolsa interior.',
   },
   {
     nome: 'Moleskine Clássico, capa dura, pautado, grande (azul hortênsia)',
@@ -194,7 +194,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'escrita',
     preco_eur: 24.39,
     preco_data: DIA,
-    porque: 'O formato grande, 13 x 21 cm e 240 páginas, para quem escreve muito.',
+    porque: 'O formato de 13 × 21 cm tem 240 páginas pautadas, para notas, apontamentos ou um diário de leituras.',
   },
   {
     nome: 'Leuchtturm1917 A5, capa dura, pontilhado',
@@ -203,7 +203,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'escrita',
     preco_eur: 24.34,
     preco_data: DIA,
-    porque: 'O preferido de quem faz bullet journal ou diário de leituras: páginas numeradas, índice, papel pontilhado e duas fitas marcadoras.',
+    porque: 'As páginas pontilhadas deixam-te organizar listas, notas e desenhos. Tem índice, páginas numeradas e duas fitas marcadoras.',
   },
   {
     nome: 'Lamy safari, caneta de tinta permanente (aparo F)',
@@ -212,7 +212,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'escrita',
     preco_eur: 23.28,
     preco_data: DIA,
-    porque: 'A caneta de tinta permanente com que muita gente começa: robusta, com pega ergonómica e aparo fino. Usa cartuchos Lamy T10.',
+    porque: 'Caneta de tinta permanente com pega ergonómica e aparo fino. Usa cartuchos Lamy T10.',
   },
   {
     nome: 'Parker Jotter Originals (preto, tinta azul)',
@@ -221,7 +221,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'escrita',
     preco_eur: 10.14,
     preco_data: DIA,
-    porque: 'Um clássico desde os anos 50, com o clique característico e recarga de tinta azul. Presente barato que não parece barato.',
+    porque: 'Esferográfica com botão retrátil e recarga de tinta azul. Podes substituir a recarga quando a tinta acabar.',
   },
   {
     nome: 'Pilot FriXion Ball Clicker (4 canetas apagáveis)',
@@ -230,7 +230,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'escrita',
     preco_eur: 10.37,
     preco_data: DIA,
-    porque: 'A tinta apaga-se por fricção, ótimo para anotar livros e agendas sem estragar. Cuidado com o calor, que também a faz desaparecer.',
+    porque: 'Podes apagar a tinta por fricção. Evita usá-la em documentos que precisas de conservar, porque o calor também a pode fazer desaparecer.',
   },
   {
     nome: 'Stabilo Boss Original Pastel (6 marcadores)',
@@ -248,7 +248,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'leitura',
     preco_eur: 15.24,
     preco_data: DIA,
-    porque: 'Ilumina o livro sem acender a luz do quarto nem incomodar quem dorme ao lado. Carrega por USB. O Kindle já tem luz própria; isto é para o papel.',
+    porque: 'Pousa-a à volta do pescoço e dirige a luz para as páginas. Carrega por USB e permite-te ler um livro de papel com o candeeiro do quarto apagado.',
   },
   {
     nome: 'Luz de leitura de pinça, recarregável',
@@ -257,7 +257,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'leitura',
     preco_eur: 12.12,
     preco_data: DIA,
-    porque: 'Prende-se à capa do livro e leva-se para todo o lado. A alternativa mais barata e mais discreta à luz de pescoço.',
+    porque: 'A pinça prende-se à capa do livro. Podes levá-la na mala e recarregá-la por USB.',
   },
   {
     nome: 'Suporte de livros em madeira',
@@ -266,7 +266,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'leitura',
     preco_eur: 11.29,
     preco_data: DIA,
-    porque: 'Mantém o livro aberto na mesa e liberta as mãos para tomar notas ou ler enquanto se come.',
+    porque: 'Mantém o livro aberto na mesa, para poderes consultar as páginas enquanto tomas notas.',
   },
   {
     nome: 'Suporte ajustável em bambu (39 x 28 cm)',
@@ -275,7 +275,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'leitura',
     preco_eur: 26.42,
     preco_data: DIA,
-    porque: 'Maior e com inclinação ajustável e molas para segurar as páginas. Aguenta livros grossos, partituras e tablets.',
+    porque: 'Base de 39 × 28 cm com inclinação ajustável e patilhas que seguram as páginas de um livro ou de uma partitura.',
   },
   {
     nome: 'Marcador com elástico «Read to Live»',
@@ -284,7 +284,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'leitura',
     preco_eur: 2.95,
     preco_data: DIA,
-    porque: 'Marca a página e mantém o livro fechado na mala. Pequeno presente para pôr dentro de um livro oferecido.',
+    porque: 'Marca a página e mantém o livro fechado na mala. O elástico prende-o à capa.',
   },
 
   // Carregadores, cabos e tomadas.
@@ -295,7 +295,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'carregar',
     preco_eur: 9.14,
     preco_data: DIA,
-    porque: 'Carrega o Kindle e o telemóvel depressa, num formato pequeno. É o que falta na caixa do Kindle, que só traz o cabo.',
+    porque: 'Carregador de uma porta USB-C para o Kindle ou o telemóvel.',
   },
   {
     nome: 'Carregador USB-C Nano GaN de 20 W',
@@ -304,7 +304,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'carregar',
     preco_eur: 8.52,
     preco_data: DIA,
-    porque: 'Alternativa compacta, com uma porta USB-C. Chega para o Kindle e para um telemóvel.',
+    porque: 'Carregador compacto com uma porta USB-C. Podes carregar um aparelho de cada vez.',
   },
   {
     nome: 'Carregador de 67 W com 3 portas USB-C BoostCharge Pro',
@@ -313,7 +313,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'carregar',
     preco_eur: 30.49,
     preco_data: DIA,
-    porque: 'Um só carregador para portátil, telemóvel e Kindle ao mesmo tempo. Ideal para viagens.',
+    porque: 'Três portas USB-C para ligares vários aparelhos. Os 67 W são repartidos pelas portas quando as usas ao mesmo tempo.',
   },
   {
     nome: 'Extensão com 2 tomadas e 3 portas USB (20 W)',
@@ -322,7 +322,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'carregar',
     preco_eur: 15.44,
     preco_data: DIA,
-    porque: 'Duas tomadas, duas portas USB-C e uma USB-A num cabo de 1,57 m: resolve a mesa de cabeceira sem carregadores à parte.',
+    porque: 'Duas tomadas, duas portas USB-C e uma USB-A, com cabo de 1,57 m. Podes ligar o candeeiro e carregar pequenos aparelhos na mesma extensão.',
   },
   {
     nome: 'Extensão Ecolor de 4 tomadas com 3 portas USB',
@@ -331,7 +331,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'carregar',
     preco_eur: 23.99,
     preco_data: DIA,
-    porque: 'Quatro tomadas com interruptor e três portas USB (duas USB-C de 20 W), de uma marca alemã com tradição em material elétrico.',
+    porque: 'Quatro tomadas com interruptor, duas portas USB-C e uma USB-A. Consulta na ficha a potência disponível quando usas várias portas.',
   },
   {
     nome: 'Tomada inteligente Tapo P100',
@@ -340,14 +340,14 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'carregar',
     preco_eur: 9.14,
     preco_data: DIA,
-    porque: 'Programa horários e desliga carregadores à distância pelo telemóvel, para não ficarem ligados à corrente a noite toda.',
+    porque: 'Programa a hora a que um aparelho se liga ou desliga e controla a tomada pela aplicação Tapo.',
   },
   {
     nome: 'Powerbank Nano de 10 000 mAh com cabo USB-C',
     marca: 'Anker',
     asin: 'B0C9CJKCH3',
     categoria: 'carregar',
-    porque: 'Bateria de bolso com o cabo integrado: carrega o telemóvel cerca de duas vezes e dá semanas extra ao Kindle em viagem.',
+    porque: 'Bateria externa de 10 000 mAh com cabo USB-C integrado. Podes carregar o Kindle ou o telemóvel em viagem.',
   },
   {
     nome: 'Cabo USB-C para USB-C (certificado USB-IF)',
@@ -356,7 +356,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'carregar',
     preco_eur: 7.47,
     preco_data: DIA,
-    porque: 'Um cabo suplente para a mesa de cabeceira ou para a mala, que serve no Kindle, no telemóvel e no portátil.',
+    porque: 'Cabo com USB-C nas duas pontas. Confirma se a potência suportada chega para o aparelho que queres carregar.',
   },
   {
     nome: 'Cabo USB-C de 2 m (100 W)',
@@ -365,7 +365,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'carregar',
     preco_eur: 12.19,
     preco_data: DIA,
-    porque: 'Dois metros chegam da tomada à cama, para ler com o Kindle a carregar sem esticar o braço.',
+    porque: 'O comprimento de 2 m dá-te mais margem entre a tomada e o lugar onde estás a ler.',
   },
 
   // Ebooks (rubrica Três Ebooks). Sem preço: varia muito e muda depressa.
@@ -376,7 +376,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'ebooks',
     livro: true,
     ficha_url: '/tres-livros/2026-05-07-lidia-jorge-lobo-antunes-peixoto',
-    porque: 'Romance sobre as últimas semanas de uma mulher num lar, escrito sem melodrama. Lídia Jorge na melhor forma.',
+    porque: 'A vida de uma mulher num lar, contada a partir dos dias, das memórias e das conversas com quem a rodeia.',
   },
   {
     nome: 'Nem Todas as Árvores Morrem de Pé, de Luísa Sobral',
@@ -385,7 +385,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'ebooks',
     livro: true,
     ficha_url: '/tres-livros/2026-04-30-luisa-sobral-jrs-thriller-e-ensaio',
-    porque: 'A estreia em romance da autora de «Amar Pelos Dois», escrita com mão segura.',
+    porque: 'O primeiro romance de Luísa Sobral, autora da canção «Amar Pelos Dois».',
   },
   {
     nome: 'O Segredo dos Segredos, de Dan Brown',
@@ -394,7 +394,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'ebooks',
     livro: true,
     ficha_url: '/tres-livros/2026-05-07-pcf-dan-brown-colleen-hoover-leituras-que-se-devoram',
-    porque: 'Robert Langdon regressa, desta vez em Praga. Um thriller para devorar em poucos dias.',
+    porque: 'Robert Langdon regressa numa história passada em Praga. Vê a apresentação e os dados da edição na rubrica.',
   },
   {
     nome: 'Isto Acaba Aqui, de Colleen Hoover',
@@ -403,7 +403,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'ebooks',
     livro: true,
     ficha_url: '/tres-livros/2026-05-07-pcf-dan-brown-colleen-hoover-leituras-que-se-devoram',
-    porque: 'O romance que se tornou fenómeno, sobre uma relação que parecia feita à medida até deixar de ser segura.',
+    porque: 'Um romance sobre uma relação marcada pela violência doméstica.',
   },
   {
     nome: 'Hábitos Atómicos, de James Clear',
@@ -412,7 +412,7 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'ebooks',
     livro: true,
     ficha_url: '/tres-livros/2026-05-14-van-der-ding-daniel-silva-james-clear',
-    porque: 'O livro mais lido sobre mudar pequenos hábitos, com capítulos curtos que se leem bem no Kindle.',
+    porque: 'James Clear apresenta métodos para criares hábitos e acompanhares pequenas mudanças na rotina.',
   },
   {
     nome: 'Vamos Todos Morrer, de Hugo van der Ding',
@@ -421,6 +421,6 @@ export const MONTRA: ItemMontra[] = [
     categoria: 'ebooks',
     livro: true,
     ficha_url: '/tres-livros/2026-05-14-van-der-ding-daniel-silva-james-clear',
-    porque: 'Biografias curtas e sarcásticas de gente que já morreu, três páginas cada. Perfeito para as esperas do dia a dia.',
+    porque: 'Biografias curtas em que Hugo van der Ding percorre, com humor, a vida de figuras de épocas diferentes.',
   },
 ];

@@ -42,7 +42,7 @@ const {
   lista,
   pill = 'Ofertas do momento',
   titulo = `Grandes marcas com ${DESCONTO_MINIMO} % ou mais de desconto`,
-  texto = 'Fora do mundo Kindle, mas escolhidas com o mesmo critério: marcas conhecidas, vendidas e enviadas pela Amazon, em stock, com 4 estrelas ou mais e o desconto que a própria ficha mostra.',
+  texto = 'Vê as características e confirma o vendedor, o preço e a entrega na ficha da Amazon.es.',
   idTitulo = 'ofertas-momento-titulo',
 } = Astro.props;
 
@@ -136,8 +136,8 @@ const ultima = todas.find((o) => !o.fonte)?.verificado_em;
               {o.fonte && (
                 <p class="mt-2 rounded-lg bg-ambar-50 px-2 py-1.5 text-[0.7rem] leading-snug text-ambar-800">
                   Preço por confirmar na ficha: anunciado a {o.fonte.preco_original} por{' '}
-                  <a href={o.fonte.url} rel="noopener" target="_blank" class="underline underline-offset-2">{o.fonte.nome}</a>;
-                  em Portugal a Amazon cobra IVA de 23 %, daí o valor acima.
+                  <a href={o.fonte.url} rel="noopener" target="_blank" class="underline underline-offset-2">{o.fonte.nome}</a>.
+                  Confirma na Amazon.es o total para a tua morada.
                 </p>
               )}
               <p class="mt-3 flex-1 text-sm text-marinho-600">{o.resumo}</p>

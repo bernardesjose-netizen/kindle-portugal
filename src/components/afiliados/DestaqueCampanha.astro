@@ -136,7 +136,7 @@ const principalNoDestaque = !!principal?.asin && asinsEstrela.has(principal.asin
 const titulo = principal && !principalNoDestaque
   ? `${principal.nome} a ${formatarPreco(principal.preco_promo)}${principal.desconto_pct ? `, −${principal.desconto_pct}%` : ''}`
   : principalNoDestaque
-    ? 'Paperwhite de volta e o novo Kindle já em stock'
+    ? 'Modelos Kindle nesta campanha'
     : 'Kindle em promoção';
 ---
 
@@ -223,7 +223,7 @@ const titulo = principal && !principalNoDestaque
               href="/guias/prime-big-deal-days-2026"
               class="inline-flex items-center gap-2 rounded-[0.625rem] border border-creme-50/40 bg-creme-50/10 px-5 py-3 font-semibold text-creme-50 backdrop-blur transition hover:-translate-y-0.5 hover:border-creme-50/70 hover:bg-creme-50/20"
             >
-              Como aproveitar sem pagar Prime
+              Ver as condições do Prime
             </a>
           </div>
         </div>
@@ -445,7 +445,7 @@ const titulo = principal && !principalNoDestaque
           </p>
           {esgotados.length > 0 && (
             <p class="mt-2 text-xs text-creme-50/75">
-              O Kindle básico de 2026 já está em stock, sem publicidade, a 177,88 €; os restantes modelos de 2026 e os preços estão em{' '}
+              Podes consultar os modelos apresentados nesta campanha na página de{' '}
               <a href="/promocoes" class="font-semibold underline decoration-creme-50/40 underline-offset-2 hover:text-dourado-300">promoções</a>.
             </p>
           )}

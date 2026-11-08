@@ -40,6 +40,7 @@ const convidado = d.convidado_ingles;
     {d.livros.map((livro, i) => (
       <CardLivro
         asin={livro.asin}
+        formato={livro.formato}
         titulo={livro.titulo}
         autor={livro.autor}
         editora={livro.editora}
@@ -60,6 +61,7 @@ const convidado = d.convidado_ingles;
       <p class="mt-2 max-w-prose text-marinho-700">De seis em seis dias, juntamos um bestseller em inglês às três escolhas portuguesas.</p>
       <CardLivro
         asin={convidado.asin}
+        formato={convidado.formato}
         titulo={convidado.titulo}
         autor={convidado.autor}
         editora={convidado.editora}

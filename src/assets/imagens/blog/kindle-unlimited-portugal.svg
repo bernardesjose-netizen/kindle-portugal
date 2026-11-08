@@ -18,9 +18,9 @@
   <rect width="1200" height="630" fill="url(#glow1)"/>
   <rect width="1200" height="630" fill="url(#glow2)"/>
   <text x="120" y="220" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="40" font-weight="500" fill="#cfe1f3" opacity="0.7">Blog</text>
-  <text x="120" y="335" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="94" font-weight="800" fill="#ffbc4a" letter-spacing="-3">Kindle Unlimited:</text>
+  <text x="120" y="335" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="94" font-weight="800" fill="#ffbc4a" letter-spacing="-3">Kindle Unlimited</text>
   <text x="120" y="420" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="70" font-weight="700" fill="#fefbf5" letter-spacing="-2">vale a pena em Portugal?</text>
-  <text x="120" y="490" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="26" font-weight="400" fill="#cfe1f3">9,99 € por mês: como funciona e que tipo de leitor sai a ganhar.</text>
+  <text x="120" y="490" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="26" font-weight="400" fill="#cfe1f3">Planos e catálogo de leitura por subscrição.</text>
   <g transform="translate(120, 555)">
     <rect width="280" height="40" rx="20" fill="rgba(255,188,74,0.16)" stroke="rgba(255,188,74,0.45)" stroke-width="1"/>
     <text x="140" y="26" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="600" fill="#ffd894" letter-spacing="2">KINDLEPORTUGAL.COM</text>

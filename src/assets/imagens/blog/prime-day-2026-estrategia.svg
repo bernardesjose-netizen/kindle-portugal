@@ -18,9 +18,9 @@
   <rect width="1200" height="630" fill="url(#glow1)"/>
   <rect width="1200" height="630" fill="url(#glow2)"/>
   <text x="120" y="220" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="40" font-weight="500" fill="#cfe1f3" opacity="0.7">Blog</text>
-  <text x="120" y="330" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="82" font-weight="800" fill="#38bdf8" letter-spacing="-3">O Prime Day arrancou:</text>
-  <text x="120" y="420" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="82" font-weight="700" fill="#fefbf5" letter-spacing="-3">a estratégia certa</text>
-  <text x="120" y="490" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="26" font-weight="400" fill="#cfe1f3">Quatro dias de ofertas, um Kindle em mínimos, zero impulsos.</text>
+  <text x="120" y="330" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="82" font-weight="800" fill="#38bdf8" letter-spacing="-3">Prime Day 2026</text>
+  <text x="120" y="420" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="82" font-weight="700" fill="#fefbf5" letter-spacing="-3">preços e modelos</text>
+  <text x="120" y="490" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="26" font-weight="400" fill="#cfe1f3">O registo da campanha de junho de 2026.</text>
   <g transform="translate(120, 555)">
     <rect width="280" height="40" rx="20" fill="rgba(56,189,248,0.16)" stroke="rgba(56,189,248,0.45)" stroke-width="1"/>
     <text x="140" y="26" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="600" fill="#7dd3fc" letter-spacing="2">KINDLEPORTUGAL.COM</text>

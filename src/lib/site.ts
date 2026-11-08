@@ -38,17 +38,17 @@ export const ROTULOS_CATEGORIA_GUIA: Readonly<Record<string, string>> = {
 };
 
 export const NAVEGACAO_PRINCIPAL = [
-  { label: 'Início', href: '/' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'Modelos Kindle', href: '/modelos' },
-  { label: 'Modelos BOOX', href: '/modelos-boox' },
-  { label: 'Guias', href: '/guias' },
-  { label: 'Três Ebooks', href: '/tres-livros' },
-  { label: 'Produtos Estrela', href: '/produtos-estrela' },
-  { label: 'Montra', href: '/montra' },
-  { label: 'Achados Tech', href: '/achados-tech' },
-  { label: 'Amazon Prime', href: '/blog/amazon-prime-portugal-vale-a-pena' },
-  { label: 'FAQ', href: '/faq' },
+  { label: 'Início', href: '/', visivel: 'menu' },
+  { label: 'Modelos Kindle', href: '/modelos', visivel: 'tablet' },
+  { label: 'Modelos BOOX', href: '/modelos-boox', visivel: 'portatil' },
+  { label: 'Guias', href: '/guias', visivel: 'tablet' },
+  { label: 'Blog', href: '/blog', visivel: 'tablet' },
+  { label: 'Três Ebooks', href: '/tres-livros', visivel: 'tablet' },
+  { label: 'Produtos Estrela', href: '/produtos-estrela', visivel: 'portatil' },
+  { label: 'Montra', href: '/montra', visivel: 'portatil' },
+  { label: 'Achados Tech', href: '/achados-tech', visivel: 'portatil' },
+  { label: 'Amazon Prime', href: '/blog/amazon-prime-portugal-vale-a-pena', visivel: 'desktop' },
+  { label: 'FAQ', href: '/faq', visivel: 'desktop' },
 ] as const;
 
 export const NAVEGACAO_RODAPE = [

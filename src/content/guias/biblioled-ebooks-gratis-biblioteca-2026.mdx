@@ -21,7 +21,7 @@ seo:
 
 import LojasAmazonLinha from '@components/afiliados/LojasAmazonLinha.astro';
 
-Há um serviço público português que empresta ebooks e audiolivros sem custo nenhum, a quem tenha cartão de leitor de uma biblioteca municipal, e que a maioria dos leitores digitais do país nunca experimentou. Chama-se **BiblioLED**, é a biblioteca pública digital gerida pela Direção-Geral do Livro, dos Arquivos e das Bibliotecas (DGLAB), e junta **mais de 400 bibliotecas municipais aderentes** numa única plataforma de empréstimo. Este guia explica como entrar, como funciona o empréstimo e, a parte que gera mais confusão, em que aparelhos se consegue mesmo ler.
+A **BiblioLED** permite requisitar ebooks e audiolivros gratuitamente através das bibliotecas municipais aderentes. É gerida pela Direção-Geral do Livro, dos Arquivos e das Bibliotecas (DGLAB). Se já tens cartão de leitor, pergunta à tua biblioteca como podes ativar o acesso.
 
 ## O que é e o que oferece
 
@@ -31,48 +31,40 @@ A BiblioLED funciona como a estante digital das bibliotecas municipais: um catá
 - O empréstimo dura **21 dias** e a devolução é **automática**: o ficheiro expira sozinho no fim do prazo. Não há atrasos, não há multas, não há nada para devolver fisicamente.
 - O catálogo varia com as aquisições das bibliotecas, e os títulos mais procurados podem ter fila de espera, como na biblioteca física.
 
-Para quem lê duas ou três obras por mês, a poupança anual face à compra é real e substancial. E para quem quer experimentar autores sem compromisso, é a ferramenta perfeita.
+Podes usar o serviço para conhecer um autor antes de comprares outros livros dele. Se houver fila de espera, faz uma reserva.
 
 ## Como aderir
 
-O bilhete de entrada é o **cartão de leitor de uma biblioteca municipal aderente**. Quem já o tem está a minutos de começar; quem não tem trata dele numa visita única à biblioteca do seu concelho, de borla na esmagadora maioria dos casos.
+O bilhete de entrada é o **cartão de leitor de uma biblioteca municipal aderente**. Se ainda não tens cartão, pergunta à biblioteca do teu concelho o que precisas de apresentar.
 
-1. Confirma que a tua biblioteca municipal adere à BiblioLED, na lista do site oficial, `biblioled.gov.pt`. Com mais de 400 aderentes, a probabilidade é alta; Lisboa, Porto e a generalidade das capitais de distrito estão dentro.
+1. Confirma que a tua biblioteca municipal adere à BiblioLED, na lista do site oficial, `biblioled.gov.pt`. Consulta a lista atual de bibliotecas aderentes antes de pedires o acesso.
 2. Pede na biblioteca as **credenciais de acesso à BiblioLED** associadas ao teu cartão de leitor. Algumas bibliotecas tratam disto ao balcão na hora, outras por email.
 3. Entra na plataforma com as credenciais e navega o catálogo. A requisição faz-se com um clique; a fila de espera, quando existe, também.
 
-## Onde se consegue ler (a parte importante)
+## Dispositivos e aplicações compatíveis
 
-Os ficheiros emprestados vêm protegidos, e é essa proteção que faz a devolução automática funcionar. A consequência prática é que a BiblioLED se lê em aparelhos e aplicações **compatíveis com Adobe DRM ou com o Thorium Reader**, e a escolha do aparelho decide tudo:
+Antes de comprares um leitor ou instalares uma aplicação, consulta a [lista oficial de compatibilidade](https://ajuda.biblioled.gov.pt/pt/doc/st2625/1/dispositivos-e-aplicacoes-compativeis). A proteção do empréstimo e o programa de leitura têm de ser compatíveis.
 
-**No computador**, o caminho mais simples: o **Thorium Reader**, leitor gratuito e de código aberto para Windows, macOS e Linux, indicado pela própria ajuda da BiblioLED. Instala-se, autentica-se, e os empréstimos abrem-se lá dentro.
+A ajuda distingue **ACS** e **LCP**. Para ACS, identifica uma conta **ByteBooks** como substituta do Adobe ID. No computador, o Adobe Digital Editions e o Thorium suportam proteções diferentes. Segue o guia indicado para o empréstimo que requisitaste.
 
-**No leitor Kobo**, o melhor cenário para quem quer tinta eletrónica: o Kobo suporta Adobe DRM, e o empréstimo transfere-se pelo **Adobe Digital Editions** com o cabo USB, exatamente como uma compra da FNAC ou da Bertrand. O passo a passo completo do Adobe Digital Editions está no nosso [guia de compra de ebooks para Kobo](/guias/comprar-ebooks-para-kobo-portugal), e serve tal e qual para a BiblioLED.
+A lista inclui **modelos Kobo específicos**. Isso é diferente da aplicação Kobo, que não abre os empréstimos. Os leitores Kindle e a aplicação Kindle também são incompatíveis.
 
-**No telemóvel ou tablet**, através de aplicações de leitura compatíveis com Adobe DRM, listadas na ajuda oficial da plataforma.
-
-**E no Kindle? Não.** Esta é a resposta que custa dar num site com este nome, mas é a verdade verificável: **a Amazon não suporta o empréstimo das bibliotecas públicas portuguesas**, nem o Adobe DRM em que ele assenta. Um ebook da BiblioLED não entra num Kindle por nenhum caminho legítimo. Quem tem Kindle e quer usar a BiblioLED lê os empréstimos no computador ou no telemóvel; quem considera comprar um leitor e sabe que vai usar muito a biblioteca tem aqui um argumento de peso a favor do Kobo, como reconhecemos na nossa [comparação honesta entre os dois](/blog/kindle-ou-kobo-livros-portugues-comparacao-2026).
-
-Para esse caso, os dois Kobo de entrada vendem-se na Amazon Espanha com envio para Portugal:
+Podes consultar as variantes e a entrega para a tua morada na Amazon.es.
 
 <LojasAmazonLinha asin="B0CZXYV8GT" prefixo="Kobo Clara BW:" />
 
 <LojasAmazonLinha asin="B0CZY1LRT4" prefixo="Kobo Clara Colour:" />
 
-## O fluxo completo, do catálogo ao Kobo
+## Do empréstimo à leitura
 
-Para fixar, o circuito típico de um empréstimo lido num Kobo:
-
-1. Requisita o ebook na plataforma BiblioLED e descarrega o ficheiro de licença (`.acsm`).
-2. Abre-o no **Adobe Digital Editions** no computador, autorizado com o teu Adobe ID. O programa descarrega o livro propriamente dito.
-3. Liga o Kobo por USB, autoriza-o com o mesmo Adobe ID, e arrasta o livro para o aparelho.
-4. Lê. Ao fim de 21 dias, o livro expira sozinho, no Kobo e em todo o lado.
-
-A primeira vez exige a configuração do Adobe Digital Editions, uns dez minutos. Da segunda em diante, o ciclo requisitar-transferir-ler demora menos do que ir à estante.
+1. Requisita o ebook na plataforma da tua biblioteca.
+2. Escolhe o guia de iniciação para o teu dispositivo na ajuda oficial.
+3. Confirma o programa, a proteção e a conta necessários antes de transferires o livro.
+4. Se o livro não abrir, consulta a ajuda da BiblioLED ou pede apoio à biblioteca.
 
 ## Em síntese
 
-A BiblioLED é provavelmente o serviço mais subaproveitado da leitura digital em Portugal: gratuito, legal, com catálogo crescente e devolução automática. Pede um cartão de biblioteca, dez minutos de configuração e a escolha certa de aparelho. No computador e no telemóvel funciona para toda a gente; em tinta eletrónica, é território Kobo. O Kindle, por decisão da Amazon, fica à porta, e isso merece entrar nas contas de quem ainda está a escolher o seu leitor.
+Confirma que a tua biblioteca adere, pede as credenciais e verifica que aplicação ou leitor podes usar. Se pretendes ler num Kobo, confirma o modelo e segue o guia de transferência atual da BiblioLED. No Kindle, terás de procurar uma edição compatível fora do serviço de empréstimo.
 
 ---
 

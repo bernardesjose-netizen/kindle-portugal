@@ -22,7 +22,7 @@
   <text x="380" y="320" font-family="Fraunces,Georgia,serif" font-size="86" font-weight="500" fill="#fefbf5" letter-spacing="-3">ou</text>
   <text x="500" y="320" font-family="Fraunces,Georgia,serif" font-size="86" font-weight="700" fill="#5cc4b1" letter-spacing="-3">Kobo?</text>
   <text x="120" y="410" font-family="Fraunces,Georgia,serif" font-size="56" font-weight="500" fill="#fefbf5" letter-spacing="-2">Livros em português</text>
-  <text x="120" y="490" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="500" fill="#cfe1f3">Comparação honesta, sem mitos.</text>
+  <text x="120" y="490" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="500" fill="#cfe1f3">Lojas, editoras e formatos disponíveis.</text>
   <g transform="translate(120, 555)">
     <rect width="280" height="40" rx="20" fill="rgba(249,126,7,0.18)" stroke="rgba(249,126,7,0.45)" stroke-width="1"/>
     <text x="140" y="26" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="600" fill="#ffbc4a" letter-spacing="2">KINDLEPORTUGAL.COM</text>

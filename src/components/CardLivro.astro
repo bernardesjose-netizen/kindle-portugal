@@ -5,7 +5,8 @@ import { linkWook } from '@lib/wook';
 import { urlAfiliado } from '@lib/afiliados';
 
 interface Props {
-  asin: string;
+  asin?: string;
+  formato?: 'ebook' | 'papel';
   titulo: string;
   autor: string;
   editora: string;
@@ -18,7 +19,7 @@ interface Props {
   capaAmazon?: string;
 }
 
-const { asin, titulo, autor, editora, ano, marketplace = 'es', comentario, numero, urlWook, fonteEdicao, capaAmazon } = Astro.props;
+const { asin, formato = 'ebook', titulo, autor, editora, ano, marketplace = 'es', comentario, numero, urlWook, fonteEdicao, capaAmazon } = Astro.props;
 
 const capaSrc = urlCapaLivro(asin, 'medio', capaAmazon);
 const dominioPorMarketplace: Record<string, string> = {
@@ -30,7 +31,9 @@ const dominioPorMarketplace: Record<string, string> = {
   it: 'amazon.it',
 };
 const dominio = dominioPorMarketplace[marketplace];
-const linkCompra = urlAfiliado(`https://www.${dominio}/dp/${asin}/`);
+const linkCompra = formato === 'papel'
+  ? fonteEdicao
+  : asin ? urlAfiliado(`https://www.${dominio}/dp/${asin}/`) : undefined;
 const linkWookAfiliado = urlWook ? linkWook(urlWook) : undefined;
 
 // Os parágrafos do comentário separam-se por linhas em branco no YAML.
@@ -84,30 +87,30 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
       </div>
 
       <div class="mt-5 flex flex-wrap gap-3">
-        <a
+        {linkCompra && <a
           href={linkCompra}
-          rel="nofollow sponsored noopener"
+          rel={formato === 'ebook' ? 'nofollow sponsored noopener' : 'noopener'}
           class="inline-flex items-center gap-2 rounded-lg bg-marinho-900 px-4 py-2.5 text-sm font-semibold text-creme-50 transition-colors hover:bg-marca-700"
         >
-          Ver ebook na {dominio.replace('amazon', 'Amazon')}
+          {formato === 'papel' ? 'Ver edição em papel' : 'Ver ebook na ' + dominio.replace('amazon', 'Amazon')}
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M5 12h14M13 5l7 7-7 7"/>
           </svg>
-        </a>
+        </a>}
         {linkWookAfiliado && (
           <a
             href={linkWookAfiliado}
             rel="nofollow sponsored noopener"
             class="inline-flex items-center gap-2 rounded-lg border border-marinho-900 px-4 py-2.5 text-sm font-semibold text-marinho-900 transition-colors hover:bg-marinho-900 hover:text-creme-50"
           >
-            Comprar na Wook
+            Ver na Wook
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M5 12h14M13 5l7 7-7 7"/>
             </svg>
           </a>
         )}
       </div>
-      <LojasAmazonSecundarias nome={`${titulo} ${autor} ${editora}`} asin={asin} principal={marketplace} categoria="digital-text" />
+      <LojasAmazonSecundarias nome={`${titulo} ${autor} ${editora}`} asin={asin} principal={formato === 'papel' ? null : marketplace} categoria={formato === 'papel' ? 'stripbooks' : 'digital-text'} />
       {fonteEdicao && (
         <p class="mt-3 text-sm text-marinho-600">
           <a href={fonteEdicao} class="underline decoration-marinho-300 underline-offset-3 hover:text-marca-700">Ficha editorial</a>

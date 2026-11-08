@@ -27,7 +27,7 @@ seo:
 import LojasAmazon from '@components/afiliados/LojasAmazon.astro';
 import ImagemProduto from '@components/afiliados/ImagemProduto.astro';
 
-As **marcações** (em inglês *highlights*) e as **notas** são, talvez, a funcionalidade do Kindle mais subutilizada por quem o tem. Servem para guardar uma frase que fica a martelar na cabeça, juntar argumentos para um trabalho académico, montar uma "pilha de citações" para revisitar, ou simplesmente lembrar porque é que aquela página merecia ser revista. Este guia explica tudo o que precisas: como criar, onde ficam guardadas, como vê-las todas num só sítio, como exportar para fora do ecossistema Amazon e como integrar com o Notion, Obsidian ou Readwise.
+As **marcações** guardam passagens de um livro. Nas **notas**, podes escrever um comentário associado ao texto. Podes consultá-las no Kindle e, quando estão sincronizadas, na conta. Antes de exportares, confirma os limites da edição e a forma como o livro chegou ao aparelho.
 
 ## Em resumo
 
@@ -78,11 +78,11 @@ O Kindle guarda as anotações em **dois sítios em simultâneo**, e perceber a 
 
 **1. Na cloud Amazon (Whispersync para Marcações).** Se o livro foi comprado, emprestado (KU/Prime Reading) ou enviado via *Send to Kindle* para um ficheiro associado à tua conta, as marcações sincronizam automaticamente entre todos os dispositivos da mesma conta. Se sublinhas no Paperwhite hoje, a marcação aparece no Scribe amanhã e na app do telemóvel daqui a 5 segundos.
 
-**2. Localmente, no ficheiro `My Clippings.txt`.** Independentemente do que sincroniza ou não para a cloud, o Kindle escreve **tudo** num ficheiro de texto simples na pasta `documents`. Este ficheiro é o teu seguro: nunca depende da Amazon, nunca expira, e podes lê-lo num bloco de notas.
+**2. Localmente, no ficheiro `My Clippings.txt`.** Independentemente do que sincroniza ou não para a cloud, o Kindle regista marcações num ficheiro de texto simples na pasta `documents`. Podes copiar o ficheiro e abri-lo num editor de texto para veres o que contém.
 
 A diferença importa em três casos:
 
-- **Livros sem DRM** (EPUBs próprios, PDFs convertidos com Calibre, ebooks do Projecto Gutenberg): as marcações **só ficam no `My Clippings.txt`**. Não vão para a cloud nem aparecem em `notebook`.
+- **Ficheiros copiados por USB:** guarda uma cópia das anotações locais. Nos documentos enviados pelo Send to Kindle, a sincronização depende do formato e das funções suportadas.
 - **Livros do Kindle Unlimited** que devolves: a marcação desaparece do dispositivo, mas a Amazon mantém o registo na cloud associado ao teu histórico, e reaparece se voltares a empréstimo.
 - **PDFs enviados por *Send to Kindle*** (não convertidos): as marcações em PDF têm comportamento errático e nem sempre sincronizam.
 
@@ -188,7 +188,7 @@ O **Calibre** (o gestor de ebooks gratuito que cobrimos no [guia dedicado](/guia
 
 ## Sincronizar com Notion, Obsidian, Roam ou Logseq
 
-A pergunta mais comum no email do site: "como passo as minhas marcações Kindle para o Notion (ou Obsidian)?". Em 2026, há essencialmente três caminhos:
+Para passares marcações para o Notion ou o Obsidian, podes comparar estes três caminhos.
 
 1. **Readwise (recomendado).** Configuras a integração com Notion ou o plugin oficial para Obsidian, e cada marcação nova aparece na tua base como uma nova página/bloco, com título do livro, autor, localização, e a tua nota. Suporta templates personalizáveis.
 2. **Exportação manual em Markdown** via Klib, Kindle Mate ou KindleClippings.com, e arrastar para a pasta do Obsidian. Bom para arquivos antigos; mau para uso contínuo.
@@ -260,7 +260,7 @@ Em qualquer Kindle podes adicionar marcadores. Para **escrever** sobre o PDF e f
 - Cuidado com o **clipping limit**: nem todas as marcações exportam, e o limite vem do editor.
 - Para uso ocasional, copia manualmente do Notebook ou usa o KindleClippings.com gratuito.
 - Para uso regular e integração com Notion/Obsidian/Roam, o **Readwise** é a solução paga que vale o investimento a partir de 10-12 livros por ano.
-- Em livros sem DRM (Projecto Gutenberg, EPUBs próprios), tudo vive no `My Clippings.txt`. Faz cópia de segurança ocasional.
+- Se copiaste o livro por USB, guarda também as anotações locais. Confirma o conteúdo do `My Clippings.txt` antes de repores o Kindle.
 
 Para tirar partido total disto, ajuda ter um Kindle confortável de andar contigo, sublinhar não custar uma volta ao quarto. O Paperwhite continua a ser o equilíbrio ideal para quem lê todos os dias e quer marcar; o Scribe é a opção para quem combina leitura e tomar notas longas à mão.
 

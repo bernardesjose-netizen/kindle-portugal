@@ -18,9 +18,9 @@
   <rect width="1200" height="630" fill="url(#glow1)"/>
   <rect width="1200" height="630" fill="url(#glow2)"/>
   <text x="120" y="220" font-family="Fraunces,Georgia,serif" font-size="40" font-weight="500" fill="#cfe1f3" opacity="0.7">Blog</text>
-  <text x="120" y="320" font-family="Fraunces,Georgia,serif" font-size="78" font-weight="700" fill="#fefbf5" letter-spacing="-3">Comprar sem IVA</text>
-  <text x="120" y="402" font-family="Fraunces,Georgia,serif" font-size="78" font-weight="700" fill="#f97e07" letter-spacing="-3">com NIF de empresa</text>
-  <text x="120" y="490" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="500" fill="#cfe1f3">O processo Amazon Business para empresas em Portugal.</text>
+  <text x="120" y="320" font-family="Fraunces,Georgia,serif" font-size="78" font-weight="700" fill="#fefbf5" letter-spacing="-3">Amazon Business</text>
+  <text x="120" y="402" font-family="Fraunces,Georgia,serif" font-size="78" font-weight="700" fill="#f97e07" letter-spacing="-3">NIF da empresa</text>
+  <text x="120" y="490" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="500" fill="#cfe1f3">Faturas e IVA para empresas em Portugal.</text>
   <g transform="translate(120, 555)">
     <rect width="280" height="40" rx="20" fill="rgba(249,126,7,0.18)" stroke="rgba(249,126,7,0.45)" stroke-width="1"/>
     <text x="140" y="26" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="600" fill="#ffbc4a" letter-spacing="2">KINDLEPORTUGAL.COM</text>

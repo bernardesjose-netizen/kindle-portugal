@@ -32,7 +32,7 @@
 
   <text x="120" y="425" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="44" font-weight="500" fill="#cfe1f3" letter-spacing="-0.8">O que vais encontrar aqui</text>
 
-  <text x="120" y="490" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="22" font-weight="400" fill="#a4cde9">Reviews, guias e dicas em português europeu — sem floreados.</text>
+  <text x="120" y="490" font-family="'Bricolage Grotesque',Inter,Arial,sans-serif" font-size="22" font-weight="400" fill="#a4cde9">Guias e comparações em português de Portugal.</text>
 
   <g transform="translate(120, 555)">
     <rect width="280" height="40" rx="20" fill="rgba(249,126,7,0.18)" stroke="rgba(249,126,7,0.45)" stroke-width="1"/>

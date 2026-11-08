@@ -77,7 +77,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 45,
     verificado_em: VERIF_ULTIMA,
     resumo:
-      'Auscultadores de diadema com cancelamento de ruído e até 80 horas de bateria anunciadas. Quase metade do preço de lançamento, num modelo com pouco mais de um ano.',
+      "Auscultadores de diadema com cancelamento de ruído. A autonomia anunciada chega a 80 horas em condições de teste, consoante o modo de utilização.",
   },
   {
     marca: 'Sony',
@@ -89,7 +89,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 41,
     verificado_em: VERIF_ULTIMA,
     resumo:
-      'Auriculares sem fios pequenos e leves, com o som equilibrado da Sony. Não têm cancelamento de ruído, mas a este preço e com milhares de avaliações são aposta segura.',
+      "Auriculares Bluetooth compactos. Podes ligá-los a dois aparelhos ao mesmo tempo e ativar o modo de som ambiente.",
   },
   {
     marca: 'Samsung',
@@ -104,7 +104,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'Os auriculares topo de gama da Samsung, com cancelamento de ruído, a menos de metade do preço recomendado. Fazem mais sentido para quem tem um telemóvel Galaxy.',
+      "Auriculares Samsung com cancelamento de ruído. Algumas funções exigem um telemóvel Galaxy compatível.",
   },
   {
     marca: 'Belkin',
@@ -116,7 +116,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 55,
     verificado_em: VERIF_ULTIMA,
     resumo:
-      'Carregador de parede com duas portas USB-C: telemóvel e Kindle ao mesmo tempo, ou um portátil leve. O maior desconto desta lista.',
+      "Carregador de duas portas USB-C. Confirma a potência disponível por porta se queres carregar um portátil e outro aparelho ao mesmo tempo.",
   },
   {
     marca: 'Belkin',
@@ -128,7 +128,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 49,
     verificado_em: VERIF_ULTIMA,
     resumo:
-      'Três portas USB-C e potência para carregar um MacBook Air. Para quem quer deixar de andar com vários carregadores na mala.',
+      "Três portas USB-C com potência máxima de 67 W. Quando ligas vários aparelhos, a potência é repartida pelas portas.",
   },
   {
     marca: 'Logitech',
@@ -140,7 +140,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 43,
     verificado_em: VERIF_ULTIMA,
     resumo:
-      'O rato simples que a Logitech vende há anos, com recetor USB e pilha que dura meses. Milhares de avaliações, por menos de 10 €.',
+      "Rato sem fios com recetor USB. Podes usá-lo com a mão esquerda ou direita.",
   },
   {
     marca: 'Philips',
@@ -152,7 +152,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 47,
     verificado_em: VERIF_ULTIMA,
     resumo:
-      'Duas escovas elétricas topo de gama da Philips, com sensor de pressão e aplicação, quase a metade do preço. Faz sentido para um casal: cada escova sai a cerca de 135 €.',
+      "Conjunto de duas escovas elétricas com sensor de pressão. Vê na ficha os acessórios incluídos.",
   },
   {
     marca: 'Philips',
@@ -167,7 +167,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'A mesma escova topo de gama do pack de duas, vendida sozinha: sensor de pressão e aplicação. A menos de metade do preço recomendado.',
+      "Escova elétrica com sensor de pressão e ligação à aplicação. Esta é a versão vendida individualmente.",
   },
   {
     marca: 'Oral-B',
@@ -182,7 +182,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'Escova elétrica da gama iO, com sensor de pressão e três cabeças incluídas. Quase metade do preço, e com cabeças para os primeiros meses.',
+      "Escova elétrica da gama iO, com sensor de pressão e três cabeças incluídas.",
   },
   {
     marca: 'iRobot',
@@ -194,7 +194,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 48,
     verificado_em: VERIF_ULTIMA,
     resumo:
-      'Robot 2 em 1 que aspira e passa a mopa, com base que esvazia o depósito sozinha, por menos de 200 €. É um modelo de entrada da gama Roomba.',
+      "Robô que aspira e passa a mopa. A base esvazia o depósito de pó, mas tens de tratar do pano e do reservatório de água.",
   },
   {
     marca: 'Samsung',
@@ -209,7 +209,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'A versão sem «Pro» dos auriculares da Samsung, com cancelamento de ruído e carregador incluído, a menos de metade do preço recomendado. Tal como os Pro, fazem mais sentido com um telemóvel Galaxy.',
+      "Auriculares Samsung com cancelamento de ruído e carregador incluído nesta ficha. Confirma os aparelhos compatíveis com as funções que queres usar.",
   },
   {
     marca: 'Technics',
@@ -224,7 +224,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'Os auriculares topo de gama da Technics, a marca de áudio da Panasonic, com cancelamento de ruído. Para quem dá prioridade à qualidade de som, estão 42 % abaixo do preço recomendado.',
+      "Auriculares Technics com cancelamento de ruído. Vê as opções de ligação e de controlo na ficha do fabricante.",
   },
   {
     marca: 'Philips',
@@ -239,7 +239,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'A máquina de barbear rotativa topo de gama da Philips, a metade do preço recomendado. Faz sentido para quem faz a barba todos os dias e quer uma máquina para muitos anos.',
+      "Máquina de barbear rotativa da Philips. Confirma os acessórios incluídos e o preço das cabeças de substituição.",
   },
   {
     marca: 'Braun',
@@ -254,7 +254,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'Máquina de barbear de lâminas da Braun, a metade do preço recomendado e com milhares de avaliações. Uma escolha simples para o dia a dia, sem pagar a gama alta.',
+      "Máquina de barbear de lâminas da gama Series 5 da Braun. Vê os acessórios desta variante na ficha.",
   },
   {
     marca: 'Philips',
@@ -269,7 +269,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'Aspirador de trenó sem saco, de 900 W e tamanho compacto, com dezenas de milhares de avaliações. Um aspirador simples para casas pequenas, a pouco mais de metade do preço.',
+      "Aspirador de trenó sem saco, de 900 W. O depósito pode ser retirado para esvaziares o pó.",
   },
   {
     marca: 'Samsung',
@@ -284,7 +284,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'O relógio inteligente da Samsung com Galaxy AI, na versão de 40 mm, 42 % abaixo do preço recomendado. Só funciona com telemóveis Android: para quem tem iPhone, não serve.',
+      "Galaxy Watch8 de 40 mm para telemóveis Android compatíveis. Confirma os requisitos das funções Samsung que queres usar.",
   },
   {
     marca: 'AEG',
@@ -299,7 +299,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'Aspirador vertical sem fios que também se usa como aspirador de mão, com até 50 minutos de autonomia anunciados. A metade do preço recomendado e com milhares de avaliações.',
+      "Aspirador vertical sem fios que também podes usar como aspirador de mão. A AEG anuncia até 50 minutos de autonomia, consoante o modo e os acessórios.",
   },
   {
     marca: 'Philips',
@@ -314,7 +314,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'A OneBlade da Philips para aparar e rapar a barba e o corpo, com ligação Bluetooth à aplicação. Uma das máquinas de barba mais populares, 41 % abaixo do preço recomendado.',
+      "Máquina Philips OneBlade para aparar e rapar a barba e o corpo, com ligação Bluetooth à aplicação.",
   },
   {
     marca: 'TP-Link',
@@ -326,7 +326,7 @@ export const OFERTAS_MOMENTO: OfertaMomento[] = [
     desconto_pct: 41,
     verificado_em: VERIF_ULTIMA,
     resumo:
-      'Câmara de interior que roda 360°, com imagem 2K e deteção de pessoas. Para ver o cão, a casa de férias ou o bebé a partir do telemóvel, sem mensalidade obrigatória.',
+      "Câmara de interior com imagem 2K e rotação controlada pela aplicação. Podes ver a imagem e usar o áudio bidirecional no telemóvel.",
   },
 ];
 
@@ -366,7 +366,7 @@ export const TABLETS_TELEMOVEIS: OfertaMomento[] = [
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'O dobrável da Samsung com ecrã que fecha a meio e cabe em qualquer bolso. Com 40 % de desconto face ao preço de lançamento, é das maiores descidas de um Galaxy nesta campanha; ainda tem poucas avaliações por ser recente.',
+      "Telemóvel dobrável Samsung de 128 GB. O ecrã principal fecha a meio para reduzir o espaço ocupado no bolso.",
   },
   {
     marca: 'Samsung',
@@ -380,7 +380,7 @@ export const TABLETS_TELEMOVEIS: OfertaMomento[] = [
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'A versão mais acessível da gama S, com ecrã de 6,7 polegadas, câmara de 50 MP e 512 GB. Para quem quer um Galaxy de topo sem pagar o S25 completo.',
+      "Galaxy S25 FE com ecrã de 6,7 polegadas, câmara de 50 MP e 512 GB de armazenamento.",
   },
   {
     marca: 'Xiaomi',
@@ -394,7 +394,7 @@ export const TABLETS_TELEMOVEIS: OfertaMomento[] = [
     valida_ate: FIM_PBDD,
     so_prime: true,
     resumo:
-      'O Redmi Note mais completo deste ano, com 512 GB e bateria de 8340 mAh que aguenta folgadamente dois dias. Muito telemóvel por menos de 400 €.',
+      "Redmi Note 17 Pro 5G com 512 GB de armazenamento e bateria de 8340 mAh. A autonomia depende da utilização.",
   },
 ];
 
@@ -461,7 +461,7 @@ export const OFERTAS_ESTRELA: OfertaEstrela[] = [
     mostrar_ate: TROCA_DESTAQUE,
     so_prime: true,
     resumo:
-      'O Series 11 deu lugar ao Series 12 e baixou para o preço mais baixo de sempre na Amazon.es, segundo a Applesfera. Ecrã sempre ligado, qualidade do sono e monitorização de treino e saúde. Atenção: só funciona com iPhone.',
+      "Apple Watch com ecrã sempre ligado e funções de registo de atividade, sono e treino. Precisas de um iPhone compatível para o configurares.",
   },
   // Destaque principal a partir de 07/10, ~13h30 (pedido do utilizador: "muda
   // o destaque principal para Kindle", trocando com os Galaxy Buds3 Pro, que
@@ -480,7 +480,7 @@ export const OFERTAS_ESTRELA: OfertaEstrela[] = [
     verificado_em: new Date('2026-10-07T13:16:00+01:00'),
     valida_ate: FIM_PBDD,
     resumo:
-      'O primeiro Kindle a cores, quase a metade do preço: capas, banda desenhada e sublinhados a cores, com a autonomia de semanas de um Kindle. A ficha indicava só três unidades em stock.',
+      "Colorsoft de 16 GB com ecrã a cores para capas, banda desenhada e destaques. O preço e a indicação de stock deste registo pertencem à verificação de outubro.",
   },
 ];
 

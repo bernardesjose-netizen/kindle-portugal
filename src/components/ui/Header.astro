@@ -4,9 +4,9 @@ import { SITE, NAVEGACAO_PRINCIPAL } from '@lib/site';
 import { caminhoPublico } from '@lib/urls';
 
 const caminhoAtual = caminhoPublico(Astro.url.pathname);
-const principais = ['/modelos', '/guias', '/blog', '/tres-livros', '/montra'];
-const atalhos = NAVEGACAO_PRINCIPAL.filter(({ href }) => principais.includes(href))
-  .sort((a, b) => principais.indexOf(a.href) - principais.indexOf(b.href));
+const atalhos = NAVEGACAO_PRINCIPAL.filter((item) => item.visivel !== 'menu');
+const classesBarra = { tablet: 'md:block', portatil: 'lg:block', desktop: 'xl:block' };
+const classesMenu = { menu: '', tablet: 'md:hidden', portatil: 'lg:hidden', desktop: 'xl:hidden' };
 const caminhoAtivo = NAVEGACAO_PRINCIPAL
   .filter(({ href }) => caminhoAtual === href || (href !== '/' && caminhoAtual.startsWith(href + '/')))
   .sort((a, b) => b.href.length - a.href.length)[0]?.href;
@@ -14,8 +14,8 @@ const caminhoAtivo = NAVEGACAO_PRINCIPAL
 
 <header class="sticky top-0 z-40 border-b border-marinho-200/70 bg-creme-50/95 shadow-suave backdrop-blur-md">
   <div class="h-0.5 bg-gradient-to-r from-marca-600 via-marca-300 to-oceano-600" aria-hidden="true"></div>
-  <Container largura="largo" classe="flex min-h-16 items-center justify-between gap-4 py-2 lg:gap-8">
-    <a href="/" class="group flex min-h-11 shrink-0 items-center gap-2.5 rounded-md text-marinho-900" aria-label={SITE.nome}>
+  <Container largura="largo" classe="flex min-h-16 items-center justify-between gap-3 py-2 xl:gap-5">
+    <a href="/" class="group flex min-h-11 shrink-0 items-center gap-2.5 rounded-md text-marinho-900" aria-label={SITE.nome + ' · Início'} aria-current={caminhoAtual === '/' ? 'page' : undefined}>
       <svg
         class="h-9 w-9 shrink-0"
         viewBox="0 0 32 32"
@@ -33,10 +33,10 @@ const caminhoAtivo = NAVEGACAO_PRINCIPAL
       </span>
     </a>
 
-    <nav aria-label="Navegação principal" class="flex min-w-0 items-center gap-2 lg:gap-3">
-      <ul class="hidden items-center gap-1.5 text-sm lg:flex">
+    <nav aria-label="Navegação principal" class="flex min-w-0 items-center gap-2">
+      <ul class="barra-links hidden items-center text-sm md:flex xl:gap-1">
         {atalhos.map((item) => (
-          <li>
+          <li class:list={['hidden', classesBarra[item.visivel]]}>
             <a
               href={item.href}
               class:list={['nav-link', caminhoAtivo === item.href && 'ativo']}
@@ -48,16 +48,20 @@ const caminhoAtivo = NAVEGACAO_PRINCIPAL
         ))}
       </ul>
 
-      <details data-menu-principal class="relative">
+      <details data-menu-principal class="relative xl:hidden">
         <summary class="menu-toggle flex min-h-11 cursor-pointer items-center gap-2 rounded-lg border border-marinho-200 bg-white px-3 text-sm font-semibold text-marinho-900 transition-colors hover:border-marca-700 hover:bg-marca-50">
-          <svg viewBox="0 0 24 24" class="size-4 shrink-0" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
+          <svg viewBox="0 0 24 24" class="size-4 shrink-0 md:hidden" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
             <path d="M4 6h16M4 12h16M4 18h16" />
           </svg>
-          Menu
+          <span class="md:hidden">Menu</span>
+          <span class="hidden md:inline">Mais</span>
+          <svg viewBox="0 0 16 16" class="hidden size-3 shrink-0 md:block" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="m4 6 4 4 4-4" />
+          </svg>
         </summary>
         <ul class="menu-painel absolute right-0 top-[calc(100%+0.75rem)] grid gap-1.5 rounded-2xl border border-marinho-200 bg-creme-50 p-3 text-sm shadow-forte min-[360px]:grid-cols-2">
           {NAVEGACAO_PRINCIPAL.map((item) => (
-            <li class:list={[principais.includes(item.href) && 'lg:hidden']}>
+            <li class={classesMenu[item.visivel]}>
               <a
                 href={item.href}
                 class:list={['nav-link w-full rounded-lg', caminhoAtivo === item.href && 'ativo']}
@@ -74,6 +78,11 @@ const caminhoAtivo = NAVEGACAO_PRINCIPAL
 </header>
 
 <style>
+  .barra-links .nav-link {
+    padding-inline: clamp(0.45rem, 0.7vw, 0.7rem);
+    white-space: nowrap;
+  }
+
   .menu-toggle {
     list-style: none;
   }

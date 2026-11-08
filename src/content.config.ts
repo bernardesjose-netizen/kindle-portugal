@@ -15,7 +15,9 @@ const seo = z.object({
 const livroDestaque = z.object({
   asin: z
     .string()
-    .regex(/^B0[A-Z0-9]{8}$/, 'ASIN inválido (deve começar por B0 e ter 10 caracteres)'),
+    .regex(/^B0[A-Z0-9]{8}$/, 'ASIN inválido (deve começar por B0 e ter 10 caracteres)')
+    .optional(),
+  formato: z.enum(['ebook', 'papel']).default('ebook'),
   titulo: z.string(),
   autor: z.string(),
   editora: z.string(),
@@ -25,6 +27,8 @@ const livroDestaque = z.object({
   url_wook: z.string().url().optional(),
   fonte_edicao: z.string().url().optional(),
   capa_amazon: z.string().url().optional(),
+}).refine((livro) => livro.formato === 'papel' ? Boolean(livro.fonte_edicao) : Boolean(livro.asin), {
+  message: 'Um ebook exige ASIN confirmado. Uma edição em papel exige fonte editorial.',
 });
 
 const modelos = defineCollection({

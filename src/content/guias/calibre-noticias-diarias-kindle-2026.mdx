@@ -34,9 +34,9 @@ import LojasAmazon from '@components/afiliados/LojasAmazon.astro';
 import fotoCafe from '@/assets/imagens/guias/send-to-kindle-cafe.jpg';
 import fotoCama from '@/assets/imagens/guias/send-to-kindle-cama.jpg';
 
-Acordar e ter o **Público do dia** já no Kindle, formatado como um livro, sem publicidade e sem *paywalls* visuais, só texto, fonte ajustável, leitura fluída. É possível, é gratuito e demora dez minutos a configurar. Este guia mostra como, usando o **Calibre News Downloader** (uma das funcionalidades mais subestimadas do programa) combinado com o **[Send to Kindle](/guias/send-to-kindle-enviar-ebooks-2026)** para a entrega automática.
+Podes usar o **Calibre News Downloader** para reunir notícias de fontes compatíveis num ebook e enviá-lo pelo **[Send to Kindle](/guias/send-to-kindle-enviar-ebooks-2026)**. A receita de cada jornal determina o que é descarregado. Para artigos de acesso reservado, continuas a precisar de uma subscrição e de uma receita que a suporte.
 
-Vamos cobrir os três caminhos: as **receitas que o Calibre já traz** para imprensa portuguesa, o **modo básico** para escrever uma receita sem mexer em código, e **sete receitas prontas a usar** que escrevemos para os jornais que faltam na lista oficial.
+Podes começar pelas **receitas que o Calibre já traz** para a imprensa portuguesa. Também podes criar uma no **modo básico** ou experimentar as **sete receitas** que disponibilizamos neste guia.
 
 <div class="my-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
   <ImagemProduto asin="B0G4SHH6YH" alt="Kindle de 6″ (2026), 16 GB" marketplace="es" formato="pequeno" />
@@ -50,7 +50,7 @@ Vamos cobrir os três caminhos: as **receitas que o Calibre já traz** para impr
 - O **Calibre** sabe descarregar feeds RSS, formatá-los como livro e enviar para o Kindle, **automaticamente**, todos os dias.
 - Vem com **5 receitas portuguesas** pré-instaladas, das quais 3 são úteis em 2026: **Correio da Manhã**, **Deutsche Welle (PT)** e **Público.PT** (esta última requer subscrição).
 - Para o que falta (Expresso, Observador, DN, Record, RTP, Notícias ao Minuto), **escrevemos 7 receitas** prontas a usar, descarregáveis abaixo.
-- O agendamento corre **no teu computador** com o Calibre aberto (não em servidor): acordas e o jornal já lá está.
+- O agendamento corre **no teu computador**, com o Calibre aberto e ligação à Internet.
 - Entrega ao Kindle via **[Send to Kindle](/guias/send-to-kindle-enviar-ebooks-2026)** por email, sem cabos.
 - **A Bola, O Jogo, Jornal de Notícias**: sem feeds oficiais ativos em 2026. Alternativas no fim do guia.
 
@@ -65,7 +65,7 @@ O ficheiro Python que diz ao Calibre como tratar cada site chama-se **receita** 
 - O **idioma** do conteúdo
 - Regras opcionais de **limpeza** (remover anúncios, partilhas sociais, comentários)
 
-O resultado é um livro digital de tamanho razoável (1 a 5 MB), tipografia decente, índice clicável e zero publicidade. No Kindle abre-se como qualquer livro comprado na Amazon.
+O resultado é um ebook com índice, cuja formatação depende da receita e do conteúdo que o site disponibiliza. No Kindle abre-se como qualquer livro comprado na Amazon.
 
 ## As receitas portuguesas que o Calibre já traz
 
@@ -110,7 +110,7 @@ Em vez de agendar logo, faz uma busca única para confirmares que funciona:
 
 O Calibre vai mostrar uma barra de progresso. Demora **30 segundos a 3 minutos** dependendo do tamanho do feed e da tua ligação. Quando acaba, o livro aparece na **biblioteca Calibre** com o título "Correio da Manhã - Portugal" e a data de hoje.
 
-**Para abrir e confirmar:** duplo-clique no livro → abre no leitor interno do Calibre. Vê se os artigos chegam completos, com tipografia limpa, e sem restos de menu lateral.
+**Para abrir e confirmar:** duplo clique no livro → abre no leitor interno do Calibre. Vê se os artigos chegam completos, com tipografia limpa, e sem restos de menu lateral.
 
 ## Agendamento: receber todos os dias sem mexer
 
@@ -206,11 +206,11 @@ Quando o jornal tem **múltiplas secções** (Notícias ao Minuto tem 11, RTP te
 | **Notícias ao Minuto** | Multi-secção | **11** | [`noticias-ao-minuto.recipe`](/recipes/noticias-ao-minuto.recipe) |
 | **RTP Notícias** | Multi-secção | **7** | [`rtp-noticias.recipe`](/recipes/rtp-noticias.recipe) |
 
-> **Nota honesta:** estas receitas foram escritas com base nos feeds RSS oficiais e algoritmo de limpeza automática do Calibre (`auto_cleanup = True`). Funcionam bem para a maioria dos artigos, mas podem ter pequenas imperfeições na **extração de conteúdo** (artigos truncados, sobras de menu lateral). Se reparares em algum problema sistemático, abre o `.recipe` num editor de texto e ajusta as regras de `remove_tags`. É Python simples, sem dependências exóticas.
+> **Sobre estas receitas.** Estas receitas foram escritas com base nos feeds RSS oficiais e algoritmo de limpeza automática do Calibre (`auto_cleanup = True`). Confirma a **extração de conteúdo** depois de descarregares (artigos truncados, sobras de menu lateral). Se reparares em algum problema sistemático, abre o `.recipe` num editor de texto e ajusta as regras de `remove_tags`. É Python simples, sem dependências exóticas.
 
-## Caso prático: a tua manhã idealizada
+## Exemplo de agendamento
 
-Imagina o seguinte fluxo, todo automático:
+Depois de testares uma receita, podes agendá-la para antes da hora a que costumas ler.
 
 <figure class="my-8 overflow-hidden rounded-2xl border border-marinho-200 bg-creme-50 shadow-[var(--shadow-suave)]">
   <Image
@@ -222,17 +222,17 @@ Imagina o seguinte fluxo, todo automático:
     loading="lazy"
   />
   <figcaption class="px-5 py-3 text-xs text-marinho-600 border-t border-marinho-100">
-    Cinco minutos de configuração rendem-te dois jornais frescos na cama, todos os dias, sem ver um anúncio.
+    Confirma o resultado de cada receita antes de agendares o envio para o Kindle.
   </figcaption>
 </figure>
 
 - **06:00**: Calibre desperta, descarrega Público, Expresso e RTP.
-- **06:03**: Cada um chega ao teu `@kindle.com` por email.
-- **06:05**: Kindle (ligado a Wi-Fi) recebe os três ebooks e sincroniza.
-- **07:30**: Acordas. Pegas no Kindle. Tens **três jornais frescos** com leitura ajustável, índice clicável, sem publicidade.
+- **Depois da descarga**: o Calibre envia os ficheiros para o teu `@kindle.com`.
+- **Com Wi-Fi ligado**: o Kindle recebe os documentos depois de a Amazon os processar.
+- **Antes de saíres**: confirma se os documentos chegaram e se os artigos estão legíveis.
 - **08:15**: Sais de casa. O Kindle desligado fica na carteira ou bolso, sem precisar de Wi-Fi para continuares.
 
-Investimento de uma vez: 10-15 minutos. Resultado: 30 a 60 minutos de boa leitura por dia, semana após semana.
+Se uma receita deixar de funcionar, testa o feed e revê a configuração antes de voltares a agendá-la.
 
 ## A Bola, O Jogo, Jornal de Notícias: o que fazer
 
@@ -261,7 +261,7 @@ O agendamento exige o Calibre **aberto**. Soluções: (a) abrir o Calibre logo q
 
 **"Não consigo configurar o SMTP do Gmail / Outlook."**
 - **Gmail**: precisas de **password de aplicação** (não a tua password normal). Gera uma em [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords).
-- **Outlook.com**: usa porta 587, TLS, password normal funciona se não tiveres autenticação a 2 fatores; senão também precisas de password de aplicação.
+- **Outlook.com**: consulta as instruções atuais da Microsoft para o método de autenticação aceite. O servidor pode recusar uma ligação SMTP baseada apenas em palavra-passe.
 - **iCloud**: usa `smtp.mail.me.com`, porta 587, password de aplicação obrigatória.
 
 ## Perguntas frequentes
@@ -296,10 +296,10 @@ Existem todos no catálogo oficial Calibre, são mantidos ativamente e funcionam
 - Em PT, vêm 3 receitas úteis built-in (**Correio da Manhã**, **DW**, **Público** com subscrição).
 - Para os jornais que faltam, ou usas o **modo básico** com a URL do feed, ou descarregas as nossas **7 receitas prontas**.
 - O agendamento é simples mas precisa do Calibre **aberto** à hora marcada.
-- A entrega ao Kindle faz-se pelo **Send to Kindle** via email, configura uma vez, esquece para sempre.
+- A entrega ao Kindle faz-se pelo **Send to Kindle** via email, testa o primeiro envio e confirma os resultados depois de uma alteração da receita.
 - **A Bola, O Jogo, JN**: sem RSS oficial, alternativas no Record + Notícias ao Minuto + RTP Desporto.
 
-Em 15 minutos de configuração rendes-te a um fluxo que outras pessoas pagam para ter. O Kindle deixa de ser só o aparelho dos romances e passa a ser também o jornal da manhã, sem publicidade, sem distrações, e com tipografia bem melhor do que qualquer site português permite.
+Começa por uma fonte e testa a leitura no Kindle. Se o resultado te serve, agenda o envio e acrescenta outras receitas aos poucos.
 
 <figure class="my-8 overflow-hidden rounded-2xl border border-marinho-200 bg-creme-50 shadow-[var(--shadow-suave)]">
   <Image
@@ -311,7 +311,7 @@ Em 15 minutos de configuração rendes-te a um fluxo que outras pessoas pagam pa
     loading="lazy"
   />
   <figcaption class="px-5 py-3 text-xs text-marinho-600 border-t border-marinho-100">
-    Café da manhã, jornal no Kindle, sem publicidade nem pop-ups. É o que o Calibre faz por ti.
+    Podes ler as notícias descarregadas sem manteres o Kindle ligado ao Wi-Fi.
   </figcaption>
 </figure>
 
