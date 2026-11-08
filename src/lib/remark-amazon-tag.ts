@@ -61,6 +61,21 @@ function aplicarTag(urlStr: string): string {
   }
 }
 
+// Worten (programa Awin): links markdown para worten.pt passam pelo link
+// de afiliado Awin. Mesmos valores de src/lib/worten.ts (duplicados aqui
+// porque este plugin corre em Node, fora do Vite).
+const AWIN_MID_WORTEN = '99897';
+function awinAffid(): string {
+  return process.env.PUBLIC_AWIN_AFFID || '2950455';
+}
+function ehWorten(hostname: string): boolean {
+  const h = hostname.toLowerCase();
+  return h === 'worten.pt' || h.endsWith('.worten.pt');
+}
+function linkWorten(urlStr: string): string {
+  return `https://www.awin1.com/cread.php?awinmid=${AWIN_MID_WORTEN}&awinaffid=${awinAffid()}&ued=${encodeURIComponent(urlStr)}`;
+}
+
 interface MdastNode {
   type: string;
   url?: string;
@@ -74,7 +89,10 @@ const REL_AFILIADO = 'sponsored nofollow noopener';
 function reescreverLinks(node: MdastNode): void {
   if (node.type === 'link' && node.url) {
     try {
-      if (detetarMarketplace(new URL(node.url).hostname)) {
+      if (ehWorten(new URL(node.url).hostname)) {
+        node.url = linkWorten(node.url);
+        node.data = { ...node.data, hProperties: { ...node.data?.hProperties, rel: REL_AFILIADO } };
+      } else if (detetarMarketplace(new URL(node.url).hostname)) {
         node.url = aplicarTag(node.url);
         if (new URL(node.url).searchParams.has('tag')) {
           node.data = { ...node.data, hProperties: { ...node.data?.hProperties, rel: REL_AFILIADO } };

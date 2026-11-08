@@ -5,6 +5,7 @@ import LinkPrecos from '@components/afiliados/LinkPrecos.astro';
 import LinkAvaliacoes from '@components/afiliados/LinkAvaliacoes.astro';
 import { urlAfiliado } from '@lib/afiliados';
 import { linkWook } from '@lib/wook';
+import { linkWorten } from '@lib/worten';
 import { formatarPreco, formatarData } from '@lib/formatters';
 
 interface Props {
@@ -66,8 +67,8 @@ if (loja === 'amazon' && asin) {
 if (urlWorten) {
   botoes.push({
     rotulo: 'Ver na Worten',
-    url: urlWorten,
-    rel: 'nofollow noopener',
+    url: linkWorten(urlWorten),
+    rel: 'nofollow sponsored',
     principal: loja === 'worten',
   });
 }

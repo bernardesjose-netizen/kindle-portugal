@@ -43,6 +43,13 @@ const modelos = defineCollection({
       preco_referencia_eur: z.number().positive().optional(),
       preco_data: z.coerce.date().optional(),
       url_amazon: z.string().url().optional(),
+      // Ficha na Worten (Portugal). Quando existe, o botão da Worten
+      // aparece antes do da Amazon. `worten_nota` explica a variante
+      // (p. ex. «versão com publicidade») e `worten_data` a data de leitura.
+      url_worten: z.string().url().optional(),
+      worten_preco_eur: z.number().positive().optional(),
+      worten_data: z.coerce.date().optional(),
+      worten_nota: z.string().max(200).optional(),
       asin: z.string().optional(),
       // Stock na Amazon.es à data de `disponibilidade_data`. Sem este campo,
       // o site não afirma nada sobre o stock.

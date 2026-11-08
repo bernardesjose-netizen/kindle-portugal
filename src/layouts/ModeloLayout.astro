@@ -5,6 +5,7 @@ import LinkPrecos from '@components/afiliados/LinkPrecos.astro';
 import BaseLayout from './BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
 import BotaoAmazon from '@components/afiliados/BotaoAmazon.astro';
+import BotaoWorten from '@components/afiliados/BotaoWorten.astro';
 import ImagemProduto from '@components/afiliados/ImagemProduto.astro';
 import OrnamentoFundo from '@components/ui/OrnamentoFundo.astro';
 import FotoFundoDecorativa from '@components/ui/FotoFundoDecorativa.astro';
@@ -120,6 +121,19 @@ const productLd = fichaJsonLd({
                   Variante e opções de entrega verificadas a{' '}
                   <time datetime={dataVerificacao.toISOString().slice(0, 10)}>{formatarData(dataVerificacao)}</time>.
                 </p>
+              )}
+              {d.url_worten && (
+                <div class="mt-4 rounded-xl border border-[#e3001b]/25 bg-[#e3001b]/5 p-4">
+                  <p class="text-sm leading-relaxed text-marinho-700">
+                    <strong>À venda na Worten, em Portugal.</strong>{' '}
+                    {d.worten_preco_eur && <>A {formatarPreco(d.worten_preco_eur)}{d.worten_data && <> (preço lido a {formatarData(d.worten_data)})</>}. </>}
+                    Fatura portuguesa, levantamento em loja e devolução numa loja Worten.
+                    {d.worten_nota && <> {d.worten_nota}</>}
+                  </p>
+                  <div class="mt-3">
+                    <BotaoWorten url={d.url_worten} tamanho="grande">Ver na Worten</BotaoWorten>
+                  </div>
+                </div>
               )}
               <div class="mt-4">
                 <BotaoAmazon url={d.url_amazon} tamanho="grande">
