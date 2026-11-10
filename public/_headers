@@ -15,3 +15,12 @@
 # alteração, por isso podem ficar em cache um ano sem revalidar.
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Recursos úteis para leitores de feeds e para descarregar no Calibre, mas que
+# não são páginas de resultados de pesquisa. O cabeçalho permite ao Google
+# rastrear os links sem tentar indexar o próprio XML/ficheiro de receita.
+/recipes/*
+  X-Robots-Tag: noindex, follow
+
+/*/rss.xml
+  X-Robots-Tag: noindex, follow
