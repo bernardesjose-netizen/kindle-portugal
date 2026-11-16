@@ -15,10 +15,8 @@ const entrada = modo === 'entrada';
 const agora = Date.now();
 const lista: readonly OfertaBlackFriday[] = OFERTAS_BLACK_FRIDAY_2026;
 const emCampanha = lista.filter(({ expiraEm }) => !expiraEm || Date.parse(expiraEm) > agora);
-const destaques = emCampanha.filter(({ destaque }) => destaque);
-const destaquesComFoto = destaques.filter(({ imagem }) => imagem);
-const destaquesSemFoto = destaques.filter(({ imagem }) => !imagem);
-const ofertas = entrada ? [...destaquesComFoto, ...destaquesSemFoto].slice(0, 6) : emCampanha;
+const ofertas = entrada ? emCampanha.filter(({ destaque }) => destaque).slice(0, 6) : emCampanha;
+const primeiraFoto = entrada ? ofertas.findIndex(({ imagem }) => Boolean(imagem)) : -1;
 const tituloId = entrada ? 'titulo-black-friday-entrada' : 'titulo-ofertas-black-friday';
 ---
 
@@ -66,7 +64,7 @@ const tituloId = entrada ? 'titulo-black-friday-entrada' : 'titulo-ofertas-black
       {ofertas.length > 0 && (
         <ul class:list={['mt-5 grid gap-4 sm:grid-cols-2', entrada ? 'lg:grid-cols-3' : 'xl:grid-cols-2']}>
           {ofertas.map((oferta, i) => (
-            <CartaoOfertaBlackFriday2026 oferta={oferta} carregarFoto={entrada && i === 0 ? 'eager' : 'lazy'} />
+            <CartaoOfertaBlackFriday2026 oferta={oferta} carregarFoto={i === primeiraFoto ? 'eager' : 'lazy'} />
           ))}
         </ul>
       )}

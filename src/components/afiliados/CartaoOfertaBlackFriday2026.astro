@@ -60,6 +60,13 @@ const temDataVerificacao = !Number.isNaN(dataVerificacao.valueOf());
         {imagem.fonte ? (
           <a href={imagem.fonte} target="_blank" rel="noopener" class="underline underline-offset-2">{imagem.credito}</a>
         ) : imagem.credito}
+        {imagem.licenca && (
+          <>
+            {' · '}
+            <a href={imagem.licenca.url} target="_blank" rel="noopener" class="underline underline-offset-2">{imagem.licenca.nome}</a>
+          </>
+        )}
+        {imagem.alteracao && ` · ${imagem.alteracao}`}
       </p>
     )}
     <div class="flex flex-1 flex-col p-4 sm:p-5">

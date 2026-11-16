@@ -1,6 +1,7 @@
 import fotoClara from '../assets/imagens/ofertas/kobo-clara-colour-preto-kyu3a.jpg';
 import fotoLibra from '../assets/imagens/ofertas/kobo-libra-colour-branco-kyu3a.jpg';
-import fotoColorsoft from '../assets/imagens/ofertas/kindle-colorsoft-primeira-geracao-kyu3a.jpg';
+import fotoSage from '../assets/imagens/ofertas/kobo-sage-preto-raymond-snijders.jpg';
+import fotoAirPods from '../assets/imagens/ofertas/apple-airpods-pro-3-branco-burkhard-mucke.jpg';
 import type { OfertaBlackFriday } from '@lib/black-friday-2026';
 
 const verificadaEm = '2026-11-16';
@@ -35,7 +36,6 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     loja: 'amazon',
     url: 'https://www.amazon.es/dp/B0CFPWLGF2',
     etiqueta: 'Black Friday antecipada',
-    destaque: true,
     verificadaEm,
   },
   {
@@ -44,14 +44,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     detalhe: 'A geração anterior do Colorsoft, indicada para quem quer ver capas, ilustrações e destaques a cores e não precisa dos 32 GB da edição Signature.',
     loja: 'amazon',
     url: 'https://www.amazon.es/dp/B0CX8MQF7R',
-    imagem: {
-      src: fotoColorsoft,
-      alt: 'Kindle Colorsoft de primeira geração num expositor de loja',
-      credito: 'Colorsoft de 1.ª geração em exposição. Foto de Kyu3a, CC BY-SA 4.0.',
-      fonte: 'https://commons.wikimedia.org/wiki/File:Amazon_Kindle_Colorsoft_-_1.jpg',
-    },
     etiqueta: 'Black Friday antecipada',
-    destaque: true,
     verificadaEm,
   },
   {
@@ -104,8 +97,10 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     imagem: {
       src: fotoLibra,
       alt: 'Kobo Libra Colour branco com ecrã a cores e botões de navegação',
-      credito: 'Kyu3a, CC BY-SA 4.0',
+      credito: 'Foto de Kyu3a',
       fonte: 'https://commons.wikimedia.org/wiki/File:Kobo_Libra_Colour.jpg',
+      licenca: { nome: 'CC BY-SA 4.0', url: 'https://creativecommons.org/licenses/by-sa/4.0/' },
+      alteracao: 'Redimensionada',
     },
     destaque: true,
     preco: '239,99 €',
@@ -122,8 +117,10 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     imagem: {
       src: fotoClara,
       alt: 'Kobo Clara Colour preto com capas de livros a cores no ecrã',
-      credito: 'Kyu3a, CC BY-SA 4.0',
+      credito: 'Foto de Kyu3a',
       fonte: 'https://commons.wikimedia.org/wiki/File:Kobo_Clara_Colour.jpg',
+      licenca: { nome: 'CC BY-SA 4.0', url: 'https://creativecommons.org/licenses/by-sa/4.0/' },
+      alteracao: 'Redimensionada',
     },
     destaque: true,
     alternativa: { loja: 'amazon', url: 'https://www.amazon.es/dp/B0CZY1LRT4' },
@@ -139,6 +136,15 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     loja: 'outra',
     nomeLoja: 'PcComponentes',
     url: 'https://www.pccomponentes.pt/kobo-sage-8-ereader-preto',
+    imagem: {
+      src: fotoSage,
+      alt: 'Kobo Sage preto com o nome do modelo visível nas definições de Bluetooth',
+      credito: 'Foto de Raymond Snijders',
+      fonte: 'https://www.flickr.com/photos/snijders73/51704673449/',
+      licenca: { nome: 'CC BY 2.0', url: 'https://creativecommons.org/licenses/by/2.0/' },
+      alteracao: 'Redimensionada',
+    },
+    destaque: true,
     preco: '303,99 €',
     referencia: 'Referência de 350,88 € indicada pela loja',
     etiqueta: 'Redução indicada na loja',
@@ -247,6 +253,27 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     loja: 'amazon',
     url: 'https://www.amazon.es/dp/B0F66XD5LF',
     etiqueta: 'Redução indicada na loja',
+    verificadaEm,
+  },
+  {
+    id: 'apple-airpods-pro-3',
+    nome: 'Auriculares Apple AirPods Pro 3, brancos',
+    detalhe: 'Para ouvir audiolivros no telemóvel por Bluetooth, com cancelamento ativo de ruído e estojo de carregamento USB-C. Vendidos e enviados pela PcComponentes.',
+    loja: 'outra',
+    nomeLoja: 'PcComponentes',
+    url: 'https://www.pccomponentes.pt/apple-airpods-pro-3-auriculares-bluetooth-com-cancelamento-ativo-de-ruido-usb-c-brancos',
+    imagem: {
+      src: fotoAirPods,
+      alt: 'Par de AirPods Pro 3 brancos com pontas de silicone',
+      credito: 'Foto de Burkhard Mücke',
+      fonte: 'https://commons.wikimedia.org/wiki/File:Airpods_Modell_Pro_3.jpg',
+      licenca: { nome: 'CC BY-SA 4.0', url: 'https://creativecommons.org/licenses/by-sa/4.0/' },
+      alteracao: 'Redimensionada',
+    },
+    destaque: true,
+    preco: '217,00 €',
+    referencia: 'PVP recomendado de 249 € indicado pela loja',
+    etiqueta: 'Black Friday PcComponentes',
     verificadaEm,
   },
 ] satisfies OfertaBlackFriday[];
