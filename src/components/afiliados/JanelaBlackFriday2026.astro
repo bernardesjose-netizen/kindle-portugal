@@ -1,0 +1,21 @@
+---
+import FasesCampanha from '@components/afiliados/FasesCampanha.astro';
+
+const inicio = '2026-11-16T00:00:00+01:00';
+const fim = '2026-11-30T23:59:59+01:00';
+const agora = Date.now();
+const duranteCampanha = agora >= Date.parse(inicio) && agora <= Date.parse(fim);
+---
+
+{duranteCampanha && (
+  <>
+    <div
+      data-campanha-inicio={inicio}
+      data-campanha-fim={fim}
+      data-esconder-fora
+    >
+      <slot />
+    </div>
+    <FasesCampanha />
+  </>
+)}

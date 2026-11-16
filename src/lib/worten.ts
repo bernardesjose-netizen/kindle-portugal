@@ -49,7 +49,7 @@ export const WORTEN = {
   /** Kindle 2026 de 6″, 16 GB, grafite (versão com publicidade). */
   kindle2026Grafite: 'https://www.worten.pt/produtos/amazon-kindle-2026-com-ads-6-16-gb-grafite-9026977',
   /** Kindle 2026 de 6″, 16 GB, roxo ube (versão com publicidade). */
-  kindle2026Roxo: 'https://www.worten.pt/produtos/amazon-kindle-2026-com-ads-6-16-gb-roxo-ube-9026978',
+  kindle2026Roxo: 'https://www.worten.pt/produtos/amazon-kindle-2026-com-ads-6-16-gb-roxo-9026978',
   /** Anúncio da Worten sobre a chegada dos novos Kindle. */
   novidade: 'https://www.worten.pt/novidades-tecnologicas/novos-kindle-modelos-precos-novidades',
   /** Todos os leitores de ebooks (Kindle, Kobo, BOOX). */

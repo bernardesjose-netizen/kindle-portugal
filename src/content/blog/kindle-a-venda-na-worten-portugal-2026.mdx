@@ -18,33 +18,32 @@ seo:
 
 import BotaoWorten from '@components/afiliados/BotaoWorten.astro';
 import BotaoAmazon from '@components/afiliados/BotaoAmazon.astro';
+import { WORTEN } from '@lib/worten';
 
-Durante anos, a resposta a «onde compro um Kindle em Portugal?» foi quase sempre a Amazon.es. Desde **27 de outubro de 2026**, há uma alternativa numa loja portuguesa: a **Worten** passou a vender o **Kindle de 6″ de 2026**, com levantamento em loja e fatura portuguesa. Os restantes modelos continuam, por agora, na Amazon.es.
+Durante anos, a resposta a «onde compro um Kindle em Portugal?» foi quase sempre a Amazon.es. Desde **27 de outubro de 2026**, há uma alternativa numa loja portuguesa: a **Worten** passou a vender o **Kindle de 6″ de 2026**, com levantamento em loja e fatura portuguesa. Confirma a variante e o vendedor na ficha antes de encomendar.
 
 ## Em resumo
 
-- **O que a Worten vende:** o Kindle de 6″ e 16 GB de 2026, em grafite e roxo ube, na versão com publicidade. A 8 de novembro de 2026 custava **154,99 €**.
+- **O que a Worten vende:** o Kindle de 6″ e 16 GB de 2026 com publicidade, em grafite e roxo ube. A 16 de novembro de 2026, ambas as cores apareciam a **124,99 €**, vendidas pela própria Worten. O PVP recomendado indicado pela loja era **154,99 €**.
 - **O que ganhas:** ver o aparelho numa loja, levantar no próprio dia, pagar como pagas noutras compras em Portugal e devolver numa loja física.
-- **O que ainda não há:** Paperwhite, Colorsoft e Scribe de 2026 (a Worten indicou uma chegada progressiva) e a versão sem publicidade com stock.
-- **Quando escolher a Amazon.es:** se queres outro modelo, a edição sem publicidade ou a versão de alumínio com 32 GB.
+- **Quando consultar a Amazon.es:** se procuras a edição sem publicidade, a versão de alumínio com 32 GB ou outro modelo.
 
 ## O que está à venda na Worten
 
 A ficha da Worten apresenta o **Amazon Kindle 2026**, ecrã de 6″ a 300 ppi e 16 GB, nas cores grafite e roxo ube. É o mesmo aparelho que a Amazon vende e regista-se na mesma conta Amazon que já usas para os ebooks. A especificação completa está na nossa [ficha do Kindle básico](/modelos/basico).
 
-| | Worten | Amazon.es |
+| Loja | Variante a consultar | Preço e entrega |
 |---|---|---|
-| Kindle 6″ 16 GB com publicidade | 154,99 € (8/11/2026) | Disponível |
-| Kindle 6″ 16 GB sem publicidade | Na ficha, sem stock a 8/11/2026 | Disponível |
-| Kindle de alumínio 32 GB | Não | Disponível |
-| Paperwhite, Colorsoft, Scribe 2026 | Anunciados como «a chegar» | Disponíveis |
-
-_Preços e stock lidos nas fichas das duas lojas na data indicada. Confirma o valor atual antes de comprar._
+| Worten, venda direta | 6″, 16 GB, com publicidade, em grafite ou roxo ube | 124,99 € a 16/11/2026 |
+| Amazon.es | 6″, 16 GB, sem publicidade, em grafite | Consulta a ficha para veres o preço e a entrega. |
 
 <div class="not-prose my-6 flex flex-wrap gap-3">
-  <BotaoWorten url="https://www.worten.pt/produtos/amazon-kindle-2026-com-ads-6-16-gb-grafite-9026977">Ver o Kindle 2026 na Worten</BotaoWorten>
-  <BotaoAmazon url="https://www.amazon.es/dp/B0G4SHH6YH">Comparar na Amazon.es</BotaoAmazon>
+  <BotaoWorten url={WORTEN.kindle2026Grafite}>Ver grafite com publicidade na Worten</BotaoWorten>
+  <BotaoWorten url={WORTEN.kindle2026Roxo}>Ver roxo ube com publicidade na Worten</BotaoWorten>
+  <BotaoAmazon url="https://www.amazon.es/dp/B0G4SHH6YH">Ver grafite sem publicidade na Amazon.es</BotaoAmazon>
 </div>
+
+Confirma o preço atual e a disponibilidade para a tua morada na ficha. Para comparar preços das duas lojas, verifica se a variante tem a mesma capacidade, cor e configuração de publicidade.
 
 ## O que ganhas a comprar numa loja portuguesa
 
@@ -59,7 +58,7 @@ A versão vendida pela Worten mostra ofertas no ecrã de bloqueio quando o Kindl
 
 ## Quando continua a compensar a Amazon.es
 
-- Queres o **Paperwhite**, o **Colorsoft** ou o **Scribe**, que ainda não estão na Worten.
+- Queres comparar as versões do **Paperwhite**, do **Colorsoft** ou do **Scribe**.
 - Preferes a edição **sem publicidade** desde o primeiro dia.
 - Queres a versão de **alumínio com 32 GB**.
 - Estás a acompanhar uma campanha, como a [Black Friday de 2026](/guias/black-friday-2026-kindle), e queres comparar o preço nas duas lojas.
@@ -71,8 +70,7 @@ O nosso [guia para comprar um Kindle em Portugal](/guias/comprar-kindle-em-portu
 A Worten já vendia leitores **Kobo** e **BOOX**. Se lês sobretudo em EPUB ou usas a BiblioLED, vale a pena comparares com o [guia Kindle ou Kobo](/blog/kindle-ou-kobo-livros-portugues-comparacao-2026) antes de escolheres.
 
 <div class="not-prose my-6 flex flex-wrap gap-3">
-  <BotaoWorten url="https://www.worten.pt/livros/e-reader-e-acessorios/e-reader/kindle">Todos os Kindle na Worten</BotaoWorten>
   <BotaoAmazon url="https://www.amazon.es/s?k=kindle">Todos os Kindle na Amazon.es</BotaoAmazon>
 </div>
 
-Fonte: [anúncio da Worten sobre os novos Kindle](https://www.worten.pt/novidades-tecnologicas/novos-kindle-modelos-precos-novidades) e fichas de produto consultadas a 8 de novembro de 2026.
+O anúncio da Worten descreve o lançamento. [Novos Kindle na Worten](https://www.worten.pt/novidades-tecnologicas/novos-kindle-modelos-precos-novidades) e fichas Worten [grafite](https://www.worten.pt/produtos/amazon-kindle-2026-com-ads-6-16-gb-grafite-9026977) e [roxo ube](https://www.worten.pt/produtos/amazon-kindle-2026-com-ads-6-16-gb-roxo-9026978), consultadas a 16 de novembro de 2026.

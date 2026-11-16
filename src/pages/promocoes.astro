@@ -46,7 +46,7 @@ const descricao = aDecorrer
   ? `${comPromo.map((it) => `${it.modelo.data.nome} a ${formatarPreco(it.preco_promo)} (−${it.desconto_pct}%)`).join(', ')}${esgotados.length ? `; ${esgotados.map((it) => nomeCurto(it.modelo.data.nome)).join(', ').replace(/, ([^,]*)$/, ' e $1')} esgotados` : ''}. Preços e stock na Amazon.es a ${formatarData(CAMPANHA.verificado_em)}.`
   : fase === 'antecipacao'
     ? `O Prime Big Deal Days é a 6 e 7 de outubro de 2026 e há Kindle já com desconto antes da abertura. Preços confirmados a ${formatarData(CAMPANHA.verificado_em)}.`
-    : 'Quando houver promoções de Kindle a decorrer, ficam aqui. Vê entretanto todos os modelos e os preços de referência.';
+    : 'Vê o guia de Black Friday Kindle 2026 e confirma o preço da variante e a entrega em Portugal.';
 
 // Esquema ItemList → só anuncia `price` quando o preço promocional foi
 // confirmado (preco_promo != null). Caso contrário, não afirma um preço atual.
@@ -182,13 +182,17 @@ const bandeiras: Record<string, string> = {
             Promoções de Kindle
           </h1>
           <p class="mt-5 max-w-2xl text-lg text-oceano-100/90">
-            De momento, não há nenhuma campanha publicada nesta página. Podes consultar as fichas
-            dos modelos para veres o preço e as opções de entrega na loja.
+            O guia da Black Friday de 2026 reúne o calendário da campanha e ajuda-te a escolher a variante e a confirmar a entrega em Portugal.
           </p>
-          <a href="/modelos" class="mt-8 inline-flex btn-marca">
-            Ver todos os modelos
-            <span aria-hidden="true">→</span>
-          </a>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href="/guias/black-friday-2026-kindle" class="btn-marca">
+              Ver guia da Black Friday Kindle
+              <span aria-hidden="true">→</span>
+            </a>
+            <a href="/modelos" class="font-semibold text-marca-300 underline underline-offset-4 hover:text-creme-50">
+              Ver todos os modelos
+            </a>
+          </div>
         </>
       )}
     </Container>
