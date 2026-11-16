@@ -2,7 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
 import DestaqueCampanha from '@components/afiliados/DestaqueCampanha.astro';
-import JanelaBlackFriday2026 from '@components/afiliados/JanelaBlackFriday2026.astro';
+import OfertasBlackFriday2026 from '@components/afiliados/OfertasBlackFriday2026.astro';
 import CartaoFamiliaKindle from '@components/CartaoFamiliaKindle.astro';
 import OfertasMomento from '@components/afiliados/OfertasMomento.astro';
 import WookWidget from '@components/afiliados/WookWidget.astro';
@@ -54,6 +54,7 @@ const pillPorCategoria: Record<string, string> = {
 ---
 
 <BaseLayout titulo={`${SITE.nome} · Guias de Kindle e ebooks em português`} descricao={SITE.descricao}>
+  <OfertasBlackFriday2026 modo="entrada" />
   <section aria-labelledby="titulo-gama-kindle" class="relative overflow-hidden border-b-4 border-marca-500 bg-gradient-to-br from-marinho-900 via-marinho-800 to-oceano-900 text-creme-50">
     <div
       aria-hidden="true"
@@ -90,18 +91,6 @@ const pillPorCategoria: Record<string, string> = {
               </svg>
             </span>
           </h1>
-          <JanelaBlackFriday2026>
-            <a
-              href="/guias/black-friday-2026-kindle"
-              class="group mt-5 flex max-w-xl items-center gap-3 rounded-xl border border-marca-300/60 bg-marca-500/15 px-4 py-3 text-creme-50 no-underline transition hover:-translate-y-0.5 hover:bg-marca-500/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-marca-300"
-            >
-              <span class="min-w-0 flex-1">
-                <strong class="block text-lg font-bold leading-tight text-marca-300 sm:text-xl">Black Friday Kindle 2026</strong>
-                <span class="mt-1 block text-sm">Vê as ofertas da Amazon.es e da Worten para Portugal.</span>
-              </span>
-              <span aria-hidden="true" class="shrink-0 text-xl text-marca-300 transition-transform group-hover:translate-x-1">→</span>
-            </a>
-          </JanelaBlackFriday2026>
           <p class="mt-6 max-w-xl text-lg text-oceano-100/90 sm:text-xl">
             <strong class="font-semibold text-creme-50">{totalVersoes} versões no catálogo de 2026.</strong>{' '}No guia, explicamos as diferenças mais relevantes entre os modelos, incluindo a luz quente, o ecrã a cores e a escrita com caneta.
           </p>
