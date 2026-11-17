@@ -1,5 +1,6 @@
 ---
 import Container from '@components/ui/Container.astro';
+import BotaoAmazon from '@components/afiliados/BotaoAmazon.astro';
 import { SELECAO_LEITURA_2026, type CategoriaLeitura2026 } from '@lib/selecao-leitura-2026';
 
 const categorias: { id: CategoriaLeitura2026; nome: string }[] = [
@@ -74,8 +75,9 @@ const secoes = categorias.map((categoria) => ({
                   <h4 class="text-lg font-bold leading-tight text-marinho-900">{produto.nome}</h4>
                   <p class="mt-2 flex-1 text-sm leading-relaxed text-marinho-700">{produto.descricao}</p>
                   <p class="mt-4 text-lg font-bold text-marinho-900">{produto.preco}</p>
-                  <p class="mt-1 text-xs text-marinho-600">Preço observado a <time datetime={produto.verificadaEm}>17 de novembro de 2026</time></p>
-                  <div class="mt-4">
+                  <p class="mt-1 text-xs text-marinho-600">Preço na PcComponentes a <time datetime={produto.verificadaEm}>17 de novembro de 2026</time></p>
+                  <div class="mt-4 flex flex-wrap gap-2">
+                    <BotaoAmazon url={'https://www.amazon.es/s?k=' + encodeURIComponent(produto.nome)}>Pesquisar na Amazon.es</BotaoAmazon>
                     <a href={produto.linkAfiliado} target="_blank" rel="sponsored nofollow noopener" data-afiliado="pccomponentes" class="btn-secundario px-4 py-2.5 text-sm">
                       Comparar na PcComponentes <span aria-hidden="true">↗</span>
                     </a>
