@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import imagemCampanha from '../../assets/imagens/ofertas/leitura-digital-black-friday-2026.png';
 import Container from '@components/ui/Container.astro';
 import BotaoAmazon from '@components/afiliados/BotaoAmazon.astro';
 import BotaoWorten from '@components/afiliados/BotaoWorten.astro';
@@ -6,6 +8,7 @@ import CartaoOfertaBlackFriday2026 from '@components/afiliados/CartaoOfertaBlack
 import JanelaBlackFriday2026 from '@components/afiliados/JanelaBlackFriday2026.astro';
 import { GUIA_BLACK_FRIDAY, type OfertaBlackFriday } from '@lib/black-friday-2026';
 import { OFERTAS_BLACK_FRIDAY_2026 } from '@lib/ofertas-black-friday-2026';
+import { linkWorten, WORTEN } from '@lib/worten';
 
 interface Props {
   modo: 'entrada' | 'guia';
@@ -16,8 +19,12 @@ const agora = Date.now();
 const lista: readonly OfertaBlackFriday[] = OFERTAS_BLACK_FRIDAY_2026;
 const emCampanha = lista.filter(({ expiraEm }) => !expiraEm || Date.parse(expiraEm) > agora);
 const ofertas = entrada ? emCampanha.filter(({ destaque }) => destaque).slice(0, 6) : emCampanha;
-const primeiraFoto = entrada ? ofertas.findIndex(({ imagem }) => Boolean(imagem)) : -1;
 const tituloId = entrada ? 'titulo-black-friday-entrada' : 'titulo-ofertas-black-friday';
+const inicioDezcontao = '2026-11-17T00:00:00+00:00';
+const fimDezcontao = '2026-11-23T23:59:59.999+00:00';
+const dezcontaoAtivo = agora >= Date.parse(inicioDezcontao) && agora <= Date.parse(fimDezcontao);
+const linkDezcontao = 'https://www.awin1.com/cread.php?awinmid=99897&awinaffid=2950455&ued=https%3A%2F%2Fwww.worten.pt%2Fpromocoes%2Fdezcontao%3Futm_source%3Dawin%26utm_medium%3Dafiliados%26utm_campaign%3D26tatcgen5499_promo_awin_afiliados_pa_core_varias_display_1x1_cv';
+const regulamentoDezcontao = 'https://www.worten.pt/i2/01M7JA2M48QQAVN7RP5RFWZ1DB/01M7JA2MC09C2H1WF49P7WQXBH';
 ---
 
 <JanelaBlackFriday2026>
@@ -33,40 +40,92 @@ const tituloId = entrada ? 'titulo-black-friday-entrada' : 'titulo-ofertas-black
     ]}
   >
     <Container largura={entrada ? 'largo' : 'normal'} classe={entrada ? 'py-8 sm:py-12' : 'py-6'}>
-      <div class="grid items-end gap-4 md:grid-cols-[1fr_auto]">
-        <div>
+      <div class="relative isolate overflow-hidden rounded-2xl border border-marinho-700 bg-marinho-900 text-creme-50">
+        <Image
+          src={imagemCampanha}
+          alt=""
+          widths={[400, 640, 900, 1200]}
+          sizes="(min-width: 1280px) 680px, (min-width: 640px) 56vw, 65vw"
+          loading={entrada ? 'eager' : 'lazy'}
+          fetchpriority={entrada ? 'high' : undefined}
+          class="absolute inset-y-0 right-0 h-full w-[65%] object-cover object-[60%_70%] sm:w-[56%]"
+        />
+        <div aria-hidden="true" class="absolute inset-0 bg-gradient-to-r from-marinho-900 via-marinho-900/90 to-marinho-900/20"></div>
+        <div class="relative max-w-2xl px-5 py-7 sm:px-8 sm:py-10">
           <h2 id={tituloId} class="text-3xl font-bold leading-tight sm:text-4xl">
-            {entrada ? 'Black Friday Kindle 2026' : 'Ofertas e reduções verificadas'}
+            {entrada ? 'Black Friday Kindle 2026' : 'Campanhas Black Friday da Amazon.es e da Worten'}
           </h2>
-          <p class:list={['mt-2 text-sm sm:text-base', entrada ? 'text-oceano-100' : 'text-marinho-700']}>
-            {entrada
-              ? 'Kindle, Kobo e acessórios na Amazon.es, na Worten, na FNAC e noutras lojas com entrega em Portugal.'
-              : 'Abre a ficha para confirmar a variante, o preço atual e a entrega para a tua morada.'}
+          <p class="mt-2 max-w-lg text-sm leading-relaxed text-oceano-100 sm:text-base">
+            Kindle, Kobo e acessórios na Amazon.es, na Worten, na FNAC e noutras lojas com entrega em Portugal.
           </p>
+          {entrada && (
+            <a href={GUIA_BLACK_FRIDAY + '#ofertas-black-friday'} class="btn-marca mt-5 w-fit px-6 py-3.5 text-base">
+              {emCampanha.length > 0 ? 'Ver as ' + emCampanha.length + ' ofertas' : 'Ver todas as ofertas'} <span aria-hidden="true">→</span>
+            </a>
+          )}
         </div>
-        {entrada && (
-          <a href={GUIA_BLACK_FRIDAY + '#ofertas-black-friday'} class="btn-marca w-fit px-6 py-3.5 text-base">
-            {emCampanha.length > 0 ? 'Ver as ' + emCampanha.length + ' ofertas' : 'Ver todas as ofertas'} <span aria-hidden="true">→</span>
-          </a>
-        )}
       </div>
 
-      <p class:list={['mt-4 text-sm leading-relaxed', entrada ? 'text-creme-100' : 'text-marinho-700']}>
-        <strong>Links de afiliado.</strong> Podemos receber uma comissão por compras elegíveis, sem custo adicional para ti.{' '}
-        <a href="/divulgacao-afiliados" class="font-semibold underline underline-offset-2">Como funciona</a>.
-      </p>
+      <ul aria-label="Campanhas das lojas" class="mt-4 grid gap-3 md:grid-cols-2">
+        <li class="flex min-w-0 flex-col rounded-2xl border border-marca-200 border-t-4 border-t-marca-500 bg-creme-50 p-4 text-marinho-900 sm:p-5">
+          <h3 class="text-xl font-bold">Amazon.es</h3>
+          <p class="mt-1 text-sm font-semibold text-marinho-800">Semana Black Friday de 19 a 30 de novembro</p>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-marinho-700">
+            Há ofertas antecipadas em Kindle selecionados desde 16 de novembro. Confirma a versão e a entrega para a tua morada.
+          </p>
+          <div class="mt-4">
+            <BotaoAmazon url="https://www.amazon.es/blackfriday" tamanho="grande">Ver Black Friday na Amazon.es</BotaoAmazon>
+          </div>
+        </li>
 
-      <div class="mt-4 flex flex-wrap items-center gap-3">
-        <BotaoAmazon url="https://www.amazon.es/blackfriday" tamanho="grande">Black Friday oficial da Amazon.es</BotaoAmazon>
-        <BotaoWorten url="https://www.worten.pt/black-friday" tamanho="grande">Black Friday oficial da Worten</BotaoWorten>
-      </div>
+        <li
+          class="flex min-w-0 flex-col rounded-2xl border border-marinho-200 border-t-4 border-t-[#e3001b] bg-creme-50 p-4 text-marinho-900 sm:p-5"
+          data-campanha-inicio={inicioDezcontao}
+          data-campanha-fim={fimDezcontao}
+        >
+          <h3 class="text-xl font-bold">Worten</h3>
+          <div data-so-fase="ativa" hidden={!dezcontaoAtivo}>
+            <p class="mt-1 text-sm font-semibold text-marinho-800">
+              Dezcontão de <time datetime="2026-11-17">17</time> a <time datetime="2026-11-23">23 de novembro</time>
+            </p>
+            <p class="mt-2 text-xl font-bold leading-snug">Até 50% de desconto direto + 10% extra em talão</p>
+            <p class="mt-2 text-sm leading-relaxed text-marinho-700">
+              O desconto até 50% aplica-se a eletrodomésticos assinalados. O talão incide sobre o valor pago em artigos elegíveis vendidos e entregues pela Worten. O crédito é para uma compra posterior. Kobo, livros e Marketplace estão excluídos.
+            </p>
+            <p class="mt-2 text-sm leading-relaxed text-marinho-700">
+              Na consulta de 17 de novembro, a Worten assinalava o talão no Kindle 2026 de 16 GB com publicidade, em
+              {' '}<a href={linkWorten(WORTEN.kindle2026Grafite)} target="_blank" rel="sponsored nofollow noopener" data-afiliado="worten" class="font-semibold underline underline-offset-2">grafite</a>
+              {' '}e <a href={linkWorten(WORTEN.kindle2026Roxo)} target="_blank" rel="sponsored nofollow noopener" data-afiliado="worten" class="font-semibold underline underline-offset-2">roxo</a>.
+              Cada versão estava a 124,99 €, com PVP recomendado de 154,99 €.
+            </p>
+            <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
+              <BotaoWorten url={linkDezcontao} tamanho="grande">Ver Dezcontão na Worten</BotaoWorten>
+              <a href={regulamentoDezcontao} class="text-sm font-semibold text-marinho-800 underline underline-offset-2">Regulamento e exclusões</a>
+              <a href={linkWorten('https://www.worten.pt/black-friday')} target="_blank" rel="sponsored nofollow noopener" data-afiliado="worten" class="text-sm font-semibold text-marinho-800 underline underline-offset-2">Black Friday geral na Worten</a>
+            </div>
+          </div>
+          <div data-so-fase="antecipacao fora" hidden={dezcontaoAtivo}>
+            <p class="mt-2 text-sm leading-relaxed text-marinho-700">Consulta as campanhas e os produtos assinalados para venda direta na Worten.</p>
+            <div class="mt-4">
+              <BotaoWorten url="https://www.worten.pt/black-friday" tamanho="grande">Ver Black Friday na Worten</BotaoWorten>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <p class:list={['mt-3 text-xs', entrada ? 'text-creme-100' : 'text-marinho-600']}>Publicidade · Ligações de afiliado</p>
 
+      {!entrada && ofertas.length > 0 && (
+        <h3 class="mt-6 text-xl font-bold text-marinho-900">Ofertas de Kindle, Kobo e acessórios</h3>
+      )}
       {ofertas.length > 0 && (
         <ul class:list={['mt-5 grid gap-4 sm:grid-cols-2', entrada ? 'lg:grid-cols-3' : 'xl:grid-cols-2']}>
-          {ofertas.map((oferta, i) => (
-            <CartaoOfertaBlackFriday2026 oferta={oferta} carregarFoto={i === primeiraFoto ? 'eager' : 'lazy'} />
+          {ofertas.map((oferta) => (
+            <CartaoOfertaBlackFriday2026 oferta={oferta} />
           ))}
         </ul>
+      )}
+      {ofertas.length > 0 && (
+        <p class:list={['mt-3 text-xs', entrada ? 'text-creme-100' : 'text-marinho-600']}>Publicidade · Ligações de afiliado</p>
       )}
 
     </Container>

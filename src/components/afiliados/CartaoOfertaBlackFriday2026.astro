@@ -13,16 +13,28 @@ interface Props {
 }
 
 const { oferta, carregarFoto = 'lazy' } = Astro.props;
-const { alternativa, detalhe, etiqueta, expiraEm, id, imagem, loja, nome, nomeLoja, preco, referencia, url, verificadaEm } = oferta;
+const { alternativa, detalhe, etiqueta, expiraEm, id, imagem, linkAfiliado, loja, nome, nomeLoja, preco, referencia, url, verificadaEm } = oferta;
 const mostrarPreco = loja !== 'amazon' && Boolean(preco);
 const rotulosLojas = { amazon: 'Amazon.es', worten: 'Worten', outra: 'Outra loja' };
 const etiquetaLoja = nomeLoja ?? rotulosLojas[loja];
+const hrefPrincipal = linkAfiliado ?? (
+  loja === 'amazon' ? urlAfiliado(url) : loja === 'worten' ? linkWorten(url) : url
+);
+const fotoDestino = imagem?.destino;
+const hrefImagem = fotoDestino ? fotoDestino.linkAfiliado ?? (
+  fotoDestino.loja === 'amazon' ? urlAfiliado(fotoDestino.url)
+    : fotoDestino.loja === 'worten' ? linkWorten(fotoDestino.url)
+    : fotoDestino.url
+) : hrefPrincipal;
+const imagemAfiliada = fotoDestino
+  ? Boolean(fotoDestino.linkAfiliado) || fotoDestino.loja !== 'outra'
+  : Boolean(linkAfiliado) || loja !== 'outra';
 const nomeAlternativa = alternativa && (alternativa.nomeLoja ?? rotulosLojas[alternativa.loja]);
-const hrefAlternativa = alternativa && (
+const hrefAlternativa = alternativa && (alternativa.linkAfiliado ?? (
   alternativa.loja === 'amazon' ? urlAfiliado(alternativa.url)
     : alternativa.loja === 'worten' ? linkWorten(alternativa.url)
     : alternativa.url
-);
+));
 const dataVerificacao = new Date(verificadaEm);
 const temDataVerificacao = !Number.isNaN(dataVerificacao.valueOf());
 ---
@@ -30,7 +42,14 @@ const temDataVerificacao = !Number.isNaN(dataVerificacao.valueOf());
 <li data-oferta-black-friday={id} data-expira-black-friday={expiraEm} class="min-w-0">
   <article class="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-marinho-100 bg-creme-50 shadow-sm">
     {imagem && (
-      <figure class="relative grid aspect-[8/5] place-items-center overflow-hidden bg-gradient-to-br from-creme-100 via-creme-50 to-oceano-50 px-5 py-3">
+      <a
+        href={hrefImagem}
+        target="_blank"
+        rel={imagemAfiliada ? 'sponsored nofollow noopener' : 'noopener'}
+        data-afiliado={imagemAfiliada ? (fotoDestino?.nomeLoja ?? nomeLoja ?? fotoDestino?.loja ?? loja).toLowerCase() : undefined}
+        class="block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-marca-700"
+      >
+      <figure class="relative grid aspect-[8/5] place-items-center overflow-hidden bg-white px-5 py-3">
         {typeof imagem.src === 'string' ? (
           <img
             src={imagem.src}
@@ -54,6 +73,7 @@ const temDataVerificacao = !Number.isNaN(dataVerificacao.valueOf());
           />
         )}
       </figure>
+      </a>
     )}
     {imagem?.credito && (
       <p class="px-4 pt-2 text-xs text-marinho-600 sm:px-5">
@@ -93,15 +113,15 @@ const temDataVerificacao = !Number.isNaN(dataVerificacao.valueOf());
         ) : loja === 'worten' ? (
           <BotaoWorten url={url}>Ver na Worten</BotaoWorten>
         ) : (
-          <a href={url} target="_blank" rel="noopener" class="btn-secundario px-4 py-2 text-sm">
-            Consultar na loja <span aria-hidden="true">↗</span>
+          <a href={hrefPrincipal} target="_blank" rel={linkAfiliado ? 'sponsored nofollow noopener' : 'noopener'} class="btn-secundario px-4 py-2 text-sm">
+            Consultar na {etiquetaLoja} <span aria-hidden="true">↗</span>
           </a>
         )}
         {alternativa && (
           <a
             href={hrefAlternativa}
             target="_blank"
-            rel={alternativa.loja === 'outra' ? 'noopener' : 'sponsored nofollow noopener'}
+            rel={alternativa.linkAfiliado || alternativa.loja !== 'outra' ? 'sponsored nofollow noopener' : 'noopener'}
             class="inline-flex items-center gap-2 rounded-lg border border-marinho-300 px-4 py-2 text-sm font-semibold text-marinho-900 no-underline hover:bg-marinho-50"
           >
             Ver também em {nomeAlternativa} <span aria-hidden="true">↗</span>

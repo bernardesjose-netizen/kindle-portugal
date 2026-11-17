@@ -4,6 +4,7 @@ interface LojaBlackFriday {
   loja: 'amazon' | 'worten' | 'outra';
   nomeLoja?: string;
   url: string;
+  linkAfiliado?: string;
 }
 
 export interface OfertaBlackFriday extends LojaBlackFriday {
@@ -18,6 +19,7 @@ export interface OfertaBlackFriday extends LojaBlackFriday {
     fonte?: string;
     licenca?: { nome: string; url: string };
     alteracao?: string;
+    destino?: LojaBlackFriday;
   };
   destaque?: boolean;
   etiqueta?: string;
