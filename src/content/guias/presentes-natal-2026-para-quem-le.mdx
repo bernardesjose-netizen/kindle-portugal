@@ -1,307 +1,150 @@
 ---
-titulo: "Presentes de Natal 2026 para quem gosta de ler: ideias por orçamento"
-descricao: "Ideias de presente para leitores em quatro escalões: até 25 €, até 50 €, até 100 € e acima de 100 €. Kindle, capas, auscultadores e ebooks, com preços datados."
+titulo: "Presentes de Natal 2026 para quem lê: por orçamento e amigo secreto"
+descricao: "Ideias para leitores com tetos de 10, 15, 25, 50 e 100 euros, além de leitores digitais. Escolhe por gosto, modelo e orçamento, com preços de acessórios datados."
 categoria: "comprar"
 tags:
   - "presentes de Natal"
   - "Natal 2026"
+  - "amigo secreto"
   - "ideias de presente"
   - "Kindle"
   - "acessórios Kindle"
-  - "capas"
-  - "audiolivros"
 autor:
   nome: "Kindle Portugal"
 data_publicacao: 2026-10-07
-tempo_leitura_min: 13
+data_revisao: 2026-11-17
+tempo_leitura_min: 8
+imagem_hero: ../../assets/imagens/ofertas/leitura-digital-black-friday-2026.png
+imagem_hero_alt: "Leitor digital sobre um livro, junto a uma chávena e a um candeeiro aceso"
 modelos_relacionados:
   - "basico"
   - "paperwhite"
   - "colorsoft"
   - "scribe"
 seo:
-  titulo_seo: "Presentes de Natal 2026 para quem lê: ideias por preço"
-  descricao_seo: "Presentes de Natal para leitores, de menos de 25 € a mais de 100 €: Kindle, capas, auscultadores e ebooks, com preços datados e a quem serve cada um."
+  titulo_seo: "Presentes para leitores e amigo secreto: Natal 2026"
+  descricao_seo: "Ideias de Natal e amigo secreto para leitores, por orçamento de 10 a mais de 100 euros. Capas compatíveis, ebooks, comandos e leitores digitais."
 ---
 
-import ImagemProduto from '@components/afiliados/ImagemProduto.astro';
 import LinkAmazon from '@components/afiliados/LinkAmazon.astro';
-import LinkAvaliacoes from '@components/afiliados/LinkAvaliacoes.astro';
-import LinkPrecos from '@components/afiliados/LinkPrecos.astro';
-import LojasAmazonLinha from '@components/afiliados/LojasAmazonLinha.astro';
+import BotaoWorten from '@components/afiliados/BotaoWorten.astro';
+import CartaoOfertaBlackFriday2026 from '@components/afiliados/CartaoOfertaBlackFriday2026.astro';
+import FasesCampanha from '@components/afiliados/FasesCampanha.astro';
+import { SELECAO_LEITURA_2026 } from '@lib/selecao-leitura-2026';
+import { WORTEN } from '@lib/worten';
 
-Antes de escolheres o presente, confirma se a pessoa já tem um leitor e qual é o modelo. Se tem, podes procurar uma capa compatível, auscultadores ou um livro que gostasses de lhe sugerir. Se vais oferecer o primeiro leitor, compara também as lojas em que a pessoa compra ebooks.
+Para um amigo secreto, começa pelo bilhete que vai acompanhar o presente. Um «lembrei-me de ti por causa deste livro» dá sentido a um ebook, a uma capa nova ou a um marcador feito por ti. Se vais comprar um acessório, descobre primeiro **a marca, o modelo e a geração do leitor**. Esse pequeno cuidado evita oferecer uma capa que fica na gaveta.
 
-> **Sobre os preços.** Cada valor vem com a data em que o vimos na Amazon.es (os Kindle e os gadgets entre julho e outubro de 2026, as capas na nossa análise de abril). Até ao Natal vão mudar, e a Black Friday pelo meio pode baixá-los, por isso confirma sempre na ficha antes de comprar (<LinkPrecos />). Os preços do Prime Big Deal Days de 6 e 7 de outubro aparecem só como referência histórica: valeram apenas durante a campanha.
+## Escolhe primeiro o orçamento
 
-## Antes de escolher: três perguntas
+Os valores dos acessórios abaixo foram observados no catálogo português da PcComponentes a **17 de novembro de 2026**. Confirma o preço atual e soma os portes ao teu teto.
 
-1. **Já tem Kindle?** Se tem, salta para os acessórios e para os ebooks. Um segundo Kindle quase nunca faz falta, e arrisca-se a acabar devolvido. Na dúvida, pergunta a alguém da família.
-2. **Que modelo é?** As capas são feitas à medida de uma geração. A do Paperwhite de 2024 (7 polegadas) não serve no Paperwhite anterior (6,8 polegadas) nem no Kindle básico. Se não sabes o modelo, um cartão-oferta evita o problema.
-3. **Onde e como lê?** Quem lê na praia ou na banheira precisa de resistência à água, quem lê à noite agradece a luz quente, quem ouve mais do que lê vai gostar de audiolivros, quem lê banda desenhada olha para o Colorsoft, e quem estuda com PDFs olha para o Scribe.
+| Orçamento | Ideia para oferecer | O que convém saber |
+|---|---|---|
+| Até 10 € | Um marcador e um postal com uma sugestão de leitura | Podes fazê-los com os materiais que já tens e juntar uma primeira leitura em português. |
+| Até 15 € | Um ebook escolhido para aquela pessoa | Procura um título que caiba no teto e confirma o idioma, a edição e a opção de oferta na ficha. |
+| Até 25 € | Kobo Basic SleepCover para Clara Colour/BW, azul-cobalto, a <a href="https://www.awin1.com/pclick.php?p=37863916711&a=2950455&m=20983" target="_blank" rel="sponsored nofollow noopener">19,99 € na PcComponentes</a> | Serve nos Clara Colour e Clara BW. Confirma o modelo e o total com entrega. |
+| Até 50 € | Kobo Remote branco, a <a href="https://www.awin1.com/pclick.php?p=44545508518&a=2950455&m=20983" target="_blank" rel="sponsored nofollow noopener">27,99 € na PcComponentes</a> | Para quem tem um Kobo com Bluetooth e gosta de ler com o aparelho pousado num suporte. |
+| Até 100 € | BOOX Pen2 Pro com borracha, a <a href="https://www.awin1.com/pclick.php?p=43622835541&a=2950455&m=20983" target="_blank" rel="sponsored nofollow noopener">79,96 € na PcComponentes</a> | É preciso confirmar que o leitor aceita esta caneta. Acessórios BOOX podem usar tecnologias diferentes. |
+| Mais de 100 € | Um primeiro Kindle ou um leitor de outra livraria | Confirma onde a pessoa compra livros, o formato que prefere e o prazo de entrega. |
 
-## Tabela-resumo
+<p class="not-prose mt-3 text-xs text-marinho-600">Publicidade · Ligações de afiliado</p>
 
-| Escalão | Presente | Para quem | Preço de referência |
-|---|---|---|---|
-| Até 25 € | Um ebook dos [Três Ebooks](/tres-livros) | Quem já tem Kindle e lê em português | ver preço na ficha |
-| Até 25 € | Cartão-presente da Amazon.es | Quem tem gostos difíceis de adivinhar | valor à escolha |
-| Até 25 € | Capa transparente com correia (Paperwhite 2024 e Colorsoft) | Quem lê de pé, nos transportes | ~18 € (abril de 2026) |
-| Até 25 € | Capa folio com correia de mão (Paperwhite 2024 e Colorsoft) | Quem lê sessões longas | ~20 € (abril de 2026) |
-| Até 25 € | Capa Fintie com suporte (Paperwhite 2024 e Colorsoft) | Quem lê à mesa | ~22 € (abril de 2026) |
-| Até 25 € | Auscultadores JBL Tune 510BT | Quem quer experimentar audiolivros | 24,79 € (1/8/2026) |
-| Até 50 € | Capa oficial Amazon em material vegetal | Quem tem Paperwhite 2024 ou Colorsoft | ~35 € (abril de 2026) |
-| Até 50 € | Powerbank Anker Nano (10 000 mAh) | Quem viaja muito | 27,50 € (4/10/2026) |
-| Até 50 € | Carregador Belkin de 60 W | Quem recebeu um Kindle sem carregador | recomendado 40,65 € |
-| Até 50 € | Auriculares Sony WF-C510 | Audiolivros em casa e na rua | 36,09 € no Prime Big Deal Days |
-| Até 50 € | Auriculares Xiaomi Redmi Buds 8 | Audiolivros nos transportes | 43,70 € (06/10/2026) |
-| Até 100 € | Kindle básico de 2024 | Primeiro Kindle, orçamento curto | 94,21 € (31/07/2026), esgotado |
-| Até 100 € | Kindle do Amazon Warehouse | Quem aceita um aparelho como novo | variável |
-| Acima de 100 € | Kindle de 2026 (16 GB) | Primeiro Kindle | 177,88 € (07/10/2026) |
-| Acima de 100 € | Kindle Kids | Crianças a ganhar hábitos de leitura | ~140 € (abril de 2026) |
-| Acima de 100 € | Paperwhite de 2026 | Ecrã de 7″ e luz quente | Ver [ficha](/modelos/paperwhite) |
-| Acima de 100 € | Paperwhite Signature de 2026 | 32 GB, luz automática e base de contacto | 259,99 € no anúncio da Amazon Espanha de 01/10/2026 |
-| Acima de 100 € | Colorsoft de 2026 | Banda desenhada e livros ilustrados | Desde 299,99 € no anúncio da Amazon Espanha de 01/10/2026 |
-| Acima de 100 € | Scribe de 11″ | Estudantes e quem toma notas | Desde 449,99 € no lançamento em Espanha de 10/06/2026 |
-| Acima de 100 € | Kobo Clara BW ou BOOX Go 6 | Quem lê EPUB ou usa a biblioteca | 169,99 € na Worten (31/07/2026) |
+## Amigo secreto até 10 ou 15 euros
 
-A tabela distingue preços observados de preços anunciados em Espanha. Confirma o total e a previsão de entrega com a tua morada.
+### Um marcador com uma recomendação tua
 
-## Até 25 €
+Um marcador em papel resistente, um postal e três linhas escritas por ti fazem um presente bonito para quem gosta de ler. Escreve o título de um livro que te ficou na memória e diz o que te fez pensar naquela pessoa. Podes acrescentar uma ligação para experimentar umas páginas antes de comprar.
+
+No [artigo sobre preparar um Kindle para oferecer](/blog/preparar-kindle-presente-natal-2026) deixámos um exemplo de cartão com uma leitura de Eça de Queirós em português. Dá para imprimir ou adaptar à mão e juntar a um presente pequeno.
 
 ### Um ebook escolhido a dedo
 
-**Para quem:** quem já tem Kindle e lê muito. É o presente mais pessoal da lista e o único que não ocupa espaço na estante.
+Para quem já tem Kindle, a rubrica [Três Ebooks](/tres-livros) ajuda a encontrar uma sugestão com contexto. Quatro pontos de partida do nosso arquivo são:
 
-Na rubrica [Três Ebooks](/tres-livros) sugerimos três livros de cada vez, quase todos em português europeu, e é um bom sítio para escolher. Quatro pontos de partida, conforme o leitor:
+- **Romance português** — <LinkAmazon href="https://www.amazon.es/dp/B07H8SB3J5">*Pão de Açúcar*, de Afonso Reis Cabral</LinkAmazon>, para quem gosta de ficção portuguesa com temas difíceis.
+- **Humor em textos curtos** — <LinkAmazon href="https://www.amazon.es/dp/B09ML55W4S">*Vamos todos morrer*, de Hugo van der Ding</LinkAmazon>, para ir lendo aos poucos.
+- **Suspense** — <LinkAmazon href="https://www.amazon.es/dp/B09PFL31GY">*A Rapariga no Comboio*, de Paula Hawkins</LinkAmazon>, para um leitor de thrillers.
+- **Hábitos e organização** — <LinkAmazon href="https://www.amazon.es/dp/B07SR7BPKX">*Hábitos Atómicos*, de James Clear</LinkAmazon>, se sabes que a pessoa gosta desse tema.
 
-- **Romance português premiado:** <LinkAmazon href="https://www.amazon.es/dp/B07H8SB3J5">*Pão de Açúcar*, de Afonso Reis Cabral</LinkAmazon>, Prémio José Saramago de 2019. Um livro difícil, que olha a crueldade de frente sem a explorar ([a nossa nota sobre *Pão de Açúcar*](/tres-livros/2026-06-11-tres-romances-portugueses-premiados)).
-- **Humor:** <LinkAmazon href="https://www.amazon.es/dp/B09ML55W4S">*Vamos todos morrer*, de Hugo van der Ding</LinkAmazon>, biografias breves que se leem aos bocadinhos ([a nossa nota sobre *Vamos todos morrer*](/tres-livros/2026-05-14-van-der-ding-daniel-silva-james-clear)).
-- **Thriller:** <LinkAmazon href="https://www.amazon.es/dp/B09PFL31GY">*A Rapariga no Comboio*, de Paula Hawkins</LinkAmazon>, para quem gosta de ler de um fôlego ([a nossa nota sobre *A Rapariga no Comboio*](/tres-livros/2026-05-28-tres-thrillers-nepomuceno-hawkins-slaughter)).
-- **Não-ficção:** <LinkAmazon href="https://www.amazon.es/dp/B07SR7BPKX">*Hábitos Atómicos*, de James Clear</LinkAmazon>, um manual prático sobre a forma como os pequenos hábitos se acumulam ([a nossa nota sobre *Hábitos Atómicos*](/tres-livros/2026-05-14-van-der-ding-daniel-silva-james-clear)).
+Consulta o preço da edição escolhida para veres se cabe nos 15 euros. A Amazon documenta a compra de ebooks para oferecer na Amazon.es quando a opção está disponível na ficha. Comprador e destinatário têm de residir no mesmo país. O nosso [guia para preparar a oferta](/blog/preparar-kindle-presente-natal-2026) explica o resgate. [Regras oficiais da Amazon KDP](https://kdp.amazon.com/en_US/help/topic/G200652260)
 
-O preço de cada ebook está na ficha da Amazon.es. Como se oferece? A forma mais segura é um cartão-oferta com o valor do livro e um bilhete a dizer qual é. Se a ficha do ebook mostrar a opção de o comprar para outra pessoa, também serve.
+<p class="not-prose mt-3 text-xs text-marinho-600">Publicidade · Ligações de afiliado</p>
 
-{/* TODO: confirmar se a Amazon.es permite comprar um ebook Kindle para outra pessoa e como é entregue. */}
+Se a pessoa lê em português europeu, confirma também a editora e a edição. O [guia de ebooks em português](/guias/ebooks-em-portugues-amazon-kindle) mostra onde procurar essa informação.
 
-**Atenção:** a Amazon mistura português europeu e do Brasil na mesma etiqueta. Antes de oferecer, confirma a editora com o método do nosso [guia de ebooks em PT-PT](/guias/ebooks-em-portugues-amazon-kindle).
+## De 25 a 100 euros, quando já há um leitor em casa
 
-### Um cartão-oferta da Amazon.es
+**Uma capa à medida** é uma boa escolha se conheces o modelo exato. O nome da família e o tamanho do ecrã podem repetir-se em gerações com botões ou encaixes diferentes. Fotografa a identificação do aparelho ou pede essa informação a alguém da família antes de encomendar.
 
-**Para quem:** quem tem gostos difíceis de adivinhar, ou quando não sabes que Kindle a pessoa tem.
+**Um comando para virar páginas** combina bem com um suporte que a pessoa já tenha. O Kobo Remote funciona com leitores Kobo equipados com Bluetooth, segundo o fabricante. Confirma a marca do aparelho antes de escolher este comando. [Compatibilidade oficial Kobo](https://ereader.kobo.com/es-es/products/kobo-remote)
 
-Serve para ebooks, para um acessório ou para ajudar a pagar um Kindle maior. Na Amazon.es chama-se *cheque regalo*, e há <LinkAmazon href="https://www.amazon.es/s?k=cheque+regalo">vários formatos na loja</LinkAmazon>. O saldo usa-se na Amazon.es, que é a loja que os leitores em Portugal já usam para o Kindle ([guia de compra em Portugal](/guias/comprar-kindle-em-portugal)).
+**Uma caneta de substituição** faz sentido para alguém que já escreve no leitor e sabe qual é o modelo de caneta de que gosta. A Pen2 Pro, a InkSense Plus e a InkSpire têm listas de compatibilidade diferentes. Verifica a referência da caneta atual antes de fazer a troca.
 
-Podes juntar ao cartão uma sugestão de livro escrita por ti.
-
-### Uma capa para o Kindle que já tem
-
-**Para quem:** quem tem um Paperwhite de 2024 ou um Colorsoft, que partilham o mesmo corpo de 7 polegadas, e anda com o Kindle sem proteção ou com uma capa gasta.
-
-<div class="my-6 grid grid-cols-3 gap-4">
-  <ImagemProduto asin="B0FQJM8TF5" alt="Capa transparente acrílica com correia de mão para Kindle Paperwhite de 2024 e Colorsoft" marketplace="es" formato="pequeno" />
-  <ImagemProduto asin="B0DLP2L8H9" alt="Capa folio com correia de mão para Kindle Paperwhite de 2024 e Colorsoft" marketplace="es" formato="pequeno" />
-  <ImagemProduto asin="B0DPMFS69T" alt="Capa Fintie com suporte e ranhura para a mão, para Kindle Paperwhite de 2024 e Colorsoft" marketplace="es" formato="pequeno" />
+<div class="not-prose my-6">
+  <ul class="grid gap-4 sm:grid-cols-2">
+    {SELECAO_LEITURA_2026.filter((produto) => ['10830549', '11058571', '11002878'].includes(produto.referencia)).map((produto) => (
+      <CartaoOfertaBlackFriday2026
+        oferta={{
+          id: 'presente-' + produto.id,
+          nome: produto.nome,
+          detalhe: produto.descricao,
+          loja: 'outra',
+          nomeLoja: 'PcComponentes',
+          url: produto.url,
+          linkAfiliado: produto.linkAfiliado,
+          imagem: { ...produto.imagem, credito: 'Imagem disponibilizada pela PcComponentes via Awin' },
+          preco: produto.preco,
+          verificadaEm: produto.verificadaEm,
+        }}
+      />
+    ))}
+  </ul>
+  <p class="mt-3 text-xs text-marinho-600">Publicidade · Ligações de afiliado</p>
 </div>
 
-- **Transparente com correia, cerca de 18 €** (<LinkAmazon href="https://www.amazon.es/dp/B0FQJM8TF5">ver a capa transparente na Amazon.es</LinkAmazon>): traseira em acrílico rígido, que deixa ver o aparelho, e uma correia para a mão. Boa para quem lê de pé no metro ou no comboio.
-- **Folio com correia de mão, cerca de 20 €** (<LinkAmazon href="https://www.amazon.es/dp/B0DLP2L8H9">ver a capa folio na Amazon.es</LinkAmazon>): a correia elástica atrás tira o peso do polegar em sessões de uma ou duas horas. Para leitores intensivos.
-- **Fintie com suporte e ranhura, cerca de 22 €** (<LinkAmazon href="https://www.amazon.es/dp/B0DPMFS69T">ver a capa Fintie na Amazon.es</LinkAmazon>): dobra-se em suporte para ler à mesa e tem pega atrás. Para quem lê enquanto come ou estuda.
+### E se a pessoa preferir audiolivros?
 
-Os preços são aproximados e vêm da nossa [análise de capas para o Paperwhite](/guias/capas-para-kindle-paperwhite), de abril de 2026. Todas têm íman para ligar e desligar o ecrã ao abrir e fechar.
+Uns auriculares podem ser uma boa oferta para ouvir no telemóvel. Para ouvir diretamente no Kindle, confirma primeiro o modelo, a loja associada à conta e a disponibilidade do Audible para essa conta e país. O [guia de audiolivros a partir de Portugal](/blog/audiolivros-audible-no-kindle-portugal) reúne os pontos a verificar. [Dispositivos e aplicações compatíveis com Audible](https://help.audible.com/s/article/devices-compatible-with-audible?language=es_US) · [Lojas e países Audible](https://help.audible.com/s/article/change-your-marketplace)
 
-Duas ressalvas. A Amazon.es indicava **11 de novembro de 2026** como data prevista de lançamento do novo Paperwhite. Se o presente for para esse modelo, confirma na ficha da capa que serve na edição de 2026. E para o **Kindle básico** temos [cinco capas analisadas](/guias/capas-para-kindle-basico), da MoKo à Fintie com suporte, mas sem preço registado: vê na Amazon.es se cabem no orçamento.
+## Mais de 100 euros, um primeiro leitor digital
 
-### Auscultadores JBL Tune 510BT
+Para alguém que lê sobretudo romances e quer um aparelho pequeno, começaria por comparar o [Kindle de 6 polegadas](/modelos/basico). Se a luz quente e um ecrã maior forem importantes, olha para o [Paperwhite](/modelos/paperwhite). Para banda desenhada ou livros ilustrados, compara as opções a cores na [ficha Colorsoft](/modelos/colorsoft).
 
-**Para quem:** quem tem um Kindle recente e quer começar a ouvir audiolivros. O Kindle não tem altifalante, por isso precisa de auscultadores ou auriculares Bluetooth.
+Também vale a pena perguntar onde a pessoa compra os seus ebooks. O [Kobo Clara BW](/guias/kobo-clara-bw-alternativa-kindle) é uma alternativa compacta ligada à livraria Kobo. Os leitores BOOX permitem comparar outro tipo de utilização, com aplicações e formatos de ecrã diferentes. O [guia Kindle ou Kobo](/blog/kindle-ou-kobo-livros-portugues-comparacao-2026) ajuda a escolher a partir dos hábitos de leitura.
 
-<ImagemProduto asin="B08VDJYLS5" alt="Auscultadores Bluetooth JBL Tune 510BT, dobráveis, para ouvir audiolivros no Kindle" marketplace="es" formato="pequeno" />
-
-Leves, dobráveis, com 40 horas de bateria anunciadas e o som equilibrado da JBL. Custavam **24,79 € a 1 de agosto de 2026** (<LinkPrecos />). <LinkAvaliacoes asin="B08VDJYLS5" />
-
-Quanto à disponibilidade, a 4 de outubro, a Amazon.es só tinha unidades usadas deste modelo, sem oferta de artigo novo. Se continuar assim, os auriculares do escalão seguinte são a alternativa. Como funciona o Audible no Kindle está explicado no nosso [guia de audiolivros](/blog/audiolivros-audible-no-kindle-portugal).
-
-## Até 50 €
-
-### Capa oficial Amazon em material vegetal
-
-**Para quem:** quem tem um Paperwhite de 2024 ou um Colorsoft e gosta de coisas bem acabadas.
-
-<ImagemProduto asin="B0CM7ZXQWC" alt="Capa oficial Amazon em material vegetal para Kindle Paperwhite de 2024 e Kindle Colorsoft" marketplace="es" formato="pequeno" />
-
-A variante ligada aqui usa material de origem vegetal e abre lateralmente. Confirma o ano e a edição do aparelho na ficha. Rondava os **35 € na nossa análise de abril de 2026**. <LinkAvaliacoes asin="B0CM7ZXQWC" />
-
-Compara o material, o peso e a compatibilidade com as outras capas do mesmo modelo.
-
-<LojasAmazonLinha asin="B0CM7ZXQWC" />
-
-### Carregador USB-C Belkin BoostCharge de 60 W
-
-**Para quem:** quem vai receber (ou recebeu) um Kindle novo. O Kindle vem com cabo USB-C, mas **sem carregador** na caixa.
-
-<ImagemProduto asin="B0C4FYH4YM" alt="Carregador de parede Belkin BoostCharge de 60 W com duas portas USB-C" marketplace="es" formato="pequeno" />
-
-Duas portas USB-C: carrega o telemóvel e o Kindle ao mesmo tempo, ou um portátil leve. O preço recomendado que a Amazon.es mostrava era **40,65 €**; no Prime Big Deal Days de outubro de 2026 chegou a **18,19 €**, por isso numa promoção chega a caber nos 25 €. <LinkAvaliacoes asin="B0C4FYH4YM" />
-
-Confirma primeiro se a pessoa já tem um carregador compatível. Um modelo com várias portas pode ser útil se costuma carregar o leitor e o telemóvel no mesmo sítio.
-
-### Powerbank Anker Nano (10 000 mAh, USB-C)
-
-**Para quem:** quem viaja muito e lê fora de casa.
-
-<ImagemProduto asin="B0C9CJKCH3" alt="Powerbank Anker Nano de 10 000 mAh com cabo USB-C integrado" marketplace="es" formato="pequeno" />
-
-Compacta e com o cabo USB-C integrado, o pormenor que acaba com o "trouxe a bateria mas esqueci-me do cabo". Custava **27,50 € a 4 de outubro de 2026** (<LinkPrecos />). <LinkAvaliacoes asin="B0C9CJKCH3" />
-
-A bateria externa também pode carregar o telemóvel em viagem. Confirma o tipo de ligação dos aparelhos que a pessoa usa.
-
-### Auriculares para audiolivros: Sony WF-C510 ou Xiaomi Redmi Buds 8
-
-**Para quem:** quem ouve audiolivros a caminhar, nos transportes ou a fazer outras coisas.
-
-<div class="my-6 grid grid-cols-2 gap-4">
-  <ImagemProduto asin="B0DBLNFHLT" alt="Auriculares sem fios Sony WF-C510, pequenos e leves" marketplace="es" formato="pequeno" />
-  <ImagemProduto asin="B0GQLY4D9F" alt="Auriculares sem fios Xiaomi Redmi Buds 8 com cancelamento de ruído" marketplace="es" formato="pequeno" />
+<div
+  class="not-prose my-6 rounded-2xl border border-marinho-200 bg-creme-50 p-5"
+  data-campanha-inicio="2026-11-17T00:00:00+00:00"
+  data-campanha-fim="2026-11-23T23:59:59.999+00:00"
+  data-esconder-fora
+  hidden={Date.now() > Date.parse('2026-11-23T23:59:59.999+00:00')}
+>
+  <h3 class="text-xl font-bold text-marinho-900">Kindle 2026 na Worten</h3>
+  <p class="mt-3 text-sm leading-relaxed text-marinho-700">
+    Na consulta de 17 de novembro, as versões de 6″ e 16 GB com publicidade, em grafite e roxo,
+    eram vendidas pela própria Worten a <strong>124,99 €</strong>, com PVP recomendado de 154,99 €.
+    As duas estavam assinaladas para a campanha de <strong>10% extra em talão de 17 a 23 de novembro</strong>.
+  </p>
+  <p class="mt-2 text-sm leading-relaxed text-marinho-700">
+    O talão incide sobre o valor efetivamente pago e destina-se a uma compra posterior.
+    A campanha abrange produtos elegíveis vendidos e entregues pela Worten.
+    Kobo, livros e Marketplace estão excluídos.
+    <a href="https://www.worten.pt/i2/01M7JA2M48QQAVN7RP5RFWZ1DB/01M7JA2MC09C2H1WF49P7WQXBH" class="font-semibold underline underline-offset-2">Regulamento e exclusões</a>.
+  </p>
+  <div class="mt-4 flex flex-wrap gap-3">
+    <BotaoWorten url={WORTEN.kindle2026Grafite}>Ver grafite com publicidade</BotaoWorten>
+    <BotaoWorten url={WORTEN.kindle2026Roxo}>Ver roxo com publicidade</BotaoWorten>
+  </div>
+  <p class="mt-3 text-xs text-marinho-600">Publicidade · Ligações de afiliado</p>
 </div>
 
-- **Sony WF-C510:** pequenos e leves, com o som equilibrado da Sony, mas sem cancelamento de ruído. No Prime Big Deal Days de outubro de 2026 chegaram a **36,09 €**; o preço recomendado era **60,98 €**, por isso só cabem neste escalão com desconto. <LinkAvaliacoes asin="B0DBLNFHLT" />
-- **Xiaomi Redmi Buds 8:** cancelamento de ruído até 50 dB, 44 horas de autonomia com o estojo e ligação a dois aparelhos. Custavam **43,70 € a 6 de outubro de 2026** (<LinkPrecos />). São recentes e ainda têm poucas avaliações. <LinkAvaliacoes asin="B0GQLY4D9F" />
+<FasesCampanha />
 
-Para ouvir no autocarro ou no comboio, o cancelamento de ruído dos Xiaomi faz diferença. Para ouvir em casa ou a passear, os Sony chegam.
+Para comparar os preços e modelos das duas lojas, abre o [hub Black Friday da Amazon.es e da Worten](/guias/black-friday-2026-kindle). Confirma a capacidade, a publicidade, o vendedor e o total entregue para a tua morada.
 
-### Um cartão-oferta com um ou dois livros sugeridos
+## Antes de embrulhar
 
-Para quem já tem tudo: um cartão-oferta de 30 a 50 € com dois títulos sugeridos num bilhete. Dá para a pessoa escolher, e mostra que pensaste nela.
+Se o presente incluir uma capa, deixa a referência junto do comprovativo de compra. Confirma o prazo de entrega e as condições de devolução do vendedor escolhido. Se aparecer uma opção de associar o Kindle à tua conta durante a compra, deixa esse passo para a pessoa que vai recebê-lo.
 
-## Até 100 €
-
-Este ano é o escalão mais difícil. O Kindle que costumava caber aqui esgotou e o modelo novo custa bastante mais. Ainda assim, há opções.
-
-### Kindle básico de 2024, se voltar ao stock
-
-**Para quem:** o primeiro Kindle de alguém que lê ficção na cama ou no sofá e não precisa de extras.
-
-<ImagemProduto asin="B0CP32JG8B" alt="Kindle básico de 2024 com ecrã de 6 polegadas" marketplace="es" formato="pequeno" />
-
-Seis polegadas, 300 ppi, 16 GB e 158 g, um modelo leve de 6 polegadas. Para ver o seu sucessor, consulta a [ficha do Kindle de 2026](/modelos/basico). Estava a **94,21 € a 31 de julho de 2026** e, nas ofertas que abriram antes do Prime Big Deal Days, chegou a **91,39 € a 4 de outubro**.
-
-A **7 de outubro estava esgotado na Amazon.es, sem previsão de reposição**. Esse registo é histórico. Confirma o stock e a data de entrega antes de contares com o aparelho para oferecer.
-
-Se a resistência à água for importante para a pessoa, compara-o com o Paperwhite.
-
-### Um Kindle do Amazon Warehouse
-
-**Para quem:** quem aceita um aparelho devolvido, em estado "como novo", em troca de um preço mais baixo.
-
-O Amazon Warehouse (no site espanhol, *Amazon Segunda Mano*) vende Kindle devolvidos ou com a embalagem danificada, depois de inspecionados pela Amazon. O preço e o stock mudam todos os dias, por isso não há um valor de referência. Para oferecer, escolhe o estado "como novo" e lê antes o nosso [guia do Amazon Warehouse](/blog/kindle-no-amazon-warehouse), que explica os estados e a garantia.
-
-### Combinações que funcionam
-
-- **Capa oficial (~35 €) e um cartão-oferta de 50 €**, para quem já tem Paperwhite ou Colorsoft.
-- **Auriculares e dois ebooks**, para quem está a descobrir os audiolivros.
-
-## Acima de 100 €
-
-### Kindle de 2026: o primeiro Kindle
-
-**Para quem:** quem nunca teve um Kindle e lê sobretudo ficção.
-
-<ImagemProduto asin="B0G4SHH6YH" alt="Kindle de 2026, a nova geração do Kindle básico, com 16 GB e sem publicidade" marketplace="es" formato="pequeno" />
-
-É a nova geração do Kindle básico, que a Amazon descreve como mais fina, leve e rápida. A versão de 16 GB **sem publicidade** custava **177,88 € a 7 de outubro de 2026**, com entrega em Portugal no dia seguinte (<LinkPrecos />). É o preço de lançamento, sem desconto.
-
-A ficha do [Kindle de 2026](/modelos/basico) resume as especificações e as diferenças entre as versões. Se a pessoa lê perto da água, compara com um modelo com classificação de resistência à água. <LinkAvaliacoes asin="B0G4SHH6YH" />
-
-{/* TODO: confirmar as especificações do Kindle de 2026 (resistência à água, ecrã, peso) antes de as referir. */}
-
-### Kindle Kids
-
-**Para quem:** crianças que estão a ganhar o hábito de ler sozinhas, mais ou menos a partir dos sete anos.
-
-A Amazon anunciou pacotes Kids para o básico, o Paperwhite e o Colorsoft, com capa infantil e 12 meses de Amazon Kids+. Confirma a variante disponível, as condições para Portugal e o preço na Amazon.es. O nosso [guia do Kindle para crianças](/guias/kindle-para-criancas-amazon-kids-2026) explica os perfis e o controlo parental.
-
-Ressalva: o catálogo do Kids+ servido pela Amazon Espanha é sobretudo em espanhol e inglês. Os livros infantis em português compram-se à parte.
-
-{/* TODO: confirmar preço atual e versão (2024 ou 2026) do Kindle Kids na Amazon.es. */}
-
-### Kindle Paperwhite de 2026
-
-**Para quem:** quem lê com regularidade e quer um ecrã de 7″, luz quente ajustável e resistência à água.
-
-<ImagemProduto asin="B0GV5TP9KW" alt="Kindle Paperwhite de 2026, 16 GB e sem publicidade" marketplace="es" formato="pequeno" />
-
-Na Amazon.es, o Paperwhite de 2026 estava em pré-venda a 5 de novembro, com lançamento previsto para 11 de novembro. Confirma a data de entrega com a tua morada e seleciona «Sin publicidad» se queres a versão sem anúncios. O Paperwhite de 2024 pode compensar em promoção. [Comparar as gerações e variantes](/modelos/paperwhite).
-
-### Paperwhite Signature Edition de 2026
-
-**Para quem:** quem quer 32 GB, ajuste automático da luz e carregamento numa base de contacto compatível.
-
-<ImagemProduto asin="B0GV674LSF" alt="Kindle Paperwhite Signature Edition de 2026 com 32 GB" marketplace="es" formato="pequeno" />
-
-A Signature também acrescenta traseira em alumínio e avanço de página com dois toques. Confirma se a base e a capa são compatíveis com a geração de 2026. [Ficha do Paperwhite](/modelos/paperwhite).
-
-### Kindle Colorsoft de 2026
-
-**Para quem:** quem lê banda desenhada, livros ilustrados ou de cozinha, ou usa sublinhados a cores.
-
-<ImagemProduto asin="B0GV642G9D" alt="Kindle Colorsoft de 2026 com ecrã a cores de 7 polegadas e 16 GB" marketplace="es" formato="pequeno" />
-
-O Colorsoft foi anunciado a partir de 299,99 € em Espanha em outubro de 2026. A Signature de 32 GB foi anunciada a partir de 329,99 €. Confirma as datas de entrega da variante antes de comprar para oferecer. [Ficha do Colorsoft](/modelos/colorsoft) e [guia de leitura a cores](/guias/kindle-colorsoft-vale-a-pena).
-
-### Kindle Scribe de 11 polegadas
-
-**Para quem:** estudantes, investigadores e quem toma notas à mão em reuniões.
-
-<ImagemProduto asin="B0FC1XB22K" alt="Kindle Scribe de 11 polegadas com luz frontal e caneta" marketplace="es" formato="pequeno" />
-
-Escolhe entre as versões monocromáticas com e sem luz frontal ou o Scribe Colorsoft. As três têm ecrã de 11″ e incluem caneta. Confirma a variante se comprares uma capa. [Comparar os três Scribe](/modelos/scribe).
-
-### Fora da Amazon: Kobo e BOOX
-
-**Para quem:** quem requisita ebooks na biblioteca municipal ou compra EPUB na WOOK e na Bertrand.
-
-O Kindle não lê os ebooks da BiblioLED nem os EPUB com DRM das livrarias portuguesas. Para esse leitor, há duas alternativas vendidas em Portugal:
-
-- **Kobo Clara BW**, a 169,99 € na Worten a 31 de julho de 2026, com resistência à água e luz de temperatura ajustável ([os Kobo na Worten](/produtos-estrela/kobo-na-worten-clara-libra)).
-- **BOOX Go 6**, a 169,99 € na Worten à mesma data, um leitor com Android onde cabem as apps Kindle, Kobo e WOOK. Segundo as condições publicadas pela Worten, quem compra um BOOX Go da campanha recebe dois ebooks da WOOK, até 31 de dezembro de 2026 ([condições da oferta BOOX Go](/produtos-estrela/boox-go-wookreader-ebooks-oferta)).
-
-## Dicas para comprar presentes na Amazon.es
-
-- **Encomenda com tempo.** No Prime Big Deal Days, o Kindle básico esgotou logo no arranque e o Colorsoft ficou reduzido a três unidades. Se já sabes o que queres, não deixes para a última semana.
-- **Marca a encomenda como presente.** Os Kindle comprados na Amazon costumam chegar já associados à conta de quem compra. Se isso acontecer, a pessoa só tem de anular o registo nas definições da conta do Kindle e entrar com a conta dela.
-- **Confirma o vendedor.** Prefere "vendido e enviado por Amazon": a devolução e a garantia ficam mais simples.
-- **Guarda a fatura.** A garantia legal de um Kindle comprado na Amazon.es é de três anos ([garantia do Kindle em Portugal](/faq/garantia-kindle-em-portugal)).
-- **Devoluções.** A Amazon.es dá 30 dias para devolver sem justificar, com recolha gratuita na maioria dos casos ([guia de devoluções](/guias/devolver-produto-amazon-em-portugal)). Confirma na loja se há prazo alargado para as compras de Natal deste ano.
-- **Black Friday pelo meio.** Se o presente pode esperar até ao fim de novembro, lê o nosso [guia da Black Friday 2026 para quem quer um Kindle](/guias/black-friday-2026-kindle), com os preços de referência de cada modelo.
-
-{/* TODO: confirmar que na Amazon.es a opção de presente evita o registo automático do Kindle na conta do comprador, e as condições de devolução de Natal de 2026. */}
-
-## Perguntas frequentes
-
-**Qual é o melhor Kindle para oferecer a quem nunca teve um?**
-Para a maioria, o [Paperwhite](/modelos/paperwhite): ecrã de 7 polegadas, resistência à água e luz quente. Se o orçamento é curto e a pessoa lê sobretudo em casa, o Kindle de 2026 chega. O nosso [comparativo de todos os modelos](/guias/qual-kindle-comprar-2026) ajuda a decidir.
-
-**Posso oferecer um ebook a alguém?**
-Sim. A forma mais simples é um cartão-oferta da Amazon.es com o título sugerido num bilhete. A pessoa compra o livro com a conta dela, e o livro fica na biblioteca dela.
-
-**E se a pessoa já tiver Kindle?**
-Uma capa à medida do modelo, auriculares Bluetooth para audiolivros ou um ebook. Se não sabes o modelo, podes oferecer um cartão-oferta e deixar a escolha do acessório à pessoa.
-
-**Um Kindle é bom presente para uma criança?**
-É, sobretudo a partir dos sete anos, quando a leitura autónoma ganha força. O modo Amazon Kids bloqueia a loja e a internet. Explicamos tudo no [guia do Kindle para crianças](/guias/kindle-para-criancas-amazon-kids-2026).
-
-**Vale a pena esperar pela Black Friday para comprar o presente?**
-Pode valer, mas há o risco de stock. Se o modelo que queres já está perto do preço mais baixo que registámos, compra e esquece. Os preços de referência estão no [guia da Black Friday](/guias/black-friday-2026-kindle).
-
-## Em resumo
-
-- **Até 25 €:** um ebook escolhido a dedo, um cartão-presente ou uma capa de terceiros para o Paperwhite de 2024 ou o Colorsoft (18 a 22 € na nossa análise de abril).
-- **Até 50 €:** a capa oficial em material vegetal (~35 €), auriculares para audiolivros ou um carregador USB-C, que o Kindle não traz.
-- **Até 100 €:** o Kindle básico de 2024, se voltar ao stock (esgotado a 7 de outubro), ou um Kindle "como novo" do Amazon Warehouse.
-- **Acima de 100 €:** o Kindle de 2026 (177,88 € a 7 de outubro) para um primeiro Kindle, o Paperwhite para a maioria, o Colorsoft para quem lê banda desenhada e o Scribe para quem estuda.
-- **Confirma sempre o preço na ficha:** até ao Natal vai mudar, para cima ou para baixo.
-
----
-
-_Preços de referência lidos na Amazon.es nas datas indicadas, com IVA e entrega em Portugal (as capas na nossa análise de abril de 2026); os da Worten a 31 de julho de 2026. Mudam sem aviso, confirma sempre na ficha do produto. Imagens via widget oficial Amazon Associates._
+O artigo [como preparar um Kindle para oferecer no Natal](/blog/preparar-kindle-presente-natal-2026) explica o registo, o cartão de primeira leitura e os primeiros ajustes de letra. É uma boa ligação para guardar e enviar depois de a pessoa abrir o presente.

@@ -1,0 +1,93 @@
+---
+import Container from '@components/ui/Container.astro';
+import { SELECAO_LEITURA_2026, type CategoriaLeitura2026 } from '@lib/selecao-leitura-2026';
+
+const categorias: { id: CategoriaLeitura2026; nome: string }[] = [
+  { id: 'leitores', nome: 'Leitores de texto e cor' },
+  { id: 'ecra-grande', nome: 'Leitura e escrita em ecrã grande' },
+  { id: 'capas', nome: 'Capas por modelo' },
+  { id: 'acessorios', nome: 'Canetas, comandos e proteção' },
+];
+
+const secoes = categorias.map((categoria) => ({
+  ...categoria,
+  referencias: SELECAO_LEITURA_2026.filter((produto) => produto.categoria === categoria.id),
+}));
+---
+
+<section
+  id="mais-leitores-e-acessorios"
+  aria-labelledby="titulo-selecao-leitura-2026"
+  class="not-prose scroll-mt-24 border-t border-marinho-200 bg-creme-50"
+>
+  <Container largura="largo" classe="py-8 sm:py-10">
+    <h2 id="titulo-selecao-leitura-2026" class="text-2xl font-bold leading-tight text-marinho-900 sm:text-3xl">
+      Mais leitores e acessórios para comparar
+    </h2>
+    <p class="mt-3 max-w-3xl text-sm leading-relaxed text-marinho-700 sm:text-base">
+      São {SELECAO_LEITURA_2026.length} referências adicionais da PcComponentes. Os preços foram observados no catálogo
+      de <time datetime="2026-11-17">17 de novembro de 2026</time>. Confirma o preço atual, o vendedor,
+      a compatibilidade e a entrega para a tua morada na ficha do produto.
+    </p>
+
+    <nav aria-label="Categorias de leitores e acessórios" class="mt-5">
+      <ul class="flex flex-wrap gap-2">
+        {categorias.map((categoria) => (
+          <li>
+            <a href={'#selecao-leitura-' + categoria.id} class="inline-flex rounded-lg border border-marinho-300 px-3 py-2 text-sm font-semibold text-marinho-900 no-underline transition-colors hover:bg-marinho-100">
+              {categoria.nome}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    {secoes.map((secao) => (
+      <section
+        id={'selecao-leitura-' + secao.id}
+        aria-labelledby={'titulo-selecao-leitura-' + secao.id}
+        class="mt-8 scroll-mt-24"
+      >
+        <h3 id={'titulo-selecao-leitura-' + secao.id} class="text-xl font-bold text-marinho-900 sm:text-2xl">
+          {secao.nome}
+        </h3>
+        <ul class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {secao.referencias.map((produto) => (
+            <li data-referencia-leitura={produto.id} class="min-w-0">
+              <article class="flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-marinho-200 bg-white shadow-sm">
+                <a href={produto.linkAfiliado} target="_blank" rel="sponsored nofollow noopener" data-afiliado="pccomponentes" class="block focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-marca-700">
+                  <figure class="grid aspect-[4/3] place-items-center overflow-hidden bg-white px-5 py-3">
+                    <img
+                      src={produto.imagem.src}
+                      alt={produto.imagem.alt}
+                      width="500"
+                      height="500"
+                      loading="lazy"
+                      decoding="async"
+                      class="h-full max-h-44 w-full object-contain"
+                      data-fallback="hide-pai"
+                    />
+                  </figure>
+                </a>
+                <p class="px-4 pt-2 text-xs text-marinho-600 sm:px-5">Imagem disponibilizada pela PcComponentes via Awin</p>
+                <div class="flex flex-1 flex-col p-4 sm:p-5">
+                  <h4 class="text-lg font-bold leading-tight text-marinho-900">{produto.nome}</h4>
+                  <p class="mt-2 flex-1 text-sm leading-relaxed text-marinho-700">{produto.descricao}</p>
+                  <p class="mt-4 text-lg font-bold text-marinho-900">{produto.preco}</p>
+                  <p class="mt-1 text-xs text-marinho-600">Preço observado a <time datetime={produto.verificadaEm}>17 de novembro de 2026</time></p>
+                  <div class="mt-4">
+                    <a href={produto.linkAfiliado} target="_blank" rel="sponsored nofollow noopener" data-afiliado="pccomponentes" class="btn-secundario px-4 py-2.5 text-sm">
+                      Comparar na PcComponentes <span aria-hidden="true">↗</span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <p class="mt-4 text-xs text-marinho-600">Publicidade · Ligações de afiliado</p>
+  </Container>
+</section>
