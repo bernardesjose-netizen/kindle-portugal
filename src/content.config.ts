@@ -168,6 +168,7 @@ const guias = defineCollection({
       tempo_leitura_min: z.number().int().positive().optional(),
       imagem_hero: image().optional(),
       imagem_hero_alt: z.string().optional(),
+      mostrar_imagem_hero: z.boolean().default(false),
       modelos_relacionados: z.array(z.string()).default([]),
       rascunho: z.boolean().default(false),
       seo: seo.optional(),
