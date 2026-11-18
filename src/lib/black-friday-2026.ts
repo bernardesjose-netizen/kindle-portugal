@@ -14,6 +14,8 @@ export interface OfertaBlackFriday extends LojaBlackFriday {
   verificadaEm: string;
   imagem?: {
     src: string | ImageMetadata;
+    largura?: number;
+    altura?: number;
     alt: string;
     credito?: string;
     fonte?: string;

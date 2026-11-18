@@ -56,8 +56,8 @@ const temDataVerificacao = !Number.isNaN(dataVerificacao.valueOf());
             alt={imagem.alt}
             loading={carregarFoto}
             decoding="async"
-            width="440"
-            height="275"
+            width={imagem.largura ?? 440}
+            height={imagem.altura ?? 275}
             class="h-full max-h-40 w-full object-contain"
             data-fallback="hide-pai"
           />

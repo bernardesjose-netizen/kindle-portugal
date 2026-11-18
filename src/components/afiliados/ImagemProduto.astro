@@ -1,6 +1,7 @@
 ---
 import { tagPara, urlAfiliado, type Marketplace } from '@lib/afiliados';
 import { imagemParaAsin } from '@lib/asin-images';
+import { imagemAmazonApi } from '@lib/amazon-imagens-api';
 
 interface Props {
   /** ASIN do produto na Amazon (10 caracteres) */
@@ -73,7 +74,10 @@ const semTag = !tag;
 // usa como fallback o widget oficial (pode falhar em browsers com
 // ad-blocker), e depois o placeholder estático.
 const imagemDirecta = imagemParaAsin(asin, tamanhoEfetivo);
-const srcWidget = imagemDirecta
+// Só os quatro ASINs confirmados usam a API; a fotografia mantém a ligação ao produto.
+const imagemApi = marketplace === 'es' && linkar ? imagemAmazonApi(asin) : null;
+const estiloImagem = imagemApi ? undefined : imgStyle;
+const srcWidget = imagemApi?.src ?? imagemDirecta
   ?? `https://${cfg.widget}/widgets/q?_encoding=UTF8&MarketPlace=${cfg.place}&ASIN=${asin}&ServiceVersion=20070822&ID=AsinImage&WS=1&Format=_SL${tamanhoEfetivo}_${tag ? `&tag=${tag}` : ''}`;
 
 // Fallback final quando o ASIN não tem imagem no catálogo Amazon.
@@ -116,10 +120,10 @@ const lado = tamanhoEfetivo;
         alt={alt}
         loading={loading}
         decoding="async"
-        width={lado}
-        height={lado}
+        width={imagemApi?.largura ?? lado}
+        height={imagemApi?.altura ?? lado}
         class={imgClasses}
-        style={imgStyle}
+        style={estiloImagem}
         referrerpolicy="no-referrer-when-downgrade"
         data-fallback={srcFallback}
       />

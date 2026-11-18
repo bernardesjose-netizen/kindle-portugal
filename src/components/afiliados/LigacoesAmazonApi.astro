@@ -1,0 +1,8 @@
+<script>
+ import { endpointProdutoAmazonApi } from '@lib/amazon-imagens-api';
+ import { tagPara } from '@lib/afiliados';
+ import { atualizarLigacoesAmazonApi } from '@lib/ligacoes-amazon-api';
+ const atualizar = () => atualizarLigacoesAmazonApi(endpointProdutoAmazonApi, tagPara('es'));
+ atualizar();
+ document.addEventListener('astro:page-load', atualizar);
+</script>

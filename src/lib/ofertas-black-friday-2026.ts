@@ -1,6 +1,4 @@
-import fotoKindle2026Imprensa from '../assets/imagens/ofertas/kindle-2026-grafite-imprensa.png';
-import fotoPaperwhiteImprensa from '../assets/imagens/ofertas/kindle-paperwhite-2024-preto-imprensa.jpg';
-import fotoTechnicsImprensa from '../assets/imagens/ofertas/technics-eah-az80-prateados-imprensa.png';
+import { imagemAmazonApi } from './amazon-imagens-api';
 import fotoSage from '../assets/imagens/ofertas/kobo-sage-preto-raymond-snijders.jpg';
 import type { OfertaBlackFriday } from '@lib/black-friday-2026';
 
@@ -32,11 +30,9 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     loja: 'amazon',
     url: 'https://www.amazon.es/dp/B0G4SHH6YH',
     imagem: {
-      src: fotoKindle2026Imprensa,
-      alt: 'Leitura num Kindle de 6 polegadas de 2026 em grafite',
-      credito: 'Imagem de divulgação: Amazon',
-      fonte: 'https://www.aboutamazon.com/news/devices/new-kindle-lineup-2026',
-      alteracao: 'Fotograma da animação oficial',
+      ...imagemAmazonApi('B0G4SHH6YH')!,
+      alt: 'Kindle de 6 polegadas de 2026 em grafite, sem publicidade',
+      credito: 'Imagem: Amazon (Creators API)',
     },
     etiqueta: 'Black Friday antecipada',
     verificadaEm,
@@ -48,10 +44,9 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     loja: 'amazon',
     url: 'https://www.amazon.es/dp/B0CFPWLGF2',
     imagem: {
-      src: fotoPaperwhiteImprensa,
+      ...imagemAmazonApi('B0CFPWLGF2')!,
       alt: 'Kindle Paperwhite de 2024 em preto, visto de frente e de trás',
-      credito: 'Imagem de imprensa: Amazon',
-      fonte: 'https://press.aboutamazon.com/search/devices?f1=00000186-385a-d973-a1fe-fb5ff9290000',
+      credito: 'Imagem: Amazon (Creators API)',
     },
     etiqueta: 'Black Friday antecipada',
     verificadaEm,
@@ -327,6 +322,11 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     detalhe: 'Capa de material vegetal para Paperwhite de 12.ª geração e Colorsoft da geração anterior. Confirma a lista de compatibilidade se tens um dos modelos redesenhados de outubro de 2026.',
     loja: 'amazon',
     url: 'https://www.amazon.es/dp/B0CM7ZXQWC',
+    imagem: {
+      ...imagemAmazonApi('B0CM7ZXQWC')!,
+      alt: 'Capa Amazon preta de material vegetal para Paperwhite e Colorsoft de 2024',
+      credito: 'Imagem: Amazon (Creators API)',
+    },
     etiqueta: 'Redução indicada na loja',
     verificadaEm,
   },
@@ -407,10 +407,9 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     loja: 'amazon',
     url: 'https://www.amazon.es/dp/B0C4LSRTYT',
     imagem: {
-      src: fotoTechnicsImprensa,
-      alt: 'Auriculares Technics EAH-AZ80 prateados dentro da caixa de carregamento aberta',
-      credito: 'Imagem de imprensa: Technics / Panasonic',
-      fonte: 'https://www.technics.com/ch/de/presse/pressemeldung/04-fy2023-technics-praesentiert-neue-tws-kopfhoerer.html',
+      ...imagemAmazonApi('B0C4LSRTYT')!,
+      alt: 'Auriculares Technics EAH-AZ80 prateados com a caixa de carregamento',
+      credito: 'Imagem: Amazon (Creators API)',
     },
     etiqueta: 'Black Friday antecipada',
     verificadaEm,
