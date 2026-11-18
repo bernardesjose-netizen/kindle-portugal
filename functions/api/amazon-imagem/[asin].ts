@@ -1,5 +1,5 @@
 /**
- * URL de imagem da Creators API; nunca transfere nem guarda a fotografia.
+ * URLs de imagem/produto da Creators API; nunca guarda a fotografia.
  * Credenciais v3.2 EU: apenas secrets do Cloudflare, sem valores no repositório.
  * Pedido conforme scripts/testar-creators-api.mjs e documentação oficial:
  * https://affiliate-program.amazon.com/creatorsapi/docs/en-us/get-started/using-curl
@@ -27,6 +27,12 @@ interface Token {
  expiresAt: number;
 }
 
+interface Product {
+ imageUrl?: string;
+ detailPageURL: string;
+ expiresAt: number;
+}
+
 const ASINS = new Set([
  'B0G4SHH6YH', 'B0CFPWLGF2', 'B0CM7ZXQWC', 'B0C4LSRTYT',
  'B07FRPXF44', 'B000JL2CAG', 'B08VD632WJ',
@@ -36,14 +42,19 @@ const TAGS = {
  'mochila-pt': 'mochilapt-21',
  'mochila-es': 'comp_mochilaes-21',
 } as const;
+type Site = keyof typeof TAGS;
 const TOKEN_URL = 'https://api.amazon.co.uk/auth/o2/token';
 const ITEMS_URL = 'https://creatorsapi.amazon/catalog/v1/getItems';
 const MARKETPLACE = 'www.amazon.es';
 const URL_TTL_SECONDS = 3600;
+const PRODUCT_ORIGINS = new Set(['https://mochiladeemergencia.pt', 'https://kindleportugal.com']);
 
 // Estado efémero do isolate: não vai para Cache API, disco, resposta ou logs.
 let token: Token | undefined;
 let pendingToken: { clientId: string; promise: Promise<Token> } | undefined;
+const pendingBatches = new Map<string, Promise<Record<string, Product>>>();
+let catalogQueue: Promise<unknown> = Promise.resolve();
+let lastCatalogStart = 0;
 
 function reply(status: number, text: string, extra: HeadersInit = {}): Response {
  return new Response(text, {
@@ -58,14 +69,41 @@ function reply(status: number, text: string, extra: HeadersInit = {}): Response 
 }
 
 function imageUrl(value: unknown): string | undefined {
- if (typeof value !== 'string') return;
+ if (typeof value !== 'string' || value.trim() !== value) return;
  try {
   const url = new URL(value);
   if (url.protocol === 'https:' && url.hostname === 'm.media-amazon.com'
    && !url.port && !url.username && !url.password && url.pathname.startsWith('/images/')) {
-   return url.href;
+   return value;
   }
  } catch { /* Dados inválidos nunca passam para Location. */ }
+}
+
+function productUrl(value: unknown, asin: string, site: Site): string | undefined {
+ if (typeof value !== 'string' || value.trim() !== value || /[\u0000-\u0020\u007f]/.test(value)) return;
+ try {
+  const url = new URL(value);
+  if (url.protocol === 'https:' && url.hostname === 'www.amazon.es'
+   && !url.port && !url.username && !url.password && !url.hash
+   && url.pathname === `/dp/${asin}` && url.searchParams.getAll('tag').length === 1
+   && url.searchParams.get('tag') === TAGS[site]) {
+   return value; // Preservar todos os parâmetros e a ordem devolvidos pela API.
+  }
+ } catch { /* Um URL inválido nunca passa para Location. */ }
+}
+
+function productResponse(url: string, origin: string | null): Response {
+ return new Response(JSON.stringify({ url }), { headers: {
+  'Content-Type': 'application/json; charset=utf-8',
+  'Cache-Control': 'private, max-age=60, must-revalidate',
+  'X-Robots-Tag': 'noindex, nofollow',
+  Vary: 'Origin',
+  ...(origin && PRODUCT_ORIGINS.has(origin) ? { 'Access-Control-Allow-Origin': origin } : {}),
+ } });
+}
+
+function productFallback(asin: string, site: Site, origin: string | null): Response {
+ return productResponse(`https://www.amazon.es/dp/${asin}?tag=${TAGS[site]}`, origin);
 }
 
 function redirect(url: string): Response {
@@ -168,78 +206,126 @@ async function accessToken(clientId: string, clientSecret: string): Promise<stri
  }
 }
 
+function cacheKey(origin: string, asin: string, site: Site): Request {
+ return new Request(`${origin}/api/amazon-imagem/${asin}?site=${site}`);
+}
+
+async function loadBatch(clientId: string, clientSecret: string, site: Site, origin: string, cache?: Cache): Promise<Record<string, Product>> {
+ const key = `${clientId}:${site}`;
+ const existing = pendingBatches.get(key);
+ if (existing) return existing;
+
+ const promise = (async (): Promise<Record<string, Product>> => {
+  const bearer = await accessToken(clientId, clientSecret);
+  // Um batch de7ASINs conta como uma transação. Limitar também outros sites
+  // no mesmo isolate a1pedido/1,1s; não é um limitador global entrePOPs.
+  const job = catalogQueue.then(async () => {
+   const delay = Math.max(0, lastCatalogStart + 1100 - Date.now());
+   if (delay) await new Promise<void>((resolve) => setTimeout(resolve, delay));
+   lastCatalogStart = Date.now();
+   return post('catalog', ITEMS_URL, {
+    itemIds: [...ASINS],
+    itemIdType: 'ASIN',
+    marketplace: MARKETPLACE,
+    partnerTag: TAGS[site],
+    resources: ['images.primary.large'],
+   }, { Authorization: `Bearer ${bearer}`, 'x-marketplace': MARKETPLACE });
+  });
+  catalogQueue = job.then(() => undefined, () => undefined);
+  const response = await job;
+  if (!response.ok) {
+   if (response.status === 401 && token?.value === bearer) token = undefined;
+   throw new Error('Catalog unavailable');
+  }
+  const body = response.data as {
+   itemsResult?: { items?: { asin?: string; detailPageURL?: unknown; images?: { primary?: { large?: { url?: unknown } } } }[] };
+  };
+  const items = body?.itemsResult?.items;
+  const products: Record<string, Product> = {};
+  if (Array.isArray(items)) {
+   for (const item of items) {
+    if (!item?.asin || !ASINS.has(item.asin)) continue;
+    const detailPageURL = productUrl(item.detailPageURL, item.asin, site);
+    if (!detailPageURL) continue;
+    products[item.asin] = {
+     imageUrl: imageUrl(item.images?.primary?.large?.url),
+     detailPageURL,
+     expiresAt: Date.now() + URL_TTL_SECONDS * 1000,
+    };
+   }
+  }
+  if (!Object.keys(products).length) logFailure('catalog', 'invalid_response', body);
+  if (cache) {
+   // Resolver só depois das escritas: o próximo pedido não abre outro batch
+   // entre o fim do POST e a disponibilização dos outros ASINs na cache.
+   await Promise.all(Object.entries(products).map(([asin, product]) => cache.put(
+    cacheKey(origin, asin, site),
+    new Response(JSON.stringify(product), { headers: {
+     'Content-Type': 'application/json',
+     'Cache-Control': `max-age=${URL_TTL_SECONDS}`,
+     'X-Robots-Tag': 'noindex, nofollow',
+    } }),
+   ).catch(() => undefined)));
+  }
+  return products; // Só dados simples; nunca partilhar Response/streams.
+ })();
+ pendingBatches.set(key, promise);
+ try {
+  return await promise;
+ } finally {
+  if (pendingBatches.get(key) === promise) pendingBatches.delete(key);
+ }
+}
+
 export async function onRequest(context: Context): Promise<Response> {
  const { request, env, params } = context;
  if (request.method !== 'GET') return reply(405, 'Method not allowed', { Allow: 'GET' });
 
  const asin = params.asin;
  const url = new URL(request.url);
- const site = url.searchParams.get('site');
+ const requestedSite = url.searchParams.get('site');
+ const route = url.pathname.match(/^\/api\/amazon-(imagem|produto)\/([A-Z0-9]{10})\/?$/);
  if (typeof asin !== 'string' || !ASINS.has(asin)
-  || !/^\/api\/amazon-imagem\/[A-Z0-9]{10}\/?$/.test(url.pathname)
-  || !site || !Object.hasOwn(TAGS, site) || url.searchParams.getAll('site').length !== 1
+  || !route || route[2] !== asin
+  || !requestedSite || !Object.hasOwn(TAGS, requestedSite) || url.searchParams.getAll('site').length !== 1
   || [...url.searchParams.keys()].some((key) => key !== 'site')) {
   return reply(404, 'Not found');
  }
+ const site = requestedSite as Site;
+ const isProduct = route[1] === 'produto';
+ const origin = request.headers.get('Origin');
+ if (isProduct && origin && !PRODUCT_ORIGINS.has(origin)) return reply(403, 'Origin not allowed');
+ const unavailable = () => isProduct ? productFallback(asin, site, origin) : reply(503, 'Image unavailable', { 'Retry-After': '60' });
  const clientId = env.CREATORS_CLIENT_ID;
  const clientSecret = env.CREATORS_CLIENT_SECRET;
- if (!clientId || !clientSecret) return reply(503, 'Image unavailable', { 'Retry-After': '60' });
+ if (!clientId || !clientSecret) return unavailable();
 
- // Chave canónica: apenas o ASIN e site validados, sem parâmetros arbitrários.
- const key = new Request(`${url.origin}/api/amazon-imagem/${asin}?site=${site}`);
+ // Imagem e produto usam o mesmo par de URLs e prazo por ASIN/site.
+ const key = cacheKey(url.origin, asin, site);
  let cache: Cache | undefined;
  try {
-  cache = await caches.open('creators-image-urls-v1');
+  cache = await caches.open('creators-product-urls-v2');
   const cached = await cache.match(key);
   if (cached) {
-   const entry = await cached.json() as { url?: unknown; expiresAt?: unknown };
-   const officialUrl = imageUrl(entry.url);
-   if (officialUrl && typeof entry.expiresAt === 'number' && entry.expiresAt > Date.now()
-    && entry.expiresAt <= Date.now() + URL_TTL_SECONDS * 1000) return redirect(officialUrl);
+   const entry = await cached.json() as Product;
+   const detail = productUrl(entry?.detailPageURL, asin, site);
+   if (detail && typeof entry.expiresAt === 'number' && entry.expiresAt > Date.now()
+    && entry.expiresAt <= Date.now() + URL_TTL_SECONDS * 1000) {
+    if (isProduct) return productResponse(detail, origin);
+    const image = imageUrl(entry.imageUrl);
+    return image ? redirect(image) : unavailable();
+   }
   }
  } catch { /* Uma falha da cache permite consultar a API normalmente. */ }
 
  try {
-  const bearer = await accessToken(clientId, clientSecret);
-  const response = await post('catalog', ITEMS_URL, {
-   itemIds: [asin],
-   itemIdType: 'ASIN',
-   marketplace: MARKETPLACE,
-   partnerTag: TAGS[site as keyof typeof TAGS],
-   resources: ['images.primary.large'],
-  }, {
-   Authorization: `Bearer ${bearer}`,
-   'x-marketplace': MARKETPLACE,
-  });
-  if (!response.ok) {
-   if (response.status === 401) token = undefined;
-   return reply(503, 'Image unavailable', { 'Retry-After': '60' });
-  }
-  const body = response.data as {
-   itemsResult?: { items?: { asin?: string; images?: { primary?: { large?: { url?: unknown } } } }[] };
-  };
-  const items = body?.itemsResult?.items;
-  const item = Array.isArray(items) ? items.find((candidate) => candidate?.asin === asin) : undefined;
-  const officialUrl = imageUrl(item?.images?.primary?.large?.url);
-  if (!officialUrl) {
-   logFailure('catalog', 'image_unavailable', body);
-   return reply(503, 'Image unavailable', { 'Retry-After': '60' });
-  }
-
-  if (cache) {
-   const entry = new Response(JSON.stringify({
-    url: officialUrl,
-    expiresAt: Date.now() + URL_TTL_SECONDS * 1000,
-   }), { headers: {
-    'Content-Type': 'application/json',
-    'Cache-Control': `max-age=${URL_TTL_SECONDS}`,
-    'X-Robots-Tag': 'noindex, nofollow',
-   } });
-   context.waitUntil(cache.put(key, entry).catch(() => undefined));
-  }
-  return redirect(officialUrl);
+  const products = await loadBatch(clientId, clientSecret, site, url.origin, cache);
+  const product = products[asin];
+  if (!product) return unavailable();
+  if (isProduct) return productResponse(product.detailPageURL, origin);
+  return product.imageUrl ? redirect(product.imageUrl) : unavailable();
  } catch {
   // A resposta pública nunca expõe diagnóstico, corpos, tokens ou credenciais.
-  return reply(503, 'Image unavailable', { 'Retry-After': '60' });
+  return unavailable();
  }
 }
