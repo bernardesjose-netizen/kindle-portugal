@@ -77,9 +77,33 @@ function redirect(url: string): Response {
 
 type Stage = 'oauth' | 'catalog';
 
-function logFailure(stage: Stage, status: number | string): void {
- // Logs privados Cloudflare: só estes dois campos, sem erros/corpos/URLs/segredos.
- console.warn({ stage, status });
+// Só identificadores públicos documentados; nunca mensagens ou valores livres.
+const SAFE_ERRORS = new Set([
+ 'UnauthorizedException', 'ValidationException', 'AccessDeniedException',
+ 'ResourceNotFoundException', 'ThrottleException', 'InternalServerException',
+ 'UnknownOperation', 'CannotParse', 'FieldValidationFailed', 'InvalidAssociate',
+ 'InvalidPartnerTag', 'AssociateNotEligible', 'MissingClaim', 'MissingKeyId',
+ 'UnsupportedClient', 'InvalidClient', 'MissingCredential', 'TokenExpired', 'InvalidToken', 'Other',
+ 'invalid_request', 'invalid_client', 'invalid_scope', 'invalid_grant',
+ 'unauthorized_client', 'unsupported_grant_type', 'access_denied', 'server_error',
+ 'temporarily_unavailable',
+]);
+
+function logFailure(stage: Stage, status: number | string, data?: unknown): void {
+ const fields: Record<string, string | number> = { stage, status };
+ if (data && typeof data === 'object' && !Array.isArray(data)) {
+  const body = data as Record<string, unknown>;
+  const safe = (value: unknown): value is string => typeof value === 'string' && SAFE_ERRORS.has(value);
+  if (safe(body.type)) fields.type = body.type;
+  if (safe(body.reason)) fields.reason = body.reason;
+  if (safe(body.error)) fields.code = body.error;
+  if (Array.isArray(body.errors)) {
+   const partial = body.errors.find((entry) => entry && typeof entry === 'object' && safe(entry.code));
+   if (partial) fields.code = partial.code;
+  }
+ }
+ // Logs privados Cloudflare: só campos/códigos fechados, sem corpos/URLs/segredos.
+ console.warn(fields);
 }
 
 async function post(stage: Stage, url: string, body: unknown, headers: HeadersInit = {}): Promise<{
@@ -93,14 +117,13 @@ async function post(stage: Stage, url: string, body: unknown, headers: HeadersIn
    method: 'POST',
    headers: { 'Content-Type': 'application/json', ...headers },
    body: JSON.stringify(body),
-   redirect: 'error',
+   redirect: 'manual', // Workers suporta manual/follow; 3xx não é seguido.
    signal: controller.signal,
   });
   receivedStatus = response.status;
-  if (!response.ok) logFailure(stage, response.status);
-  // O limite inclui a leitura JSON; corpos de erro nunca são lidos/expostos.
-  const data: unknown = response.ok ? await response.json() : undefined;
-  if (!response.ok) void response.body?.cancel().catch(() => undefined);
+  // Inclui a leitura no timeout; de erros só saem códigos da lista fechada.
+  const data: unknown = await response.json().catch(() => undefined);
+  if (!response.ok) logFailure(stage, response.status, data);
   return { ok: response.ok, status: response.status, data };
  } catch {
   logFailure(stage, receivedStatus === undefined ? 'request_failed' : 'invalid_response');
@@ -127,7 +150,7 @@ async function accessToken(clientId: string, clientSecret: string): Promise<stri
   const lifetime = Number(body?.expires_in);
   if (typeof body?.access_token !== 'string' || !body.access_token
    || !Number.isFinite(lifetime) || lifetime <= 0) {
-   logFailure('oauth', 'invalid_response');
+   logFailure('oauth', 'invalid_response', body);
    throw new Error('Invalid token');
   }
   token = {
@@ -199,7 +222,7 @@ export async function onRequest(context: Context): Promise<Response> {
   const item = Array.isArray(items) ? items.find((candidate) => candidate?.asin === asin) : undefined;
   const officialUrl = imageUrl(item?.images?.primary?.large?.url);
   if (!officialUrl) {
-   logFailure('catalog', 'image_unavailable');
+   logFailure('catalog', 'image_unavailable', body);
    return reply(503, 'Image unavailable', { 'Retry-After': '60' });
   }
 
