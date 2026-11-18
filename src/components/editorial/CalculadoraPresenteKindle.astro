@@ -1,0 +1,51 @@
+---
+const parcelas = [
+ { id: 'leitor', nome: 'Leitor', valor: '124.99' },
+ { id: 'capa', nome: 'Capa ou proteção escolhida', valor: '0' },
+ { id: 'carregador', nome: 'Carregador, se fizer falta', valor: '0' },
+ { id: 'leitura', nome: 'Livro ou leitura que vais juntar', valor: '0' },
+ { id: 'entrega', nome: 'Portes e outros custos da encomenda', valor: '0' },
+];
+---
+
+<section class="not-prose my-8 rounded-2xl border border-marinho-200 bg-creme-50 p-5 sm:p-7" aria-labelledby="orcamento-presente-titulo">
+ <p class="text-xs font-bold uppercase tracking-widest text-marca-700">A tua conta</p>
+ <h2 id="orcamento-presente-titulo" class="mt-2 text-2xl font-bold text-marinho-900">Soma o presente completo</h2>
+ <p id="orcamento-presente-ajuda" class="mt-3 text-sm leading-relaxed text-marinho-700">
+  O leitor começa no exemplo de 124,99 € observado na Worten em 18 de novembro de 2026. Substitui-o pelo preço da tua ficha e preenche as outras parcelas. Os zeros são valores por acrescentar, não uma promessa de acessórios ou portes gratuitos.
+ </p>
+ <form data-orcamento-presente aria-describedby="orcamento-presente-ajuda" class="mt-5">
+  <div class="grid gap-4 sm:grid-cols-2">
+   {parcelas.map((parcela) => (
+    <label class="block min-w-0 text-sm font-semibold text-marinho-800" for={`orcamento-${parcela.id}`}>
+     {parcela.nome}
+     <span class="mt-1.5 flex items-center gap-2">
+      <input id={`orcamento-${parcela.id}`} name={parcela.id} type="number" min="0" max="10000" step="0.01" value={parcela.valor} required inputmode="decimal" class="w-full min-w-0 rounded-lg border border-marinho-300 bg-white px-3 py-2.5 text-base font-normal text-marinho-900 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-marca-700" />
+      <span aria-hidden="true">€</span>
+     </span>
+    </label>
+   ))}
+  </div>
+  <div class="mt-6 flex flex-wrap items-baseline justify-between gap-3 border-t border-marinho-200 pt-5">
+   <label for="orcamento-total" class="font-semibold text-marinho-800">Total das parcelas</label>
+   <output id="orcamento-total" name="total" aria-live="polite" aria-atomic="true" class="text-3xl font-bold text-marinho-900">124,99 €</output>
+  </div>
+ </form>
+ <p class="mt-3 text-xs leading-relaxed text-marinho-600">Antes de pagar, confere este total com o valor final do carrinho. Créditos para compras futuras ficam fora desta soma.</p>
+</section>
+
+<script>
+ const formato = new Intl.NumberFormat('pt-PT', { style: 'currency', currency: 'EUR' });
+ document.querySelectorAll<HTMLFormElement>('[data-orcamento-presente]').forEach((formulario) => {
+  const campos = Array.from(formulario.querySelectorAll<HTMLInputElement>('input[type="number"]'));
+  const total = formulario.querySelector<HTMLOutputElement>('output');
+  if (!total) return;
+  const atualizar = () => {
+   const validos = campos.every((campo) => Number.isFinite(campo.valueAsNumber) && campo.valueAsNumber >= 0 && campo.valueAsNumber <= 10000);
+   total.value = validos ? formato.format(campos.reduce((soma, campo) => soma + Math.round(campo.valueAsNumber * 100), 0) / 100) : 'Confirma os valores';
+  };
+  formulario.addEventListener('input', atualizar);
+  formulario.addEventListener('submit', (event) => event.preventDefault());
+  atualizar();
+ });
+</script>
