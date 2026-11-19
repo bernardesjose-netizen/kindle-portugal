@@ -1,8 +1,7 @@
 import { imagemAmazonApi } from './amazon-imagens-api';
-import fotoSage from '../assets/imagens/ofertas/kobo-sage-preto-raymond-snijders.jpg';
 import type { OfertaBlackFriday } from '@lib/black-friday-2026';
 
-const verificadaEm = '2026-11-16';
+const verificadaEm = '2026-11-19';
 
 export const OFERTAS_BLACK_FRIDAY_2026 = [
   {
@@ -34,7 +33,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       alt: 'Kindle de 6 polegadas de 2026 em grafite, sem publicidade',
       credito: 'Imagem: Amazon (Creators API)',
     },
-    etiqueta: 'Black Friday antecipada',
+    etiqueta: 'Black Friday Amazon.es',
     verificadaEm,
   },
   {
@@ -48,7 +47,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       alt: 'Kindle Paperwhite de 2024 em preto, visto de frente e de trás',
       credito: 'Imagem: Amazon (Creators API)',
     },
-    etiqueta: 'Black Friday antecipada',
+    etiqueta: 'Black Friday Amazon.es',
     verificadaEm,
   },
   {
@@ -74,7 +73,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       url: 'https://www.pccomponentes.pt/kindle-colorsoft-e-book-7-05-16gb',
       linkAfiliado: 'https://www.awin1.com/pclick.php?p=44287954953&a=2950455&m=20983',
     },
-    etiqueta: 'Black Friday antecipada',
+    etiqueta: 'Black Friday Amazon.es',
     verificadaEm,
   },
   {
@@ -100,7 +99,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       url: 'https://www.pccomponentes.pt/livro-eletronico-amazon-kindle-scribe-bluetooth-wifi-11-32gb-cinzento-com-stylus-pen',
       linkAfiliado: 'https://www.awin1.com/pclick.php?p=45175126219&a=2950455&m=20983',
     },
-    etiqueta: 'Black Friday antecipada',
+    etiqueta: 'Black Friday Amazon.es',
     destaque: true,
     verificadaEm,
   },
@@ -127,7 +126,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       url: 'https://www.pccomponentes.pt/livro-eletronico-amazon-kindle-scribe-colorsoft-wifi-11-64gb-graphite-com-stylus-pen',
       linkAfiliado: 'https://www.awin1.com/pclick.php?p=45776358807&a=2950455&m=20983',
     },
-    etiqueta: 'Black Friday antecipada',
+    etiqueta: 'Black Friday Amazon.es',
     verificadaEm,
   },
   {
@@ -153,7 +152,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       url: 'https://www.pccomponentes.pt/kindle-paperwhite-signature-edition-livro-electronico-7-32gb-preto-metalizado',
       linkAfiliado: 'https://www.awin1.com/pclick.php?p=39135247776&a=2950455&m=20983',
     },
-    etiqueta: 'Black Friday antecipada',
+    etiqueta: 'Black Friday Amazon.es',
     destaque: true,
     verificadaEm,
   },
@@ -180,7 +179,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       url: 'https://www.pccomponentes.pt/amazon-kindle-colorsoft-signature-edition-e-reader-cores-32gb-wifi',
       linkAfiliado: 'https://www.awin1.com/pclick.php?p=42169554253&a=2950455&m=20983',
     },
-    etiqueta: 'Black Friday antecipada',
+    etiqueta: 'Black Friday Amazon.es',
     destaque: true,
     verificadaEm,
   },
@@ -225,23 +224,20 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     verificadaEm,
   },
   {
-    id: 'kobo-sage',
-    nome: 'Kobo Sage de 8″, 32 GB',
-    detalhe: 'Ecrã monocromático, botões de navegação e suporte para caneta Kobo Stylus, vendida em separado. Dá mais espaço à página que os leitores de 6″.',
-    loja: 'outra',
-    nomeLoja: 'PcComponentes',
-    url: 'https://www.pccomponentes.pt/kobo-sage-8-ereader-preto',
+    id: 'kindle-2026-worten-roxo',
+    nome: 'Kindle 2026 de 6″ em roxo com publicidade',
+    detalhe: 'A versão de 16 GB em roxo ube é vendida e entregue pela Worten. A alternativa na Amazon.es corresponde à mesma cor, memória e opção com publicidade no ecrã de bloqueio.',
+    loja: 'worten',
+    url: 'https://www.worten.pt/produtos/amazon-kindle-2026-com-ads-6-16-gb-roxo-9026978',
     imagem: {
-      src: fotoSage,
-      alt: 'Kobo Sage preto com o nome do modelo visível nas definições de Bluetooth',
-      credito: 'Foto de Raymond Snijders',
-      fonte: 'https://www.flickr.com/photos/snijders73/51704673449/',
-      licenca: { nome: 'CC BY 2.0', url: 'https://creativecommons.org/licenses/by/2.0/' },
-      alteracao: 'Redimensionada',
+      src: 'https://www.worten.pt/i/36e17c8483ad39e641208ca5e76973459aff8d11',
+      alt: 'Kindle de 6 polegadas de 2026 em roxo ube, com 16 GB e publicidade',
+      credito: 'Imagem disponibilizada pela Worten via Awin',
     },
-    preco: '303,99 €',
-    referencia: 'Referência de 350,88 € indicada pela loja',
-    etiqueta: 'Redução indicada na loja',
+    alternativa: { loja: 'amazon', url: 'https://www.amazon.es/dp/B0G4SM81G1' },
+    preco: '124,99 €',
+    referencia: 'PVP recomendado de 154,99 € indicado pela Worten',
+    etiqueta: 'Preço abaixo do PVPR',
     verificadaEm,
   },
   {
@@ -257,9 +253,9 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       alt: 'PocketBook Era Lite Stone Green, de 7 polegadas e 16 GB',
       credito: 'Imagem disponibilizada pela PcComponentes via Awin',
     },
-    preco: '192,99 €',
-    referencia: 'Preço mais baixo dos últimos 30 dias indicado pela loja: 209 €',
-    etiqueta: 'Redução indicada na loja',
+    preco: '200,99 €',
+    referencia: 'PVP recomendado de 209 € indicado pela loja',
+    etiqueta: 'Preço abaixo do PVPR',
     verificadaEm,
   },
   {
@@ -276,8 +272,8 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       credito: 'Imagem disponibilizada pela PcComponentes via Awin',
     },
     preco: '167,92 €',
-    referencia: 'Preço mais baixo dos últimos 30 dias indicado pela loja: 178,99 €',
-    etiqueta: 'Redução indicada na loja',
+    referencia: 'PVP recomendado de 179 € indicado pela loja',
+    etiqueta: 'Preço abaixo do PVPR',
     verificadaEm,
   },
   {
@@ -411,7 +407,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       alt: 'Auriculares Technics EAH-AZ80 prateados com a caixa de carregamento',
       credito: 'Imagem: Amazon (Creators API)',
     },
-    etiqueta: 'Black Friday antecipada',
+    etiqueta: 'Black Friday Amazon.es',
     verificadaEm,
   },
   {
