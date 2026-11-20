@@ -1,7 +1,7 @@
 import { imagemAmazonApi } from './amazon-imagens-api';
 import type { OfertaBlackFriday } from '@lib/black-friday-2026';
 
-const verificadaEm = '2026-11-19';
+const verificadaEm = '2026-11-20';
 
 export const OFERTAS_BLACK_FRIDAY_2026 = [
   {
@@ -16,7 +16,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       credito: 'Imagem disponibilizada pela Worten via Awin',
     },
     alternativa: { loja: 'amazon', url: 'https://www.amazon.es/dp/B0G4SHXZNZ' },
-    preco: '124,99 €',
+    preco: '119,99 €',
     referencia: 'PVP recomendado de 154,99 € indicado pela Worten',
     etiqueta: 'Preço abaixo do PVPR',
     destaque: true,
@@ -48,6 +48,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       credito: 'Imagem: Amazon (Creators API)',
     },
     etiqueta: 'Black Friday Amazon.es',
+    destaque: true,
     verificadaEm,
   },
   {
@@ -130,33 +131,6 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     verificadaEm,
   },
   {
-    id: 'paperwhite-signature-2024',
-    nome: 'Kindle Paperwhite Signature Edition, 32 GB',
-    detalhe: 'Modelo de 2024 com luz frontal automática e carregamento sem fios. A base é opcional e deve ser compatível com esta geração.',
-    loja: 'amazon',
-    url: 'https://www.amazon.es/dp/B0CFPN47NY',
-    imagem: {
-      src: 'https://img.pccomponentes.com/articles/1086/10860151/1119-kindle-paperwhite-signature-edition-libro-electronico-7-32gb-negro-metalizado.jpg',
-      alt: 'Kindle Paperwhite Signature Edition de 2024, preto metalizado, 32 GB',
-      credito: 'Imagem disponibilizada pela PcComponentes via Awin',
-      destino: {
-        loja: 'outra',
-        nomeLoja: 'PcComponentes',
-        url: 'https://www.pccomponentes.pt/kindle-paperwhite-signature-edition-livro-electronico-7-32gb-preto-metalizado',
-        linkAfiliado: 'https://www.awin1.com/pclick.php?p=39135247776&a=2950455&m=20983',
-      },
-    },
-    alternativa: {
-      loja: 'outra',
-      nomeLoja: 'PcComponentes',
-      url: 'https://www.pccomponentes.pt/kindle-paperwhite-signature-edition-livro-electronico-7-32gb-preto-metalizado',
-      linkAfiliado: 'https://www.awin1.com/pclick.php?p=39135247776&a=2950455&m=20983',
-    },
-    etiqueta: 'Black Friday Amazon.es',
-    destaque: true,
-    verificadaEm,
-  },
-  {
     id: 'colorsoft-signature-2024',
     nome: 'Kindle Colorsoft Signature Edition, 32 GB',
     detalhe: 'A edição de 2024 acrescenta armazenamento, luz frontal automática e carregamento sem fios ao ecrã a cores. Boa candidata para uma biblioteca maior de banda desenhada.',
@@ -235,7 +209,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       credito: 'Imagem disponibilizada pela Worten via Awin',
     },
     alternativa: { loja: 'amazon', url: 'https://www.amazon.es/dp/B0G4SM81G1' },
-    preco: '124,99 €',
+    preco: '119,99 €',
     referencia: 'PVP recomendado de 154,99 € indicado pela Worten',
     etiqueta: 'Preço abaixo do PVPR',
     verificadaEm,
@@ -253,7 +227,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       alt: 'PocketBook Era Lite Stone Green, de 7 polegadas e 16 GB',
       credito: 'Imagem disponibilizada pela PcComponentes via Awin',
     },
-    preco: '200,99 €',
+    preco: '203,99 €',
     referencia: 'PVP recomendado de 209 € indicado pela loja',
     etiqueta: 'Preço abaixo do PVPR',
     verificadaEm,
@@ -292,25 +266,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     preco: '609,00 €',
     referencia: 'Preço mais baixo dos últimos 30 dias indicado pela loja: 689,44 €',
     etiqueta: 'Redução indicada na loja',
-    verificadaEm,
-  },
-  {
-    id: 'boox-tab-x-c',
-    nome: 'BOOX Tab X C de 13,3″, 128 GB',
-    detalhe: 'Tablet E Ink a cores com Android e caneta incluída. O ecrã de formato próximo de A4 é sobretudo útil para consultar PDFs e anotar sem reduzir demasiado o texto.',
-    loja: 'outra',
-    nomeLoja: 'PcComponentes',
-    url: 'https://www.pccomponentes.pt/tablet-boox-tab-x-c-wifi-13-3-6gb-128gb-preto-stylus-pen',
-    linkAfiliado: 'https://www.awin1.com/pclick.php?p=44328157035&a=2950455&m=20983',
-    imagem: {
-      src: 'https://img.pccomponentes.com/articles/1102/11029975/1427-e-book-boox-tab-x-c-wifi-133-6gb-128gb-negro-stylus-pen-mejor-precio.jpg',
-      alt: 'BOOX Tab X C preto de 13,3 polegadas e 128 GB com caneta',
-      credito: 'Imagem disponibilizada pela PcComponentes via Awin',
-    },
-    preco: '779,00 €',
-    referencia: 'PVP recomendado de 819,99 € indicado pela loja',
-    etiqueta: 'Preço abaixo do PVPR',
-    verificadaEm,
+    verificadaEm: '2026-11-19',
   },
   {
     id: 'capa-paperwhite-colorsoft-2024',

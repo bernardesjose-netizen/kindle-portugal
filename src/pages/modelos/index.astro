@@ -4,6 +4,8 @@ import Container from '@components/ui/Container.astro';
 import { getCollection } from 'astro:content';
 import CartaoFamiliaKindle from '@components/CartaoFamiliaKindle.astro';
 import EscolherKindle from '@components/EscolherKindle.astro';
+import JanelaBlackFriday2026 from '@components/afiliados/JanelaBlackFriday2026.astro';
+import { GUIA_BLACK_FRIDAY } from '@lib/black-friday-2026';
 
 const ordem: Record<string, number> = { basico: 0, paperwhite: 1, colorsoft: 2, scribe: 3 };
 const modelos = (await getCollection('modelos', ({ data }) => !data.rascunho))
@@ -77,9 +79,16 @@ const destaques = [
             Modelos de Kindle em Portugal
           </h1>
         </div>
-        <p class="max-w-prose text-base leading-relaxed text-marinho-600 sm:text-lg lg:pb-1">
-          Das 6 polegadas do Kindle básico às 11 do Scribe. Compara os leitores, os ecrãs a cores e as versões para escrever. Cada ficha distingue as variantes e liga à Amazon.es.
-        </p>
+        <div class="lg:pb-1">
+          <p class="max-w-prose text-base leading-relaxed text-marinho-600 sm:text-lg">
+            Das 6 polegadas do Kindle básico às 11 do Scribe. Compara os leitores, os ecrãs a cores e as versões para escrever. Cada ficha distingue as variantes e liga à Amazon.es.
+          </p>
+          <JanelaBlackFriday2026>
+            <a class="btn-marca mt-4" href={GUIA_BLACK_FRIDAY}>
+              Comparar ofertas no guia Black Friday Kindle <span aria-hidden="true">→</span>
+            </a>
+          </JanelaBlackFriday2026>
+        </div>
       </div>
     </Container>
   </section>

@@ -59,8 +59,8 @@ const regulamentoDezcontao = 'https://www.worten.pt/i2/01M7JA2M48QQAVN7RP5RFWZ1D
             Kindle, Kobo e acessórios na Amazon.es, na Worten, na FNAC e noutras lojas com entrega em Portugal.
           </p>
           {entrada && (
-            <a href={GUIA_BLACK_FRIDAY + '#ofertas-black-friday'} class="btn-marca mt-5 w-fit px-6 py-3.5 text-base">
-              {emCampanha.length > 0 ? 'Ver as ' + emCampanha.length + ' ofertas' : 'Ver todas as ofertas'} <span aria-hidden="true">→</span>
+            <a href={GUIA_BLACK_FRIDAY} class="btn-marca mt-5 w-fit px-6 py-3.5 text-base">
+              {'Guia Black Friday Kindle' + (emCampanha.length ? ' · ver as ' + emCampanha.length + ' ofertas' : '')} <span aria-hidden="true">→</span>
             </a>
           )}
         </div>
@@ -93,10 +93,10 @@ const regulamentoDezcontao = 'https://www.worten.pt/i2/01M7JA2M48QQAVN7RP5RFWZ1D
               O desconto até 50% aplica-se a eletrodomésticos assinalados. O talão incide sobre o valor pago em artigos elegíveis vendidos e entregues pela Worten. O crédito é para uma compra posterior. Kobo, livros e Marketplace estão excluídos.
             </p>
             <p class="mt-2 text-sm leading-relaxed text-marinho-700">
-              Na consulta de 19 de novembro, a Worten assinalava o talão no Kindle 2026 de 16 GB com publicidade, em
+              Na consulta de 20 de novembro, a Worten assinalava o talão no Kindle 2026 de 16 GB com publicidade, em
               {' '}<a href={linkWorten(WORTEN.kindle2026Grafite)} target="_blank" rel="sponsored nofollow noopener" data-afiliado="worten" class="font-semibold underline underline-offset-2">grafite</a>
               {' '}e <a href={linkWorten(WORTEN.kindle2026Roxo)} target="_blank" rel="sponsored nofollow noopener" data-afiliado="worten" class="font-semibold underline underline-offset-2">roxo</a>.
-              Cada versão estava a 124,99 €, com PVP recomendado de 154,99 €.
+              Cada versão estava a 119,99 €, com PVP recomendado de 154,99 €.
             </p>
             <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
               <BotaoWorten url={linkDezcontao} tamanho="grande">Ver Dezcontão na Worten</BotaoWorten>
