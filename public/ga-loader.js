@@ -26,10 +26,6 @@
   });
 
   window.addEventListener('load', () => {
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(iniciar, { timeout: 20000 });
-    } else {
-      window.setTimeout(iniciar, 20000);
-    }
+    window.setTimeout(iniciar, 20000);
   }, { once: true });
 })();
