@@ -8,6 +8,7 @@ import { formatarData } from '@lib/formatters';
 const artigos = (await getCollection('blog', ({ data }) => !data.rascunho)).sort(
   (a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf(),
 );
+const idDestaque = 'amazon-business-nif-empresa-portuguesa-sem-iva-2026';
 ---
 
 <BaseLayout
@@ -40,10 +41,13 @@ const artigos = (await getCollection('blog', ({ data }) => !data.rascunho)).sort
     ) : (
       <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {artigos.map((a) => (
-          <li class="group">
+          <li class:list={['group', a.id === idDestaque && 'artigo-assinalado']}>
             <a href={`/blog/${a.id}`} class="block">
               {a.data.imagem_hero ? (
-                <div class="mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-marinho-50 to-creme-100 transition-transform group-hover:-translate-y-1">
+                <div class:list={['relative mb-4 overflow-visible rounded-xl bg-gradient-to-br from-marinho-50 to-creme-100 transition-transform group-hover:-translate-y-1', a.id === idDestaque && 'capa-assinalada']}>
+                  {a.id === idDestaque && (
+                    <span class="etiqueta-assinalada" aria-hidden="true">Para empresas</span>
+                  )}
                   <Image
                     src={a.data.imagem_hero}
                     alt={a.data.imagem_hero_alt ?? a.data.titulo}
@@ -74,3 +78,50 @@ const artigos = (await getCollection('blog', ({ data }) => !data.rascunho)).sort
   </Container>
   </div>
 </BaseLayout>
+
+<style>
+  .capa-assinalada::before,
+  .capa-assinalada::after {
+    position: absolute;
+    z-index: 2;
+    border: 3px solid rgb(249 126 7 / 0.78);
+    content: '';
+    inset: -7px -9px -8px -8px;
+    pointer-events: none;
+    border-radius: 47% 53% 49% 51% / 8% 10% 9% 11%;
+    transform: rotate(-0.7deg);
+  }
+
+  .capa-assinalada::after {
+    border-width: 2px;
+    border-color: rgb(249 126 7 / 0.38);
+    inset: -4px -12px -11px -5px;
+    transform: rotate(0.55deg);
+  }
+
+  .etiqueta-assinalada {
+    position: absolute;
+    z-index: 3;
+    top: -14px;
+    right: 12px;
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    background: #f97e07;
+    box-shadow: 0 4px 12px rgb(14 24 41 / 0.18);
+    color: #0b111a;
+    font-family: Arial, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transform: rotate(2deg);
+  }
+
+  .artigo-assinalado h2 {
+    text-decoration: underline;
+    text-decoration-color: rgb(249 126 7 / 0.42);
+    text-decoration-thickness: 0.22em;
+    text-underline-offset: -0.08em;
+    text-decoration-skip-ink: none;
+  }
+</style>
