@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <title>Preparar um Kindle para oferecer no Natal</title>
+  <defs>
+    <linearGradient id="fundo" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#0b111a"/><stop offset="1" stop-color="#173b35"/>
+    </linearGradient>
+    <radialGradient id="luz">
+      <stop stop-color="#d4a84b" stop-opacity=".25"/><stop offset="1" stop-color="#d4a84b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#fundo)"/>
+  <ellipse cx="952" cy="288" rx="420" ry="390" fill="url(#luz)"/>
+  <path d="M104 501h1000" stroke="#fefbf5" opacity=".25"/>
+  <path d="M104 149h57" stroke="#d4a84b" stroke-width="3"/>
+  <text x="175" y="156" fill="#d4a84b" font-family="Arial,sans-serif" font-size="22" font-weight="700" letter-spacing="3">BLOG</text>
+  <text x="104" y="282" fill="#fefbf5" font-family="Georgia,serif" font-size="70" font-weight="bold">Kindle para</text>
+  <text x="104" y="376" fill="#d4a84b" font-family="Georgia,serif" font-size="68" font-weight="bold">oferecer</text>
+  <g transform="translate(790 136)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="77" y="18" width="132" height="188" rx="12" fill="#101a2c" stroke="#fefbf5" stroke-width="6"/>
+    <rect x="93" y="40" width="100" height="137" rx="4" fill="#fefbf5" stroke="#d4a84b" stroke-width="4"/>
+    <path d="M109 71h67M109 91h67M109 111h52" stroke="#173b35" stroke-width="5"/>
+    <circle cx="143" cy="191" r="4" fill="#d4a84b" stroke="none"/>
+    <path d="M34 205h218v142H34z" fill="#173b35" stroke="#d4a84b" stroke-width="6"/>
+    <path d="M19 178h248v55H19z" fill="#173b35" stroke="#d4a84b" stroke-width="6"/>
+    <path d="M129 178h29v169h-29z" fill="#d4a84b" stroke="none"/>
+    <path d="M143 178c-52-5-74-27-62-48 14-23 48 5 62 48Zm0 0c52-5 74-27 62-48-14-23-48 5-62 48Z" stroke="#d4a84b" stroke-width="8"/>
+  </g>
+  <text x="104" y="555" fill="#d7e8e3" font-family="Arial,sans-serif" font-size="21" letter-spacing="2">KINDLE PORTUGAL</text>
+  <path d="M0 626h1200v4H0z" fill="#d4a84b"/>
+</svg>
