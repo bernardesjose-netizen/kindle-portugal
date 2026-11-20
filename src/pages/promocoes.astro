@@ -263,7 +263,7 @@ const bandeiras: Record<string, string> = {
                         height="220"
                         class={`block max-h-48 w-auto object-contain ${esgotado ? 'opacity-60 grayscale' : ''}`}
                         style="mix-blend-mode: multiply; filter: drop-shadow(0 8px 14px rgba(15,26,36,0.18));"
-                        referrerpolicy="no-referrer-when-downgrade"
+                        referrerpolicy="strict-origin-when-cross-origin"
                         data-fallback="hide"
                       />
                     </a>
@@ -437,7 +437,7 @@ const bandeiras: Record<string, string> = {
                           height="180"
                           class="block max-h-40 w-auto object-contain"
                           style="mix-blend-mode: multiply;"
-                          referrerpolicy="no-referrer-when-downgrade"
+                          referrerpolicy="strict-origin-when-cross-origin"
                           data-fallback="hide"
                         />
                       )}
