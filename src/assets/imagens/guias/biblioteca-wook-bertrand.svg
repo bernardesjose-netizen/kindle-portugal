@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Onde abro o meu ebook?</title>
+  <desc id="desc">A proteção wookreader ou Biblio Bertrand indica a aplicação da loja. Um livro com proteção LCP também pode ser aberto no computador com o Thorium Reader.</desc>
+  <rect width="1200" height="630" fill="#102c3a"/>
+  <g font-family="Inter,Arial,sans-serif">
+    <text x="70" y="83" fill="#9dd8cc" font-size="25" letter-spacing="2">GUIA DE LEITURA DIGITAL</text>
+    <text x="66" y="177" fill="#fff5df" font-size="78" font-weight="700">Onde abro o meu ebook?</text>
+    <path d="M70 221h1060" stroke="#668b8b" stroke-width="2"/>
+    <text x="72" y="283" fill="#a8dfd1" font-size="28">Na ficha do ebook</text>
+    <text x="673" y="283" fill="#a8dfd1" font-size="28">Onde ler</text>
+    <g fill="#fff5df" font-size="40" font-weight="600">
+      <text x="70" y="367">wookreader</text>
+      <text x="70" y="447">Biblio Bertrand</text>
+      <text x="70" y="527">Proteção LCP</text>
+      <text x="670" y="367">wookreader</text>
+      <text x="670" y="447">Biblio Bertrand</text>
+      <text x="670" y="527">App da loja ou Thorium*</text>
+    </g>
+    <g fill="none" stroke="#e1ad6d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M489 353h100m-14-12 14 12-14 12 M489 433h100m-14-12 14 12-14 12 M489 513h100m-14-12 14 12-14 12"/>
+    </g>
+    <text x="670" y="575" fill="#c5d7d5" font-size="25">* Thorium Reader no computador.</text>
+  </g>
+</svg>
