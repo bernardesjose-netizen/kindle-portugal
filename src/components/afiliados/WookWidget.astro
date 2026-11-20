@@ -12,8 +12,8 @@ import { WOOK_AID, WOOK_BID_BANNER } from '@lib/wook';
  * apenas escurece a sombra e os textos auxiliares à volta para
  * destacar contra fundos dark gradient (hero das listings).
  *
- * O pixel 1×1 da `programadeafiliados.wook.pt` continua a contar
- * impressões, esse não tem proteção.
+ * Não inclui píxeis de impressão nem outros pedidos invisíveis de terceiros.
+ * A atribuição é feita exclusivamente pela ligação de afiliado.
  */
 
 interface Props {
@@ -21,7 +21,7 @@ interface Props {
   bid?: string;
   /** Classes Tailwind extra na secção exterior. */
   classe?: string;
-  /** Carregar pixel com prioridade quando o banner aparece acima do fold. */
+  /** Mantido por compatibilidade; o logótipo local usa carregamento diferido. */
   prioridade?: boolean;
   /** Variante de cor, útil para ajustar contra fundos claros vs escuros. */
   variante?: 'claro' | 'escuro';
@@ -30,13 +30,11 @@ interface Props {
 const {
   bid = WOOK_BID_BANNER,
   classe = '',
-  prioridade = false,
+  prioridade: _prioridade = false,
   variante = 'claro',
 } = Astro.props;
 
 const linkUrl = `https://www.wook.pt/?a_aid=${WOOK_AID}&a_bid=${bid}`;
-const pixelUrl = `https://programadeafiliados.wook.pt/scripts/qgm99l1ix25?a_aid=${WOOK_AID}&a_bid=${bid}`;
-
 const fundoCartao =
   variante === 'escuro'
     ? 'border-white/15 bg-white/95 text-marinho-900'
@@ -63,9 +61,9 @@ const fundoCartao =
       alt="WOOK"
       width="600"
       height="226"
-      loading={prioridade ? 'eager' : 'lazy'}
+      loading="lazy"
       decoding="async"
-      fetchpriority={prioridade ? 'high' : 'auto'}
+      fetchpriority="low"
       class="mx-auto mt-4 block h-auto w-full max-w-[180px]"
       style="mix-blend-mode: multiply;"
     />
@@ -95,16 +93,4 @@ const fundoCartao =
       ]}
     >divulgação</a>
   </p>
-
-  {/* Pixel 1×1, WOOK tracking; fora do viewport para não causar layout-shift.
-      Sempre eager: com lazy, um elemento fora do viewport pode nunca carregar. */}
-  <img
-    src={pixelUrl}
-    width="1"
-    height="1"
-    alt=""
-    aria-hidden="true"
-    loading="eager"
-    style="border:0;position:absolute;left:-9999px;width:1px;height:1px;"
-  />
 </aside>

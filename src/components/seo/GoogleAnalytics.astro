@@ -4,9 +4,9 @@
 // Só carrega em produção (import.meta.env.PROD), para não poluir as
 // estatísticas com tráfego de desenvolvimento e de pré-visualização.
 //
-// A configuração inline vive em /gtag-init.js porque a CSP do site
-// (ver public/_headers) não permite scripts inline. O loader externo
-// precisa de googletagmanager.com na diretiva script-src.
+// O carregador local adia a ligação ao Google até depois do carregamento
+// principal e da primeira oportunidade ociosa/interação. Isto mantém o GA4
+// fora do caminho crítico sem perder a atribuição da página de entrada.
 //
 // ATENÇÃO RGPD: o GA4 escreve cookies (_ga, _ga_*). Ao ativar, a
 // política de privacidade deixa de poder afirmar "sem cookies" e, em
@@ -16,8 +16,5 @@ const ativar = import.meta.env.PROD;
 ---
 
 {ativar && (
-  <>
-    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
-    <script is:inline defer src="/gtag-init.js"></script>
-  </>
+  <script is:inline defer src="/ga-loader.js" data-ga-id={GA_ID}></script>
 )}
