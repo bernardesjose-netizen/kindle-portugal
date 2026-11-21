@@ -1,0 +1,42 @@
+---
+import editoras from '../../data/editoras-kindle.json';
+
+interface Props {
+  noGuia?: boolean;
+}
+
+const { noGuia = false } = Astro.props;
+const destino = noGuia ? '#pesquisar-por-editora' : '/guias/ebooks-em-portugues-amazon-kindle#pesquisar-por-editora';
+---
+
+<aside
+  aria-labelledby="destaque-editoras-titulo"
+  class:list={[
+    'not-prose bg-marca-100 text-marinho-900',
+    noGuia ? 'my-6 rounded-xl border-l-4 border-marca-500' : 'border-y-2 border-marca-400',
+  ]}
+>
+  <div class:list={[
+    'flex flex-col items-start gap-4',
+    noGuia ? 'p-5 sm:p-6' : 'mx-auto max-w-7xl px-4 py-5 sm:px-6 sm:py-7 lg:flex-row lg:items-center lg:justify-between lg:gap-10',
+  ]}>
+    <div class="max-w-3xl">
+      <span class="inline-block rounded-sm bg-marinho-900 px-2 py-1 text-xs font-bold uppercase tracking-widest text-marca-200">
+        Novidade
+      </span>
+      <p
+        id="destaque-editoras-titulo"
+        class:list={['mt-2 text-balance font-serif font-bold leading-tight', noGuia ? 'text-2xl' : 'text-3xl sm:text-4xl']}
+      >
+        {noGuia ? 'Que editora queres explorar?' : 'Há livros portugueses para o teu Kindle.'}
+      </p>
+      <p class="mt-2 max-w-2xl text-base leading-relaxed text-marinho-700">
+        Da Gradiva à Dom Quixote, escolhe entre <strong>{editoras.length} editoras e chancelas</strong>.
+        Pesquisa ebooks com o idioma português selecionado e compara uma amostra Kindle com a ficha da edição.
+      </p>
+    </div>
+    <a href={destino} class="inline-flex min-h-11 shrink-0 items-center justify-center gap-3 rounded-lg bg-marinho-900 px-5 py-3 font-semibold text-creme-50 no-underline hover:bg-oceano-800 focus-visible:outline-oceano-600">
+      Pesquisar por editora <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</aside>

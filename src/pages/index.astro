@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
+import DestaqueEditorasKindle from '@components/editorial/DestaqueEditorasKindle.astro';
 import DestaqueCampanha from '@components/afiliados/DestaqueCampanha.astro';
 import OfertasBlackFriday2026 from '@components/afiliados/OfertasBlackFriday2026.astro';
 import CartaoFamiliaKindle from '@components/CartaoFamiliaKindle.astro';
@@ -54,6 +55,7 @@ const pillPorCategoria: Record<string, string> = {
 ---
 
 <BaseLayout titulo={`${SITE.nome} · Guias de Kindle e ebooks em português`} descricao={SITE.descricao}>
+  <DestaqueEditorasKindle />
   <OfertasBlackFriday2026 modo="entrada" />
   <section aria-labelledby="titulo-gama-kindle" class="relative overflow-hidden border-b-4 border-marca-500 bg-gradient-to-br from-marinho-900 via-marinho-800 to-oceano-900 text-creme-50">
     <div

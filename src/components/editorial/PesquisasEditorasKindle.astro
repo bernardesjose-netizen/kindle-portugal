@@ -1,0 +1,88 @@
+---
+import LinkAmazon from '@components/afiliados/LinkAmazon.astro';
+import DisclosureBanner from '@components/afiliados/DisclosureBanner.astro';
+import catalogo from '../../data/editoras-kindle.json';
+
+interface Edicao {
+  editora: string;
+  editoraAmazon?: string;
+  autorPesquisa?: string;
+  titulo: string;
+  autor: string;
+  tradutor?: string;
+  asin: string;
+  fonte: string;
+}
+
+const editoras: Edicao[] = [...catalogo].sort((a, b) => a.editora.localeCompare(b.editora, 'pt'));
+
+function pesquisaKindle(edicao: Edicao) {
+  const url = new URL('https://www.amazon.es/s');
+  url.searchParams.set('i', 'digital-text');
+  // Filtros da loja espanhola para ebooks em língua estrangeira e idioma português.
+  url.searchParams.set('rh', 'n:827235031,p_n_feature_browse-bin:831446031');
+  url.searchParams.set('field-publisher', edicao.editoraAmazon ?? edicao.editora);
+  if (edicao.autorPesquisa) url.searchParams.set('field-author', edicao.autorPesquisa);
+  return url.toString();
+}
+---
+
+<div data-catalogo-editoras>
+  <p>
+    Estas {editoras.length} editoras e chancelas têm pelo menos uma edição Kindle em português de Portugal.
+    Carrega no nome para pesquisar na Amazon.es. Ao lado, encontras um livro com a edição identificada.
+    A ficha de referência permite comparar a editora e o autor ou tradutor com a versão que aparece na loja.
+  </p>
+  <DisclosureBanner />
+  <div hidden data-painel-filtro class="not-prose my-5">
+    <label for="filtrar-editoras" class="block text-sm font-semibold text-marinho-800">Procurar editora, livro, autor ou tradutor nesta lista</label>
+    <input type="search" id="filtrar-editoras" class="mt-2 w-full rounded-lg border border-marinho-300 bg-white px-3 py-2 text-marinho-900" aria-controls="tabela-editoras" />
+    <p data-contagem role="status" class="mt-1 text-sm text-marinho-600"></p>
+  </div>
+  <table id="tabela-editoras">
+    <caption class="sr-only">Editoras com edições em português de Portugal na Kindle Store da Amazon.es</caption>
+    <thead><tr><th scope="col">Pesquisar na Amazon.es</th><th scope="col">Edição portuguesa de referência</th></tr></thead>
+    <tbody>
+      {editoras.map((edicao) => (
+        <tr>
+          <th scope="row" class="align-top text-left">
+            <LinkAmazon href={pesquisaKindle(edicao)}>{edicao.editora}</LinkAmazon>
+            {edicao.autorPesquisa && <small class="block font-normal">Com o filtro de autor {edicao.autorPesquisa}</small>}
+          </th>
+          <td class="align-top">
+            <a href={edicao.fonte}><cite>{edicao.titulo}</cite></a> · {edicao.autor}
+            {edicao.tradutor && <span> · Tradução de {edicao.tradutor}</span>}
+            <span class="block text-sm">
+              <a href={`https://leer.amazon.es/sample/${edicao.asin}`}>Ler a amostra Kindle<span class="sr-only"> de {edicao.titulo}</span></a>
+            </span>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<script>
+  const catalogo = document.querySelector('[data-catalogo-editoras]');
+  const campo = catalogo?.querySelector('input');
+  const painel = catalogo?.querySelector<HTMLElement>('[data-painel-filtro]');
+  const contagem = catalogo?.querySelector('[data-contagem]');
+  if (campo && painel && contagem && catalogo) {
+    const normalizar = (s: string) => s.normalize('NFD').replace(/\p{M}/gu, '').toLocaleLowerCase('pt').replace(/[’']/g, ' ').trim();
+    const linhas = Array.from(catalogo.querySelectorAll('tbody tr'), linha => ({
+      linha, texto: normalizar(linha.textContent ?? ''),
+    }));
+    const filtrar = () => {
+      const termos = normalizar(campo.value).split(/\s+/).filter(Boolean);
+      let visiveis = 0;
+      for (const { linha, texto } of linhas) {
+        linha.toggleAttribute('hidden', !termos.every(termo => texto.includes(termo)));
+        if (!linha.hasAttribute('hidden')) visiveis++;
+      }
+      contagem.textContent = termos.length ? `${visiveis} de ${linhas.length} editoras e chancelas` : '';
+    };
+    campo.addEventListener('input', filtrar);
+    filtrar();
+    painel.hidden = false;
+  }
+</script>

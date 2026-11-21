@@ -1,0 +1,424 @@
+[
+  {
+    "editora": "A Esfera dos Livros",
+    "titulo": "História de Portugal",
+    "autor": "Rui Ramos, Bernardo Vasconcelos e Sousa e Nuno Gonçalo Monteiro",
+    "asin": "B00M6YJC4I",
+    "fonte": "https://www.wook.pt/livro/historia-de-portugal-rui-ramos/12963391"
+  },
+  {
+    "editora": "Actual Editora",
+    "titulo": "Contabilidade Descodificada",
+    "autor": "Rafael Franco e Rafael Dolores",
+    "asin": "B08LR3J1L1",
+    "fonte": "https://www.wook.pt/livro/contabilidade-descodificada-rafael-franco/24358645"
+  },
+  {
+    "editora": "Alfaguara",
+    "autorPesquisa": "Manuel Vilas",
+    "titulo": "Nós",
+    "autor": "Manuel Vilas",
+    "tradutor": "Guilherme Pires",
+    "asin": "B0CKV423TJ",
+    "fonte": "https://penguinlivros.pt/loja/alfaguara/livro/nos/"
+  },
+  {
+    "editora": "Alfaguara Infantil & Juvenil",
+    "editoraAmazon": "ALFAGUARA INFANTIS E JUVENIS",
+    "titulo": "Olimpvs.net 1: No labirinto do Minotauro",
+    "autor": "Ana Soares e Bárbara Wong",
+    "asin": "B07K2L7449",
+    "fonte": "https://penguinlivros.pt/loja/alfaguara-infantil-juvenil/livro/no-labirinto-do-minotauro/"
+  },
+  {
+    "editora": "Alma dos Livros",
+    "titulo": "O Divórcio",
+    "autor": "Freida McFadden",
+    "tradutor": "Carla Ribeiro",
+    "asin": "B0H2755DGJ",
+    "fonte": "https://almadoslivros.pt/products/o-divorcio"
+  },
+  {
+    "editora": "Arena",
+    "titulo": "O livro que as pessoas de quem gosta têm de ler",
+    "autor": "Philippa Perry",
+    "tradutor": "Catarina Gil Gândara",
+    "asin": "B0D63L4SKV",
+    "fonte": "https://penguinlivros.pt/loja/arena/livro/o-livro-que-as-pessoas-de-quem-gosta-tem-de-ler/"
+  },
+  {
+    "editora": "ASA",
+    "titulo": "Um Homem Escandaloso",
+    "autor": "Tiago Rebelo",
+    "asin": "B00PHWPUAG",
+    "fonte": "https://www.lyvros.com/catalogo/um-homem-escandaloso-ebook"
+  },
+  {
+    "editora": "Booksmile",
+    "titulo": "Sonho",
+    "autor": "Barbara O'Connor",
+    "tradutor": "Dulce Afonso",
+    "asin": "B0GTRMLC78",
+    "fonte": "https://penguinlivros.pt/loja/booksmile/livro/sonho/"
+  },
+  {
+    "editora": "Caderno",
+    "titulo": "O Amor É uma Carta Fechada",
+    "autor": "Joaquim Quintino Aires",
+    "asin": "B009CAB8RI",
+    "fonte": "https://www.lyvros.com/catalogo/o-amor-e-uma-carta-fechada-ebook"
+  },
+  {
+    "editora": "Caminho",
+    "titulo": "A Gorda",
+    "autor": "Isabela Figueiredo",
+    "asin": "B01M8NGC57",
+    "fonte": "https://www.wook.pt/ebook/a-gorda-isabela-figueiredo/18910429"
+  },
+  {
+    "editora": "Casa das Letras",
+    "titulo": "Quando Lisboa Tremeu",
+    "autor": "Domingos Amaral",
+    "asin": "B009CB1IG8",
+    "fonte": "https://www.wook.pt/ebook/quando-lisboa-tremeu-domingos-amaral/12639974"
+  },
+  {
+    "editora": "Cavalo de Ferro",
+    "titulo": "Elizabeth",
+    "autor": "Ken Greenhall",
+    "tradutor": "Eugénia Antunes",
+    "asin": "B0GRWNPZKL",
+    "fonte": "https://penguinlivros.pt/loja/cavalo-de-ferro/livro/elizabeth/"
+  },
+  {
+    "editora": "Companhia das Letras",
+    "autorPesquisa": "João Tordo",
+    "titulo": "O livro dos homens sem luz",
+    "autor": "João Tordo",
+    "asin": "B09W8RCT4V",
+    "fonte": "https://penguinlivros.pt/loja/companhia-das-letras/livro/o-livro-dos-homens-sem-luz/"
+  },
+  {
+    "editora": "Crítica",
+    "titulo": "Como o Mundo realmente Funciona",
+    "autor": "Vaclav Smil",
+    "asin": "B0BT3X6V8N",
+    "fonte": "https://www.wook.pt/ebook/como-o-mundo-realmente-funciona-vaclav-smil/28096287"
+  },
+  {
+    "editora": "Cultura Editora",
+    "titulo": "O Mosteiro: O Rei Improvável",
+    "autor": "Nuno Nepomuceno",
+    "asin": "B0GF8ZX7LG",
+    "fonte": "https://particular.pt/products/o-mosteiro-o-rei-improvavel"
+  },
+  {
+    "editora": "Dom Quixote",
+    "titulo": "O Último Avô",
+    "autor": "Afonso Reis Cabral",
+    "asin": "B0FNY65ML3",
+    "fonte": "https://www.wook.pt/ebook/o-ultimo-avo-afonso-reis-cabral/32481898"
+  },
+  {
+    "editora": "Edições 70",
+    "autorPesquisa": "David Castaño",
+    "titulo": "Mário Soares e o 25 de Abril – O Essencial",
+    "autor": "David Castaño",
+    "asin": "B0CZB22QFB",
+    "fonte": "https://www.wook.pt/ebook/mario-soares-e-o-25-de-abril-o-essencial-david-castano/29879974"
+  },
+  {
+    "editora": "Edições Vercial",
+    "titulo": "A Bruxa de Monte Córdova",
+    "autor": "Camilo Castelo Branco",
+    "asin": "B009NMHWQ6",
+    "fonte": "https://www.wook.pt/ebook/a-bruxa-de-monte-cordova-jose-barbosa-machado/14306052"
+  },
+  {
+    "editora": "Editorial Presença",
+    "titulo": "Os Pequenos Milagres na Pastelaria da Meia-Noite",
+    "autor": "Lee Onhwa",
+    "asin": "B0GZV51BCC",
+    "fonte": "https://www.bertrand.pt/ebook/os-pequenos-milagres-na-pastelaria-da-meia-noite-lee-onhwa/33503713"
+  },
+  {
+    "editora": "Elsinore",
+    "titulo": "Um Homem de Duas Caras",
+    "autor": "Viet Thanh Nguyen",
+    "tradutor": "Maria do Carmo Figueira",
+    "asin": "B0DLF4MR1S",
+    "fonte": "https://penguinlivros.pt/loja/elsinore/livro/um-homem-de-duas-caras/"
+  },
+  {
+    "editora": "Estrela Polar",
+    "titulo": "O Chamado para a Transformação",
+    "autor": "Joana Areias",
+    "asin": "B0F22NFKTV",
+    "fonte": "https://www.wook.pt/ebook/o-chamado-para-a-transformacao-joana-areias/31581170"
+  },
+  {
+    "editora": "Fábula",
+    "titulo": "Os livros que devoraram o meu pai: a estranha e mágica história de Vivaldo Bonfim",
+    "autor": "Afonso Cruz",
+    "asin": "B0FNNHCKPS",
+    "fonte": "https://penguinlivros.pt/loja/fabula/livro/os-livros-que-devoraram-o-meu-pai-a-estranha-e-magica-historia-de-vivaldo-bonfim/"
+  },
+  {
+    "editora": "Farol",
+    "titulo": "O Que Nos Torna Humanos?",
+    "autor": "Iain S. Thomas e Jasmine Wang",
+    "tradutor": "Paulo Jorge de Oliveira Mendes",
+    "asin": "B0C4876TPD",
+    "fonte": "https://penguinlivros.pt/loja/farol/livro/o-que-nos-torna-humanos/"
+  },
+  {
+    "editora": "Fundação Francisco Manuel dos Santos",
+    "titulo": "Em Torno de Abril: 25 anos que mudaram Portugal (1961-1986)",
+    "autor": "José Miguel Sardica",
+    "asin": "B0GRKGC1BC",
+    "fonte": "https://ffms.pt/pt-pt/livraria/em-torno-de-abril-25-anos-que-mudaram-portugal-1961-1986"
+  },
+  {
+    "editora": "Gailivro",
+    "titulo": "Eragon",
+    "autor": "Christopher Paolini",
+    "tradutor": "Andrea Alves Silva",
+    "asin": "B00AN4QUTS",
+    "fonte": "https://www.lyvros.com/catalogo/eragon-ebook"
+  },
+  {
+    "editora": "Gradiva",
+    "titulo": "A Fórmula de Deus",
+    "autor": "José Rodrigues dos Santos",
+    "asin": "B086G35LX1",
+    "fonte": "https://www.gradiva.pt/produto/a-formula-de-deus-ebook/"
+  },
+  {
+    "editora": "Guerra e Paz",
+    "titulo": "A Incrível História Secreta da Língua Portuguesa",
+    "autor": "Marco Neves",
+    "asin": "B087W2MJ8S",
+    "fonte": "https://novaresearch.unl.pt/en/publications/a-incr%C3%ADvel-hist%C3%B3ria-secreta-da-l%C3%ADngua-portuguesa/"
+  },
+  {
+    "editora": "HarperCollins Portugal",
+    "editoraAmazon": "HarperCollins Ibérica S.A.",
+    "titulo": "A rapariga nova",
+    "autor": "Daniel Silva",
+    "asin": "B084G933VB",
+    "fonte": "https://www.wook.pt/ebook/a-rapariga-nova-daniel-silva/23859541"
+  },
+  {
+    "editora": "Iguana",
+    "titulo": "E Agora?",
+    "autor": "Raquel Sem Interesse",
+    "asin": "B0C7FDHSLF",
+    "fonte": "https://penguinlivros.pt/loja/iguana/livro/e-agora/"
+  },
+  {
+    "editora": "Influência",
+    "titulo": "O Teu Minimalismo",
+    "autor": "Cláudia Ganhão",
+    "asin": "B09PFKKNQZ",
+    "fonte": "https://penguinlivros.pt/loja/influencia/livro/o-teu-minimalismo/"
+  },
+  {
+    "editora": "Livros d’Hoje",
+    "editoraAmazon": "Livros d'Hoje",
+    "titulo": "As Batalhas que Fizeram Portugal",
+    "autor": "Susana Lima",
+    "asin": "B00LV9OZ9G",
+    "fonte": "https://www.lyvros.com/catalogo/as-batalhas-que-fizeram-portugal-ebook"
+  },
+  {
+    "editora": "Livros Horizonte",
+    "titulo": "Filipa de Lencastre",
+    "autor": "Isabel Stilwell",
+    "asin": "B0BZ2QCWFG",
+    "fonte": "https://www.wook.pt/ebook/filipa-de-lencastre-isabel-stilwell/23236762"
+  },
+  {
+    "editora": "Lua de Papel",
+    "titulo": "Hábitos Atómicos",
+    "autor": "James Clear",
+    "tradutor": "João Carlos Silva",
+    "asin": "B07SR7BPKX",
+    "fonte": "https://www.wook.pt/ebook/habitos-atomicos-james-clear/23154847"
+  },
+  {
+    "editora": "Manuscrito Editora",
+    "titulo": "Se Me Amas Não Te Demores",
+    "autor": "Raul Minh’alma",
+    "asin": "B0DPFX2NYD",
+    "fonte": "https://www.presenca.pt/products/ebook-se-me-amas-nao-te-demores"
+  },
+  {
+    "editora": "Marcador Editora",
+    "titulo": "As Identidades Assassinas",
+    "autor": "Amin Maalouf",
+    "asin": "B0CY5S6DJ3",
+    "fonte": "https://www.wook.pt/ebook/as-identidades-assassinas-amin-maalouf/28636074"
+  },
+  {
+    "editora": "Midgard Editores",
+    "titulo": "Viagens na Minha Terra",
+    "autor": "Almeida Garrett",
+    "asin": "B07FM1V1QY",
+    "fonte": "https://midgard.pt/loja/viagens-na-minha-terra-e-book/"
+  },
+  {
+    "editora": "Minotauro",
+    "autorPesquisa": "Eric Ambler",
+    "titulo": "A Máscara de Dimitrios",
+    "autor": "Eric Ambler",
+    "tradutor": "Miguel Mata",
+    "asin": "B0CSDXSP8H",
+    "fonte": "https://www.bertrand.pt/livro/a-mascara-de-dimitrios-eric-ambler/25748760"
+  },
+  {
+    "editora": "Nascente",
+    "titulo": "Autoconhecimento",
+    "autor": "Gabrielle Bernstein",
+    "tradutor": "Maria Ferro",
+    "asin": "B0F7M5HZQS",
+    "fonte": "https://penguinlivros.pt/loja/nascente/livro/autoconhecimento/"
+  },
+  {
+    "editora": "Nova Delphi",
+    "titulo": "A Queda d'um Anjo",
+    "autor": "Camilo Castelo Branco",
+    "asin": "B077NH1F1W",
+    "fonte": "https://www.fnac.pt/A-Queda-de-Um-Anjo-Camilo-Castelo-Branco/a7328506?NUMERICAL=Y"
+  },
+  {
+    "editora": "Nuvem de Letras",
+    "titulo": "Os Larápios 2: A Caça ao Cão",
+    "autor": "Anders Sparring",
+    "tradutor": "João Reis",
+    "asin": "B0F9FQLGS6",
+    "fonte": "https://penguinlivros.pt/loja/nuvem-de-letras/livro/os-larapios-2-a-caca-ao-cao/"
+  },
+  {
+    "editora": "Nuvem de Tinta",
+    "titulo": "O que queres ser?",
+    "autor": "Marta Monteiro e Maria João Viegas",
+    "asin": "B07BHW7PXJ",
+    "fonte": "https://penguinlivros.pt/loja/nuvem-de-tinta/livro/o-que-queres-ser/"
+  },
+  {
+    "editora": "Objectiva",
+    "titulo": "4000 semanas - Gestão do tempo para mortais",
+    "autor": "Oliver Burkeman",
+    "tradutor": "Isabel Veríssimo",
+    "asin": "B0BVDJRYZ1",
+    "fonte": "https://penguinlivros.pt/loja/objectiva/livro/4000-semanas-gestao-do-tempo-para-mortais/"
+  },
+  {
+    "editora": "Oficina do Livro",
+    "titulo": "A Raridade das Coisas Banais",
+    "autor": "Pedro Chagas Freitas",
+    "asin": "B09YVNHVNL",
+    "fonte": "https://www.wook.pt/ebook/a-raridade-das-coisas-banais-pedro-chagas-freitas/26993217"
+  },
+  {
+    "editora": "Penguin",
+    "editoraAmazon": "PENGUIN COMERCIAL",
+    "titulo": "A Livraria dos Segredos",
+    "autor": "Kerry Barrett",
+    "tradutor": "José João Leiria",
+    "asin": "B0GF9JGQJ4",
+    "fonte": "https://penguinlivros.pt/loja/penguin/livro/a-livraria-dos-segredos/"
+  },
+  {
+    "editora": "Penguin Clássicos",
+    "titulo": "Toda uma Literatura",
+    "autor": "Fernando Pessoa",
+    "asin": "B0BMSLNDQB",
+    "fonte": "https://penguinlivros.pt/loja/penguin-classicos/livro/toda-uma-literatura/"
+  },
+  {
+    "editora": "Planeta Portugal",
+    "titulo": "O Protocolo Caos",
+    "autor": "José Rodrigues dos Santos",
+    "asin": "B0DK1KD3Z2",
+    "fonte": "https://www.planetadelivros.pt/livro-o-protocolo-caos/406495"
+  },
+  {
+    "editora": "Quinta Essência",
+    "titulo": "O Rei Lobo",
+    "autor": "Lauren Palphreyman",
+    "tradutor": "Raquel Almeida",
+    "asin": "B0H3L81JFX",
+    "fonte": "https://www.bertrand.pt/livro/o-rei-lobo-lauren-palphreyman/33548047"
+  },
+  {
+    "editora": "Relógio D’Água",
+    "editoraAmazon": "Relógio D'Água Editores",
+    "titulo": "1984",
+    "autor": "George Orwell",
+    "tradutor": "José Miguel Silva",
+    "asin": "B08W98GJK4",
+    "fonte": "https://www.relogiodagua.pt/produto/1984/"
+  },
+  {
+    "editora": "Saída de Emergência",
+    "titulo": "E Se...? Respostas Científicas para Perguntas Absurdas",
+    "autor": "Randall Munroe",
+    "tradutor": "Renato Carreira",
+    "asin": "B00VSIK6Z2",
+    "fonte": "https://pt.everand.com/book/900334904/E-Se"
+  },
+  {
+    "editora": "Secret Society",
+    "titulo": "Uma Verdade Tecida em Sombras",
+    "autor": "Pedro Subtil",
+    "asin": "B0HJRH4D2P",
+    "fonte": "https://penguinlivros.pt/loja/secret-society/livro/uma-verdade-tecida-em-sombras/"
+  },
+  {
+    "editora": "Suma de Letras",
+    "titulo": "O Elevador",
+    "autor": "Filipa Fonseca Silva",
+    "asin": "B0B5VWNZTX",
+    "fonte": "https://penguinlivros.pt/loja/suma-de-letras/livro/o-elevador/"
+  },
+  {
+    "editora": "Teorema",
+    "titulo": "A Queda de Um Homem",
+    "autor": "Luís Osório",
+    "asin": "B075RQQNSV",
+    "fonte": "https://www.bertrand.pt/ebook/a-queda-de-um-homem-luis-osorio/20067130"
+  },
+  {
+    "editora": "Texto Editores",
+    "editoraAmazon": "Texto",
+    "titulo": "Três Contos de Guerra Junqueiro",
+    "autor": "Guerra Junqueiro",
+    "asin": "B00D6VDB9W",
+    "fonte": "https://www.bertrand.pt/ebook/tres-contos-de-guerra-junqueiro-guerra-junqueiro/15021137"
+  },
+  {
+    "editora": "Topseller",
+    "titulo": "Mulher em Queda",
+    "autor": "Colleen Hoover",
+    "tradutor": "Susana Serrão",
+    "asin": "B0HKJV5QSK",
+    "fonte": "https://penguinlivros.pt/loja/topseller/livro/mulher-em-queda/"
+  },
+  {
+    "editora": "Topseller #Bliss",
+    "titulo": "O Que Posso Eu Fazer?",
+    "autor": "Holly Bourne",
+    "tradutor": "Dina Antunes",
+    "asin": "B0CB4ZKQZ5",
+    "fonte": "https://penguinlivros.pt/loja/topseller-bliss/livro/o-que-posso-eu-fazer/"
+  },
+  {
+    "editora": "Vogais",
+    "titulo": "Espaço",
+    "autor": "Dr. Becky Smethurst",
+    "tradutor": "Catarina Gil Gândara",
+    "asin": "B0C2XBSG27",
+    "fonte": "https://penguinlivros.pt/loja/vogais/livro/espaco/"
+  }
+]
