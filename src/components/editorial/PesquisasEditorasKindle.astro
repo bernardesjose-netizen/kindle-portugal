@@ -62,6 +62,26 @@ function pesquisaKindle(edicao: Edicao) {
   </table>
 </div>
 
+<style>
+  #tabela-editoras tbody th {
+    background-color: #edf3f7;
+    color: #172c3f;
+  }
+  #tabela-editoras tbody th :global(a) {
+    color: #123858;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: currentColor;
+    text-underline-offset: 0.18em;
+  }
+  #tabela-editoras tbody th :global(a:visited) { color: #4a3162; }
+  #tabela-editoras tbody th :global(a:hover) { color: #0e2840; }
+  #tabela-editoras tbody th :global(a:focus-visible) {
+    outline: 2px solid #15557a;
+    outline-offset: 3px;
+  }
+</style>
+
 <script>
   const catalogo = document.querySelector('[data-catalogo-editoras]');
   const campo = catalogo?.querySelector('input');
