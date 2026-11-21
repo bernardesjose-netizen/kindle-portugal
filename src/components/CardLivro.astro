@@ -38,7 +38,7 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
       />
       <img
         src={capaSrc}
-        alt={`Capa de ${titulo}`}
+        alt={`Capa do livro (${titulo})`}
         loading="lazy"
         decoding="async"
         width="200"
@@ -55,7 +55,7 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
         {numero ? `Livro ${numero} de 3` : 'Convidado em inglês'}
       </span>
       <h2 lang={Astro.props.idiomaTitulo} class="mt-2 text-2xl font-bold leading-tight text-marinho-900" style="font-family: var(--font-serif); letter-spacing: -0.02em;">
-        {titulo}
+        ({titulo})
       </h2>
       <p class="mt-1 text-marinho-600">
         <strong class="font-semibold text-marinho-700">{autor}</strong>

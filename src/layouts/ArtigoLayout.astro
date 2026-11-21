@@ -2,6 +2,10 @@
 import BaseLayout from './BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
 import OrnamentoFundo from '@components/ui/OrnamentoFundo.astro';
+import LinkAmazon from '@components/afiliados/LinkAmazon.astro';
+import CapaLivroBlog from '@components/editorial/CapaLivroBlog.astro';
+import type { CollectionEntry } from 'astro:content';
+import { urlCapaLivro } from '@lib/capa-livro';
 import { ROTULOS_CATEGORIA_GUIA, SITE } from '@lib/site';
 import { caminhoPublico } from '@lib/urls';
 import { formatarData } from '@lib/formatters';
@@ -48,6 +52,7 @@ interface Props {
   categoria?: string;
   tempoLeituraMin?: number;
   imagem?: string;
+  capaLivro?: NonNullable<CollectionEntry<'blog'>['data']['capa_livro']>;
   /** Título/descrição para SEO (frontmatter seo.*), se diferirem dos visíveis. */
   tituloSeo?: string;
   descricaoSeo?: string;
@@ -71,7 +76,8 @@ const {
   tituloSeo,
   descricaoSeo,
   noindex,
-  imagem,
+  imagem: imagemEditorial,
+  capaLivro,
   heroAsin,
   heroAlt,
   mostrarDisclosure = true,
@@ -79,6 +85,7 @@ const {
 } = Astro.props;
 
 const heroSrc = heroAsin ? imagemParaAsin(heroAsin, 500) : null;
+const imagem = capaLivro ? urlCapaLivro(capaLivro.asin, 'grande', capaLivro.capa_amazon) : imagemEditorial;
 
 const articleLd = {
   '@context': 'https://schema.org',
@@ -116,6 +123,7 @@ const pillCategoriaClass = categoria ? PILL_POR_CATEGORIA[categoria] ?? '' : '';
   dataRevisao={dataRevisao}
   autor={autor?.nome}
   imagem={imagem}
+  imagemAlt={capaLivro ? `Capa do ebook (${capaLivro.titulo})` : undefined}
   jsonLd={articleLd}
   semOrnamento={true}
 >
@@ -124,7 +132,7 @@ const pillCategoriaClass = categoria ? PILL_POR_CATEGORIA[categoria] ?? '' : '';
     <OrnamentoFundo motivo={motivoSecundario} posicao="fundo-esquerda" intensidade="subtil" tom="dourado" />
     <Container largura="texto">
       <header class="mb-10">
-        <div class={heroSrc ? 'grid gap-8 sm:grid-cols-[1fr_auto] sm:items-start' : ''}>
+        <div class={capaLivro || heroSrc ? 'grid gap-8 sm:grid-cols-[1fr_auto] sm:items-start' : ''}>
           <div>
             {categoria && <span class={`pill ${pillCategoriaClass}`}>{ROTULOS_CATEGORIA_GUIA[categoria] ?? categoria}</span>}
             <h1
@@ -166,7 +174,11 @@ const pillCategoriaClass = categoria ? PILL_POR_CATEGORIA[categoria] ?? '' : '';
             </div>
           </div>
 
-          {heroSrc && (
+          {capaLivro ? (
+            <LinkAmazon href={`https://www.amazon.es/dp/${capaLivro.asin}`} class="mx-auto block w-40 sm:mx-0 sm:w-44 lg:w-48">
+              <CapaLivroBlog livro={capaLivro} cabecalho />
+            </LinkAmazon>
+          ) : heroSrc && (
             <figure class="relative mx-auto w-32 shrink-0 sm:mx-0 sm:w-40 lg:w-48" aria-hidden="true">
               <div
                 class="absolute -inset-6 rounded-full opacity-50 blur-2xl"

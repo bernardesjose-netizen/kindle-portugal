@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
+import CapaLivroBlog from '@components/editorial/CapaLivroBlog.astro';
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { formatarData } from '@lib/formatters';
@@ -43,7 +44,11 @@ const idDestaque = 'amazon-business-nif-empresa-portuguesa-sem-iva-2026';
         {artigos.map((a) => (
           <li class:list={['group', a.id === idDestaque && 'artigo-assinalado']}>
             <a href={`/blog/${a.id}`} class="block">
-              {a.data.imagem_hero ? (
+              {a.data.capa_livro ? (
+                <div class="relative mb-4 aspect-[1200/630] overflow-hidden rounded-xl bg-gradient-to-br from-marinho-100 to-creme-100 transition-transform group-hover:-translate-y-1">
+                  <CapaLivroBlog livro={a.data.capa_livro} />
+                </div>
+              ) : a.data.imagem_hero && (
                 <div class:list={['relative mb-4 overflow-visible rounded-xl bg-gradient-to-br from-marinho-50 to-creme-100 transition-transform group-hover:-translate-y-1', a.id === idDestaque && 'capa-assinalada']}>
                   {a.id === idDestaque && (
                     <span class="etiqueta-assinalada" aria-hidden="true">Para empresas</span>
@@ -58,8 +63,6 @@ const idDestaque = 'amazon-business-nif-empresa-portuguesa-sem-iva-2026';
                     decoding="async"
                   />
                 </div>
-              ) : (
-                <div class="mb-4 aspect-[1200/630] w-full rounded-xl bg-gradient-to-br from-marinho-100 to-creme-200 transition-transform group-hover:-translate-y-1" />
               )}
               <h2 class="text-lg font-semibold leading-snug text-marinho-900 group-hover:text-marca-700">
                 {a.data.titulo}

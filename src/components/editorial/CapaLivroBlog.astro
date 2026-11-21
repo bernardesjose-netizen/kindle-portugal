@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { urlCapaLivro } from '@lib/capa-livro';
+
+interface Props {
+  livro: NonNullable<CollectionEntry<'blog'>['data']['capa_livro']>;
+  cabecalho?: boolean;
+}
+
+const { livro, cabecalho = false } = Astro.props;
+---
+
+<img
+  src={urlCapaLivro(livro.asin, cabecalho ? 'grande' : 'medio', livro.capa_amazon)}
+  alt={`Capa do ebook (${livro.titulo})`}
+  width="330"
+  height="500"
+  loading={cabecalho ? 'eager' : 'lazy'}
+  decoding="async"
+  referrerpolicy="strict-origin-when-cross-origin"
+  data-fallback={urlCapaLivro(livro.asin)}
+  class:list={[
+    'block object-contain drop-shadow-md',
+    cabecalho ? 'mx-auto h-auto max-h-72 max-w-full' : 'absolute inset-0 m-auto h-[92%] w-[94%]',
+  ]}
+/>

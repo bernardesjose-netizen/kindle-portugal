@@ -221,7 +221,7 @@ const pillPorCategoria: Record<string, string> = {
                 {ultimoTresLivros.data.livros.map((livro, i) => (
                   <img
                     src={urlCapaLivro(livro.asin, 'medio', livro.capa_amazon)}
-                    alt={`Capa de ${livro.titulo}`}
+                    alt={`Capa do livro (${livro.titulo})`}
                     loading="lazy"
                     decoding="async"
                     width="200"
@@ -254,7 +254,7 @@ const pillPorCategoria: Record<string, string> = {
                   <li class="flex items-start gap-2">
                     <span class="mt-2 inline-block h-1 w-1 shrink-0 rounded-full bg-dourado-500" aria-hidden="true" />
                     <span>
-                      <strong class="font-semibold text-marinho-900">{livro.titulo}</strong>
+                      <strong class="font-semibold text-marinho-900">({livro.titulo})</strong>
                       <span class="text-marinho-500">, {livro.autor} · {livro.editora}</span>
                     </span>
                   </li>
@@ -262,7 +262,7 @@ const pillPorCategoria: Record<string, string> = {
               </ul>
 
               {ultimoTresLivros.data.convidado_ingles && (
-                <p class="mt-4 text-sm text-oceano-800">Em inglês · <em>{ultimoTresLivros.data.convidado_ingles.titulo}</em></p>
+                <p class="mt-4 text-sm text-oceano-800">Em inglês · <em>({ultimoTresLivros.data.convidado_ingles.titulo})</em></p>
               )}
 
               <p class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-marca-700 group-hover:text-marca-800">

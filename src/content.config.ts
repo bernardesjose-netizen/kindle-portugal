@@ -12,11 +12,10 @@ const seo = z.object({
   noindex: z.boolean().default(false),
 });
 
+const asinKindle = z.string().regex(/^B0[A-Z0-9]{8}$/, 'ASIN inválido (deve começar por B0 e ter 10 caracteres)');
+
 const livroDestaque = z.object({
-  asin: z
-    .string()
-    .regex(/^B0[A-Z0-9]{8}$/, 'ASIN inválido (deve começar por B0 e ter 10 caracteres)')
-    .optional(),
+  asin: asinKindle.optional(),
   formato: z.enum(['ebook', 'papel']).default('ebook'),
   titulo: z.string(),
   autor: z.string(),
@@ -189,6 +188,11 @@ const blog = defineCollection({
       data_revisao: z.coerce.date().optional(),
       imagem_hero: image().optional(),
       imagem_hero_alt: z.string().optional(),
+      capa_livro: z.object({
+        titulo: z.string().min(1),
+        asin: asinKindle,
+        capa_amazon: z.string().url(),
+      }).optional(),
       rascunho: z.boolean().default(false),
       evitar_domingo: z.boolean().default(false),
       mostrar_disclosure: z.boolean().default(true),

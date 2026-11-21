@@ -2,7 +2,6 @@
 import { getCollection, render } from 'astro:content';
 import ArtigoLayout from '@layouts/ArtigoLayout.astro';
 import CardLivro from '@components/CardLivro.astro';
-import DisclosureBanner from '@components/afiliados/DisclosureBanner.astro';
 import { urlAfiliado } from '@lib/afiliados';
 import { urlCapaLivro } from '@lib/capa-livro';
 
@@ -45,7 +44,6 @@ const bilingue = d.ingles;
     </nav>
   )}
   <Content />
-  <DisclosureBanner />
 
   <section aria-label="Os três livros desta edição" class="not-prose">
     {d.livros.map((livro, i) => (
@@ -71,10 +69,9 @@ const bilingue = d.ingles;
       <h2 id="english-title" class="!mt-0">{bilingue.titulo}</h2>
       <p class="text-lg font-medium text-marinho-700">{bilingue.descricao}</p>
       <p>{bilingue.introducao}</p>
-      <p class="text-sm text-marinho-600">This article contains affiliate links. If you buy a book through one of them, we may earn a commission at no extra cost to you.</p>
       {d.livros.map((livro) => (
         <section>
-          <h3 lang={d.serie === 'portugues' ? 'pt-PT' : 'en'}>{livro.titulo}</h3>
+          <h3 lang={d.serie === 'portugues' ? 'pt-PT' : 'en'}>({livro.titulo})</h3>
           <p class="!mb-2 text-sm text-marinho-600">{livro.autor} · {livro.editora}{livro.ano && ` · ${livro.ano}`}</p>
           {livro.tradutor && <p class="text-sm text-marinho-600">Translated into Portuguese by {livro.tradutor}</p>}
           <p>{livro.comentario_en}</p>

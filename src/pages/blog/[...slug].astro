@@ -71,8 +71,8 @@ const heroPorPost: Record<string, { asin: string; alt: string }> = {
 const { artigo } = Astro.props;
 const { Content } = await render(artigo);
 const d = artigo.data;
-const capa = d.imagem_hero;
-const hero = capa ? undefined : heroPorPost[artigo.id];
+const capa = d.capa_livro ? undefined : d.imagem_hero;
+const hero = capa || d.capa_livro ? undefined : heroPorPost[artigo.id];
 ---
 
 <ArtigoLayout
@@ -86,6 +86,7 @@ const hero = capa ? undefined : heroPorPost[artigo.id];
   dataRevisao={d.data_revisao}
   categoria="Blog"
   imagem={capa?.src}
+  capaLivro={d.capa_livro}
   heroAsin={hero?.asin}
   heroAlt={hero?.alt}
   mostrarDisclosure={d.mostrar_disclosure}

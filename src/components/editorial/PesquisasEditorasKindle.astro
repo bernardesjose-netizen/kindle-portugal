@@ -47,7 +47,7 @@ function pesquisaKindle(edicao: Edicao) {
             {edicao.autorPesquisa && <small class="block font-normal">Com o filtro de autor {edicao.autorPesquisa}</small>}
           </th>
           <td class="align-top">
-            <LinkAmazon href={`https://www.amazon.es/dp/${edicao.asin}`}><cite>{edicao.titulo}</cite></LinkAmazon> · {edicao.autor}
+            <LinkAmazon href={`https://www.amazon.es/dp/${edicao.asin}`}>(<cite>{edicao.titulo}</cite>)</LinkAmazon> · {edicao.autor}
             {edicao.tradutor && <span> · Tradução de {edicao.tradutor}</span>}
           </td>
         </tr>
