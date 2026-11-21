@@ -1,6 +1,5 @@
 ---
 import LinkAmazon from '@components/afiliados/LinkAmazon.astro';
-import DisclosureBanner from '@components/afiliados/DisclosureBanner.astro';
 import catalogo from '../../data/editoras-kindle.json';
 
 interface Edicao {
@@ -33,7 +32,6 @@ function pesquisaKindle(edicao: Edicao) {
     Carrega no nome para pesquisar na Amazon.es. Ao lado, encontras um livro com a edição identificada.
     A ficha de referência permite comparar a editora e o autor ou tradutor com a versão que aparece na loja.
   </p>
-  <DisclosureBanner />
   <div hidden data-painel-filtro class="not-prose my-5">
     <label for="filtrar-editoras" class="block text-sm font-semibold text-marinho-800">Procurar editora, livro, autor ou tradutor nesta lista</label>
     <input type="search" id="filtrar-editoras" class="mt-2 w-full rounded-lg border border-marinho-300 bg-white px-3 py-2 text-marinho-900" aria-controls="tabela-editoras" />
@@ -52,9 +50,6 @@ function pesquisaKindle(edicao: Edicao) {
           <td class="align-top">
             <a href={edicao.fonte}><cite>{edicao.titulo}</cite></a> · {edicao.autor}
             {edicao.tradutor && <span> · Tradução de {edicao.tradutor}</span>}
-            <span class="block text-sm">
-              <a href={`https://leer.amazon.es/sample/${edicao.asin}`}>Ler a amostra Kindle<span class="sr-only"> de {edicao.titulo}</span></a>
-            </span>
           </td>
         </tr>
       ))}
