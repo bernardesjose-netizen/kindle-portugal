@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
-import WookWidget from '@components/afiliados/WookWidget.astro';
 import { getCollection } from 'astro:content';
 import { formatarData } from '@lib/formatters';
 import { imagemParaAsin } from '@lib/asin-images';
@@ -95,7 +94,7 @@ const ASIN_FALLBACK = 'B0CFPWLGF2';
           </p>
         </div>
         <div class="lg:justify-self-end">
-          <WookWidget variante="escuro" prioridade classe="w-full max-w-sm mx-auto lg:mx-0" />
+          <a href="/guias/ebooks-em-portugues-amazon-kindle#pesquisar-por-editora" class="inline-flex min-h-11 items-center gap-2 rounded-lg bg-creme-50 px-5 py-3 font-semibold text-marinho-900 hover:bg-dourado-100">Pesquisar livros por editora <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </Container>
