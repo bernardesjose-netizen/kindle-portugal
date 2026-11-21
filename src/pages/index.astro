@@ -6,7 +6,6 @@ import DestaqueCampanha from '@components/afiliados/DestaqueCampanha.astro';
 import OfertasBlackFriday2026 from '@components/afiliados/OfertasBlackFriday2026.astro';
 import CartaoFamiliaKindle from '@components/CartaoFamiliaKindle.astro';
 import OfertasMomento from '@components/afiliados/OfertasMomento.astro';
-import WookWidget from '@components/afiliados/WookWidget.astro';
 import { getCollection } from 'astro:content';
 import { ROTULOS_CATEGORIA_GUIA, SITE } from '@lib/site';
 import { formatarData } from '@lib/formatters';
@@ -31,7 +30,7 @@ const blogTodos = (await getCollection('blog', ({ data }) => !data.rascunho))
   .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf());
 const ultimoPost = blogTodos[0];
 
-const tresLivrosTodos = (await getCollection('tresLivros', ({ data }) => !data.rascunho))
+const tresLivrosTodos = (await getCollection('tresLivros', ({ data }) => !data.rascunho && data.serie === 'portugues'))
   .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf());
 const ultimoTresLivros = tresLivrosTodos[0];
 
@@ -199,8 +198,7 @@ const pillPorCategoria: Record<string, string> = {
               Três Ebooks
             </h2>
             <p class="mt-2 max-w-xl text-marinho-600">
-              Escolhemos três obras escritas em português de Portugal e publicadas por editoras portuguesas.
-              Se já tens um livro em mente, vê <a href="/guias/ebooks-em-portugues-amazon-kindle" class="font-semibold text-marca-700 underline underline-offset-2 hover:text-marca-800">como encontrar a edição portuguesa para Kindle</a>.
+              Escolhemos três obras em português de Portugal, entre originais e traduções. Para quem também lê em inglês, há uma <a href="/tres-livros#em-ingles" class="font-semibold text-marca-700 underline underline-offset-2 hover:text-marca-800">seleção de três livros em inglês</a> de três em três dias.
             </p>
           </div>
           <a
@@ -320,10 +318,6 @@ const pillPorCategoria: Record<string, string> = {
       </a>
     </Container>
   )}
-
-  <Container largura="normal" classe="pt-6">
-    <WookWidget prioridade />
-  </Container>
 
   {modelos.length > 0 && (
     <section aria-labelledby="titulo-modelos-destaque" class="bg-creme-50">

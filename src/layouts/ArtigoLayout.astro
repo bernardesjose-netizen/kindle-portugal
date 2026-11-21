@@ -57,6 +57,7 @@ interface Props {
   /** Texto alternativo para a hero image. */
   heroAlt?: string;
   mostrarDisclosure?: boolean;
+  idiomas?: string[];
 }
 
 const {
@@ -74,6 +75,7 @@ const {
   heroAsin,
   heroAlt,
   mostrarDisclosure = true,
+  idiomas,
 } = Astro.props;
 
 const heroSrc = heroAsin ? imagemParaAsin(heroAsin, 500) : null;
@@ -83,7 +85,7 @@ const articleLd = {
   '@type': 'Article',
   headline: titulo,
   description: descricao,
-  inLanguage: 'pt-PT',
+  inLanguage: idiomas ?? 'pt-PT',
   datePublished: dataPublicacao.toISOString(),
   dateModified: (dataRevisao ?? dataPublicacao).toISOString(),
   author: autor

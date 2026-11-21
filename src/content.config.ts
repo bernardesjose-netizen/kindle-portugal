@@ -21,9 +21,11 @@ const livroDestaque = z.object({
   titulo: z.string(),
   autor: z.string(),
   editora: z.string(),
+  tradutor: z.string().optional(),
   ano: z.number().int().min(1900).optional(),
   marketplace: z.enum(['es', 'com', 'uk', 'de', 'fr', 'it']).default('es'),
   comentario: z.string().min(50).max(800),
+  comentario_en: z.string().min(50).max(800).optional(),
   url_wook: z.string().url().optional(),
   fonte_edicao: z.string().url().optional(),
   capa_amazon: z.string().url().optional(),
@@ -211,6 +213,12 @@ const tresLivros = defineCollection({
     z.object({
       titulo: z.string(),
       descricao: z.string().max(200),
+      serie: z.enum(['portugues', 'ingles']).default('portugues'),
+      ingles: z.object({
+        titulo: z.string().min(1),
+        descricao: z.string().min(1).max(240),
+        introducao: z.string().min(40),
+      }).optional(),
       autor: autor,
       data_publicacao: z.coerce.date(),
       livros: z
@@ -222,6 +230,8 @@ const tresLivros = defineCollection({
       imagem_hero_alt: z.string().optional(),
       rascunho: z.boolean().default(false),
       seo: seo.optional(),
+    }).refine((edicao) => !edicao.ingles || edicao.livros.every((livro) => livro.comentario_en && livro.fonte_edicao), {
+      message: 'Cada livro de uma edição bilingue precisa de uma nota em inglês e de uma ficha da edição.',
     }),
 });
 

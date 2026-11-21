@@ -1,23 +1,29 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
-import WookWidget from '@components/afiliados/WookWidget.astro';
 import { getCollection } from 'astro:content';
 import { formatarData } from '@lib/formatters';
 import { urlCapaLivro } from '@lib/capa-livro';
 
-const posts = (await getCollection('tresLivros', ({ data }) => !data.rascunho)).sort(
+const edicoes = await getCollection('tresLivros');
+const posts = edicoes.filter((p) => !p.data.rascunho).sort(
   (a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf(),
 );
+const portugues = posts.filter((p) => p.data.serie === 'portugues');
+const recente = (p: typeof posts[number]) => p.data.tags.some((t) => t === 'originais-pt-pt' || t === 'edicoes-pt-pt');
+const primeiraEmIngles = edicoes.filter((p) => p.data.serie === 'ingles').sort(
+  (a, b) => a.data.data_publicacao.valueOf() - b.data.data_publicacao.valueOf(),
+)[0];
 const grupos = [
-  { titulo: 'Novas edições', posts: posts.filter((p) => p.data.tags.includes('originais-pt-pt')) },
-  { titulo: 'Arquivo da rubrica', posts: posts.filter((p) => !p.data.tags.includes('originais-pt-pt')) },
-].filter((grupo) => grupo.posts.length);
+  { id: 'em-portugues', titulo: 'Livros em português de Portugal', posts: portugues.filter(recente) },
+  { id: 'em-ingles', titulo: 'Livros em inglês', posts: posts.filter((p) => p.data.serie === 'ingles') },
+  { id: 'arquivo', titulo: 'Arquivo da rubrica', posts: portugues.filter((p) => !recente(p)) },
+].filter((grupo) => grupo.posts.length || (grupo.id === 'em-ingles' && primeiraEmIngles));
 ---
 
 <BaseLayout
   titulo="Três Ebooks"
-  descricao="Três ebooks de dois em dois dias, escritos originalmente em português de Portugal e publicados por editoras portuguesas."
+  descricao="Descobre três ebooks em português de Portugal de dois em dois dias e três em inglês de três em três dias, com notas de leitura e ligações para as edições Kindle."
 >
   <section class="relative overflow-hidden border-b-4 border-dourado-500 bg-gradient-to-br from-marinho-900 via-oceano-800 to-marinho-800 text-creme-50">
     <div
@@ -26,20 +32,17 @@ const grupos = [
       style="background-image: radial-gradient(ellipse at top right, rgb(212 168 75 / 0.30) 0%, transparent 55%), radial-gradient(ellipse at bottom left, rgb(20 110 180 / 0.35) 0%, transparent 50%);"
     />
     <Container largura="normal" classe="relative z-10 py-14">
-      <div class="grid items-center gap-10 lg:grid-cols-[1.8fr_1fr] lg:gap-12">
+      <div class="max-w-3xl">
         <div>
-          <span class="inline-flex items-center gap-1 rounded-full border border-dourado-400/40 bg-dourado-500/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-dourado-400">
-            Edições de dois em dois dias
-          </span>
           <h1 class="mt-3 text-3xl font-bold text-creme-50 md:text-4xl" style="font-family: var(--font-serif);">
             Três Ebooks
           </h1>
           <p class="mt-3 max-w-2xl text-oceano-100/90">
-            Três ebooks de dois em dois dias, escritos originalmente em português de Portugal e publicados por editoras portuguesas. Cada livro vem com uma nota de leitura e a ligação para a edição Kindle. De seis em seis dias, juntamos um best-seller em inglês.
+            De dois em dois dias, escolhemos três ebooks em português de Portugal. De três em três dias, há outra seleção com três livros em inglês. Cada nota de leitura acompanha a edição indicada.
           </p>
-        </div>
-        <div class="lg:justify-self-end">
-          <WookWidget variante="escuro" prioridade classe="w-full max-w-sm mx-auto lg:mx-0" />
+          <nav aria-label="Séries da rubrica" class="mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-creme-50">
+            {grupos.map((grupo) => <a href={`#${grupo.id}`} class="underline decoration-dourado-400 underline-offset-4">{grupo.titulo}</a>)}
+          </nav>
         </div>
       </div>
     </Container>
@@ -50,8 +53,9 @@ const grupos = [
       <p class="text-marinho-600">Ainda não há edições publicadas nesta rubrica.</p>
     ) : (
       grupos.map((grupo) => (
-        <section class="mb-12 last:mb-0">
+        <section id={grupo.id} class="mb-12 scroll-mt-20 last:mb-0">
           <h2 class="mb-6 text-2xl font-bold text-marinho-900" style="font-family: var(--font-serif);">{grupo.titulo}</h2>
+          {grupo.posts.length === 0 && primeiraEmIngles && <p class="text-marinho-600">A primeira seleção de livros em inglês sai a {formatarData(primeiraEmIngles.data.data_publicacao)}. Podes ler o artigo em português ou em inglês.</p>}
           <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {grupo.posts.map((p) => {
               const capa1 = urlCapaLivro(p.data.livros[0].asin, 'pequeno', p.data.livros[0].capa_amazon);
@@ -69,6 +73,7 @@ const grupos = [
                       {p.data.titulo}
                     </h3>
                     <p class="mt-2 text-sm text-marinho-600">{p.data.descricao}</p>
+                    {p.data.ingles && <p class="mt-2 text-xs font-semibold text-oceano-800">Artigo bilingue · <span lang="en">English version included</span></p>}
                     {p.data.convidado_ingles && <p class="mt-2 text-xs font-semibold text-oceano-800">Inclui uma leitura em inglês</p>}
                     <p class="mt-2 text-xs text-marinho-400">
                       <time datetime={p.data.data_publicacao.toISOString()}>

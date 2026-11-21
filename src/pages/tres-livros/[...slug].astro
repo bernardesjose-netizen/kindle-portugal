@@ -2,6 +2,8 @@
 import { getCollection, render } from 'astro:content';
 import ArtigoLayout from '@layouts/ArtigoLayout.astro';
 import CardLivro from '@components/CardLivro.astro';
+import DisclosureBanner from '@components/afiliados/DisclosureBanner.astro';
+import { urlAfiliado } from '@lib/afiliados';
 import { urlCapaLivro } from '@lib/capa-livro';
 
 export async function getStaticPaths() {
@@ -21,6 +23,7 @@ const d = post.data;
 // resolve via imagemParaAsin, função que só conhece dispositivos Kindle).
 const heroSrc = urlCapaLivro(d.livros[0].asin, 'grande', d.livros[0].capa_amazon);
 const convidado = d.convidado_ingles;
+const bilingue = d.ingles;
 ---
 
 <ArtigoLayout
@@ -32,9 +35,17 @@ const convidado = d.convidado_ingles;
   autor={d.autor}
   dataPublicacao={d.data_publicacao}
   categoria="Três Ebooks"
+  idiomas={bilingue ? ['pt-PT', 'en'] : undefined}
   imagem={heroSrc}
 >
+  {bilingue && (
+    <nav aria-label="Idioma do artigo" class="not-prose mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-marinho-200 pb-4">
+      <span class="text-sm font-semibold text-marinho-700">{d.serie === 'ingles' ? 'Três livros em inglês' : 'Três livros em português de Portugal'}</span>
+      <a href="#in-english" lang="en" hreflang="en" class="text-sm font-semibold text-marca-700 underline underline-offset-4">Read in English ↓</a>
+    </nav>
+  )}
   <Content />
+  <DisclosureBanner />
 
   <section aria-label="Os três livros desta edição" class="not-prose">
     {d.livros.map((livro, i) => (
@@ -42,18 +53,41 @@ const convidado = d.convidado_ingles;
         asin={livro.asin}
         formato={livro.formato}
         titulo={livro.titulo}
+        idiomaTitulo={bilingue && d.serie === 'ingles' ? 'en' : undefined}
         autor={livro.autor}
         editora={livro.editora}
+        tradutor={livro.tradutor}
         ano={livro.ano}
-        marketplace={livro.marketplace}
         comentario={livro.comentario}
-        urlWook={livro.url_wook}
-        fonteEdicao={livro.fonte_edicao}
         capaAmazon={livro.capa_amazon}
         numero={i + 1}
       />
     ))}
   </section>
+
+  {bilingue && (
+    <section id="in-english" lang="en" aria-labelledby="english-title" class="mt-14 scroll-mt-20 border-t-2 border-dourado-400 pt-7">
+      <p class="!mb-2 text-sm font-semibold text-oceano-800">{d.serie === 'ingles' ? 'Three books in English' : 'Three books in European Portuguese'}</p>
+      <h2 id="english-title" class="!mt-0">{bilingue.titulo}</h2>
+      <p class="text-lg font-medium text-marinho-700">{bilingue.descricao}</p>
+      <p>{bilingue.introducao}</p>
+      <p class="text-sm text-marinho-600">This article contains affiliate links. If you buy a book through one of them, we may earn a commission at no extra cost to you.</p>
+      {d.livros.map((livro) => (
+        <section>
+          <h3 lang={d.serie === 'portugues' ? 'pt-PT' : 'en'}>{livro.titulo}</h3>
+          <p class="!mb-2 text-sm text-marinho-600">{livro.autor} · {livro.editora}{livro.ano && ` · ${livro.ano}`}</p>
+          {livro.tradutor && <p class="text-sm text-marinho-600">Translated into Portuguese by {livro.tradutor}</p>}
+          <p>{livro.comentario_en}</p>
+          <p class="flex flex-wrap gap-x-5 text-sm">
+            {livro.asin && (
+              <a href={urlAfiliado(`https://www.amazon.es/dp/${livro.asin}/`)} rel="sponsored nofollow noopener">Kindle edition on Amazon.es</a>
+            )}
+          </p>
+        </section>
+      ))}
+      <a href="#conteudo" lang="pt-PT" class="text-sm">↑ Voltar ao texto em português</a>
+    </section>
+  )}
 
   {convidado && (
     <section aria-labelledby="titulo-convidado-ingles" class="not-prose mt-12 rounded-2xl border border-oceano-100 bg-oceano-50/70 px-4 py-6 sm:px-7">
@@ -66,9 +100,7 @@ const convidado = d.convidado_ingles;
         autor={convidado.autor}
         editora={convidado.editora}
         ano={convidado.ano}
-        marketplace={convidado.marketplace}
         comentario={convidado.comentario}
-        fonteEdicao={convidado.fonte_edicao}
         capaAmazon={convidado.capa_amazon}
       />
     </section>
