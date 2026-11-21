@@ -14,6 +14,13 @@
     "fonte": "https://www.wook.pt/livro/contabilidade-descodificada-rafael-franco/24358645"
   },
   {
+    "editora": "Alêtheia Editores",
+    "titulo": "Foi Assim",
+    "autor": "Zita Seabra",
+    "asin": "B008DJFYI8",
+    "fonte": "https://www.bertrand.pt/livro/foi-assim-zita-seabra/195348"
+  },
+  {
     "editora": "Alfaguara",
     "autorPesquisa": "Manuel Vilas",
     "titulo": "Nós",
@@ -37,6 +44,13 @@
     "tradutor": "Carla Ribeiro",
     "asin": "B0H2755DGJ",
     "fonte": "https://almadoslivros.pt/products/o-divorcio"
+  },
+  {
+    "editora": "Almedina",
+    "titulo": "Comentário à Lei de Proteção de Crianças e Jovens em Perigo",
+    "autor": "Procuradoria-Geral Regional do Porto",
+    "asin": "B08LBY4WDC",
+    "fonte": "https://search.almedina.net/book/9789724086286"
   },
   {
     "editora": "Arena",
@@ -91,6 +105,20 @@
     "fonte": "https://penguinlivros.pt/loja/cavalo-de-ferro/livro/elizabeth/"
   },
   {
+    "editora": "Chá das Cinco",
+    "titulo": "Nascer Saudável",
+    "autor": "Sandra Oliveira",
+    "asin": "B08QTTKY8G",
+    "fonte": "https://bionascimento.com/nascer-saudavel/"
+  },
+  {
+    "editora": "Chiado Editora",
+    "titulo": "A Arbitragem Institucionalizada na Acção Executiva",
+    "autor": "João de Figueiredo Salvador",
+    "asin": "B0DVPZG98F",
+    "fonte": "https://www.chiadobooks.com/a-arbitragem-institucionalizada-na-accao-executiva"
+  },
+  {
     "editora": "Companhia das Letras",
     "autorPesquisa": "João Tordo",
     "titulo": "O livro dos homens sem luz",
@@ -128,11 +156,39 @@
     "fonte": "https://www.wook.pt/ebook/mario-soares-e-o-25-de-abril-o-essencial-david-castano/29879974"
   },
   {
+    "editora": "Edições Colibri",
+    "titulo": "O Monte das Tílias",
+    "autor": "Lúcia Gonçalves",
+    "asin": "B018X1M8NY",
+    "fonte": "https://www.wook.pt/livro/o-monte-das-tilias-lucia-goncalves/17403881"
+  },
+  {
+    "editora": "Edições Esgotadas",
+    "titulo": "Competências Emocionais para a Promoção do Sucesso Escolar",
+    "autor": "Manuela Ferreira, Sofia Campos, Ana Paula Cardoso e Cláudia Chaves",
+    "asin": "B087N3VB55",
+    "fonte": "https://repositorio.ipv.pt/entities/publication/c3283961-cb6e-4df1-8bdf-8f6de7d1f31d"
+  },
+  {
+    "editora": "Edições Universidade Fernando Pessoa",
+    "titulo": "Crime e Vitimação. Polícia e Análise de Comunidades Urbanas",
+    "autor": "Ana Sani e Laura M. Nunes",
+    "asin": "B00EPF5NGM",
+    "fonte": "https://www.bertrand.pt/ebook/crime-e-vitimacao-ana-isabel-sani/15020504"
+  },
+  {
     "editora": "Edições Vercial",
     "titulo": "A Bruxa de Monte Córdova",
     "autor": "Camilo Castelo Branco",
     "asin": "B009NMHWQ6",
     "fonte": "https://www.wook.pt/ebook/a-bruxa-de-monte-cordova-jose-barbosa-machado/14306052"
+  },
+  {
+    "editora": "Edições Vieira da Silva",
+    "titulo": "Portugal Económico, Político e Social",
+    "autor": "Amílcar de Melo",
+    "asin": "B07NW5SSYN",
+    "fonte": "https://www.bertrand.pt/livro/portugal-economico-politico-e-social-amilcar-de-melo/17825118"
   },
   {
     "editora": "Editorial Presença",
@@ -216,6 +272,21 @@
     "fonte": "https://penguinlivros.pt/loja/iguana/livro/e-agora/"
   },
   {
+    "editora": "Imprensa da Universidade de Coimbra",
+    "titulo": "Como deve o jovem ouvir os poetas?",
+    "autor": "Plutarco",
+    "asin": "B09VLC1NXW",
+    "fonte": "https://ciencia.ucp.pt/pt/publications/plutarco-como-deve-o-jovem-ouvir-os-poetas-trad-introd-e-notas-de/",
+    "tradutor": "Marta Várzeas"
+  },
+  {
+    "editora": "Imprensa de Ciências Sociais",
+    "titulo": "A Circulação do Conhecimento: Medicina, Redes e Impérios",
+    "autor": "Cristiana Bastos e Renilda Barreto (org.)",
+    "asin": "B078W4F9CG",
+    "fonte": "https://www.ics.ulisboa.pt/en/node/109986"
+  },
+  {
     "editora": "Influência",
     "titulo": "O Teu Minimalismo",
     "autor": "Cláudia Ganhão",
@@ -244,6 +315,13 @@
     "tradutor": "João Carlos Silva",
     "asin": "B07SR7BPKX",
     "fonte": "https://www.wook.pt/ebook/habitos-atomicos-james-clear/23154847"
+  },
+  {
+    "editora": "Lucerna",
+    "titulo": "Romper a Solidão",
+    "autor": "Erik Varden",
+    "asin": "B0FJ2TMLQT",
+    "fonte": "https://www.lucernaonline.pt/product/romper-a-solidao/"
   },
   {
     "editora": "Manuscrito Editora",
@@ -344,6 +422,28 @@
     "fonte": "https://www.planetadelivros.pt/livro-o-protocolo-caos/406495"
   },
   {
+    "editora": "Pottermore Publishing",
+    "titulo": "Harry Potter e a Pedra Filosofal",
+    "autor": "J. K. Rowling",
+    "asin": "B0192CTP7A",
+    "fonte": "https://www.pottermorepublishing.com/publications/9781781103074-1-harry-potter-e-a-pedra-filosofal/",
+    "tradutor": "Isabel Fraga"
+  },
+  {
+    "editora": "Prime Books",
+    "titulo": "O Futsal Universal",
+    "autor": "Marcos Antunes",
+    "asin": "B0CQD28XCC",
+    "fonte": "https://www.primebooks.pt/produto/o-futsal-universal"
+  },
+  {
+    "editora": "Principia",
+    "titulo": "Introdução à Economia",
+    "autor": "João César das Neves",
+    "asin": "B0GGDZ66HT",
+    "fonte": "https://www.principia.pt/product/introducao-a-economia/"
+  },
+  {
     "editora": "Quinta Essência",
     "titulo": "O Rei Lobo",
     "autor": "Lauren Palphreyman",
@@ -412,6 +512,13 @@
     "tradutor": "Dina Antunes",
     "asin": "B0CB4ZKQZ5",
     "fonte": "https://penguinlivros.pt/loja/topseller-bliss/livro/o-que-posso-eu-fazer/"
+  },
+  {
+    "editora": "Universidade Católica Editora",
+    "titulo": "Histórias em Pandemia",
+    "autor": "Rodrigo Queiroz e Melo, Patrícia Dias e Catarina Duff Burnay",
+    "asin": "B0C2L742KV",
+    "fonte": "https://ciencia.ucp.pt/en/publications/hist%C3%B3rias-em-pandemia-resili%C3%AAncia-e-educa%C3%A7%C3%A3o-integral/"
   },
   {
     "editora": "Vogais",

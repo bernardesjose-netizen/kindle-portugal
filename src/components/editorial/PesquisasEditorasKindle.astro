@@ -29,8 +29,7 @@ function pesquisaKindle(edicao: Edicao) {
 <div data-catalogo-editoras>
   <p>
     Estas {editoras.length} editoras e chancelas têm pelo menos uma edição Kindle em português de Portugal.
-    Carrega no nome para pesquisar na Amazon.es. Ao lado, encontras um livro com a edição identificada.
-    A ficha de referência permite comparar a editora e o autor ou tradutor com a versão que aparece na loja.
+    Carrega no nome para pesquisar o catálogo na Amazon.es ou no título para abrir diretamente a edição Kindle desse livro.
   </p>
   <div hidden data-painel-filtro class="not-prose my-5">
     <label for="filtrar-editoras" class="block text-sm font-semibold text-marinho-800">Procurar editora, livro, autor ou tradutor nesta lista</label>
@@ -39,7 +38,7 @@ function pesquisaKindle(edicao: Edicao) {
   </div>
   <table id="tabela-editoras">
     <caption class="sr-only">Editoras com edições em português de Portugal na Kindle Store da Amazon.es</caption>
-    <thead><tr><th scope="col">Pesquisar na Amazon.es</th><th scope="col">Edição portuguesa de referência</th></tr></thead>
+    <thead><tr><th scope="col">Pesquisar por editora</th><th scope="col">Abrir o livro na Amazon.es</th></tr></thead>
     <tbody>
       {editoras.map((edicao) => (
         <tr>
@@ -48,7 +47,7 @@ function pesquisaKindle(edicao: Edicao) {
             {edicao.autorPesquisa && <small class="block font-normal">Com o filtro de autor {edicao.autorPesquisa}</small>}
           </th>
           <td class="align-top">
-            <a href={edicao.fonte}><cite>{edicao.titulo}</cite></a> · {edicao.autor}
+            <LinkAmazon href={`https://www.amazon.es/dp/${edicao.asin}`}><cite>{edicao.titulo}</cite></LinkAmazon> · {edicao.autor}
             {edicao.tradutor && <span> · Tradução de {edicao.tradutor}</span>}
           </td>
         </tr>
