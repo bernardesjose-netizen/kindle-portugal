@@ -184,6 +184,7 @@ const blog = defineCollection({
       autor: autor,
       data_publicacao: z.coerce.date(),
       tags: z.array(z.string()).default([]),
+      data_revisao: z.coerce.date().optional(),
       imagem_hero: image().optional(),
       imagem_hero_alt: z.string().optional(),
       rascunho: z.boolean().default(false),
