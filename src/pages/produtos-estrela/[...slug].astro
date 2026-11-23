@@ -18,7 +18,7 @@ const d = post.data;
 
 // Hero: imagem do primeiro produto com ASIN conhecido.
 const primeiroComAsin = d.produtos.find((p) => p.asin);
-const heroSrc = primeiroComAsin?.asin ? (imagemParaAsin(primeiroComAsin.asin, 1000) ?? undefined) : undefined;
+const heroSrc = d.imagem_hero?.src ?? (primeiroComAsin?.asin ? imagemParaAsin(primeiroComAsin.asin, 1000) ?? undefined : undefined);
 ---
 
 <ArtigoLayout
@@ -46,6 +46,7 @@ const heroSrc = primeiroComAsin?.asin ? (imagemParaAsin(primeiroComAsin.asin, 10
         loja={p.loja}
         asin={p.asin}
         urlWorten={p.url_worten}
+        imagemWorten={p.imagem_worten}
         urlWook={p.url_wook}
         precoEur={p.preco_eur}
         precoAnteriorEur={p.preco_anterior_eur}

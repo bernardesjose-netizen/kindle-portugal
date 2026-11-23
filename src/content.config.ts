@@ -244,6 +244,7 @@ const tresLivros = defineCollection({
 // afirma um preço sem a data em que foi confirmado na loja.
 const produtoEstrela = z.object({
   nome: z.string(),
+  imagem_worten: z.string().url().optional(),
   /** Loja onde o preço foi verificado e onde aponta o botão principal. */
   loja: z.enum(['amazon', 'worten', 'wook']),
   asin: z
@@ -263,6 +264,8 @@ const produtoEstrela = z.object({
   /** Selo curto no cartão, ex.: "Novidade" ou "−17% face à tabela". */
   etiqueta: z.string().max(40).optional(),
   comentario: z.string().min(50).max(1000),
+}).refine((p) => !p.imagem_worten || Boolean(p.url_worten), {
+  message: 'A fotografia da Worten requer a ficha de destino do anunciante.',
 }).refine((p) => p.loja !== 'amazon' || (p.classificacao == null && p.num_avaliacoes == null), {
   // Cláusula t do acordo operativo dos Afiliados: estrelas e avaliações da
   // Amazon só se podem mostrar se vierem da PA-API.

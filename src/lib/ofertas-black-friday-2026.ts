@@ -20,7 +20,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     referencia: 'PVP recomendado de 154,99 € indicado pela Worten',
     etiqueta: 'Preço abaixo do PVPR',
     destaque: true,
-    verificadaEm: '2026-11-22',
+    verificadaEm: '2026-11-23',
   },
   {
     id: 'kindle-2026-amazon',
@@ -49,7 +49,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     },
     etiqueta: 'Black Friday Amazon.es',
     destaque: true,
-    verificadaEm: '2026-11-22',
+    verificadaEm: '2026-11-23',
   },
   {
     id: 'colorsoft-16',
@@ -76,7 +76,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     },
     etiqueta: 'Black Friday Amazon.es',
     destaque: true,
-    verificadaEm: '2026-11-22',
+    verificadaEm: '2026-11-23',
   },
   {
     id: 'scribe-2026',
@@ -103,7 +103,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     },
     etiqueta: 'Black Friday Amazon.es',
     destaque: true,
-    verificadaEm: '2026-11-22',
+    verificadaEm: '2026-11-23',
   },
   {
     id: 'scribe-colorsoft-2026',
@@ -167,7 +167,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     referencia: 'Preço de referência de 269,99 € indicado pela Worten',
     etiqueta: 'Black Friday Worten',
     destaque: true,
-    verificadaEm: '2026-11-22',
+    verificadaEm: '2026-11-23',
   },
   {
     id: 'kobo-clara-colour',
@@ -185,7 +185,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     referencia: 'Preço de referência de 189,99 € indicado pela Worten',
     etiqueta: 'Black Friday Worten',
     destaque: true,
-    verificadaEm: '2026-11-22',
+    verificadaEm: '2026-11-23',
   },
   {
     id: 'kindle-2026-worten-roxo',

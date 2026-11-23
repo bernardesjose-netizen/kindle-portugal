@@ -13,6 +13,7 @@ interface Props {
   loja: 'amazon' | 'worten' | 'wook';
   asin?: string;
   urlWorten?: string;
+  imagemWorten?: string;
   urlWook?: string;
   precoEur?: number;
   precoAnteriorEur?: number;
@@ -31,6 +32,7 @@ const {
   loja,
   asin,
   urlWorten,
+  imagemWorten,
   urlWook,
   precoEur,
   precoAnteriorEur,
@@ -52,7 +54,8 @@ const NOME_LOJA: Record<Props['loja'], string> = {
   wook: 'WOOK',
 };
 
-const imgSrc = asin ? imagemParaAsin(asin, 500) : null;
+const imgSrc = imagemWorten ?? (asin ? imagemParaAsin(asin, 500) : null);
+const urlFotografia = imagemWorten && urlWorten ? linkWorten(urlWorten) : undefined;
 
 // Botões de compra: o da loja principal primeiro, alternativas depois.
 const botoes: { rotulo: string; url: string; rel: string; principal: boolean }[] = [];
@@ -109,6 +112,11 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
           aria-hidden="true"
           style="background: radial-gradient(ellipse at center, rgba(249, 126, 7, 0.20) 0%, rgba(20, 110, 180, 0.15) 50%, transparent 75%);"
         />
+        {urlFotografia ? (
+          <a href={urlFotografia} rel="sponsored nofollow noopener" data-afiliado="worten" class="relative block">
+            <img src={imgSrc} alt={nome} width="220" height="220" loading="lazy" decoding="async" class="block h-auto w-full object-contain" />
+          </a>
+        ) : (
         <img
           src={imgSrc}
           alt={nome}
@@ -121,6 +129,8 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
           referrerpolicy="strict-origin-when-cross-origin"
           data-fallback="hide-pai"
         />
+        )}
+        {urlFotografia && <figcaption class="mt-2 text-center text-xs text-marinho-600">Fotografia da Worten via Awin</figcaption>}
       </figure>
     )}
 

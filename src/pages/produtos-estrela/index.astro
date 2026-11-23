@@ -49,7 +49,7 @@ const grupos = [
           <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {g.posts.map((p) => {
           const primeiroComAsin = p.data.produtos.find((pr) => pr.asin);
-          const imgSrc = primeiroComAsin?.asin ? imagemParaAsin(primeiroComAsin.asin, 500) : null;
+          const imgSrc = p.data.imagem_hero?.src ?? (primeiroComAsin?.asin ? imagemParaAsin(primeiroComAsin.asin, 500) : null);
           return (
             <li class="group">
               <a href={`/produtos-estrela/${p.id}`} class="block">
@@ -57,7 +57,7 @@ const grupos = [
                   {imgSrc ? (
                     <img
                       src={imgSrc}
-                      alt={primeiroComAsin?.nome ?? p.data.titulo}
+                      alt={p.data.imagem_hero_alt ?? primeiroComAsin?.nome ?? p.data.titulo}
                       loading="lazy"
                       decoding="async"
                       width="500"

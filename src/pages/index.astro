@@ -7,6 +7,7 @@ import OfertasBlackFriday2026 from '@components/afiliados/OfertasBlackFriday2026
 import CartaoFamiliaKindle from '@components/CartaoFamiliaKindle.astro';
 import OfertasMomento from '@components/afiliados/OfertasMomento.astro';
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import { ROTULOS_CATEGORIA_GUIA, SITE } from '@lib/site';
 import { formatarData } from '@lib/formatters';
 import { imagemParaAsin } from '@lib/asin-images';
@@ -29,6 +30,8 @@ const guias = guiasTodos.slice(0, 4);
 const blogTodos = (await getCollection('blog', ({ data }) => !data.rascunho))
   .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf());
 const ultimoPost = blogTodos[0];
+const [ultimaSelecao] = (await getCollection('produtosEstrela', ({ data }) => !data.rascunho && data.selecao_atual))
+  .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf());
 
 const tresLivrosTodos = (await getCollection('tresLivros', ({ data }) => !data.rascunho && data.serie === 'portugues'))
   .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf());
@@ -218,7 +221,9 @@ const pillPorCategoria: Record<string, string> = {
                 style="background: radial-gradient(ellipse at center, rgba(212, 168, 75, 0.45) 0%, rgba(20, 110, 180, 0.20) 60%, transparent 80%);"
               />
               <div class="relative grid grid-cols-3 gap-3">
-                {ultimoTresLivros.data.livros.map((livro, i) => (
+                {ultimoTresLivros.data.imagem_hero ? (
+                  <Image src={ultimoTresLivros.data.imagem_hero} alt={ultimoTresLivros.data.imagem_hero_alt ?? ultimoTresLivros.data.titulo} width={650} class="col-span-3 h-auto w-full rounded-lg" />
+                ) : ultimoTresLivros.data.livros.map((livro, i) => (
                   <img
                     src={urlCapaLivro(livro.asin, 'medio', livro.capa_amazon)}
                     alt={`Capa do livro (${livro.titulo})`}
@@ -316,6 +321,11 @@ const pillPorCategoria: Record<string, string> = {
           <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
         </span>
       </a>
+      {ultimaSelecao && (
+        <p class="mt-4 text-sm text-marinho-700">
+          Produtos Estrela · <a href={`/produtos-estrela/${ultimaSelecao.id}`} class="font-semibold text-marca-800 underline underline-offset-2">{ultimaSelecao.data.titulo}</a>
+        </p>
+      )}
     </Container>
   )}
 
