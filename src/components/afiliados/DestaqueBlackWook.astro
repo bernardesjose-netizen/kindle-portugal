@@ -1,0 +1,29 @@
+---
+import { linkWook } from '@lib/wook';
+import FasesCampanha from './FasesCampanha.astro';
+
+const inicio = '2026-11-16T00:00:00Z';
+const fim = '2026-11-27T23:59:59.999Z';
+const agora = Date.now();
+const destino = linkWook('https://www.wook.pt/pagina/black-wook?utm_source=affiliate&utm_medium=banner&utm_campaign=bw2026&utm_content=mrec&a_bid=0e5ab18f');
+---
+
+{agora >= Date.parse(inicio) && agora <= Date.parse(fim) && (
+  <aside aria-label="Black Friday na WOOK" data-campanha-inicio={inicio} data-campanha-fim={fim} data-esconder-fora class="not-prose my-5 overflow-hidden rounded-2xl border border-marinho-200 bg-creme-50 text-marinho-900">
+    <div class="grid items-center gap-5 p-5 sm:grid-cols-[12rem_1fr] sm:gap-7">
+      <a href={destino} rel="sponsored nofollow noopener" class="mx-auto block w-44 sm:w-full">
+        <img src="https://programadeafiliados.wook.pt/accounts/default1/banners/0e5ab18f" width="300" height="250" loading="lazy" alt="Black WOOK, de 16 a 27 de novembro de 2026" class="block h-auto w-full" />
+      </a>
+      <div>
+        <h2 class="text-xl font-bold">Black Friday na WOOK</h2>
+        <p class="mt-2 max-w-prose text-sm leading-relaxed">Até 27 de novembro, os livros, ebooks e audiolivros em português assinalados têm 30% a 50% de desconto. Na ficha de cada título, vê quanto poupas agora e quanto fica no cartão Wookmais.</p>
+        <p class="mt-2 max-w-prose text-sm">Se compras para um Kindle, <a href="/blog/ebooks-wook-no-kindle-2026" class="font-semibold underline underline-offset-2">confirma primeiro como podes ler o ebook</a>.</p>
+        <div class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-semibold">
+          <a href={destino} rel="sponsored nofollow noopener" class="rounded-lg bg-marinho-900 px-4 py-2 text-creme-50">Ver os livros em campanha na WOOK</a>
+          <a href="https://www.wook.pt/Mensagem/index/?key=BlackWook" class="underline underline-offset-2">Condições da campanha</a>
+        </div>
+      </div>
+    </div>
+    <FasesCampanha />
+  </aside>
+)}

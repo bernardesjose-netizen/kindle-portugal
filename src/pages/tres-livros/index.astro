@@ -1,8 +1,8 @@
 ---
+import DestaqueBlackWook from '@components/afiliados/DestaqueBlackWook.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
 import { getCollection } from 'astro:content';
-import { Image } from 'astro:assets';
 import { formatarData } from '@lib/formatters';
 import { urlCapaLivro } from '@lib/capa-livro';
 
@@ -10,16 +10,8 @@ const edicoes = await getCollection('tresLivros');
 const posts = edicoes.filter((p) => !p.data.rascunho).sort(
   (a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf(),
 );
-const portugues = posts.filter((p) => p.data.serie === 'portugues');
-const recente = (p: typeof posts[number]) => p.data.tags.some((t) => t === 'originais-pt-pt' || t === 'edicoes-pt-pt');
-const primeiraEmIngles = edicoes.filter((p) => p.data.serie === 'ingles').sort(
-  (a, b) => a.data.data_publicacao.valueOf() - b.data.data_publicacao.valueOf(),
-)[0];
-const grupos = [
-  { id: 'em-portugues', titulo: 'Livros em português de Portugal', posts: portugues.filter(recente) },
-  { id: 'em-ingles', titulo: 'Livros em inglês', posts: posts.filter((p) => p.data.serie === 'ingles') },
-  { id: 'arquivo', titulo: 'Arquivo da rubrica', posts: portugues.filter((p) => !recente(p)) },
-].filter((grupo) => grupo.posts.length || (grupo.id === 'em-ingles' && primeiraEmIngles));
+const ultimaPortugues = posts.find((p) => p.data.serie === 'portugues');
+const ultimaIngles = posts.find((p) => p.data.serie === 'ingles');
 ---
 
 <BaseLayout
@@ -42,7 +34,8 @@ const grupos = [
             De dois em dois dias, escolhemos três ebooks em português de Portugal. De três em três dias, há outra seleção com três livros em inglês. Cada nota de leitura acompanha a edição indicada.
           </p>
           <nav aria-label="Séries da rubrica" class="mt-5 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-creme-50">
-            {grupos.map((grupo) => <a href={`#${grupo.id}`} class="underline decoration-dourado-400 underline-offset-4">{grupo.titulo}</a>)}
+            {ultimaPortugues && <a href="#em-portugues" class="underline decoration-dourado-400 underline-offset-4">Última seleção em português</a>}
+            {ultimaIngles && <a href="#em-ingles" class="underline decoration-dourado-400 underline-offset-4">Última seleção em inglês</a>}
           </nav>
         </div>
       </div>
@@ -50,48 +43,45 @@ const grupos = [
   </section>
 
   <Container largura="normal" classe="py-14">
+    <DestaqueBlackWook />
     {posts.length === 0 ? (
       <p class="text-marinho-600">Ainda não há edições publicadas nesta rubrica.</p>
     ) : (
-      grupos.map((grupo) => (
-        <section id={grupo.id} class="mb-12 scroll-mt-20 last:mb-0">
-          <h2 class="mb-6 text-2xl font-bold text-marinho-900" style="font-family: var(--font-serif);">{grupo.titulo}</h2>
-          {grupo.posts.length === 0 && primeiraEmIngles && <p class="text-marinho-600">A primeira seleção de livros em inglês sai a {formatarData(primeiraEmIngles.data.data_publicacao)}. Podes ler o artigo em português ou em inglês.</p>}
-          <ul class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {grupo.posts.map((p) => {
-              const capa1 = urlCapaLivro(p.data.livros[0].asin, 'pequeno', p.data.livros[0].capa_amazon);
-              const capa2 = urlCapaLivro(p.data.livros[1].asin, 'pequeno', p.data.livros[1].capa_amazon);
-              const capa3 = urlCapaLivro(p.data.livros[2].asin, 'pequeno', p.data.livros[2].capa_amazon);
-              return (
-                <li class="group">
-                  <a href={`/tres-livros/${p.id}`} class="block">
-                    <div class="relative mb-4 grid grid-cols-3 gap-2 rounded-xl bg-gradient-to-br from-marinho-50 to-creme-100 p-4 transition-transform group-hover:-translate-y-1">
-                      {p.data.imagem_hero ? (
-                        <Image src={p.data.imagem_hero} alt={p.data.imagem_hero_alt ?? p.data.titulo} width={600} class="col-span-3 h-auto w-full rounded-lg" />
-                      ) : <>
-                        <img src={capa1} alt={`Capa do livro (${p.data.livros[0].titulo})`} loading="lazy" decoding="async" width="200" height="300" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="strict-origin-when-cross-origin" data-fallback="hide" />
-                        <img src={capa2} alt={`Capa do livro (${p.data.livros[1].titulo})`} loading="lazy" decoding="async" width="200" height="300" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="strict-origin-when-cross-origin" data-fallback="hide" />
-                        <img src={capa3} alt={`Capa do livro (${p.data.livros[2].titulo})`} loading="lazy" decoding="async" width="200" height="300" class="h-auto w-full object-contain" style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));" referrerpolicy="strict-origin-when-cross-origin" data-fallback="hide" />
-                      </>}
-                    </div>
-                    <h3 class="text-lg font-semibold leading-snug text-marinho-900 group-hover:text-marca-700">
-                      {p.data.titulo}
-                    </h3>
-                    <p class="mt-2 text-sm text-marinho-600">{p.data.descricao}</p>
-                    {p.data.ingles && <p class="mt-2 text-xs font-semibold text-oceano-800">Artigo bilingue · <span lang="en">English version included</span></p>}
-                    {p.data.convidado_ingles && <p class="mt-2 text-xs font-semibold text-oceano-800">Inclui uma leitura em inglês</p>}
-                    <p class="mt-2 text-xs text-marinho-400">
-                      <time datetime={p.data.data_publicacao.toISOString()}>
-                        {formatarData(p.data.data_publicacao)}
-                      </time>
-                    </p>
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-      ))
+      <ul id="arquivo" aria-label="Todas as edições" class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {posts.map((p) => (
+          <li id={p === ultimaIngles ? 'em-ingles' : p === ultimaPortugues ? 'em-portugues' : undefined} class="group scroll-mt-20">
+            <a href={`/tres-livros/${p.id}`} class="block">
+              <div class="relative mb-4 grid grid-cols-3 gap-2 rounded-xl bg-gradient-to-br from-marinho-50 to-creme-100 p-4 transition-transform group-hover:-translate-y-1">
+                {p.data.livros.map((livro) => (
+                  <img
+                    src={urlCapaLivro(livro.asin, 'pequeno', livro.capa_amazon)}
+                    alt={`Capa do livro (${livro.titulo})`}
+                    loading="lazy"
+                    decoding="async"
+                    width="200"
+                    height="300"
+                    class="h-auto w-full object-contain"
+                    style="filter: drop-shadow(0 4px 8px rgba(15,26,36,0.18));"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    data-fallback={livro.capa_amazon && livro.asin ? urlCapaLivro(livro.asin) : undefined}
+                  />
+                ))}
+              </div>
+              <h2 class="text-lg font-semibold leading-snug text-marinho-900 group-hover:text-marca-700">
+                {p.data.titulo}
+              </h2>
+              <p class="mt-2 text-sm text-marinho-600">{p.data.descricao}</p>
+              {p.data.ingles && <p class="mt-2 text-xs font-semibold text-oceano-800">Artigo bilingue · <span lang="en">English version included</span></p>}
+              {p.data.convidado_ingles && <p class="mt-2 text-xs font-semibold text-oceano-800">Inclui uma leitura em inglês</p>}
+              <p class="mt-2 text-xs text-marinho-400">
+                <time datetime={p.data.data_publicacao.toISOString()}>
+                  {formatarData(p.data.data_publicacao)}
+                </time> · {p.data.serie === 'ingles' ? 'Livros em inglês' : 'Livros em português'}
+              </p>
+            </a>
+          </li>
+        ))}
+      </ul>
     )}
   </Container>
 </BaseLayout>

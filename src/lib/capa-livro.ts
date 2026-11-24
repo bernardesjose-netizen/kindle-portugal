@@ -1,4 +1,4 @@
-import { redimensionarImagemAmazon } from './asin-images';
+import { redimensionarImagemAmazon } from './asin-images.ts';
 
 /**
  * Constrói o URL da capa de um livro a partir do seu ASIN, usando o CDN

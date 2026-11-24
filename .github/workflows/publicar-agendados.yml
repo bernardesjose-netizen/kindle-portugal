@@ -39,6 +39,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - run: npm ci --no-audit --no-fund
+
       - name: Detetar e publicar posts cuja data ja chegou
         id: detetar
         run: |

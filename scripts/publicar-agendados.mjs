@@ -50,6 +50,16 @@ for (const nome of readdirSync(join('src/content', colecao))) {
   // Comparacao lexicografica funciona para datas ISO (YYYY-MM-DD)
   if (data > hoje) continue; // ainda nao chegou a data
 
+  if (colecao === 'tres-livros') {
+    const { verificarCapas } = await import('./verificar-capas.mjs');
+    try {
+      await verificarCapas(bloco);
+    } catch (erro) {
+      console.error(`::warning::A edição ${nome} continua em rascunho. ${erro.message}`);
+      continue;
+    }
+  }
+
   // Muda rascunho: true -> false, apenas dentro do frontmatter
   const novoBloco = bloco.replace(/^(rascunho:\s*)true(\s*)$/m, '$1false$2');
   const novoTexto = texto.replace(bloco, () => novoBloco);
