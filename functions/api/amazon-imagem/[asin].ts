@@ -35,7 +35,7 @@ interface Product {
 
 const ASINS = new Set([
  'B0G4SHH6YH', 'B0CFPWLGF2', 'B0CM7ZXQWC', 'B0C4LSRTYT',
- 'B07FRPXF44', 'B000JL2CAG', 'B08VD632WJ',
+ 'B07FRPXF44', 'B000JL2CAG', 'B08VD632WJ', '9897228411',
 ]);
 const TAGS = {
  kindle: 'portukcom_site-21',
@@ -217,7 +217,7 @@ async function loadBatch(clientId: string, clientSecret: string, site: Site, ori
 
  const promise = (async (): Promise<Record<string, Product>> => {
   const bearer = await accessToken(clientId, clientSecret);
-  // Um batch de7ASINs conta como uma transação. Limitar também outros sites
+  // O lote de ASINs conta como uma transação. Limitar também outros sites
   // no mesmo isolate a1pedido/1,1s; não é um limitador global entrePOPs.
   const job = catalogQueue.then(async () => {
    const delay = Math.max(0, lastCatalogStart + 1100 - Date.now());
