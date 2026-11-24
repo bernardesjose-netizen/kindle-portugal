@@ -8,7 +8,6 @@ import CartaoOfertaBlackFriday2026 from '@components/afiliados/CartaoOfertaBlack
 import JanelaBlackFriday2026 from '@components/afiliados/JanelaBlackFriday2026.astro';
 import { GUIA_BLACK_FRIDAY, type OfertaBlackFriday } from '@lib/black-friday-2026';
 import { OFERTAS_BLACK_FRIDAY_2026 } from '@lib/ofertas-black-friday-2026';
-import { linkWorten, WORTEN } from '@lib/worten';
 
 interface Props {
   modo: 'entrada' | 'guia';
@@ -19,14 +18,9 @@ const agora = Date.now();
 const lista: readonly OfertaBlackFriday[] = OFERTAS_BLACK_FRIDAY_2026;
 const emCampanha = lista.filter(({ expiraEm }) => !expiraEm || Date.parse(expiraEm) > agora);
 const ofertas = entrada ? emCampanha.filter(({ destaque }) => destaque).slice(0, 6) : emCampanha;
-const ofertasPrincipais = entrada ? ofertas.slice(0, 3) : ofertas.slice(0, 8);
+const ofertasPrincipais = entrada ? ofertas : ofertas.slice(0, 8);
 const ofertasRestantes = ofertas.slice(ofertasPrincipais.length);
 const tituloId = entrada ? 'titulo-black-friday-entrada' : 'titulo-ofertas-black-friday';
-const inicioDezcontao = '2026-11-17T00:00:00+00:00';
-const fimDezcontao = '2026-11-23T23:59:59.999+00:00';
-const dezcontaoAtivo = agora >= Date.parse(inicioDezcontao) && agora <= Date.parse(fimDezcontao);
-const linkDezcontao = 'https://www.awin1.com/cread.php?awinmid=99897&awinaffid=2950455&ued=https%3A%2F%2Fwww.worten.pt%2Fpromocoes%2Fdezcontao%3Futm_source%3Dawin%26utm_medium%3Dafiliados%26utm_campaign%3D26tatcgen5499_promo_awin_afiliados_pa_core_varias_display_1x1_cv';
-const regulamentoDezcontao = 'https://www.worten.pt/i2/01M7JA2M48QQAVN7RP5RFWZ1DB/01M7JA2MC09C2H1WF49P7WQXBH';
 ---
 
 <JanelaBlackFriday2026>
@@ -80,37 +74,15 @@ const regulamentoDezcontao = 'https://www.worten.pt/i2/01M7JA2M48QQAVN7RP5RFWZ1D
           </div>
         </li>
 
-        <li
-          class="flex min-w-0 flex-col rounded-2xl border border-marinho-200 border-t-4 border-t-[#e3001b] bg-creme-50 p-4 text-marinho-900 sm:p-5"
-          data-campanha-inicio={inicioDezcontao}
-          data-campanha-fim={fimDezcontao}
-        >
+        <li class="flex min-w-0 flex-col rounded-2xl border border-marinho-200 border-t-4 border-t-[#e3001b] bg-creme-50 p-4 text-marinho-900 sm:p-5">
           <h3 class="text-xl font-bold">Worten</h3>
-          <div data-so-fase="ativa" hidden={!dezcontaoAtivo}>
-            <p class="mt-1 text-sm font-semibold text-marinho-800">
-              Dezcontão de <time datetime="2026-11-17">17</time> a <time datetime="2026-11-23">23 de novembro</time>
-            </p>
-            <p class="mt-2 text-xl font-bold leading-snug">Até 50% de desconto direto + 10% extra em talão</p>
-            <p class="mt-2 text-sm leading-relaxed text-marinho-700">
-              O desconto até 50% aplica-se a eletrodomésticos assinalados. O talão incide sobre o valor pago em artigos elegíveis vendidos e entregues pela Worten. O crédito é para uma compra posterior. Kobo, livros e Marketplace estão excluídos.
-            </p>
-            <p class="mt-2 text-sm leading-relaxed text-marinho-700">
-              Na consulta de 20 de novembro, a Worten assinalava o talão no Kindle 2026 de 16 GB com publicidade, em
-              {' '}<a href={linkWorten(WORTEN.kindle2026Grafite)} target="_blank" rel="sponsored nofollow noopener" data-afiliado="worten" class="font-semibold underline underline-offset-2">grafite</a>
-              {' '}e <a href={linkWorten(WORTEN.kindle2026Roxo)} target="_blank" rel="sponsored nofollow noopener" data-afiliado="worten" class="font-semibold underline underline-offset-2">roxo</a>.
-              Cada versão estava a 119,99 €, com PVP recomendado de 154,99 €.
-            </p>
-            <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2">
-              <BotaoWorten url={linkDezcontao} tamanho="grande">Ver Dezcontão na Worten</BotaoWorten>
-              <a href={regulamentoDezcontao} class="text-sm font-semibold text-marinho-800 underline underline-offset-2">Regulamento e exclusões</a>
-              <a href={linkWorten('https://www.worten.pt/black-friday')} target="_blank" rel="sponsored nofollow noopener" data-afiliado="worten" class="text-sm font-semibold text-marinho-800 underline underline-offset-2">Black Friday geral na Worten</a>
-            </div>
-          </div>
-          <div data-so-fase="antecipacao fora" hidden={dezcontaoAtivo}>
-            <p class="mt-2 text-sm leading-relaxed text-marinho-700">Consulta as campanhas e os produtos assinalados para venda direta na Worten.</p>
-            <div class="mt-4">
-              <BotaoWorten url="https://www.worten.pt/black-friday" tamanho="grande">Ver Black Friday na Worten</BotaoWorten>
-            </div>
+          <p class="mt-1 text-sm font-semibold text-marinho-800">Black Friday em Portugal</p>
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-marinho-700">
+            Em 24 de novembro, o Kindle de 6″ e 16 GB com publicidade custava 124,99 € na Worten em grafite ou roxo. Confirma o total para a tua morada.
+          </p>
+          <div class="mt-4 flex flex-wrap items-center gap-3">
+            <BotaoWorten url="https://www.worten.pt/black-friday" tamanho="grande">Ver Black Friday na Worten</BotaoWorten>
+            <a href="/blog/vale-a-pena-usar-o-talao-worten-no-presente-de-natal-2026" class="text-sm font-semibold text-marinho-800 underline underline-offset-2">Já tens talão? Consulta os prazos</a>
           </div>
         </li>
       </ul>
@@ -122,13 +94,6 @@ const regulamentoDezcontao = 'https://www.worten.pt/i2/01M7JA2M48QQAVN7RP5RFWZ1D
       {ofertas.length > 0 && (
         <ul class:list={['mt-5 grid gap-4 sm:grid-cols-2', entrada ? 'lg:grid-cols-3' : 'xl:grid-cols-2']}>
           {ofertasPrincipais.map((oferta) => (
-            <CartaoOfertaBlackFriday2026 oferta={oferta} />
-          ))}
-        </ul>
-      )}
-      {entrada && ofertasRestantes.length > 0 && (
-        <ul class="mt-4 hidden gap-4 sm:grid-cols-2 lg:grid lg:grid-cols-3" aria-label="Mais ofertas Black Friday em destaque">
-          {ofertasRestantes.map((oferta) => (
             <CartaoOfertaBlackFriday2026 oferta={oferta} />
           ))}
         </ul>
