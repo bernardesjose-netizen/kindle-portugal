@@ -1,4 +1,6 @@
 ---
+import { temImagemAmazonApi } from '@lib/amazon-imagens-api';
+import LigacaoCapaLivro from '@components/afiliados/LigacaoCapaLivro.astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Container from '@components/ui/Container.astro';
 import DestaqueEditorasKindle from '@components/editorial/DestaqueEditorasKindle.astro';
@@ -35,6 +37,9 @@ const [ultimaSelecao] = (await getCollection('produtosEstrela', ({ data }) => !d
 const tresLivrosTodos = (await getCollection('tresLivros', ({ data }) => !data.rascunho && data.serie === 'portugues'))
   .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf());
 const ultimoTresLivros = tresLivrosTodos[0];
+const capaComLigacao = ultimoTresLivros?.data.livros.some(temImagemAmazonApi);
+const CartaoEdicao = capaComLigacao ? 'div' : 'a';
+const LerEdicao = capaComLigacao ? 'a' : 'p';
 
 const caixaPorCategoria: Record<string, string> = {
   comprar: 'caixa-marca',
@@ -212,7 +217,7 @@ const pillPorCategoria: Record<string, string> = {
         </div>
 
         <article class="group overflow-hidden rounded-2xl border border-dourado-200/60 bg-creme-50/90 shadow-sm backdrop-blur-sm transition-all hover:shadow-md">
-          <a href={`/tres-livros/${ultimoTresLivros.id}`} class="grid gap-8 p-8 md:grid-cols-[auto_1fr] md:items-center md:gap-10 md:p-10">
+          <CartaoEdicao href={capaComLigacao ? undefined : `/tres-livros/${ultimoTresLivros.id}`} class="grid gap-8 p-8 md:grid-cols-[auto_1fr] md:items-center md:gap-10 md:p-10">
             <div class="relative mx-auto w-full max-w-sm md:mx-0 md:w-80 lg:w-96">
               <div
                 class="absolute -inset-4 rounded-full opacity-40 blur-2xl"
@@ -221,18 +226,20 @@ const pillPorCategoria: Record<string, string> = {
               />
               <div class="relative grid grid-cols-3 gap-3">
                 {ultimoTresLivros.data.livros.map((livro, i) => (
-                  <img
-                    src={urlCapaLivro(livro.asin, 'medio', livro.capa_amazon)}
-                    alt={`Capa do livro (${livro.titulo})`}
-                    loading="lazy"
-                    decoding="async"
-                    width="200"
-                    height="300"
-                    class="block h-auto w-full rounded object-contain transition-transform duration-500"
-                    style={`filter: drop-shadow(0 8px 14px rgba(15,26,36,0.20)); transform: rotate(${i === 0 ? '-2deg' : i === 1 ? '0deg' : '2deg'}); transform-origin: bottom;`}
-                    referrerpolicy="strict-origin-when-cross-origin"
-                    data-fallback={livro.capa_amazon && livro.asin ? urlCapaLivro(livro.asin) : undefined}
-                  />
+                  <LigacaoCapaLivro asin={livro.asin}>
+                    <img
+                      src={urlCapaLivro(livro.asin, 'medio', livro.capa_amazon)}
+                      alt={`Capa do livro (${livro.titulo})`}
+                      loading="lazy"
+                      decoding="async"
+                      width="200"
+                      height="300"
+                      class="block h-auto w-full rounded object-contain transition-transform duration-500"
+                      style={`filter: drop-shadow(0 8px 14px rgba(15,26,36,0.20)); transform: rotate(${i === 0 ? '-2deg' : i === 1 ? '0deg' : '2deg'}); transform-origin: bottom;`}
+                      referrerpolicy="strict-origin-when-cross-origin"
+                      data-fallback={livro.capa_amazon && livro.asin ? urlCapaLivro(livro.asin) : undefined}
+                    />
+                  </LigacaoCapaLivro>
                 ))}
               </div>
             </div>
@@ -267,12 +274,12 @@ const pillPorCategoria: Record<string, string> = {
                 <p class="mt-4 text-sm text-oceano-800">Em inglês · <em>({ultimoTresLivros.data.convidado_ingles.titulo})</em></p>
               )}
 
-              <p class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-marca-700 group-hover:text-marca-800">
+              <LerEdicao href={capaComLigacao ? `/tres-livros/${ultimoTresLivros.id}` : undefined} class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-marca-700 group-hover:text-marca-800">
                 Ler edição completa
                 <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
-              </p>
+              </LerEdicao>
             </div>
-          </a>
+          </CartaoEdicao>
         </article>
 
         <div class="mt-6 text-center sm:hidden">

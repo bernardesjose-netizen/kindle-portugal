@@ -3,7 +3,15 @@ import sharp from 'sharp';
 import { urlCapaLivro } from '../src/lib/capa-livro.ts';
 
 async function verificarImagem(url) {
-  if (new URL(url).hostname !== 'm.media-amazon.com') throw new Error('Fonte de capa por verificar');
+  if (/^\/api\/amazon-imagem\/[A-Z0-9]{10}\?site=kindle$/.test(url)) {
+    const oficial = await fetch(new URL(url, 'https://kindleportugal.com'), {
+      redirect: 'manual',
+      signal: AbortSignal.timeout(10000),
+    });
+    if (oficial.status !== 302 || !oficial.headers.get('location')) throw new Error('Capa indisponível na API');
+    url = oficial.headers.get('location');
+  }
+  if (new URL(url).origin !== 'https://m.media-amazon.com') throw new Error('Fonte de capa por verificar');
   const resposta = await fetch(url, {
     headers: { Range: 'bytes=0-32767' },
     signal: AbortSignal.timeout(10000),

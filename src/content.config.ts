@@ -15,7 +15,7 @@ const seo = z.object({
 const asinKindle = z.string().regex(/^B0[A-Z0-9]{8}$/, 'ASIN inválido (deve começar por B0 e ter 10 caracteres)');
 
 const livroDestaque = z.object({
-  asin: asinKindle.optional(),
+  asin: z.union([asinKindle, z.string().regex(/^\d{9}[\dX]$/)]).optional(),
   formato: z.enum(['ebook', 'papel']).default('ebook'),
   titulo: z.string(),
   autor: z.string(),
@@ -28,7 +28,7 @@ const livroDestaque = z.object({
   url_wook: z.string().url().optional(),
   fonte_edicao: z.string().url().optional(),
   capa_amazon: z.string().url().optional(),
-}).refine((livro) => livro.formato === 'papel' ? Boolean(livro.fonte_edicao) : Boolean(livro.asin), {
+}).refine((livro) => livro.formato === 'papel' ? Boolean(livro.fonte_edicao) : asinKindle.safeParse(livro.asin).success, {
   message: 'Um ebook exige ASIN confirmado. Uma edição em papel exige fonte editorial.',
 });
 

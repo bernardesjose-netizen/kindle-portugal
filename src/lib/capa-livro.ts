@@ -1,3 +1,4 @@
+import { imagemAmazonApi } from './amazon-imagens-api.ts';
 import { redimensionarImagemAmazon } from './asin-images.ts';
 
 /**
@@ -33,6 +34,8 @@ export type TamanhoCapa = 'pequeno' | 'medio' | 'grande';
 const PX_CAPA: Record<TamanhoCapa, number> = { pequeno: 400, medio: 500, grande: 1000 };
 
 export function urlCapaLivro(asin: string | undefined, tamanho: TamanhoCapa = 'medio', capaAmazon?: string): string {
+  const oficial = asin && imagemAmazonApi(asin);
+  if (oficial) return oficial.src;
   if (capaAmazon) return redimensionarImagemAmazon(capaAmazon, PX_CAPA[tamanho]);
   if (!asin) return '/placeholder-livro.svg';
   return `https://m.media-amazon.com/images/P/${asin}.01._SCLZZZZZZZ_.jpg`;

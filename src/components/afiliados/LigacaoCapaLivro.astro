@@ -1,0 +1,9 @@
+---
+import { urlAfiliado } from '@lib/afiliados';
+import { imagemAmazonApi } from '@lib/amazon-imagens-api';
+
+interface Props { asin?: string }
+const { asin } = Astro.props;
+const destino = asin && imagemAmazonApi(asin) ? urlAfiliado(`https://www.amazon.es/dp/${asin}`) : undefined;
+---
+{destino ? <a href={destino} rel="sponsored nofollow noopener" class="relative block"><slot /></a> : <slot />}

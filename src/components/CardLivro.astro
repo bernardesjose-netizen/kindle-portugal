@@ -1,4 +1,6 @@
 ---
+import { temImagemAmazonApi } from '@lib/amazon-imagens-api';
+import LigacaoCapaLivro from '@components/afiliados/LigacaoCapaLivro.astro';
 import { urlCapaLivro } from '@lib/capa-livro';
 import { urlAfiliado } from '@lib/afiliados';
 
@@ -19,9 +21,10 @@ interface Props {
 const { asin, formato = 'ebook', titulo, autor, editora, ano, comentario, numero, capaAmazon } = Astro.props;
 
 const capaSrc = urlCapaLivro(asin, 'medio', capaAmazon);
-const linkCompra = formato === 'papel'
-  ? urlAfiliado('https://www.amazon.es/s?' + new URLSearchParams({ i: 'stripbooks', k: [titulo, autor, editora].join(' ') }))
-  : asin ? urlAfiliado(`https://www.amazon.es/dp/${asin}/`) : undefined;
+let linkCompra = asin ? urlAfiliado(`https://www.amazon.es/dp/${asin}/`) : undefined;
+if (!linkCompra && formato === 'papel') {
+  linkCompra = urlAfiliado('https://www.amazon.es/s?' + new URLSearchParams({ i: 'stripbooks', k: [titulo, autor, editora].join(' ') }));
+}
 
 // Os parágrafos do comentário separam-se por linhas em branco no YAML.
 // Aqui dividimos para renderizar com espaçamento adequado.
@@ -36,18 +39,21 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
         aria-hidden="true"
         style="background: radial-gradient(ellipse at center, rgba(20, 110, 180, 0.25) 0%, rgba(212, 168, 75, 0.15) 50%, transparent 75%);"
       />
-      <img
-        src={capaSrc}
-        alt={`Capa do livro (${titulo})`}
-        loading="lazy"
-        decoding="async"
-        width="200"
-        height="300"
-        class="relative block h-auto w-full rounded-md object-contain"
-        style="filter: drop-shadow(0 8px 14px rgba(15,26,36,0.18));"
-        referrerpolicy="strict-origin-when-cross-origin"
-        data-fallback={capaAmazon && asin ? urlCapaLivro(asin) : undefined}
-      />
+      <LigacaoCapaLivro asin={asin}>
+        <img
+          src={capaSrc}
+          alt={`Capa do livro (${titulo})`}
+          loading="lazy"
+          decoding="async"
+          width="200"
+          height="300"
+          class="relative block h-auto w-full rounded-md object-contain"
+          style="filter: drop-shadow(0 8px 14px rgba(15,26,36,0.18));"
+          referrerpolicy="strict-origin-when-cross-origin"
+          data-fallback={capaAmazon && asin ? urlCapaLivro(asin) : undefined}
+        />
+      </LigacaoCapaLivro>
+      {temImagemAmazonApi({ asin }) && <figcaption class="relative mt-2 text-center text-xs text-marinho-600">Imagem da Amazon.es</figcaption>}
     </figure>
 
     <div class="flex flex-col">
@@ -80,7 +86,7 @@ const paragrafos = comentario.trim().split(/\n\s*\n/).filter(Boolean);
           rel="sponsored nofollow noopener"
           class="inline-flex items-center gap-2 rounded-lg bg-marinho-900 px-4 py-2.5 text-sm font-semibold text-creme-50 transition-colors hover:bg-marca-700"
         >
-          {formato === 'papel' ? 'Pesquisar edição em papel na Amazon.es' : 'Ver ebook na Amazon.es'}
+          {formato === 'ebook' ? 'Ver ebook na Amazon.es' : asin ? 'Ver edição em papel na Amazon.es' : 'Pesquisar edição em papel na Amazon.es'}
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M5 12h14M13 5l7 7-7 7"/>
           </svg>
