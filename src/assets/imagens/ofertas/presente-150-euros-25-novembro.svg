@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500" role="img" aria-labelledby="titulo descricao">
+  <title id="titulo">Uma prenda, até 150 €</title>
+  <desc id="descricao">Em 25 de novembro o leitor custava 124,99 €. Com o cabo opcional a 16,99 €, sobravam 8,02 € para entrega.</desc>
+  <rect width="900" height="500" rx="22" fill="#102f38"/>
+  <g font-family="Arial, sans-serif" fill="#f8f3e8">
+    <g transform="translate(52 37)" stroke="#ecc67f" stroke-width="4" fill="none" stroke-linejoin="round">
+      <rect x="1" y="8" width="66" height="44" rx="5"/>
+      <path d="m3 12 31 22 31-22"/>
+    </g>
+    <text x="140" y="81" font-family="Georgia,serif" font-size="53">Uma prenda, até 150 €</text>
+    <text x="52" y="155" font-size="34" font-weight="bold">Kindle de 16 GB</text>
+    <text x="848" y="155" text-anchor="end" font-size="34">124,99 €</text>
+    <rect x="52" y="178" width="796" height="24" rx="12" fill="#3b5860"/>
+    <rect x="52" y="178" width="663" height="24" rx="12" fill="#9bc9b6"/>
+    <text x="52" y="269" font-size="34" font-weight="bold">Com o cabo opcional</text>
+    <text x="848" y="269" text-anchor="end" font-size="34">141,98 €</text>
+    <rect x="52" y="292" width="796" height="24" rx="12" fill="#3b5860"/>
+    <rect x="52" y="292" width="753" height="24" rx="12" fill="#ecc67f"/>
+    <rect x="52" y="292" width="663" height="24" rx="12" fill="#9bc9b6"/>
+    <path d="M52 357h796" stroke="#56717a" stroke-width="2"/>
+    <text x="52" y="410" font-size="34">Sobram para entrega</text>
+    <text x="848" y="410" text-anchor="end" font-size="44" font-weight="bold" fill="#ecc67f">8,02 €</text>
+    <text x="52" y="465" font-size="23" fill="#c9d7d3">Preços Worten de 25 de novembro de 2026 · Venda direta</text>
+  </g>
+</svg>

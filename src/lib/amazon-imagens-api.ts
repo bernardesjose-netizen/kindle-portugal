@@ -1,6 +1,12 @@
 /** Imagens autorizadas pela Creators API. Não guardar os bytes da fotografia. */
 const IMAGENS = {
   '9897228411': { largura: 300, altura: 450 },
+  B009CB1IG8: { largura: 330, altura: 500 },
+  B01DA0YCJQ: { largura: 318, altura: 500 },
+  B083N54TYR: { largura: 328, altura: 500 },
+  B0FDKCKKJM: { largura: 331, altura: 500 },
+  B0G3YRH2B8: { largura: 331, altura: 500 },
+  B0FY4SSSF6: { largura: 333, altura: 500 },
   B0G4SHH6YH: { largura: 313, altura: 500 },
   B0CFPWLGF2: { largura: 500, altura: 500 },
   B0CM7ZXQWC: { largura: 500, altura: 500 },

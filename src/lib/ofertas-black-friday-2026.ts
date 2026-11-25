@@ -17,9 +17,10 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     },
     alternativa: { loja: 'amazon', url: 'https://www.amazon.es/dp/B0G4SHXZNZ' },
     preco: '124,99 €',
+    referencia: 'PVP recomendado de 154,99 € indicado pela Worten',
     etiqueta: 'Venda direta Worten',
     destaque: true,
-    verificadaEm: '2026-11-24',
+    verificadaEm: '2026-11-25',
   },
   {
     id: 'kindle-2026-amazon',
@@ -48,7 +49,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     },
     etiqueta: 'Black Friday Amazon.es',
     destaque: true,
-    verificadaEm: '2026-11-24',
+    verificadaEm: '2026-11-25',
   },
   {
     id: 'colorsoft-16',
@@ -75,7 +76,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     },
     etiqueta: 'Black Friday Amazon.es',
     destaque: true,
-    verificadaEm: '2026-11-24',
+    verificadaEm: '2026-11-25',
   },
   {
     id: 'scribe-2026',
@@ -102,7 +103,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     },
     etiqueta: 'Black Friday Amazon.es',
     destaque: true,
-    verificadaEm: '2026-11-24',
+    verificadaEm: '2026-11-25',
   },
   {
     id: 'scribe-colorsoft-2026',
@@ -144,7 +145,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     preco: '239,99 €',
     referencia: 'PVP recomendado de 269,99 € indicado pela Worten',
     etiqueta: 'Black Friday Worten',
-    verificadaEm: '2026-11-24',
+    verificadaEm: '2026-11-25',
   },
   {
     id: 'kobo-libra-colour',
@@ -166,7 +167,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     referencia: 'PVP recomendado de 269,99 € indicado pela Worten',
     etiqueta: 'Black Friday Worten',
     destaque: true,
-    verificadaEm: '2026-11-24',
+    verificadaEm: '2026-11-25',
   },
   {
     id: 'kobo-clara-colour',
@@ -184,7 +185,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     referencia: 'PVP recomendado de 189,99 € indicado pela Worten',
     etiqueta: 'Black Friday Worten',
     destaque: true,
-    verificadaEm: '2026-11-24',
+    verificadaEm: '2026-11-25',
   },
   {
     id: 'kindle-2026-worten-roxo',
@@ -199,8 +200,9 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     },
     alternativa: { loja: 'amazon', url: 'https://www.amazon.es/dp/B0G4SM81G1' },
     preco: '124,99 €',
+    referencia: 'PVP recomendado de 154,99 € indicado pela Worten',
     etiqueta: 'Venda direta Worten',
-    verificadaEm: '2026-11-24',
+    verificadaEm: '2026-11-25',
   },
   {
     id: 'pocketbook-era-lite',
