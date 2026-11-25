@@ -33,10 +33,11 @@ interface Product {
  expiresAt: number;
 }
 
-const ASINS = new Set([
- 'B0G4SHH6YH', 'B0CFPWLGF2', 'B0CM7ZXQWC', 'B0C4LSRTYT',
- 'B07FRPXF44', 'B000JL2CAG', 'B08VD632WJ', '9897228411',
-]);
+const ASIN_BATCHES: string[][] = [
+ ['B0G4SHH6YH', 'B0CFPWLGF2', 'B0CM7ZXQWC', 'B0C4LSRTYT',
+  'B07FRPXF44', 'B000JL2CAG', 'B08VD632WJ', '9897228411'],
+ ['B009CB1IG8', 'B01DA0YCJQ', 'B083N54TYR', 'B0FDKCKKJM', 'B0G3YRH2B8', 'B0FY4SSSF6'],
+];
 const TAGS = {
  kindle: 'portukcom_site-21',
  'mochila-pt': 'mochilapt-21',
@@ -210,8 +211,8 @@ function cacheKey(origin: string, asin: string, site: Site): Request {
  return new Request(`${origin}/api/amazon-imagem/${asin}?site=${site}`);
 }
 
-async function loadBatch(clientId: string, clientSecret: string, site: Site, origin: string, cache?: Cache): Promise<Record<string, Product>> {
- const key = `${clientId}:${site}`;
+async function loadBatch(clientId: string, clientSecret: string, site: Site, origin: string, batch: string[], cache?: Cache): Promise<Record<string, Product>> {
+ const key = `${clientId}:${site}:${batch[0]}`;
  const existing = pendingBatches.get(key);
  if (existing) return existing;
 
@@ -224,7 +225,7 @@ async function loadBatch(clientId: string, clientSecret: string, site: Site, ori
    if (delay) await new Promise<void>((resolve) => setTimeout(resolve, delay));
    lastCatalogStart = Date.now();
    return post('catalog', ITEMS_URL, {
-    itemIds: [...ASINS],
+    itemIds: batch,
     itemIdType: 'ASIN',
     marketplace: MARKETPLACE,
     partnerTag: TAGS[site],
@@ -244,7 +245,7 @@ async function loadBatch(clientId: string, clientSecret: string, site: Site, ori
   const products: Record<string, Product> = {};
   if (Array.isArray(items)) {
    for (const item of items) {
-    if (!item?.asin || !ASINS.has(item.asin)) continue;
+    if (!item?.asin || !batch.includes(item.asin)) continue;
     const detailPageURL = productUrl(item.detailPageURL, item.asin, site);
     if (!detailPageURL) continue;
     products[item.asin] = {
@@ -285,7 +286,8 @@ export async function onRequest(context: Context): Promise<Response> {
  const url = new URL(request.url);
  const requestedSite = url.searchParams.get('site');
  const route = url.pathname.match(/^\/api\/amazon-(imagem|produto)\/([A-Z0-9]{10})\/?$/);
- if (typeof asin !== 'string' || !ASINS.has(asin)
+ const batch = typeof asin === 'string' && ASIN_BATCHES.find(items => items.includes(asin));
+ if (typeof asin !== 'string' || !batch
   || !route || route[2] !== asin
   || !requestedSite || !Object.hasOwn(TAGS, requestedSite) || url.searchParams.getAll('site').length !== 1
   || [...url.searchParams.keys()].some((key) => key !== 'site')) {
@@ -319,7 +321,7 @@ export async function onRequest(context: Context): Promise<Response> {
  } catch { /* Uma falha da cache permite consultar a API normalmente. */ }
 
  try {
-  const products = await loadBatch(clientId, clientSecret, site, url.origin, cache);
+  const products = await loadBatch(clientId, clientSecret, site, url.origin, batch, cache);
   const product = products[asin];
   if (!product) return unavailable();
   if (isProduct) return productResponse(product.detailPageURL, origin);
