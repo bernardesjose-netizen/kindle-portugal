@@ -9,6 +9,7 @@ const autor = z.object({
 const seo = z.object({
   titulo_seo: z.string().max(65).optional(),
   descricao_seo: z.string().max(160).optional(),
+  imagem_partilha: z.string().regex(/^\/og\/[a-z0-9-]+\.png$/).optional(),
   noindex: z.boolean().default(false),
 });
 

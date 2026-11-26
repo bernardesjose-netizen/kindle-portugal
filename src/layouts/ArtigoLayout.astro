@@ -52,6 +52,7 @@ interface Props {
   categoria?: string;
   tempoLeituraMin?: number;
   imagem?: string;
+  imagemAlt?: string;
   capaLivro?: NonNullable<CollectionEntry<'blog'>['data']['capa_livro']>;
   /** Título/descrição para SEO (frontmatter seo.*), se diferirem dos visíveis. */
   tituloSeo?: string;
@@ -77,6 +78,7 @@ const {
   descricaoSeo,
   noindex,
   imagem: imagemEditorial,
+  imagemAlt,
   capaLivro,
   heroAsin,
   heroAlt,
@@ -123,7 +125,7 @@ const pillCategoriaClass = categoria ? PILL_POR_CATEGORIA[categoria] ?? '' : '';
   dataRevisao={dataRevisao}
   autor={autor?.nome}
   imagem={imagem}
-  imagemAlt={capaLivro ? `Capa do ebook (${capaLivro.titulo})` : undefined}
+  imagemAlt={capaLivro ? `Capa do ebook (${capaLivro.titulo})` : imagemAlt}
   jsonLd={articleLd}
   semOrnamento={true}
 >

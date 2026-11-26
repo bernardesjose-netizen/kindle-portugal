@@ -58,6 +58,7 @@ const tituloCompleto =
 <meta property="og:url" content={url} />
 <meta property="og:locale" content="pt_PT" />
 <meta property="og:image" content={imagemAbsoluta} />
+{imagemOg && imagem.endsWith('.png') && <meta property="og:image:type" content="image/png" />}
 {imagemOg && <meta property="og:image:width" content="1200" />}
 {imagemOg && <meta property="og:image:height" content="630" />}
 <meta property="og:image:alt" content={textoImagem} />

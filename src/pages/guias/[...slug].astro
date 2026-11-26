@@ -28,7 +28,8 @@ const capa = d.mostrar_imagem_hero ? d.imagem_hero : undefined;
   dataRevisao={d.data_revisao}
   categoria={d.categoria}
   tempoLeituraMin={d.tempo_leitura_min}
-  imagem={capa?.src}
+  imagem={d.seo?.imagem_partilha ?? capa?.src}
+  imagemAlt={d.seo?.imagem_partilha ? d.imagem_hero_alt : undefined}
 >
   {capa && (
     <figure class="not-prose mb-10 overflow-hidden rounded-2xl border border-marinho-100">
