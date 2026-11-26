@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="616" viewBox="0 0 1024 616" role="img" aria-labelledby="titulo descricao">
+  <title id="titulo">Antes de pagar o Kindle</title>
+  <desc id="descricao">Quatro linhas para comparar uma compra: versão do leitor, vendedor, estado e preço total com entrega.</desc>
+  <defs>
+    <pattern id="papel" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.8" fill="#aec5cb"/>
+    </pattern>
+  </defs>
+  <rect width="1024" height="616" rx="18" fill="#183540"/>
+  <rect width="1024" height="616" rx="18" fill="url(#papel)" opacity=".32"/>
+  <g transform="translate(47 92)" fill="none" stroke="#e8bd7d" stroke-linecap="round" stroke-linejoin="round" stroke-width="9">
+    <path d="M8 38h32l33 139h151l27-105H51m28 139h143"/>
+    <circle cx="85" cy="245" r="14"/><circle cx="202" cy="245" r="14"/>
+    <rect x="102" y="7" width="87" height="128" rx="10" fill="#254955" transform="rotate(9 146 71)"/>
+    <path d="m126 49 48 7m-51 9 35 5"/>
+  </g>
+  <path d="M42 375h260" stroke="#719097" stroke-width="2"/>
+  <text x="46" y="429" font-family="Georgia,serif" font-size="47" font-weight="bold" fill="#fff4df">O carrinho</text>
+  <text x="46" y="463" font-family="Arial,sans-serif" font-size="23" fill="#c8d8d6">26 de novembro de 2026</text>
+  <rect x="345" y="45" width="632" height="526" rx="15" fill="#fff7e8"/>
+  <g transform="translate(384 82)" font-family="Arial,sans-serif">
+    <text y="46" font-family="Georgia,serif" font-weight="bold" font-size="45" fill="#19353e">Antes de pagar</text>
+    <g fill="#19353e" font-size="32" font-weight="bold">
+      <text x="49" y="129">Versão</text><text x="49" y="216">Vendedor</text>
+      <text x="49" y="303">Estado</text><text x="49" y="390">Total e entrega</text>
+    </g>
+    <g fill="#395561" font-size="24">
+      <text x="49" y="157">Cor, memória, publicidade</text>
+      <text x="49" y="244">Quem vende e quem envia</text>
+      <text x="49" y="331">Novo ou recondicionado</text>
+      <text x="49" y="418">Portes incluídos e data prevista</text>
+    </g>
+    <g fill="none" stroke="#37705e" stroke-width="3">
+      <rect x="2" y="105" width="27" height="27" rx="5"/><rect x="2" y="192" width="27" height="27" rx="5"/>
+      <rect x="2" y="279" width="27" height="27" rx="5"/><rect x="2" y="366" width="27" height="27" rx="5"/>
+    </g>
+    <path d="M0 68h550m-550 109h550m-550 87h550m-550 87h550" stroke="#c8c8b6" stroke-width="2"/>
+  </g>
+</svg>

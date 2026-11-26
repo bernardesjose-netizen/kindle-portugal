@@ -1,7 +1,7 @@
 import { imagemAmazonApi } from './amazon-imagens-api';
 import type { OfertaBlackFriday } from '@lib/black-friday-2026';
 
-const verificadaEm = '2026-11-20';
+const verificadaEm = '2026-11-26';
 
 export const OFERTAS_BLACK_FRIDAY_2026 = [
   {
@@ -20,7 +20,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     referencia: 'PVP recomendado de 154,99 € indicado pela Worten',
     etiqueta: 'Venda direta Worten',
     destaque: true,
-    verificadaEm: '2026-11-25',
+    verificadaEm,
   },
   {
     id: 'kindle-2026-amazon',
@@ -49,7 +49,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     },
     etiqueta: 'Black Friday Amazon.es',
     destaque: true,
-    verificadaEm: '2026-11-25',
+    verificadaEm,
   },
   {
     id: 'colorsoft-16',
@@ -76,7 +76,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     },
     etiqueta: 'Black Friday Amazon.es',
     destaque: true,
-    verificadaEm: '2026-11-25',
+    verificadaEm,
   },
   {
     id: 'scribe-2026',
@@ -103,7 +103,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     },
     etiqueta: 'Black Friday Amazon.es',
     destaque: true,
-    verificadaEm: '2026-11-25',
+    verificadaEm,
   },
   {
     id: 'scribe-colorsoft-2026',
@@ -145,7 +145,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     preco: '239,99 €',
     referencia: 'PVP recomendado de 269,99 € indicado pela Worten',
     etiqueta: 'Black Friday Worten',
-    verificadaEm: '2026-11-25',
+    verificadaEm,
   },
   {
     id: 'kobo-libra-colour',
@@ -167,7 +167,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     referencia: 'PVP recomendado de 269,99 € indicado pela Worten',
     etiqueta: 'Black Friday Worten',
     destaque: true,
-    verificadaEm: '2026-11-25',
+    verificadaEm,
   },
   {
     id: 'kobo-clara-colour',
@@ -185,7 +185,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     referencia: 'PVP recomendado de 189,99 € indicado pela Worten',
     etiqueta: 'Black Friday Worten',
     destaque: true,
-    verificadaEm: '2026-11-25',
+    verificadaEm,
   },
   {
     id: 'kindle-2026-worten-roxo',
@@ -202,7 +202,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
     preco: '124,99 €',
     referencia: 'PVP recomendado de 154,99 € indicado pela Worten',
     etiqueta: 'Venda direta Worten',
-    verificadaEm: '2026-11-25',
+    verificadaEm,
   },
   {
     id: 'pocketbook-era-lite',
@@ -254,9 +254,8 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       credito: 'Imagem disponibilizada pela PcComponentes via Awin',
     },
     preco: '609,00 €',
-    referencia: 'Preço mais baixo dos últimos 30 dias indicado pela loja: 689,44 €',
-    etiqueta: 'Redução indicada na loja',
-    verificadaEm: '2026-11-19',
+    etiqueta: 'Venda direta PcComponentes',
+    verificadaEm,
   },
   {
     id: 'capa-paperwhite-colorsoft-2024',
@@ -269,7 +268,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       alt: 'Capa Amazon preta de material vegetal para Paperwhite e Colorsoft de 2024',
       credito: 'Imagem: Amazon (Creators API)',
     },
-    etiqueta: 'Redução indicada na loja',
+    etiqueta: 'Capa de material vegetal',
     verificadaEm,
   },
   {
@@ -313,7 +312,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       url: 'https://www.pccomponentes.pt/carregador-de-parede-usb-c-belkin-boostcharge-pro-60w-pd',
       linkAfiliado: 'https://www.awin1.com/pclick.php?p=36403888154&a=2950455&m=20983',
     },
-    etiqueta: 'Redução indicada na loja',
+    etiqueta: 'Duas portas USB-C',
     verificadaEm,
   },
   {
@@ -339,7 +338,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       url: 'https://www.pccomponentes.pt/belkin-carregador-de-parede-com-3-portas-usb-c-e-pps-a-67-w-boostcharge-pro-branco',
       linkAfiliado: 'https://www.awin1.com/pclick.php?p=37948376480&a=2950455&m=20983',
     },
-    etiqueta: 'Redução indicada na loja',
+    etiqueta: 'Três portas USB-C',
     verificadaEm,
   },
   {
@@ -379,7 +378,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       url: 'https://www.pccomponentes.pt/nothing-headphone-1-auscultadores-sem-fios-hi-res-anc-bluetooth-5-3-circumaurais-usb-c-pretos-brancos',
       linkAfiliado: 'https://www.awin1.com/pclick.php?p=42623623805&a=2950455&m=20983',
     },
-    etiqueta: 'Redução indicada na loja',
+    etiqueta: 'Auscultadores sem fios',
     verificadaEm,
   },
   {
@@ -395,9 +394,8 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       alt: 'Par de auriculares Apple AirPods Pro 3 brancos',
       credito: 'Imagem disponibilizada pela PcComponentes via Awin',
     },
-    preco: '217,00 €',
-    referencia: 'PVP recomendado de 249 € indicado pela loja',
-    etiqueta: 'Black Friday PcComponentes',
+    preco: '209,00 €',
+    etiqueta: 'Venda direta PcComponentes',
     verificadaEm,
   },
 ] satisfies OfertaBlackFriday[];
