@@ -36,7 +36,8 @@ const bilingue = d.ingles;
   dataPublicacao={d.data_publicacao}
   categoria="Três Ebooks"
   idiomas={bilingue ? ['pt-PT', 'en'] : undefined}
-  imagem={heroSrc}
+  imagem={d.seo?.imagem_partilha ?? heroSrc}
+  imagemAlt={d.seo?.imagem_partilha ? d.titulo : undefined}
 >
   {bilingue && (
     <nav aria-label="Idioma do artigo" class="not-prose mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-marinho-200 pb-4">

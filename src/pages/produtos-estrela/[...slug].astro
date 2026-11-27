@@ -29,7 +29,8 @@ const heroSrc = d.imagem_hero?.src ?? (primeiroComAsin?.asin ? imagemParaAsin(pr
   autor={d.autor}
   dataPublicacao={d.data_publicacao}
   categoria="Produtos Estrela"
-  imagem={heroSrc}
+  imagem={d.seo?.imagem_partilha ?? heroSrc}
+  imagemAlt={d.seo?.imagem_partilha ? d.imagem_hero_alt : undefined}
 >
   {!d.selecao_atual && (
     <aside class="not-prose mb-8 rounded-xl border border-marinho-100 bg-creme-100 p-4 text-sm text-marinho-700">

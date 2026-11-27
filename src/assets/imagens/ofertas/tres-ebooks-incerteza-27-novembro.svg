@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="titulo" font-family="Arial,sans-serif">
+  <title id="titulo">Viver com a incerteza</title>
+  <rect width="1200" height="630" fill="#253345"/>
+  <path fill="#c78059" d="M0 0h19v630H0z"/>
+  <text x="67" y="91" font-size="32" font-weight="bold" fill="#ebc8a5">TRÊS EBOOKS</text>
+  <text x="65" y="211" font-family="Georgia,serif" font-weight="bold" font-size="81" fill="#fff6e6">Viver com a incerteza</text>
+  <path d="M69 263h1060" stroke="#8d968e" stroke-width="2"/>
+  <g fill="#fff6e6" font-size="39"><text x="71" y="347">Patrícia Reis</text><text x="71" y="418">Ioli Campos</text><text x="71" y="490">Ricardo Borges de Castro</text></g>
+  <g fill="#d3b893" font-family="Georgia,serif" font-size="32" font-style="italic"><text x="625" y="347">O lugar da incerteza</text><text x="625" y="418">Crianças e Bem-Estar Digital</text><text x="625" y="490">Pensar o Futuro</text></g>
+  <text x="71" y="583" font-size="27" fill="#c9c9c2">Kindle Portugal · 27 de novembro de 2026</text>
+</svg>

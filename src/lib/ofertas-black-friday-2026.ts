@@ -1,7 +1,7 @@
 import { imagemAmazonApi } from './amazon-imagens-api';
 import type { OfertaBlackFriday } from '@lib/black-friday-2026';
 
-const verificadaEm = '2026-11-26';
+const verificadaEm = '2026-11-27';
 
 export const OFERTAS_BLACK_FRIDAY_2026 = [
   {
