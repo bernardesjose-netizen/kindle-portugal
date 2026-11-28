@@ -1,7 +1,7 @@
 import { imagemAmazonApi } from './amazon-imagens-api';
 import type { OfertaBlackFriday } from '@lib/black-friday-2026';
 
-const verificadaEm = '2026-11-27';
+const verificadaEm = '2026-11-28';
 
 export const OFERTAS_BLACK_FRIDAY_2026 = [
   {
@@ -217,7 +217,7 @@ export const OFERTAS_BLACK_FRIDAY_2026 = [
       alt: 'PocketBook Era Lite Stone Green, de 7 polegadas e 16 GB',
       credito: 'Imagem disponibilizada pela PcComponentes via Awin',
     },
-    preco: '203,99 €',
+    preco: '205,99 €',
     referencia: 'PVP recomendado de 209 € indicado pela loja',
     etiqueta: 'Preço abaixo do PVPR',
     verificadaEm,

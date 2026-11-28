@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="Arial,sans-serif" role="img" aria-labelledby="titulo">
+  <title id="titulo">A pasta da encomenda</title>
+  <rect width="1200" height="630" fill="#ede6d1"/>
+  <path d="M0 0h1200v15H0z" fill="#ab6247"/>
+  <text x="64" y="95" font-family="Georgia,serif" font-size="61" font-weight="bold" fill="#143a37">A pasta da encomenda</text>
+  <text x="67" y="145" font-size="29" fill="#455b51">Exemplo fictício · quatro separadores para uma compra online</text>
+  <path d="M62 240v-34q0-13 13-13h269l28 34h748q16 0 16 16v298q0 14-14 14H76q-14 0-14-14Z" fill="#2f554a"/>
+  <g fill="#fff6df" font-size="31" font-weight="bold"><text x="99" y="290">Referência</text><text x="99" y="359">Confirmação</text><text x="99" y="428">Entrega</text><text x="99" y="497">Devolução</text></g>
+  <g fill="#e4eade" font-size="30"><text x="390" y="290">Modelo, cor, memória e vendedor</text><text x="390" y="359">Resumo do pedido, total pago e fatura</text><text x="390" y="428">Previsão e data de receção</text><text x="390" y="497">Condições e data-limite aplicáveis</text></g>
+  <path d="M99 311h990m-990 70h990m-990 70h990" stroke="#7f9582"/>
+  <text x="66" y="598" fill="#43574d" font-size="25">Kindle Portugal · 28 de novembro de 2026</text>
+</svg>

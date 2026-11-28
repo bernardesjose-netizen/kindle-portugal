@@ -34,9 +34,10 @@ const ultimoPost = blogTodos[0];
 const [ultimaSelecao] = (await getCollection('produtosEstrela', ({ data }) => !data.rascunho && data.selecao_atual))
   .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf());
 
-const tresLivrosTodos = (await getCollection('tresLivros', ({ data }) => !data.rascunho && data.serie === 'portugues'))
+const tresLivrosTodos = (await getCollection('tresLivros', ({ data }) => !data.rascunho))
   .sort((a, b) => b.data.data_publicacao.valueOf() - a.data.data_publicacao.valueOf());
-const ultimoTresLivros = tresLivrosTodos[0];
+const ultimoTresLivros = tresLivrosTodos.find(({ data }) => data.serie === 'portugues');
+const ultimaEdicaoInglesa = tresLivrosTodos.find(({ data }) => data.serie === 'ingles');
 const capaComLigacao = ultimoTresLivros?.data.livros.some(temImagemAmazonApi);
 const CartaoEdicao = capaComLigacao ? 'div' : 'a';
 const LerEdicao = capaComLigacao ? 'a' : 'p';
@@ -282,6 +283,9 @@ const pillPorCategoria: Record<string, string> = {
           </CartaoEdicao>
         </article>
 
+        {ultimaEdicaoInglesa && (
+          <p class="mt-5 text-center text-sm text-marinho-700">Para quem lê em inglês · <a href={`/tres-livros/${ultimaEdicaoInglesa.id}`} class="font-semibold text-marca-700 underline underline-offset-2">{ultimaEdicaoInglesa.data.titulo}</a></p>
+        )}
         <div class="mt-6 text-center sm:hidden">
           <a href="/tres-livros" class="text-sm font-semibold text-marca-700 hover:text-marca-800">
             Ver rubrica completa →
